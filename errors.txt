@@ -1,7 +1,7 @@
 
 SN 68k version 2.53
 
-D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\SONIC.ASM(2132) : Warning : Forward reference to redefinable symbol
+C:\USERS\JAYKURIN\DOCUMENTS\GITHUB\THE-NEW-DEBUT\SONIC.ASM(2133) : Warning : Forward reference to redefinable symbol
 
 Assembly completed.
-0 error(s) from 53695 lines in 0.13 seconds
+0 error(s) from 53676 lines in 0.9 seconds

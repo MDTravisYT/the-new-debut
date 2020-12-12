@@ -2261,7 +2261,7 @@ GM_Title:
 		copyTilemap	$FF0000,$C206,$21,$15
 
 		locVRAM	0
-		lea	(Nem_GHZ_1st).l,a0 ; load GHZ patterns
+		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
 		bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
@@ -8937,9 +8937,7 @@ Nem_Squirrel:	incbin	"artnem\Animal Squirrel.bin"
 ; ---------------------------------------------------------------------------
 Blk16_GHZ:	incbin	"map16\GHZ.bin"
 		even
-Nem_GHZ_1st:	incbin	"artnem\8x8 - GHZ1.bin"	; GHZ primary patterns
-		even
-Nem_GHZ_2nd:	incbin	"artnem\8x8 - GHZ2.bin"	; GHZ secondary patterns
+Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
 		even
 Blk256_GHZ:	incbin	"map256\GHZ.bin"
 		even

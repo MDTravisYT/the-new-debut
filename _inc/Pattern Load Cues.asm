@@ -79,8 +79,7 @@ PLC_GameOver:	dc.w ((PLC_GameOverend-PLC_GameOver-2)/6)-1
 ; Pattern load cues - Green Hill
 ; ---------------------------------------------------------------------------
 PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
-		plcm	Nem_GHZ_1st, 0		; GHZ main patterns
-		plcm	Nem_GHZ_2nd, $39A0	; GHZ secondary	patterns
+		plcm	Nem_GHZ, 0		; GHZ main patterns
 		plcm	Nem_Stalk, $6B00	; flower stalk
 		plcm	Nem_PplRock, $7A00	; purple rock
 		plcm	Nem_Crabmeat, $8000	; crabmeat enemy
@@ -344,8 +343,7 @@ PLC_SSResult:dc.w ((PLC_SpeStResultend-PLC_SSResult-2)/6)-1
 ; Pattern load cues - ending sequence
 ; ---------------------------------------------------------------------------
 PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
-		plcm	Nem_GHZ_1st,0		; GHZ main patterns
-		plcm	Nem_GHZ_2nd, $39A0	; GHZ secondary	patterns
+		plcm	Nem_GHZ,0		; GHZ main patterns
 		plcm	Nem_Stalk, $6B00	; flower stalk
 		plcm	Nem_EndFlower, $7400	; flowers
 		plcm	Nem_EndEm, $78A0	; emeralds
