@@ -2510,7 +2510,7 @@ Music8E:	incbin	"sound/music/Mus8E - Sonic Got Through.bin"
 		even
 Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
-Music90:	incbin	"sound/music/Mus90 - Continue Screen.bin"
+Music90:	incbin	"sound/music/prelude.bin"
 		even
 Music91:	incbin	"sound/music/Mus91 - Credits.bin"
 		even

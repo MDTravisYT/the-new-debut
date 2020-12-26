@@ -7,6 +7,7 @@
 
 ; ===========================================================================
 
+    include "Debugger.asm"
 	include	"Constants.asm"
 	include	"Variables.asm"
 	include	"Macros.asm"
@@ -106,7 +107,7 @@ loc_E0:
 		dc.l ErrorTrap
 		dc.l ErrorTrap
 	endif
-Console:	dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
+ConsoleName:	dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 Date:		dc.b "(C)SEGA 1991.APR" ; Copyright holder and release date (generally year)
 Title_Local:	dc.b "SONIC DEBUT - LEVEL TEST ROM                    " ; Domestic name
 Title_Int:	dc.b "SONIC DEBUT - LEVEL TEST ROM                    " ; International name
@@ -375,172 +376,6 @@ CheckSumError:
 
 	@endlessloop:
 		bra.s	@endlessloop
-; ===========================================================================
-
-BusError:
-		move.b	#2,(v_errortype).w
-		bra.s	loc_43A
-
-AddressError:
-		move.b	#4,(v_errortype).w
-		bra.s	loc_43A
-
-IllegalInstr:
-		move.b	#6,(v_errortype).w
-		addq.l	#2,2(sp)
-		bra.s	loc_462
-
-ZeroDivide:
-		move.b	#8,(v_errortype).w
-		bra.s	loc_462
-
-ChkInstr:
-		move.b	#$A,(v_errortype).w
-		bra.s	loc_462
-
-TrapvInstr:
-		move.b	#$C,(v_errortype).w
-		bra.s	loc_462
-
-PrivilegeViol:
-		move.b	#$E,(v_errortype).w
-		bra.s	loc_462
-
-Trace:
-		move.b	#$10,(v_errortype).w
-		bra.s	loc_462
-
-Line1010Emu:
-		move.b	#$12,(v_errortype).w
-		addq.l	#2,2(sp)
-		bra.s	loc_462
-
-Line1111Emu:
-		move.b	#$14,(v_errortype).w
-		addq.l	#2,2(sp)
-		bra.s	loc_462
-
-ErrorExcept:
-		move.b	#0,(v_errortype).w
-		bra.s	loc_462
-; ===========================================================================
-
-loc_43A:
-		disable_ints
-		addq.w	#2,sp
-		move.l	(sp)+,(v_spbuffer).w
-		addq.w	#2,sp
-		movem.l	d0-a7,(v_regbuffer).w
-		bsr.w	ShowErrorMessage
-		move.l	2(sp),d0
-		bsr.w	ShowErrorValue
-		move.l	(v_spbuffer).w,d0
-		bsr.w	ShowErrorValue
-		bra.s	loc_478
-; ===========================================================================
-
-loc_462:
-		disable_ints
-		movem.l	d0-a7,(v_regbuffer).w
-		bsr.w	ShowErrorMessage
-		move.l	2(sp),d0
-		bsr.w	ShowErrorValue
-
-loc_478:
-		bsr.w	ErrorWaitForC
-		movem.l	(v_regbuffer).w,d0-a7
-		enable_ints
-		rte	
-
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-ShowErrorMessage:
-		lea	(vdp_data_port).l,a6
-		locVRAM	$F800
-		lea	(Art_Text).l,a0
-		move.w	#$27F,d1
-	@loadgfx:
-		move.w	(a0)+,(a6)
-		dbf	d1,@loadgfx
-
-		moveq	#0,d0		; clear	d0
-		move.b	(v_errortype).w,d0 ; load error code
-		move.w	ErrorText(pc,d0.w),d0
-		lea	ErrorText(pc,d0.w),a0
-		locVRAM	(vram_fg+$604)
-		moveq	#$12,d1		; number of characters (minus 1)
-
-	@showchars:
-		moveq	#0,d0
-		move.b	(a0)+,d0
-		addi.w	#$790,d0
-		move.w	d0,(a6)
-		dbf	d1,@showchars	; repeat for number of characters
-		rts	
-; End of function ShowErrorMessage
-
-; ===========================================================================
-ErrorText:	dc.w @exception-ErrorText, @bus-ErrorText
-		dc.w @address-ErrorText, @illinstruct-ErrorText
-		dc.w @zerodivide-ErrorText, @chkinstruct-ErrorText
-		dc.w @trapv-ErrorText, @privilege-ErrorText
-		dc.w @trace-ErrorText, @line1010-ErrorText
-		dc.w @line1111-ErrorText
-@exception:	dc.b "ERROR EXCEPTION    "
-@bus:		dc.b "BUS ERROR          "
-@address:	dc.b "ADDRESS ERROR      "
-@illinstruct:	dc.b "ILLEGAL INSTRUCTION"
-@zerodivide:	dc.b "@ERO DIVIDE        "
-@chkinstruct:	dc.b "CHK INSTRUCTION    "
-@trapv:		dc.b "TRAPV INSTRUCTION  "
-@privilege:	dc.b "PRIVILEGE VIOLATION"
-@trace:		dc.b "TRACE              "
-@line1010:	dc.b "LINE 1010 EMULATOR "
-@line1111:	dc.b "LINE 1111 EMULATOR "
-		even
-
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-ShowErrorValue:
-		move.w	#$7CA,(a6)	; display "$" symbol
-		moveq	#7,d2
-
-	@loop:
-		rol.l	#4,d0
-		bsr.s	@shownumber	; display 8 numbers
-		dbf	d2,@loop
-		rts	
-; End of function ShowErrorValue
-
-
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-@shownumber:
-		move.w	d0,d1
-		andi.w	#$F,d1
-		cmpi.w	#$A,d1
-		blo.s	@chars0to9
-		addq.w	#7,d1		; add 7 for characters A-F
-
-	@chars0to9:
-		addi.w	#$7C0,d1
-		move.w	d1,(a6)
-		rts	
-; End of function sub_5CA
-
-
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-ErrorWaitForC:
-		bsr.w	ReadJoypads
-		cmpi.b	#btnC,(v_jpadpress1).w ; is button C pressed?
-		bne.w	ErrorWaitForC	; if not, branch
-		rts	
-; End of function ErrorWaitForC
 
 ; ===========================================================================
 
@@ -1916,7 +1751,7 @@ WaitForVBla:
 
 GM_Sega:
 		sfx	bgm_Stop,0,1,1 ; stop music
-		sfx	$90,0,1,1	; play "SEGA" sound
+		sfx	$C3,0,1,1	; play "SEGA" sound
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
 		lea	(vdp_control_port).l,a6
@@ -2107,8 +1942,8 @@ GM_OtherSega:
         bsr Palcycle_OtherSega
         move.w  #$8174,$C00004          ; enable display
 ;        bsr.w   PaletteFadeIn
-        sfx bgm_Invincible,0,1,1          ; play "OtherSega" sound
-        move.w  #10*30,(v_demolength).w      ; stay for 3 seconds
+        sfx $90,0,1,1          ; play "OtherSega" sound
+        move.w  #10*10,(v_demolength).w      ; stay for 3 seconds
  
 OtherSega_WaitEnd:
         move.b  #2,(v_vbla_routine).w
@@ -2121,6 +1956,7 @@ OtherSega_WaitEnd:
         beq.s   OtherSega_WaitEnd            ; if not, branch
  
 OtherSega_GotoTitle:
+		bsr.w	PaletteWhiteOut
 		sfx	bgm_Fade,0,1,1 ; fade out music
         move.b  #$20,(v_gamemode).w
         rts
@@ -2265,9 +2101,12 @@ GM_Title:
 		bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
+		locVRAM	$4000
+		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
+		bsr.w	NemDec
 		sfx	bgm_Title,0,1,1	; play title screen music
 		move.b	#0,(f_debugmode).w ; disable debug mode
-		move.w	#$178,(v_demolength).w ; run title screen for $178 frames
+		move.w	#$4B9,(v_demolength).w ; run title screen for $4B9 frames
 		lea	(v_objspace+$80).w,a1
 		moveq	#0,d0
 		move.w	#7,d1
@@ -2501,51 +2340,34 @@ PlayLevel:
 ; ---------------------------------------------------------------------------
 ; Level	select - level pointers
 ; ---------------------------------------------------------------------------
-LevSel_Ptrs:	if Revision=0
-		; old level order
+LevSel_Ptrs:	
 		dc.b id_GHZ, 0
 		dc.b id_GHZ, 1
 		dc.b id_GHZ, 2
 		dc.b id_LZ, 0
 		dc.b id_LZ, 1
 		dc.b id_LZ, 2
-		dc.b id_MZ, 0
-		dc.b id_MZ, 1
-		dc.b id_MZ, 2
-		dc.b id_SLZ, 0
-		dc.b id_SLZ, 1
-		dc.b id_SLZ, 2
-		dc.b id_SYZ, 0
-		dc.b id_SYZ, 1
-		dc.b id_SYZ, 2
-		dc.b id_SBZ, 0
-		dc.b id_SBZ, 1
-		dc.b id_LZ, 3		; Scrap Brain Zone 3
-		dc.b id_SBZ, 2		; Final Zone
-		else
-		; correct level order
-		dc.b id_GHZ, 0
-		dc.b id_GHZ, 1
-		dc.b id_GHZ, 2
-		dc.b id_MZ, 0
-		dc.b id_MZ, 1
-		dc.b id_MZ, 2
-		dc.b id_SYZ, 0
-		dc.b id_SYZ, 1
-		dc.b id_SYZ, 2
-		dc.b id_LZ, 0
-		dc.b id_LZ, 1
-		dc.b id_LZ, 2
-		dc.b id_SLZ, 0
-		dc.b id_SLZ, 1
-		dc.b id_SLZ, 2
-		dc.b id_SBZ, 0
-		dc.b id_SBZ, 1
 		dc.b id_LZ, 3
+		dc.b id_MZ, 0
+		dc.b id_MZ, 1
+		dc.b id_MZ, 2
+		dc.b $06, 0
+		dc.b $06, 1
+		dc.b $06, 2
+		dc.b id_SLZ, 0
+		dc.b id_SLZ, 1
+		dc.b id_SLZ, 2
+		dc.b id_SYZ, 0
+		dc.b id_SYZ, 1
+		dc.b id_SYZ, 2
+		dc.b id_SBZ, 0
+		dc.b id_SBZ, 1
 		dc.b id_SBZ, 2
-		endc
-		dc.b id_SS, 0		; Special Stage
-		dc.w $8000		; Sound Test
+		dc.b $08, 0
+		dc.b $08, 1
+		dc.b $08, 2
+		dc.b id_SS, 0
+		dc.w $8000
 		even
 ; ---------------------------------------------------------------------------
 ; Level	select codes
@@ -2650,15 +2472,15 @@ LevSel_UpDown:
 		beq.s	LevSel_Down	; if not, branch
 		subq.w	#1,d0		; move up 1 selection
 		bhs.s	LevSel_Down
-		moveq	#$14,d0		; if selection moves below 0, jump to selection	$14
+		moveq	#$1A,d0		; if selection moves below 0, jump to selection	$14
 
 LevSel_Down:
 		btst	#bitDn,d1	; is down pressed?
 		beq.s	LevSel_Refresh	; if not, branch
 		addq.w	#1,d0		; move down 1 selection
-		cmpi.w	#$15,d0
+		cmpi.w	#$1B,d0
 		blo.s	LevSel_Refresh
-		moveq	#0,d0		; if selection moves above $14,	jump to	selection 0
+		moveq	#0,d0		; if selection moves above $1A,	jump to	selection 0
 
 LevSel_Refresh:
 		move.w	d0,(v_levselitem).w ; set new selection
@@ -2667,32 +2489,34 @@ LevSel_Refresh:
 ; ===========================================================================
 
 LevSel_SndTest:
-		cmpi.w	#$14,(v_levselitem).w ; is item $14 selected?
-		bne.s	LevSel_NoMove	; if not, branch
-		move.b	(v_jpadpress1).w,d1
-		andi.b	#btnR+btnL,d1	; is left/right	pressed?
-		beq.s	LevSel_NoMove	; if not, branch
-		move.w	(v_levselsound).w,d0
-		btst	#bitL,d1	; is left pressed?
-		beq.s	LevSel_Right	; if not, branch
-		subq.w	#1,d0		; subtract 1 from sound	test
-		bhs.s	LevSel_Right
-		moveq	#$4F,d0		; if sound test	moves below 0, set to $4F
-
-LevSel_Right:
-		btst	#bitR,d1	; is right pressed?
-		beq.s	LevSel_Refresh2	; if not, branch
-		addq.w	#1,d0		; add 1	to sound test
-		cmpi.w	#$50,d0
-		blo.s	LevSel_Refresh2
-		moveq	#0,d0		; if sound test	moves above $4F, set to	0
-
-LevSel_Refresh2:
-		move.w	d0,(v_levselsound).w ; set sound test number
-		bsr.w	LevSelTextLoad	; refresh text
-
-LevSel_NoMove:
-		rts	
+        cmpi.w  #$1A,($FFFFFF82).w
+        bne.s   loc_3CC2
+        move.w  ($FFFFFF84).w,d0
+        move.b  ($FFFFF605).w,d1
+        andi.b  #$C,d1
+        beq.s   loc_3CAA
+        btst    #$2,d1
+        beq.s   loc_3C9A
+        subq.b  #$1,d0
+        bcc.s   loc_3C9A
+        moveq   #$7F,d0
+loc_3C9A:
+        btst    #$3,d1
+        beq.s   loc_3CAA
+        addq.b  #$1,d0
+        cmpi.w  #$80,d0
+        bcs.s   loc_3CAA
+        moveq	#0,d0
+loc_3CAA:
+        btst    #$6,($FFFFF605).w
+        beq.s   loc_3CBA
+        addi.b  #$10,d0
+        andi.b  #$7F,d0
+loc_3CBA:
+        move.w  d0,($FFFFFF84).w
+        bsr     LevSelTextLoad    ; loc_3CC4
+loc_3CC2:        
+        rts
 ; End of function LevSelControls
 
 ; ---------------------------------------------------------------------------
@@ -2709,9 +2533,9 @@ LevSelTextLoad:
 
 		lea	(LevelMenuText).l,a1
 		lea	(vdp_data_port).l,a6
-		move.l	#textpos,d4	; text position on screen
+		move.l	#$608C0003,d4	; text position on screen
 		move.w	#$E680,d3	; VRAM setting (4th palette, $680th tile)
-		moveq	#$14,d1		; number of lines of text
+		moveq	#$1A,d1		; number of lines of text
 
 	LevSel_DrawAll:
 		move.l	d4,4(a6)
@@ -2722,7 +2546,7 @@ LevSelTextLoad:
 		moveq	#0,d0
 		move.w	(v_levselitem).w,d0
 		move.w	d0,d1
-		move.l	#textpos,d4
+		move.l	#$608C0003,d4
 		lsl.w	#7,d0
 		swap	d0
 		add.l	d0,d4
@@ -2736,12 +2560,12 @@ LevSelTextLoad:
 		move.l	d4,4(a6)
 		bsr.w	LevSel_ChgLine	; recolour selected line
 		move.w	#$E680,d3
-		cmpi.w	#$14,(v_levselitem).w
+		cmpi.w	#$1A,(v_levselitem).w
 		bne.s	LevSel_DrawSnd
 		move.w	#$C680,d3
 
 LevSel_DrawSnd:
-		locVRAM	$EC30		; sound test position on screen
+        move.l  #$6DB00003, ($C00004)		; sound test position on screen
 		move.w	(v_levselsound).w,d0
 		addi.w	#$80,d0
 		move.b	d0,d2
@@ -2811,7 +2635,8 @@ MusicList:
 		dc.b bgm_SLZ	; SLZ
 		dc.b bgm_SYZ	; SYZ
 		dc.b bgm_SBZ	; SBZ
-		zonewarning MusicList,1
+		dc.b bgm_FZ	; Ending
+		dc.b bgm_FZ	; Ending
 		dc.b bgm_FZ	; Ending
 		even
 ; ===========================================================================
@@ -3203,7 +3028,9 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_SYZ
 		dc.l Col_SBZ
 		zonewarning ColPointers,4
-;		dc.l Col_GHZ ; Pointer for Ending is missing by default.
+		dc.l Col_GHZ ; Pointer for Ending is missing by default.
+		dc.l Col_SBZ
+		dc.l Col_SBZ
 
 		include	"_inc\Oscillatory Routines.asm"
 
@@ -5991,18 +5818,20 @@ Map_Push:	include	"_maps\Pushable Blocks.asm"
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - zone title cards
 ; ---------------------------------------------------------------------------
-Map_Card:	dc.w M_Card_GHZ-Map_Card
-		dc.w M_Card_LZ-Map_Card
-		dc.w M_Card_MZ-Map_Card
-		dc.w M_Card_SLZ-Map_Card
-		dc.w M_Card_SYZ-Map_Card
-		dc.w M_Card_SBZ-Map_Card
-		dc.w M_Card_Zone-Map_Card
-		dc.w M_Card_Act1-Map_Card
-		dc.w M_Card_Act2-Map_Card
-		dc.w M_Card_Act3-Map_Card
-		dc.w M_Card_Oval-Map_Card
-		dc.w M_Card_FZ-Map_Card
+Map_Card:	dc.w M_Card_GHZ-Map_Card ; 0
+		dc.w M_Card_LZ-Map_Card      ; 1
+		dc.w M_Card_MZ-Map_Card      ; 2
+		dc.w M_Card_SLZ-Map_Card     ; 3
+		dc.w M_Card_SYZ-Map_Card     ; 4
+		dc.w M_Card_SBZ-Map_Card     ; 5
+		dc.w M_Card_Zone-Map_Card    ; 6
+		dc.w M_Card_IMZ-Map_Card     ; 7
+		dc.w M_Card_CSZ-Map_Card     ; 8
+		dc.w M_Card_Act1-Map_Card    ; 9
+		dc.w M_Card_Act2-Map_Card    ; A
+		dc.w M_Card_Act3-Map_Card    ; B
+		dc.w M_Card_Oval-Map_Card    ; C
+		dc.w M_Card_FZ-Map_Card      ; D
 M_Card_GHZ:	dc.b 9 			; GREEN HILL
 		dc.b $F8, 5, 0,	$18, $B4
 		dc.b $F8, 5, 0,	$3A, $C4
@@ -6068,6 +5897,30 @@ M_Card_SBZ:	dc.b $A			; SCRAP BRAIN
 		dc.b $F8, 1, 0,	$20, $3C
 		dc.b $F8, 5, 0,	$2E, $44
 		even
+M_Card_IMZ:	dc.b $B	;  GREEN HILL |   ICE MOUNTAIN
+		dc.b $F8, 1, 0, $20, $A0	; I
+		dc.b $F8, 5, 0, 8, $A8		; C
+		dc.b $F8, 5, 0, $10, $B8	; E
+		dc.b $F8, 5, 0, $2A, $D8	; M
+		dc.b $F8, 5, 0, $32, $E8	; O
+		dc.b $F8, 5, 0, $46, $F8	; U
+		dc.b $F8, 5, 0, $2E, $8	; N
+		dc.b $F8, 5, 0, $42, $18	; T
+		dc.b $F8, 5, 0, 0, $28		; A
+		dc.b $F8, 1, 0, $20, $38	; I
+		dc.b $F8, 5, 0, $2E, $40	; N
+M_Card_CSZ:	dc.b $B	;  COSMIC SPACE
+		dc.b $F8, 5, 0, 8, $9C		; C
+		dc.b $F8, 5, 0, $32, $AC	; O
+		dc.b $F8, 5, 0, $3E, $BC	; S
+		dc.b $F8, 5, 0, $2A, $CC	; M
+		dc.b $F8, 1, 0, $20, $DC	; I
+		dc.b $F8, 5, 0, 8, $E4		; C
+		dc.b $F8, 5, 0, $3E, $4	; S
+		dc.b $F8, 5, 0, $36, $14	; P
+		dc.b $F8, 5, 0, 0, $24		; A
+		dc.b $F8, 5, 0, 8, $34		; C
+		dc.b $F8, 5, 0, $10, $44	; E
 M_Card_Zone:	dc.b 4			; ZONE
 		dc.b $F8, 5, 0,	$4E, $E0
 		dc.b $F8, 5, 0,	$32, $F0
@@ -6252,6 +6105,7 @@ Map_SSRC:	include	"_maps\SS Result Chaos Emeralds.asm"
 Map_Spike:	include	"_maps\Spikes.asm"
 		include	"_incObj\3B Purple Rock.asm"
 		include	"_incObj\49 Waterfall Sound.asm"
+		include	"_incObj\10.asm"
 Map_PRock:	include	"_maps\Purple Rock.asm"
 		include	"_incObj\3C Smashable Wall.asm"
 
@@ -8463,7 +8317,7 @@ Map_SS_Down:	include	"_maps\SS DOWN Block.asm"
 
 		include	"_incObj\09 Sonic in Special Stage.asm"
 
-		include	"_incObj\10.asm"
+	;	include	"_incObj\10.asm"
 
 		include	"_inc\AnimateLevelGfx.asm"
 
@@ -8908,6 +8762,8 @@ Nem_BigFlash:	incbin	"artnem\Giant Ring Flash.bin"
 		even
 Nem_Bonus:	incbin	"artnem\Hidden Bonuses.bin" ; hidden bonuses at end of a level
 		even
+Nem_Welcome:	incbin	"artnem\GHZ Sign.bin"
+Map_Welcome:	include	"_maps\GHZ Sign.asm"
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - continue screen
 ; ---------------------------------------------------------------------------
@@ -9121,6 +8977,17 @@ Level_Index:
 		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+		
+		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
+		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+		
+		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
+		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+		
 
 Level_GHZ1:	incbin	"levels\ghz1.bin"
 		even
@@ -9253,6 +9120,16 @@ ObjPos_Index:
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		; --- Put extra object data here. ---
 ObjPosLZPlatform_Index:
 		dc.w ObjPos_LZ1pf1-ObjPos_Index, ObjPos_LZ1pf2-ObjPos_Index
@@ -9366,6 +9243,7 @@ SoundDriver:	include "s1.sounddriver.asm"
 
 ; end of 'ROM'
 		even
+	include "ErrorHandler.asm"
 EndOfRom:
 
 

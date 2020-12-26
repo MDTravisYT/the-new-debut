@@ -30,7 +30,7 @@ Card_CheckSBZ3:	; Routine 0
 		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; check if level is FZ
 		bne.s	Card_LoadConfig
 		moveq	#6,d0		; load title card number 6 (FZ)
-		moveq	#$B,d2		; use "FINAL" mappings
+		moveq	#$D,d2		; use "FINAL" mappings
 
 	Card_LoadConfig:
 		lea	(Card_ConData).l,a3
@@ -51,7 +51,7 @@ Card_Loop:
 		move.b	d2,d0
 
 	Card_ActNumber:
-		cmpi.b	#7,d0
+		cmpi.b	#9,d0
 		bne.s	Card_MakeSprite
 		add.b	(v_act).w,d0
 		cmpi.b	#3,(v_act).w
@@ -140,9 +140,9 @@ Card_ItemData:	dc.w $D0	; y-axis position
 		dc.w $E4
 		dc.b 2,	6
 		dc.w $EA
-		dc.b 2,	7
+		dc.b 2,	9
 		dc.w $E0
-		dc.b 2,	$A
+		dc.b 2,	$C
 ; ---------------------------------------------------------------------------
 ; Title	card configuration data
 ; Format:
@@ -156,4 +156,6 @@ Card_ConData:	dc.w 0,	$120, $FEFC, $13C, $414, $154, $214, $154 ; GHZ
 		dc.w 0,	$120, $FF04, $144, $41C, $15C, $21C, $15C ; SYZ
 		dc.w 0,	$120, $FF04, $144, $41C, $15C, $21C, $15C ; SBZ
 		dc.w 0,	$120, $FEE4, $124, $3EC, $3EC, $1EC, $12C ; FZ
+		dc.w 0,	$120, $FF04, $144, $41C, $15C, $21C, $15C ; SBZ
+		dc.w 0,	$120, $FF04, $144, $41C, $15C, $21C, $15C ; SBZ
 ; ===========================================================================

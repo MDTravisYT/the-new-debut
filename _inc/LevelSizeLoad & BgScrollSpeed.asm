@@ -75,6 +75,16 @@ LevelSizeArray:
 		dc.w $0004, $0000, $0DC0, $0110, $0110, $0060
 		dc.w $0004, $0000, $2FFF, $0000, $0320, $0060
 		dc.w $0004, $0000, $2FFF, $0000, $0320, $0060
+		
+		dc.w $0004, $0000, $21C0, $0000, $0720, $0060
+		dc.w $0004, $0000, $1E40, $FF00, $0800, $0060
+		dc.w $0004, $2080, $2460, $0510, $0510, $0060
+		dc.w $0004, $0000, $3EC0, $0000, $0720, $0060
+		
+		dc.w $0004, $0000, $21C0, $0000, $0720, $0060
+		dc.w $0004, $0000, $1E40, $FF00, $0800, $0060
+		dc.w $0004, $2080, $2460, $0510, $0510, $0060
+		dc.w $0004, $0000, $3EC0, $0000, $0720, $0060
 
 ; ---------------------------------------------------------------------------
 ; Ending start location array
@@ -91,7 +101,7 @@ LevSz_ChkLamp:
 		jsr	(Lamp_LoadInfo).l
 		move.w	(v_player+obX).w,d1
 		move.w	(v_player+obY).w,d0
-		bra.s	LevSz_SkipStartPos
+		bra.w	LevSz_SkipStartPos
 ; ===========================================================================
 
 LevSz_StartLoc:
@@ -100,12 +110,14 @@ LevSz_StartLoc:
 		lsr.w	#4,d0
 		lea	StartLocArray(pc,d0.w),a1 ; load Sonic's start location
 		tst.w	(f_demo).w	; is ending demo mode on?
-		bpl.s	LevSz_SonicPos	; if not, branch
+		bpl.w	LevSz_SonicPos	; if not, branch
 
 		move.w	(v_creditsnum).w,d0
 		subq.w	#1,d0
 		lsl.w	#2,d0
 		lea	EndingStLocArray(pc,d0.w),a1 ; load Sonic's start location
+	
+StartLocArray:	include	"_inc\Start Location Array - Levels.asm"
 
 LevSz_SonicPos:
 		moveq	#0,d1
@@ -148,11 +160,6 @@ SetScreen:
 		move.l	LoopTileNums(pc,d0.w),(v_256loop1).w
 		bra.w	LevSz_LoadScrollBlockSize
 ; ===========================================================================
-; ---------------------------------------------------------------------------
-; Sonic start location array
-; ---------------------------------------------------------------------------
-StartLocArray:	include	"_inc\Start Location Array - Levels.asm"
-
 ; ---------------------------------------------------------------------------
 ; Which	256x256	tiles contain loops or roll-tunnels
 ; ---------------------------------------------------------------------------
@@ -254,7 +261,8 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_SLZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
-		dc.w BgScroll_End-BgScroll_Index
+		dc.w BgScroll_End-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
+		dc.w BgScroll_SBZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 ; ===========================================================================
 
 BgScroll_GHZ:

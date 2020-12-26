@@ -56,13 +56,13 @@ EEgg_Juggle:	; Routine 4
 		asl.w	#3,d2
 		add.b	d2,obAngle(a1)
 		lea	$40(a1),a1
-		dbf	d1,@emeraldloop
+	;	dbf	d1,@emeraldloop ; temp comment
 		addq.b	#1,obFrame(a0)
 		move.w	#112,eegg_time(a0)
 
 EEgg_Wait:	; Routine 6
 		subq.w	#1,eegg_time(a0) ; decrement timer
-		bpl.s	@nochg		; branch if time remains
+	;	bpl.s	@nochg		; branch if time remains ; temp comment
 		bchg	#0,obAnim(a0)
 		move.b	#2,obRoutine(a0) ; goto EEgg_Animate next
 
