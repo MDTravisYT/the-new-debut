@@ -11,7 +11,7 @@ ptr_Push:	dc.w SonAni_Push-Ani_Sonic
 ptr_Wait:	dc.w SonAni_Wait-Ani_Sonic
 ptr_Balance:	dc.w SonAni_Balance-Ani_Sonic
 ptr_LookUp:	dc.w SonAni_LookUp-Ani_Sonic
-ptr_Duck:	dc.w SonAni_Wait-Ani_Sonic
+ptr_Duck:	dc.w SonAni_Duck-Ani_Sonic
 ptr_Warp1:	dc.w SonAni_Warp1-Ani_Sonic
 ptr_Warp2:	dc.w SonAni_Wait-Ani_Sonic
 ptr_Warp3:	dc.w SonAni_Wait-Ani_Sonic
@@ -40,31 +40,31 @@ ptr_Fall:	dc.w SonAni_Fall-Ani_Sonic
 
 SonAni_Walk:	dc.b $FF, 2, 3,	4, 5,	6, 7, afEnd
 		even
-SonAni_Run:	dc.b $FF, $8, $9, $A, $B, afEnd, afEnd, afEnd
+SonAni_Run:	dc.b $FF, $1A, $1B, $1C, $1D, afEnd, afEnd, afEnd
 		even
-SonAni_Roll:	dc.b $FE,  $D,  $C,  $E,  $C,  $F,	$C,	$10,	afEnd, afEnd
+SonAni_Roll:	dc.b $FE,  $2B,  $2A,  $2C,  $2A,  $2D,	$2A,	$2E,	afEnd, afEnd
 		even
-SonAni_Roll2:	dc.b $FE,  $D,  $C,  $E,  $C,  $F,	$C,	$10,	afEnd, afEnd
+SonAni_Roll2:	dc.b $FE,  $2B,  $2A,  $2C,  $2A,  $2D,	$2A,	$2E,	afEnd, afEnd
 		even
-SonAni_Push:	dc.b $FD, $31, $32, $33, $34, afEnd, afEnd, afEnd
+SonAni_Push:	dc.b $FD, $4F, $50, $51, $52, afEnd, afEnd, afEnd
 		even
 SonAni_Wait:	dc.b   7,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
 		dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.b   $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $29,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $29,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $29,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $29,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28,  $28
-		dc.b   $2A,  $2A,  $2B,  $2B,  $2C,  $2C,  $2D,  $2D, afBack, 8
+		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+		dc.b   $48,  $48,  $49,  $49,  $4A,  $4A,  $4B,  $4B, afBack, 8
 		even
-SonAni_Balance:	dc.b $1F, $2E, $2F, afEnd
+SonAni_Balance:	dc.b $1F, $4C, $4D, afEnd
 		even
-SonAni_LookUp:	dc.b $17, $35, afBack, 1
+SonAni_LookUp:	dc.b $17, $53, afBack, 1
 		even
-SonAni_Duck:	dc.b $17, 1, afEnd
+SonAni_Duck:	dc.b $17, $54, afEnd
 		even
 SonAni_Warp1:	dc.b $3F, $30, afEnd
 		even
@@ -74,36 +74,36 @@ SonAni_Warp3:	dc.b $3F, fr_warp3, afEnd
 		even
 SonAni_Warp4:	dc.b $3F, fr_warp4, afEnd
 		even
-SonAni_Stop:	dc.b 7,	$1F, afEnd
+SonAni_Stop:	dc.b 7,	$3D, afEnd
 		even
 SonAni_Float1:	dc.b 7,	fr_float1, fr_float4, afEnd
 		even
-SonAni_Float2:	dc.b 7,	$20, $21, $22, $23, $24, afEnd
+SonAni_Float2:	dc.b 7,	$3E, $3F, $40, $41, $42, afEnd
 		even
 SonAni_Spring:	dc.b $2F, fr_spring, afChange, id_Walk
 		even
 SonAni_Hang:	dc.b 4,	fr_hang1, fr_hang2, afEnd
 		even
-SonAni_Leap1:	dc.b $F, $17, $17, $17,	afBack, 1
+SonAni_Leap1:	dc.b $F, $35, $35, $35,	afBack, 1
 		even
-SonAni_Leap2:	dc.b $F, $17, $18, afBack, 1
+SonAni_Leap2:	dc.b $F, $35, $36, afBack, 1
 		even
 SonAni_Surf:	dc.b $3F, fr_surf, afEnd
 		even
-SonAni_GetAir:	dc.b $B, $27, $27, fr_walk16, afChange, id_Walk
+SonAni_GetAir:	dc.b $B, $45, $45, fr_walk16, afChange, id_Walk
 		even
-SonAni_Burnt:	dc.b $20, $12, afEnd
+SonAni_Burnt:	dc.b $20, $30, afEnd
 		even
-SonAni_Drown:	dc.b $17, $25, $26, afBack, 1
+SonAni_Drown:	dc.b $17, $43, $44, afBack, 1
 		even
-SonAni_Death:	dc.b $F,	$11, afBack, 1
+SonAni_Death:	dc.b $F,	$2F, afBack, 1
 		even
 SonAni_Shrink:	dc.b 3,	fr_shrink1, fr_shrink2, fr_shrink3, fr_shrink4, fr_shrink5, fr_null, afBack, 1
 		even
-SonAni_Hurt:	dc.b 4, $1E, $1C, $1C, $13, afBack, 1
+SonAni_Hurt:	dc.b 4, $3E, $3A, $3A, $31, afBack, 1
 		even
 SonAni_WaterSlide:
-		dc.b 7, $A, afEnd
+		dc.b 7, $31, afEnd
 		even
 SonAni_Null:	dc.b $77, fr_null, afChange, id_Walk
 		even
@@ -111,11 +111,11 @@ SonAni_Float3:	dc.b 3,	fr_float1, fr_float2, fr_float5, fr_float3, fr_float6, af
 		even
 SonAni_Float4:	dc.b 3,	fr_float1, afChange, id_Walk
 		even
-SonAni_Jump:	dc.b 4, $19, $19, $19, $19, afBack, 1
+SonAni_Jump:	dc.b 4, $37, $37, $37, $37, afBack, 1
 		even
-SonAni_Jump2Roll:	dc.b $2, $1D, afChange, id_Roll
+SonAni_Jump2Roll:	dc.b $2, $3B, afChange, id_Roll
 		even
-SonAni_Fall:	dc.b $7, $1A, $1B, $1C, $1C, $1C, $1C, $1C, $1C, $1C, $1C, afChange, id_Jump2Roll
+SonAni_Fall:	dc.b $7, $38, $39, $3A, $3A, $3A, $3A, $3A, $3A, $3A, $3A, afChange, id_Jump2Roll
 		even
 
 id_Walk:	equ (ptr_Walk-Ani_Sonic)/2	; 0
@@ -146,7 +146,7 @@ id_Death:	equ (ptr_Death-Ani_Sonic)/2	; $18
 id_Shrink:	equ (ptr_Shrink-Ani_Sonic)/2	; $19
 id_Hurt:	equ (ptr_Hurt-Ani_Sonic)/2	; $1A
 id_WaterSlide:	equ (ptr_WaterSlide-Ani_Sonic)/2 ; $1B
-id_Null:	equ (ptr_Null-Ani_Sonic)/2	; $1C
+id_Null:	equ (ptr_Null-Ani_Sonic)/2	; $3A
 id_Float3:	equ (ptr_Float3-Ani_Sonic)/2	; $1D
 id_Float4:	equ (ptr_Float4-Ani_Sonic)/2	; $1E
 id_Jump:	equ	(ptr_Jump-Ani_Sonic)/2	;1F

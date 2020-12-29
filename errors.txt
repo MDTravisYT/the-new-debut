@@ -4,4 +4,4 @@ SN 68k version 2.53
 D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\SONIC.ASM(1969) : Warning : Forward reference to redefinable symbol
 
 Assembly completed.
-0 error(s) from 54207 lines in 0.15 seconds
+0 error(s) from 54427 lines in 0.17 seconds

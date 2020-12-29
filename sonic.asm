@@ -108,13 +108,13 @@ loc_E0:
 		dc.l ErrorTrap
 	endif
 ConsoleName:	dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
-Date:		dc.b "(C)SEGA 1991.APR" ; Copyright holder and release date (generally year)
-Title_Local:	dc.b "SONIC DEBUT - LEVEL TEST ROM                    " ; Domestic name
-Title_Int:	dc.b "SONIC DEBUT - LEVEL TEST ROM                    " ; International name
+Date:		dc.b "MCT 2021        " ; Copyright holder and release date (generally year)
+Title_Local:	dc.b "SONIC DEBUT BY MCTRAVISYT                       " ; Domestic name
+Title_Int:	dc.b "SONIC DEBUT BY MCTRAVISYT                       " ; International name
 Serial:		if Revision=0
-		dc.b "GM 00001009-00"   ; Serial/version number (Rev 0)
+		dc.b "GM XXXXXXXX-XX"   ; Serial/version number (Rev 0)
 		else
-			dc.b "GM 00004049-01" ; Serial/version number (Rev non-0)
+			dc.b "GM XXXXXXXX-XX" ; Serial/version number (Rev non-0)
 		endc
 Checksum: dc.w $0
 		dc.b "J               " ; I/O support
@@ -2256,12 +2256,12 @@ LevelSelect:
 		andi.b	#btnABC+btnStart,(v_jpadpress1).w ; is A, B, C, or Start pressed?
 		beq.s	LevelSelect	; if not, branch
 		move.w	(v_levselitem).w,d0
-		cmpi.w	#$14,d0		; have you selected item $14 (sound test)?
+		cmpi.w	#$1A,d0		; have you selected item $1A (sound test)?
 		bne.s	LevSel_Level_SS	; if not, go to	Level/SS subroutine
 		move.w	(v_levselsound).w,d0
 		addi.w	#$80,d0
-		tst.b	(f_creditscheat).w ; is Japanese Credits cheat on?
-		beq.s	LevSel_NoCheat	; if not, branch
+	;	tst.b	(f_creditscheat).w ; is Japanese Credits cheat on?
+	;	beq.s	LevSel_NoCheat	; if not, branch
 		cmpi.w	#$9F,d0		; is sound $9F being played?
 		beq.s	LevSel_Ending	; if yes, branch
 		cmpi.w	#$9E,d0		; is sound $9E being played?
@@ -2297,7 +2297,7 @@ LevSel_Level_SS:
 		add.w	d0,d0
 		move.w	LevSel_Ptrs(pc,d0.w),d0 ; load level number
 		bmi.w	LevelSelect
-		cmpi.w	#id_SS*$100,d0	; check	if level is 0700 (Special Stage)
+		cmpi.w	#$06*$100,d0	; check	if level is 0700 (Special Stage)
 		bne.s	LevSel_Level	; if not, branch
 		move.b	#id_Special,(v_gamemode).w ; set screen mode to $10 (Special Stage)
 		clr.w	(v_zone).w	; clear	level
@@ -2351,9 +2351,9 @@ LevSel_Ptrs:
 		dc.b id_MZ, 0
 		dc.b id_MZ, 1
 		dc.b id_MZ, 2
-		dc.b $06, 0
-		dc.b $06, 1
-		dc.b $06, 2
+		dc.b $07, 0
+		dc.b $07, 1
+		dc.b $07, 2
 		dc.b id_SLZ, 0
 		dc.b id_SLZ, 1
 		dc.b id_SLZ, 2
@@ -2366,7 +2366,7 @@ LevSel_Ptrs:
 		dc.b $08, 0
 		dc.b $08, 1
 		dc.b $08, 2
-		dc.b id_SS, 0
+		dc.b $06, 0
 		dc.w $8000
 		even
 ; ---------------------------------------------------------------------------

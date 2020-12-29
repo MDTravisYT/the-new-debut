@@ -54,7 +54,7 @@ Deform_GHZ:
 		ext.l	d4
 		asl.l	#5,d4
 		move.l	d4,d1
-		asl.l	#1,d4
+		asl.l	#2,d4
 		add.l	d1,d4
   moveq	#0,d5
 		bsr.w	ScrollBlock1
@@ -64,7 +64,7 @@ Deform_GHZ:
 		andi.w	#$7FF,d0
 		lsr.w	#5,d0
 		neg.w	d0
-		addi.w	#$16,d0              
+		addi.w	#$26,d0              
 		move.w	d0,(v_bg2screenposy).w
 		move.w	d0,d4
 		bsr.w	ScrollBlock3
@@ -92,7 +92,7 @@ loc_6346:
 loc_6356:
 		move.l	d0,(a1)+
 		dbf	d1,loc_6356
-		move.w	(v_bg2screenposx).w,d0
+	;	move.w	(v_bg2screenposx).w,d0 ; Bottom portion, maybe use to scroll buildings
 		addi.w	#0,d0
 		move.w	(v_screenposx).w,d2
 		addi.w	#-$200,d2
@@ -109,11 +109,11 @@ loc_6356:
 
 loc_6384:
 		move.w	d3,d0
-		neg.w	d0
+	;	neg.w	d0
 		move.l	d0,(a1)+
-		swap	d3
-		add.l	d2,d3
-		swap	d3
+	;	swap	d3
+	;	add.l	d2,d3
+	;	swap	d3
 		dbf	d1,loc_6384
 		rts
 ; End of function Deform_GHZ
