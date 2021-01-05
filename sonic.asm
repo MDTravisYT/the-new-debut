@@ -1712,6 +1712,7 @@ Pal_GHZ:	incbin	"palette\Green Hill Zone.bin"
 Pal_LZ:		incbin	"palette\Labyrinth Zone.bin"
 Pal_LZWater:	incbin	"palette\Labyrinth Zone Underwater.bin"
 Pal_MZ:		incbin	"palette\Marble Zone.bin"
+Pal_IMZ:	incbin	"palette\Ice Mountain Zone.bin"
 Pal_SLZ:	incbin	"palette\Star Light Zone.bin"
 Pal_SYZ:	incbin	"palette\Spring Yard Zone.bin"
 Pal_SBZ1:	incbin	"palette\SBZ Act 1.bin"
@@ -3029,7 +3030,7 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_SBZ
 		zonewarning ColPointers,4
 		dc.l Col_GHZ ; Pointer for Ending is missing by default.
-		dc.l Col_SBZ
+		dc.l Col_GHZ
 		dc.l Col_SBZ
 
 		include	"_inc\Oscillatory Routines.asm"
@@ -5873,17 +5874,17 @@ M_Card_SLZ:	dc.b 9			; STAR LIGHT
 		dc.b $F8, 5, 0,	$1C, $2C
 		dc.b $F8, 5, 0,	$42, $3C
 		even
-M_Card_SYZ:	dc.b $A			; SPRING YARD
-		dc.b $F8, 5, 0,	$3E, $AC
-		dc.b $F8, 5, 0,	$36, $BC
-		dc.b $F8, 5, 0,	$3A, $CC
-		dc.b $F8, 1, 0,	$20, $DC
-		dc.b $F8, 5, 0,	$2E, $E4
-		dc.b $F8, 5, 0,	$18, $F4
-		dc.b $F8, 5, 0,	$4A, $14
-		dc.b $F8, 5, 0,	0, $24
-		dc.b $F8, 5, 0,	$3A, $34
-		dc.b $F8, 5, 0,	$C, $44
+M_Card_SYZ:	dc.b $A	;  GREEN HILL |     SPARKLING
+		dc.b $F8, 5, 0, $3E, $C0	; S
+		dc.b $F8, 5, 0, $36, $D0	; P
+		dc.b $F8, 5, 0, 0, $E0		; A
+		dc.b $F8, 5, 0, $3A, $F0	; R
+		dc.b $F8, 5, 0, $22, $0	; K
+		dc.b $F8, 5, 0, $26, $10	; L
+		dc.b $F8, 1, 0, $20, $20	; I
+		dc.b $F8, 5, 0, $2E, $28	; N
+		dc.b $F8, 5, 0, $18, $38	; G
+		dc.b $F8, 5, 0,	$0C, $48
 		even
 M_Card_SBZ:	dc.b $A			; SCRAP BRAIN
 		dc.b $F8, 5, 0,	$3E, $AC
@@ -8813,6 +8814,12 @@ Blk256_MZ:	if Revision=0
 		incbin	"map256\MZ (JP1).bin"
 		endc
 		even
+Blk16_IMZ:	incbin	"map16\IMZ.bin"
+		even
+Nem_IMZ:	incbin	"artnem\8x8 - IMZ.bin"	; GHZ primary patterns
+		even
+Blk256_IMZ:	incbin	"map256\IMZ.bin"
+		even
 Blk16_SLZ:	incbin	"map16\SLZ.bin"
 		even
 Nem_SLZ:	incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
@@ -8977,12 +8984,12 @@ Level_Index:
 		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-		
-		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
+		; IMZ
+		dc.w Level_IMZ1-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
 		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-		
+		; CSZ
 		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
@@ -9032,6 +9039,9 @@ Level_MZ3bg:	incbin	"levels\mz3bg.bin"
 		even
 byte_697E6:	dc.b 0,	0, 0, 0
 byte_697EA:	dc.b 0,	0, 0, 0
+
+Level_IMZ1:	incbin	"levels\imz1.bin"
+		even
 
 Level_SLZ1:	incbin	"levels\slz1.bin"
 		even

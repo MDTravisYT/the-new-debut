@@ -14,13 +14,14 @@ ptr_PLC_LZ:		dc.w PLC_LZ-ArtLoadCues
 ptr_PLC_LZ2:		dc.w PLC_LZ2-ArtLoadCues
 ptr_PLC_MZ:		dc.w PLC_MZ-ArtLoadCues
 ptr_PLC_MZ2:		dc.w PLC_MZ2-ArtLoadCues
+ptr_PLC_IMZ:		dc.w PLC_IMZ-ArtLoadCues
+ptr_PLC_IMZ2:		dc.w PLC_IMZ2-ArtLoadCues
 ptr_PLC_SLZ:		dc.w PLC_SLZ-ArtLoadCues
 ptr_PLC_SLZ2:		dc.w PLC_SLZ2-ArtLoadCues
 ptr_PLC_SYZ:		dc.w PLC_SYZ-ArtLoadCues
 ptr_PLC_SYZ2:		dc.w PLC_SYZ2-ArtLoadCues
 ptr_PLC_SBZ:		dc.w PLC_SBZ-ArtLoadCues
 ptr_PLC_SBZ2:		dc.w PLC_SBZ2-ArtLoadCues
-			zonewarning PLC_Levels,4
 ptr_PLC_TitleCard:	dc.w PLC_TitleCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
@@ -156,6 +157,30 @@ PLC_MZ2:	dc.w ((PLC_MZ2end-PLC_MZ2-2)/6)-1
 		plcm	Nem_VSpring, $A660	; vertical spring
 		plcm	Nem_MzBlock, $5700	; green	stone block
 	PLC_MZ2end:
+; ---------------------------------------------------------------------------
+; Pattern load cues - Ice Mountain
+; ---------------------------------------------------------------------------
+PLC_IMZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
+		plcm	Nem_IMZ, 0		; GHZ main patterns
+		plcm	Nem_Stalk, $6B00	; flower stalk
+		plcm	Nem_PplRock, $7A00	; purple rock
+		plcm	Nem_Crabmeat, $8000	; crabmeat enemy
+		plcm	Nem_Buzz, $8880		; buzz bomber enemy
+		plcm	Nem_Chopper, $8F60	; chopper enemy
+		plcm	Nem_Newtron, $9360	; newtron enemy
+		plcm	Nem_Motobug, $9E00	; motobug enemy
+		plcm	Nem_Spikes, $A360	; spikes
+		plcm	Nem_HSpring, $A460	; horizontal spring
+		plcm	Nem_VSpring, $A660	; vertical spring
+
+PLC_IMZ2:	dc.w ((PLC_GHZ2end-PLC_GHZ2-2)/6)-1
+		plcm	Nem_Swing, $7000	; swinging platform
+		plcm	Nem_Bridge, $71C0	; bridge
+		plcm	Nem_SpikePole, $7300	; spiked pole
+		plcm	Nem_Ball, $7540		; giant	ball
+		plcm	Nem_GhzWall1, $A1E0	; breakable wall
+		plcm	Nem_GhzWall2, $6980	; normal wall
+	PLC_IMZ2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Star Light
 ; ---------------------------------------------------------------------------
@@ -343,6 +368,7 @@ PLC_SSResult:dc.w ((PLC_SpeStResultend-PLC_SSResult-2)/6)-1
 ; Pattern load cues - ending sequence
 ; ---------------------------------------------------------------------------
 PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
+	PLC_Endingend:
 		plcm	Nem_GHZ,0		; GHZ main patterns
 		plcm	Nem_Stalk, $6B00	; flower stalk
 		plcm	Nem_EndFlower, $7400	; flowers
@@ -360,7 +386,7 @@ PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
 		plcm	Nem_Flicky, $B4A0	; flicky
 		plcm	Nem_Squirrel, $B660	; squirrel
 		plcm	Nem_EndStH, $B8A0	; "SONIC THE HEDGEHOG"
-	PLC_Endingend:
+	;PLC_Endingend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - "TRY AGAIN" and "END" screens
 ; ---------------------------------------------------------------------------
@@ -402,6 +428,8 @@ plcid_LZ:		equ (ptr_PLC_LZ-ArtLoadCues)/2		; 6
 plcid_LZ2:		equ (ptr_PLC_LZ2-ArtLoadCues)/2		; 7
 plcid_MZ:		equ (ptr_PLC_MZ-ArtLoadCues)/2		; 8
 plcid_MZ2:		equ (ptr_PLC_MZ2-ArtLoadCues)/2		; 9
+plcid_IMZ:		equ (ptr_PLC_IMZ-ArtLoadCues)/2		; 8
+plcid_IMZ2:		equ (ptr_PLC_IMZ2-ArtLoadCues)/2		; 9
 plcid_SLZ:		equ (ptr_PLC_SLZ-ArtLoadCues)/2		; $A
 plcid_SLZ2:		equ (ptr_PLC_SLZ2-ArtLoadCues)/2	; $B
 plcid_SYZ:		equ (ptr_PLC_SYZ-ArtLoadCues)/2		; $C

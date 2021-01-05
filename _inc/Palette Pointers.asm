@@ -19,6 +19,7 @@ Pal_Levels:
 ptr_Pal_GHZ:		palp	Pal_GHZ,v_pal_dry+$20, $30		; 4 - GHZ
 ptr_Pal_LZ:		palp	Pal_LZ,v_pal_dry+$20,$30		; 5 - LZ
 ptr_Pal_MZ:		palp	Pal_MZ,v_pal_dry+$20,$30		; 6 - MZ
+ptr_Pal_IMZ:		palp	Pal_IMZ,v_pal_dry+$20,$30		
 ptr_Pal_SLZ:		palp	Pal_SLZ,v_pal_dry+$20,$30		; 7 - SLZ
 ptr_Pal_SYZ:		palp	Pal_SYZ,v_pal_dry+$20,$30		; 8 - SYZ
 ptr_Pal_SBZ1:		palp	Pal_SBZ1,v_pal_dry+$20,$30		; 9 - SBZ1
@@ -43,6 +44,7 @@ palid_Sonic:		equ (ptr_Pal_Sonic-PalPointers)/8
 palid_GHZ:		equ (ptr_Pal_GHZ-PalPointers)/8
 palid_LZ:		equ (ptr_Pal_LZ-PalPointers)/8
 palid_MZ:		equ (ptr_Pal_MZ-PalPointers)/8
+palid_IMZ:		equ (ptr_Pal_IMZ-PalPointers)/8
 palid_SLZ:		equ (ptr_Pal_SLZ-PalPointers)/8
 palid_SYZ:		equ (ptr_Pal_SYZ-PalPointers)/8
 palid_SBZ1:		equ (ptr_Pal_SBZ1-PalPointers)/8
