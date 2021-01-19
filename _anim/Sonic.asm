@@ -46,27 +46,32 @@ SonAni_Roll:	dc.b $FE,  $2B,  $2A,  $2C,  $2A,  $2D,	$2A,	$2E,	afEnd, afEnd
 		even
 SonAni_Roll2:	dc.b $FE,  $2B,  $2A,  $2C,  $2A,  $2D,	$2A,	$2E,	afEnd, afEnd
 		even
-SonAni_Push:	dc.b $FD, $4F, $50, $51, $52, afEnd, afEnd, afEnd
+SonAni_Push:	dc.b $FD, $50, $51, $52, $53, afEnd, afEnd, afEnd
 		even
-SonAni_Wait:	dc.b   7,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1
-		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
+SonAni_Wait:	dc.b   7,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 ; big block of frames, someone please tell me how to optimize this - MCT
+		dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1         ; im screaming into a void
+		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46 ; he stare
 		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
 		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
 		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
 		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
-		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
-		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
-		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
-		dc.b   $48,  $48,  $49,  $49,  $4A,  $4A,  $4B,  $4B, afBack, 8
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49 ; he tap
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49
+		dc.b   $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49,  $48,  $48,  $49,  $49
+		dc.b   $4A,  $4A,  $4A,  $4A,  $4A,  $4A,  $4A,  $4A,  $4B,  $4C,  afBack, 2                         ; he spin
 		even
-SonAni_Balance:	dc.b $1F, $4C, $4D, afEnd
+SonAni_Balance:	dc.b $1F, $4D, $4E, afEnd
 		even
-SonAni_LookUp:	dc.b $17, $53, afBack, 1
+SonAni_LookUp:	dc.b $17, $54, afBack, 1
 		even
-SonAni_Duck:	dc.b $17, $54, afEnd
+SonAni_Duck:	dc.b $17, $55, afEnd
 		even
-SonAni_Warp1:	dc.b $3F, $30, afEnd
+SonAni_Warp1:	dc.b $3F, $4F, afEnd
 		even
 SonAni_Warp2:	dc.b $3F, fr_warp2, afEnd
 		even
@@ -74,7 +79,7 @@ SonAni_Warp3:	dc.b $3F, fr_warp3, afEnd
 		even
 SonAni_Warp4:	dc.b $3F, fr_warp4, afEnd
 		even
-SonAni_Stop:	dc.b 7,	$3D, afEnd
+SonAni_Stop:	dc.b 5,	$3D, $56, afBack, 1
 		even
 SonAni_Float1:	dc.b 7,	fr_float1, fr_float4, afEnd
 		even
@@ -111,7 +116,7 @@ SonAni_Float3:	dc.b 3,	fr_float1, fr_float2, fr_float5, fr_float3, fr_float6, af
 		even
 SonAni_Float4:	dc.b 3,	fr_float1, afChange, id_Walk
 		even
-SonAni_Jump:	dc.b 4, $37, $37, $37, $37, afBack, 1
+SonAni_Jump:	dc.b 4, $37, $37, $37, $37, afChange, id_Fall
 		even
 SonAni_Jump2Roll:	dc.b $2, $3B, afChange, id_Roll
 		even

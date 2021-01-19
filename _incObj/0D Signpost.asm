@@ -16,7 +16,7 @@ Signpost:
 Sign_Index:	dc.w Sign_Main-Sign_Index
 		dc.w Sign_Touch-Sign_Index
 		dc.w Sign_Spin-Sign_Index
-		dc.w Sign_SonicRun-Sign_Index
+		dc.w GotThroughAct-Sign_Index
 		dc.w Sign_Exit-Sign_Index
 
 spintime:	equ $30		; time for signpost to spin
@@ -38,6 +38,7 @@ Sign_Touch:	; Routine 2
 		bcs.s	@notouch
 		cmpi.w	#$20,d0		; is Sonic within $20 pixels of	the signpost?
 		bcc.s	@notouch	; if not, branch
+		move.b  #1,($FFFFF7AA).w ; Lock the screen
 		music	sfx_Signpost,0,0,0	; play signpost sound
 		clr.b	(f_timecount).w	; stop time counter
 		move.w	(v_limitright2).w,(v_limitleft2).w ; lock screen position
@@ -78,7 +79,7 @@ Sign_Spin:	; Routine 4
 		add.w	obY(a0),d0
 		move.w	d0,obY(a1)
 		move.l	#Map_Ring,obMap(a1)
-		move.w	#$27B2,obGfx(a1)
+		move.w	#$27A8,obGfx(a1)
 		move.b	#4,obRender(a1)
 		move.b	#2,obPriority(a1)
 		move.b	#8,obActWid(a1)
@@ -96,26 +97,6 @@ Sign_SparkPos:	dc.b -$18,-$10		; x-position, y-position
 		dc.b  $18, $10
 ; ===========================================================================
 
-Sign_SonicRun:	; Routine 6
-		tst.w	(v_debuguse).w	; is debug mode	on?
-		bne.w	locret_ECEE	; if yes, branch
-		btst	#1,(v_player+obStatus).w
-		bne.s	loc_EC70
-		move.b	#1,(f_lockctrl).w ; lock controls
-		move.w	#btnR<<8,(v_jpadhold2).w ; make Sonic run to the right
-
-	loc_EC70:
-		tst.b	(v_player).w
-		beq.s	loc_EC86
-		move.w	(v_player+obX).w,d0
-		move.w	(v_limitright2).w,d1
-		addi.w	#$128,d1
-		cmp.w	d1,d0
-		bcs.s	locret_ECEE
-
-	loc_EC86:
-		addq.b	#2,obRoutine(a0)
-
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	set up bonuses at the end of an	act
@@ -125,6 +106,7 @@ Sign_SonicRun:	; Routine 6
 
 
 GotThroughAct:
+		move.b  #1,($FFFFF5C0).w ; Set victory animation flag
 		tst.b	(v_objspace+$5C0).w
 		bne.s	locret_ECEE
 		move.w	(v_limitright2).w,(v_limitleft2).w

@@ -52,7 +52,7 @@ locret_9F76:
 
 Flash_End:
 		addq.b	#2,obRoutine(a0)
-		move.w	#0,(v_player).w ; remove Sonic object
+	;	move.w	#0,(v_player).w ; remove Sonic object
 		addq.l	#4,sp
 		rts	
 ; End of function Flash_Collect

@@ -180,7 +180,7 @@ RLoss_Count:	; Routine 0
 		movea.l	a0,a1
 		moveq	#0,d5
 		move.w	(v_rings).w,d5	; check number of rings you have
-		moveq	#32,d0
+		moveq	#100,d0
 		cmp.w	d0,d5		; do you have 32 or more?
 		bcs.s	@belowmax	; if not, branch
 		move.w	d0,d5		; if yes, set d5 to 32

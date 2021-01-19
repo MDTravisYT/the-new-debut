@@ -86,6 +86,7 @@ PCycle_LZ:
 
 PCycLZ_Skip1:
 ; Conveyor belts
+		rts
 		move.w	(v_framecount).w,d0
 		andi.w	#7,d0
 		move.b	PCycLZ_Seq(pc,d0.w),d0 ; get byte from palette sequence

@@ -43,10 +43,18 @@ loc_1341C:
 		bne.s	loc_13490
 		move.b	#$E,obHeight(a0)
 		move.b	#7,obWidth(a0)
-		move.b	#id_Spring,obAnim(a0) ; use "jumping" animation
+		move.b	#id_Jump,obAnim(a0) ; use "jumping" animation
 		bset	#2,obStatus(a0)
 		addq.w	#5,obY(a0)
-
+Result_Check:
+        tst.b   ($FFFFF5C0).w ; Has the victory animation flag been set?
+        beq.s   NormalJump ; If not, branch
+		move.b	#id_Leap2,obAnim(a0) ; use "jumping" animation
+        bra.s   cont ; Continue
+NormalJump:
+		move.b	#id_Jump,obAnim(a0) ; use "jumping" animation
+cont:
+		
 locret_1348E:
 		rts	
 ; ===========================================================================

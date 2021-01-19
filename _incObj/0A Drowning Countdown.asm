@@ -191,41 +191,41 @@ Drown_Countdown:; Routine $A
 
 		subq.w	#1,drown_time(a0)	; decrement timer
 		bpl.w	@nochange	; branch if time remains
-		move.w	#59,drown_time(a0)
+		move.w	#39,drown_time(a0)
 		move.w	#1,$36(a0)
 		jsr	(RandomNumber).l
 		andi.w	#1,d0
 		move.b	d0,$34(a0)
 		move.w	(v_air).w,d0	; check air remaining
-		cmpi.w	#25,d0
-		beq.s	@warnsound	; play sound if	air is 25
-		cmpi.w	#20,d0
-		beq.s	@warnsound
 		cmpi.w	#15,d0
-		beq.s	@warnsound
+		beq.s	@warnsound	; play sound if	air is 25
+	;	cmpi.w	#20,d0
+	;	beq.s	@warnsound
+	;	cmpi.w	#15,d0
+	;	beq.s	@warnsound
 		cmpi.w	#12,d0
 		bhi.s	@reduceair	; if air is above 12, branch
 
-		bne.s	@skipmusic	; if air is less than 12, branch
-		music	bgm_Drowning,0,0,0	; play countdown music
+	;	bne.s	@skipmusic	; if air is less than 12, branch
+	;	music	bgm_Drowning,0,0,0	; play countdown music
 
 	@skipmusic:
 		subq.b	#1,$32(a0)
 		bpl.s	@reduceair
 		move.b	$33(a0),$32(a0)
 		bset	#7,$36(a0)
-		bra.s	@reduceair
+	;	bra.s	@reduceair
 ; ===========================================================================
 
 @warnsound:
-		sfx	sfx_Warning,0,0,0	; play "ding-ding" warning sound
+	;	sfx	sfx_Warning,0,0,0	; play "ding-ding" warning sound
 
 @reduceair:
 		subq.w	#1,(v_air).w	; subtract 1 from air remaining
 		bcc.w	@gotomakenum	; if air is above 0, branch
 
 		; Sonic drowns here
-		bsr.w	ResumeMusic
+	;	bsr.w	ResumeMusic
 		move.b	#$81,(f_lockmulti).w ; lock controls
 		sfx	sfx_Drown,0,0,0	; play drowning sound
 		move.b	#$A,$34(a0)

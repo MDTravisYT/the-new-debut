@@ -2,12 +2,12 @@
 ; Object pointers
 ; ---------------------------------------------------------------------------
 ptr_SonicPlayer:	dc.l SonicPlayer	; $01
-ptr_Obj02:		dc.l NullObject
-ptr_Obj03:		dc.l NullObject
+ptr_Obj02:		dc.l ForceDebug
+ptr_Obj03:		dc.l Hacker
 ptr_Obj04:		dc.l NullObject
 ptr_Obj05:		dc.l NullObject
 ptr_Obj06:		dc.l NullObject
-ptr_Obj07:		dc.l NullObject
+ptr_Obj07:		dc.l Imp
 ptr_Splash:		dc.l Splash		; $08
 ptr_SonicSpecial:	dc.l SonicSpecial
 ptr_DrownCount:		dc.l DrownCount
@@ -16,7 +16,7 @@ ptr_FlapDoor:		dc.l FlapDoor
 ptr_Signpost:		dc.l Signpost
 ptr_TitleSonic:		dc.l TitleSonic
 ptr_PSBTM:		dc.l PSBTM
-ptr_Obj10:		dc.l Obj10		; $10
+ptr_Obj10:		dc.l WelcomeSign		; $10
 ptr_Bridge:		dc.l Bridge
 ptr_SpinningLight:	dc.l SpinningLight
 ptr_LavaMaker:		dc.l LavaMaker
@@ -25,7 +25,7 @@ ptr_SwingingPlatform:	dc.l SwingingPlatform
 ptr_Harpoon:		dc.l Harpoon
 ptr_Helix:		dc.l Helix
 ptr_BasicPlatform:	dc.l BasicPlatform	; $18
-ptr_Obj19:		dc.l Obj19
+ptr_Obj19:		dc.l GHZBoulder
 ptr_CollapseLedge:	dc.l CollapseLedge
 ptr_WaterSurface:	dc.l WaterSurface
 ptr_Scenery:		dc.l Scenery

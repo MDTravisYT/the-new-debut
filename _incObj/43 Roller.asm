@@ -3,156 +3,184 @@
 ; ---------------------------------------------------------------------------
 
 Roller:
-		moveq	#0,d0
-		move.b	obRoutine(a0),d0
-		move.w	Roll_Index(pc,d0.w),d1
-		jmp	Roll_Index(pc,d1.w)
-; ===========================================================================
-Roll_Index:	dc.w Roll_Main-Roll_Index
-		dc.w Roll_Action-Roll_Index
-; ===========================================================================
+                moveq   #0,d0
+                move.b  $24(a0),d0
+                move.w  index_bfb8(pc,d0.w),d1
+                jmp     index_bfb8(pc,d1.w)
+; ---------------------------------------------------------------------------
+index_bfb8:     dc.w entry_BFBE-*
+                dc.w entry_c00c-index_bfb8
+                dc.w entry_c0b0-index_bfb8
+; ---------------------------------------------------------------------------
 
-Roll_Main:	; Routine 0
-		move.b	#$E,obHeight(a0)
-		move.b	#8,obWidth(a0)
-		bsr.w	ObjectFall
-		bsr.w	ObjFloorDist
-		tst.w	d1
-		bpl.s	locret_E052
-		add.w	d1,obY(a0)	; match	roller's position with the floor
-		move.w	#0,obVelY(a0)
-		addq.b	#2,obRoutine(a0)
-		move.l	#Map_Roll,obMap(a0)
-		move.w	#$4B8,obGfx(a0)
-		move.b	#4,obRender(a0)
-		move.b	#4,obPriority(a0)
-		move.b	#$10,obActWid(a0)
+entry_BFBE:
+                move.b  #$E,$16(a0)
+                move.b  #8,$17(a0)
+                bsr.w   ObjectFall
+                bsr.w   ObjFloorDist
+                tst.w   d1
+                bpl.s   locret_C00A
+                add.w   d1,$C(a0)
+                move.w  #0,$12(a0)
+                addq.b  #2,$24(a0)
+                move.l  #unk_C0CA,4(a0)
+                move.w  #$24B8,2(a0)
+                move.b  #4,1(a0)
+                move.b  #4,$19(a0)
+                move.b  #$10,$18(a0)
+                move.b  #$8E,$20(a0)
 
-	locret_E052:
-		rts	
-; ===========================================================================
+locret_C00A:
+                rts
+; ---------------------------------------------------------------------------
 
-Roll_Action:	; Routine 2
-		moveq	#0,d0
-		move.b	ob2ndRout(a0),d0
-		move.w	Roll_Index2(pc,d0.w),d1
-		jsr	Roll_Index2(pc,d1.w)
-		lea	(Ani_Roll).l,a1
-		bsr.w	AnimateSprite
-		move.w	obX(a0),d0
-		andi.w	#$FF80,d0
-		move.w	(v_screenposx).w,d1
-		subi.w	#$80,d1
-		andi.w	#$FF80,d1
-		sub.w	d1,d0
-		cmpi.w	#$280,d0
-		bgt.w	Roll_ChkGone
-		bra.w	DisplaySprite
-; ===========================================================================
+entry_c00c:
+                moveq   #0,d0
+                move.b  $25(a0),d0
+                move.w  index_c028(pc,d0.w),d1
+                jsr     index_c028(pc,d1.w)
+                lea     (unk_C0B4).l,a1
+                bsr.w   AnimateSprite
+                bra.w   rememberstate
+; ---------------------------------------------------------------------------
+index_c028:     dc.w entry_C030-*
+                dc.w entry_c052-index_c028
+                dc.w entry_c060-index_c028
+                dc.w entry_c08e-index_c028
+; ---------------------------------------------------------------------------
 
-Roll_ChkGone:
-		lea	(v_objstate).w,a2
-		moveq	#0,d0
-		move.b	obRespawnNo(a0),d0
-		beq.s	Roll_Delete
-		bclr	#7,2(a2,d0.w)
+entry_C030:
+                move.w  ($FFFFD008).w,d0
+                sub.w   8(a0),d0
+                bcs.s   locret_C050
+                cmpi.w  #$20,d0 ; ' '
+                bcc.s   locret_C050
+                addq.b  #2,$25(a0)
+                move.b  #1,$1C(a0)
+                move.w  #$400,$10(a0)
 
-Roll_Delete:
-		bra.w	DeleteObject
-; ===========================================================================
-Roll_Index2:	dc.w Roll_RollChk-Roll_Index2
-		dc.w Roll_RollNoChk-Roll_Index2
-		dc.w Roll_ChkJump-Roll_Index2
-		dc.w Roll_MatchFloor-Roll_Index2
-; ===========================================================================
+locret_C050:
+                rts
+; ---------------------------------------------------------------------------
 
-Roll_RollChk:
-		move.w	(v_player+obX).w,d0
-		subi.w	#$100,d0
-		bcs.s	loc_E0D2
-		sub.w	obX(a0),d0	; check	distance between Roller	and Sonic
-		bcs.s	loc_E0D2
-		addq.b	#4,ob2ndRout(a0)
-		move.b	#2,obAnim(a0)
-		move.w	#$700,obVelX(a0) ; move Roller horizontally
-		move.b	#$8E,obColType(a0) ; make Roller invincible
+entry_c052:
+                cmpi.b  #2,$1C(a0)
+                bne.s   locret_C05E
+                addq.b  #2,$25(a0)
 
-loc_E0D2:
-		addq.l	#4,sp
-		rts	
-; ===========================================================================
+locret_C05E:
+                rts
+; ---------------------------------------------------------------------------
 
-Roll_RollNoChk:
-		cmpi.b	#2,obAnim(a0)
-		beq.s	loc_E0F8
-		subq.w	#1,$30(a0)
-		bpl.s	locret_E0F6
-		move.b	#1,obAnim(a0)
-		move.w	#$700,obVelX(a0)
-		move.b	#$8E,obColType(a0)
+entry_c060:
+                bsr.w   SpeedToPos
+                bsr.w   ObjFloorDist
+                cmpi.w  #$FFF8,d1
+                blt.s   loc_C07A
+                cmpi.w  #$C,d1
+                bge.s   loc_C07A
+                add.w   d1,$C(a0)
+                rts
+; ---------------------------------------------------------------------------
 
-locret_E0F6:
-		rts	
-; ===========================================================================
+loc_C07A:
+                addq.b  #2,$25(a0)
+                bset    #0,$32(a0)
+                beq.s   locret_C08C
+                move.w  #$FA00,$12(a0)
 
-loc_E0F8:
-		addq.b	#2,ob2ndRout(a0)
-		rts	
-; ===========================================================================
+locret_C08C:
+                rts
+; ---------------------------------------------------------------------------
 
-Roll_ChkJump:
-		bsr.w	Roll_Stop
-		bsr.w	SpeedToPos
-		bsr.w	ObjFloorDist
-		cmpi.w	#-8,d1
-		blt.s	Roll_Jump
-		cmpi.w	#$C,d1
-		bge.s	Roll_Jump
-		add.w	d1,obY(a0)
-		rts	
-; ===========================================================================
+entry_c08e:
+                bsr.w   ObjectFall
+                tst.w   $12(a0)
+                bmi.s   locret_C0AE
+                bsr.w   ObjFloorDist
+                tst.w   d1
+                bpl.s   locret_C0AE
+                add.w   d1,$C(a0)
+                subq.b  #2,$25(a0)
+                move.w  #0,$12(a0)
 
-Roll_Jump:
-		addq.b	#2,ob2ndRout(a0)
-		bset	#0,$32(a0)
-		beq.s	locret_E12E
-		move.w	#-$600,obVelY(a0)	; move Roller vertically
+locret_C0AE:
+                rts
+; ---------------------------------------------------------------------------
 
-locret_E12E:
-		rts	
-; ===========================================================================
-
-Roll_MatchFloor:
-		bsr.w	ObjectFall
-		tst.w	obVelY(a0)
-		bmi.s	locret_E150
-		bsr.w	ObjFloorDist
-		tst.w	d1
-		bpl.s	locret_E150
-		add.w	d1,obY(a0)	; match	Roller's position with the floor
-		subq.b	#2,ob2ndRout(a0)
-		move.w	#0,obVelY(a0)
-
-locret_E150:
-		rts	
-
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-Roll_Stop:
-		tst.b	$32(a0)
-		bmi.s	locret_E188
-		move.w	(v_player+obX).w,d0
-		subi.w	#$30,d0
-		sub.w	obX(a0),d0
-		bcc.s	locret_E188
-		move.b	#0,obAnim(a0)
-		move.b	#$E,obColType(a0)
-		clr.w	obVelX(a0)
-		move.w	#120,$30(a0)	; set waiting time to 2	seconds
-		move.b	#2,ob2ndRout(a0)
-		bset	#7,$32(a0)
-
-locret_E188:
-		rts	
-; End of function Roll_Stop
+entry_c0b0:
+                bra.w   DeleteObject
+; ---------------------------------------------------------------------------
+unk_C0B4:       dc.b   0
+                dc.b   6
+                dc.b   0
+                dc.b  $A
+                dc.b   0
+                dc.b $10
+                dc.b  $F
+                dc.b   0
+                dc.b $FF
+                dc.b   0
+                dc.b  $F
+                dc.b   1
+                dc.b   2
+                dc.b $FD
+                dc.b   2
+                dc.b   0
+                dc.b   3
+                dc.b   2
+                dc.b   3
+                dc.b   4
+                dc.b $FF
+                dc.b   0
+unk_C0CA:       dc.b   0
+                dc.b  $A
+                dc.b   0
+                dc.b $15
+                dc.b   0
+                dc.b $20
+                dc.b   0
+                dc.b $26 ; &
+                dc.b   0
+                dc.b $2C ; ,
+                dc.b   2
+                dc.b $DE
+                dc.b  $E
+                dc.b   0
+                dc.b   0
+                dc.b $F0
+                dc.b $F6
+                dc.b  $E
+                dc.b   0
+                dc.b  $C
+                dc.b $F0
+                dc.b   2
+                dc.b $E6
+                dc.b  $E
+                dc.b   0
+                dc.b   0
+                dc.b $F0
+                dc.b $FE
+                dc.b  $D
+                dc.b   0
+                dc.b $18
+                dc.b $F0
+                dc.b   1
+                dc.b $F0
+                dc.b  $F
+                dc.b   0
+                dc.b $20
+                dc.b $F0
+                dc.b   1
+                dc.b $F0
+                dc.b  $F
+                dc.b   0
+                dc.b $30 ; 0
+                dc.b $F0
+                dc.b   1
+                dc.b $F0
+                dc.b  $F
+                dc.b   0
+                dc.b $40 ; @
+                dc.b $F0
+; ---------------------------------------------------------------------------

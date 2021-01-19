@@ -362,6 +362,8 @@ ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
 
 ptr_GM_OtherSega:	bra.w	GM_Sega		; Sega Screen ($20)
 
+ptr_GM_Hacker:	bra.w	GM_Hacker		; Inaccessable Level! ($24)
+
 		rts	
 ; ===========================================================================
 
@@ -1732,7 +1734,6 @@ Pal_Ending:	incbin	"palette\Ending.bin"
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
-
 WaitForVBla:
 		enable_ints
 
@@ -1751,8 +1752,8 @@ WaitForVBla:
 ; ---------------------------------------------------------------------------
 
 GM_Sega:
-		sfx	bgm_Stop,0,1,1 ; stop music
-		sfx	$C3,0,1,1	; play "SEGA" sound
+		sfx	$90,0,1,1	; play "SEGA" sound
+		bsr.w	PaletteWhiteIn
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
 		lea	(vdp_control_port).l,a6
@@ -1786,7 +1787,7 @@ GM_Sega:
 		endc
 
 	@loadpal:
-		moveq	#palid_SegaBG,d0
+		moveq	#palid_Ending,d0
 		bsr.w	PalLoad2	; load Sega logo palette
 		move.w	#-$A,(v_pcyc_num).w
 		move.w	#0,(v_pcyc_time).w
@@ -1800,11 +1801,11 @@ Sega_WaitPal:
 		move.b	#2,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		bsr.w	PalCycle_Sega
-		bne.s	Sega_WaitPal
+	;	bne.s	Sega_WaitPal
 
 		move.b	#$14,(v_vbla_routine).w
 		bsr.w	WaitForVBla
-		move.w	#$8E,(v_demolength).w
+		move.w	#$120,(v_demolength).w
 
 Sega_WaitEnd:
 		move.b	#2,(v_vbla_routine).w
@@ -1819,93 +1820,30 @@ Sega_GotoTitle:
 		rts	
 
 PalCycle_Sega:
-		tst.b	(v_pcyc_time+1).w
-		bne.s	loc_206A
-		lea	(v_pal_dry+$20).w,a1
-		lea	(Pal_Sega1).l,a0
-		moveq	#5,d1
-		move.w	(v_pcyc_num).w,d0
-
-loc_2020:
-		bpl.s	loc_202A
-		addq.w	#2,a0
-		subq.w	#1,d1
-		addq.w	#2,d0
-		bra.s	loc_2020
-; ===========================================================================
-
-loc_202A:
-		move.w	d0,d2
-		andi.w	#$1E,d2
-		bne.s	loc_2034
-		addq.w	#2,d0
-
-loc_2034:
-		cmpi.w	#$60,d0
-		bhs.s	loc_203E
-		move.w	(a0)+,(a1,d0.w)
-
-loc_203E:
-		addq.w	#2,d0
-		dbf	d1,loc_202A
-
-		move.w	(v_pcyc_num).w,d0
-		addq.w	#2,d0
-		move.w	d0,d2
-		andi.w	#$1E,d2
-		bne.s	loc_2054
-		addq.w	#2,d0
-
-loc_2054:
-		cmpi.w	#$64,d0
-		blt.s	loc_2062
-		move.w	#$401,(v_pcyc_time).w
-		moveq	#-$C,d0
-
-loc_2062:
-		move.w	d0,(v_pcyc_num).w
-		moveq	#1,d0
-		rts	
-; ===========================================================================
-
-loc_206A:
-		subq.b	#1,(v_pcyc_time).w
-		bpl.s	loc_20BC
-		move.b	#4,(v_pcyc_time).w
-		move.w	(v_pcyc_num).w,d0
-		addi.w	#$C,d0
-		cmpi.w	#$30,d0
-		blo.s	loc_2088
-		moveq	#0,d0
-		rts	
-; ===========================================================================
-
-loc_2088:
-		move.w	d0,(v_pcyc_num).w
-		lea	(Pal_Sega2).l,a0
-		lea	(a0,d0.w),a0
-		lea	(v_pal_dry+$04).w,a1
-		move.l	(a0)+,(a1)+
-		move.l	(a0)+,(a1)+
-		move.w	(a0)+,(a1)
-		lea	(v_pal_dry+$20).w,a1
-		moveq	#0,d0
-		moveq	#$2C,d1
-
-loc_20A8:
-		move.w	d0,d2
-		andi.w	#$1E,d2
-		bne.s	loc_20B2
-		addq.w	#2,d0
-
-loc_20B2:
-		move.w	(a0),(a1,d0.w)
-		addq.w	#2,d0
-		dbf	d1,loc_20A8
-
-loc_20BC:
-		moveq	#1,d0
-		rts	
+        subq.w  #1,v_pcyc_time
+        bne.s   @return
+        move.w  #3,v_pcyc_time
+        addq.w  #2,v_pcyc_num
+        cmpi.w  #@cycle_size,v_pcyc_num     ; past cycle's size?
+        bne.s   @jmp0               ; if not, branch
+        move.w  #0,v_pcyc_num           ; if yes, reset
+@jmp0:      move.w  v_pcyc_num,d0
+        lea @cycle(pc,d0.w),a0
+        rept    4               ; repeat next line 4 times      ; --> transfer 9 colors in total
+            move.l  (a0)+,(a1)+     ; copy 2 colors and increment pointers
+        endr
+        move.w  (a0),(a1)           ; copy last color
+@return:    rts
+ 
+@cycle:     dc.w    $EC0
+        dc.w    $EA0, $E80, $E60, $E40, $E20, $E00
+        dc.w    $C00
+        dc.w    $E00, $E20, $E40, $E60, $E80, $EA0
+@cycle_end: ; remaining half copy before loop. Making it CPU-friendly
+        dc.w    $EC0
+        dc.w    $EA0, $E80, $E60, $E40, $E20, $E00
+        dc.w    $C00
+@cycle_size:=   @cycle_end-@cycle
 ; End of function PalCycle_Sega
 
 GM_OtherSega:
@@ -1943,7 +1881,7 @@ GM_OtherSega:
         bsr Palcycle_OtherSega
         move.w  #$8174,$C00004          ; enable display
 ;        bsr.w   PaletteFadeIn
-        sfx $90,0,1,1          ; play "OtherSega" sound
+    ;    sfx $90,0,1,1          ; play "OtherSega" sound
         move.w  #10*10,(v_demolength).w      ; stay for 3 seconds
  
 OtherSega_WaitEnd:
@@ -1957,8 +1895,8 @@ OtherSega_WaitEnd:
         beq.s   OtherSega_WaitEnd            ; if not, branch
  
 OtherSega_GotoTitle:
+		sfx	$C3,0,1,1	; play warp sound
 		bsr.w	PaletteWhiteOut
-		sfx	bgm_Fade,0,1,1 ; fade out music
         move.b  #$20,(v_gamemode).w
         rts
  
@@ -2047,11 +1985,11 @@ GM_Title:
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
 		disable_ints
-		locVRAM	$4000
-		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
-		bsr.w	NemDec
 		locVRAM	$6700
 		lea	(Nem_TitleSonic).l,a0 ;	load Sonic title screen	patterns
+		bsr.w	NemDec
+		locVRAM	$4000
+		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
 	;	locVRAM	$A200
 	;	lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
@@ -2077,7 +2015,7 @@ GM_Title:
 		lea	(Blk16_GHZ).l,a0 ; load	GHZ 16x16 mappings
 		move.w	#0,d0
 		bsr.w	EniDec
-		lea	(Blk256_GHZ).l,a0 ; load GHZ 256x256 mappings
+		lea	(Blk256_MZ).l,a0 ; load GHZ 256x256 mappings
 		lea	(v_256x256).l,a1
 		bsr.w	KosDec
 		bsr.w	LevelLayoutLoad
@@ -2095,11 +2033,11 @@ GM_Title:
 		move.w	#0,d0
 		bsr.w	EniDec
 
-		copyTilemap	$FF0000,$C206,$21,$15
+		copyTilemap	$FF0000,$C208,$21,$15
 
-		locVRAM	0
-		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
-		bsr.w	NemDec
+	;	locVRAM	0
+	;	lea	(Nem_GHZ).l,a0 ; load GHZ patterns
+	;	bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
 		locVRAM	$4000
@@ -2271,10 +2209,10 @@ LevelSelect:
 LevSel_NoCheat:
 		; This is a workaround for a bug, see Sound_ChkValue for more.
 		; Once you've fixed the bugs there, comment these four instructions out
-		cmpi.w	#bgm__Last+1,d0	; is sound $80-$93 being played?
-		blo.s	LevSel_PlaySnd	; if yes, branch
-		cmpi.w	#sfx__First,d0	; is sound $94-$9F being played?
-		blo.s	LevelSelect	; if yes, branch
+	;	cmpi.w	#bgm__Last+1,d0	; is sound $80-$93 being played?
+	;	blo.s	LevSel_PlaySnd	; if yes, branch
+	;	cmpi.w	#sfx__First,d0	; is sound $94-$9F being played?
+	;	blo.s	LevelSelect	; if yes, branch
 
 LevSel_PlaySnd:
 		bsr.w	PlaySound_Special
@@ -2637,8 +2575,8 @@ MusicList:
 		dc.b bgm_SYZ	; SYZ
 		dc.b bgm_SBZ	; SBZ
 		dc.b bgm_FZ	; Ending
-		dc.b bgm_FZ	; Ending
-		dc.b bgm_FZ	; Ending
+		dc.b bgm_IMZ	; IMZ
+		dc.b bgm_FZ	; CSZ
 		even
 ; ===========================================================================
 
@@ -2647,6 +2585,7 @@ MusicList:
 ; ---------------------------------------------------------------------------
 
 GM_Level:
+		move.b  #0,($FFFFF5C0).w ; Unet victory animation flag
 		bset	#7,(v_gamemode).w ; add $80 to screen mode (for pre level sequence)
 		tst.w	(f_demo).w
 		bmi.s	Level_NoMusicFade
@@ -4028,6 +3967,8 @@ Cred_WaitLoop:
 		cmpi.w	#9,(v_creditsnum).w ; have the credits finished?
 		beq.w	TryAgainEnd	; if yes, branch
 		rts	
+		
+		include	"_inc\Hacker.asm"
 
 ; ---------------------------------------------------------------------------
 ; Ending sequence demo loading subroutine
@@ -4186,6 +4127,7 @@ Demo_EndGHZ2:	incbin	"demodata\Ending - GHZ2.bin"
 		include	"_inc\LevelSizeLoad & BgScrollSpeed (JP1).asm"
 		include	"_inc\DeformLayers (JP1).asm"
 		endc
+		
 
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
@@ -5790,7 +5732,10 @@ Map_Chop:	include	"_maps\Chopper.asm"
 Map_Jaws:	include	"_maps\Jaws.asm"
 		include	"_incObj\2D Burrobot.asm"
 		include	"_anim\Burrobot.asm"
+		include	"_incObj\07 Imp.asm"
+		include	"_anim\Imp.asm"
 Map_Burro:	include	"_maps\Burrobot.asm"
+Map_Imp:	include	"_maps\Imp.asm"
 
 		include	"_incObj\2F MZ Large Grassy Platforms.asm"
 		include	"_incObj\35 Burning Grass.asm"
@@ -8005,14 +7950,14 @@ loc_1B350:
 ; End of function SS_AniWallsRings
 
 ; ===========================================================================
-SS_WaRiVramSet:	dc.w $142, $6142, $142,	$142, $142, $142, $142,	$6142
-		dc.w $142, $6142, $142,	$142, $142, $142, $142,	$6142
-		dc.w $2142, $142, $2142, $2142,	$2142, $2142, $2142, $142
-		dc.w $2142, $142, $2142, $2142,	$2142, $2142, $2142, $142
-		dc.w $4142, $2142, $4142, $4142, $4142,	$4142, $4142, $2142
-		dc.w $4142, $2142, $4142, $4142, $4142,	$4142, $4142, $2142
-		dc.w $6142, $4142, $6142, $6142, $6142,	$6142, $6142, $4142
-		dc.w $6142, $4142, $6142, $6142, $6142,	$6142, $6142, $4142
+SS_WaRiVramSet:    dc.w $142,$2142, $142, $142, $142, $142, $142, $2142
+        dc.w $142, $2142, $142, $142, $142, $142, $142,$2142
+        dc.w $2142, $142, $2142, $2142,    $2142, $2142, $2142, $142
+        dc.w $2142, $142, $2142, $2142,    $2142, $2142, $2142, $142
+        dc.w $4142, $2142, $4142, $4142, $4142,    $4142, $4142, $2142
+        dc.w $4142, $2142, $4142, $4142, $4142,    $4142, $4142, $2142
+        dc.w $6142, $4142, $6142, $6142, $6142,    $6142, $6142, $4142
+        dc.w $6142, $4142, $6142, $6142, $6142,    $6142, $6142, $4142
 ; ---------------------------------------------------------------------------
 ; Subroutine to	remove items when you collect them in the special stage
 ; ---------------------------------------------------------------------------
@@ -8315,6 +8260,8 @@ Map_SS_Glass:	include	"_maps\SS Glass Block.asm"
 Map_SS_Up:	include	"_maps\SS UP Block.asm"
 Map_SS_Down:	include	"_maps\SS DOWN Block.asm"
 		include	"_maps\SS Chaos Emeralds.asm"
+
+		include	"_incObj\02 Force Debug.asm"
 
 		include	"_incObj\09 Sonic in Special Stage.asm"
 
@@ -8709,6 +8656,8 @@ Nem_Buzz:	incbin	"artnem\Enemy Buzz Bomber.bin"
 Nem_UnkExplode:	incbin	"artnem\Unused - Explosion.bin"
 		even
 Nem_Burrobot:	incbin	"artnem\Enemy Burrobot.bin"
+		even
+Nem_Imp:	incbin	"artnem\Enemy Imp.bin"
 		even
 Nem_Chopper:	incbin	"artnem\Enemy Chopper.bin"
 		even
@@ -9162,11 +9111,8 @@ ObjPos_GHZ3:	if Revision=0
 		incbin	"objpos\ghz3 (JP1).bin"
 		endc
 		even
-ObjPos_LZ1:	if Revision=0
-		incbin	"objpos\lz1.bin"
-		else
+ObjPos_LZ1:	
 		incbin	"objpos\lz1 (JP1).bin"
-		endc
 		even
 ObjPos_LZ2:	incbin	"objpos\lz2.bin"
 		even
@@ -9254,7 +9200,15 @@ SoundDriver:	include "s1.sounddriver.asm"
 ; end of 'ROM'
 		even
 	include "ErrorHandler.asm"
+	
+;	incbin "stuffs\S2NA.7z"
 EndOfRom:
 
 
 		END
+
+
+; RESTARTED
+; POST-ALPHACPETION
+; JUST ANOTHER BETA HACK
+

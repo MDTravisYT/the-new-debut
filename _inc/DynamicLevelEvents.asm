@@ -56,7 +56,7 @@ DLE_Index:	dc.w DLE_GHZ-DLE_Index, DLE_LZ-DLE_Index
 		dc.w DLE_MZ-DLE_Index, DLE_SLZ-DLE_Index
 		dc.w DLE_SYZ-DLE_Index, DLE_SBZ-DLE_Index
 		zonewarning DLE_Index,2
-		dc.w DLE_Ending-DLE_Index, DLE_SBZ-DLE_Index
+		dc.w DLE_Ending-DLE_Index, DLE_IMZ-DLE_Index
 		dc.w DLE_SBZ-DLE_Index, DLE_SBZ-DLE_Index
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
@@ -706,4 +706,11 @@ DLE_FZend2:
 ; ---------------------------------------------------------------------------
 
 DLE_Ending:
+		rts	
+		
+; ---------------------------------------------------------------------------
+; Ice Mountain dynamic level events (empty)
+; ---------------------------------------------------------------------------
+
+DLE_IMZ:
 		rts	

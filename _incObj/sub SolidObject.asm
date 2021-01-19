@@ -35,7 +35,7 @@ SolidObject:
 
 	@stand:
 		move.w	d4,d2
-		bsr.w	MvSonicOnPtfm
+		bsr.w	MvSonicOnPtfmg
 		moveq	#0,d4
 		rts	
 ; ===========================================================================
@@ -64,7 +64,7 @@ SolidObject71:
 
 	@stand:
 		move.w	d4,d2
-		bsr.w	MvSonicOnPtfm
+		bsr.w	MvSonicOnPtfmg
 		moveq	#0,d4
 		rts	
 ; ===========================================================================
@@ -313,3 +313,39 @@ Solid_ResetFloor:
 		bset	#3,obStatus(a0)	; set Sonic standing on object flag
 		rts	
 ; End of function Solid_ResetFloor
+
+MvSonicOnPtfmG: ;Garbage shit
+		lea	(v_player).w,a1
+		move.w	obY(a0),d0
+		sub.w	d3,d0
+		bra.s	MvSonic2G
+; End of function MvSonicOnPtfmg
+
+; ---------------------------------------------------------------------------
+; Subroutine to	change Sonic's position with a platform
+; ---------------------------------------------------------------------------
+
+; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
+
+
+MvSonicOnPtfm2g:
+		lea	(v_player).w,a1
+		move.w	obY(a0),d0
+		subi.w	#9,d0
+
+MvSonic2G:
+		tst.b	(f_lockmulti).w
+		bmi.s	locret_7B62G
+		cmpi.b	#6,(v_player+obRoutine).w
+		bhs.s	locret_7B62G
+		tst.w	(v_debuguse).w
+		bne.s	locret_7B62G
+		moveq	#0,d1
+		move.b	obHeight(a1),d1
+		sub.w	d1,d0
+		move.w	d0,obY(a1)
+		sub.w	obX(a0),d2
+		sub.w	d2,obX(a1)
+
+locret_7B62G:
+		rts	

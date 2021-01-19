@@ -20,6 +20,7 @@ loc_134AE:
 		andi.b	#btnABC,d0	; is A, B or C pressed?
 		bne.s	locret_134C2	; if yes, branch
 		move.w	d1,obVelY(a0)
+		move.b	#id_Fall,obAnim(a0) ; use "falling" animation
 
 locret_134C2:
 		rts	

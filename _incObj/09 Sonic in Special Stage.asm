@@ -640,10 +640,10 @@ Obj09_UPblock:
 		asl	(v_ssrotate).w	; increase stage rotation speed
 		movea.l	$32(a0),a1
 		subq.l	#1,a1
-		move.b	#$2A,(a1)	; change item to a "DOWN" block
+	;	move.b	#$2A,(a1)	; change item to a "DOWN" block
 
 Obj09_UPsnd:
-		sfx	sfx_SSItem,1,0,0	; play up/down sound
+	;	sfx	sfx_SSItem,1,0,0	; play up/down sound
 ; ===========================================================================
 
 Obj09_DOWNblock:
@@ -654,13 +654,13 @@ Obj09_DOWNblock:
 		move.b	#$1E,$36(a0)
 		btst	#6,(v_ssrotate+1).w
 		bne.s	Obj09_DOWNsnd
-		asr	(v_ssrotate).w	; reduce stage rotation speed
+		neg.w	(v_ssrotate).w	; reverse stage rotation
 		movea.l	$32(a0),a1
 		subq.l	#1,a1
-		move.b	#$29,(a1)	; change item to an "UP" block
+	;	move.b	#$29,(a1)	; change item to an "UP" block
 
 Obj09_DOWNsnd:
-		sfx	sfx_SSItem,1,0,0	; play up/down sound
+	;	sfx	sfx_SSItem,1,0,0	; play up/down sound
 ; ===========================================================================
 
 Obj09_Rblock:

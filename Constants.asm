@@ -208,7 +208,7 @@ bgm_GotThrough:	equ ((ptr_mus8E-MusicIndex)/4)+bgm__First
 bgm_GameOver:	equ ((ptr_mus8F-MusicIndex)/4)+bgm__First
 bgm_Continue:	equ ((ptr_mus90-MusicIndex)/4)+bgm__First
 bgm_Credits:	equ ((ptr_mus91-MusicIndex)/4)+bgm__First
-bgm_Drowning:	equ ((ptr_mus92-MusicIndex)/4)+bgm__First
+bgm_IMZ:	equ ((ptr_mus92-MusicIndex)/4)+bgm__First
 bgm_Emerald:	equ ((ptr_mus93-MusicIndex)/4)+bgm__First
 bgm__Last:	equ ((ptr_musend-MusicIndex-4)/4)+bgm__First
 
