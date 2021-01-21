@@ -382,17 +382,17 @@ off_7098:	dc.w DLE_MZ3boss-off_7098
 ; ===========================================================================
 
 DLE_MZ3boss:
-		move.w	#$720,(v_limitbtm1).w
+	;	move.w	#$720,(v_limitbtm1).w
 		cmpi.w	#$1560,(v_screenposx).w
 		bcs.s	locret_70E8
-		move.w	#$210,(v_limitbtm1).w
+		move.w	#$410,(v_limitbtm1).w
 		cmpi.w	#$17F0,(v_screenposx).w
 		bcs.s	locret_70E8
 		bsr.w	FindFreeObj
 		bne.s	loc_70D0
 		move.b	#id_BossMarble,0(a1) ; load MZ boss object
 		move.w	#$19F0,obX(a1)
-		move.w	#$22C,obY(a1)
+		move.w	#$42C,obY(a1)
 
 loc_70D0:
 		music	bgm_Boss,0,1,0	; play boss music

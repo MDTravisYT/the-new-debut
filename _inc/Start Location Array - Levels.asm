@@ -37,7 +37,7 @@
 		dc.w	$80,$A8
 		dc.w	$80,$A8
 		
-		dc.w	$80,$A8
+		incbin	"startpos\imz1.bin"
 		dc.w	$80,$A8
 		dc.w	$80,$A8
 		dc.w	$80,$A8

@@ -24,7 +24,7 @@ Obj73_Main:	; Routine 0
 		move.w	obX(a0),$30(a0)
 		move.w	obY(a0),$38(a0)
 		move.b	#$F,obColType(a0)
-		move.b	#8,obColProp(a0) ; set number of hits to 8
+		move.b	#1,obColProp(a0) ; set number of hits to 8
 		lea	Obj73_ObjData(pc),a2
 		movea.l	a0,a1
 		moveq	#3,d1
@@ -147,7 +147,7 @@ loc_183CA:
 		tst.w	obVelX(a0)
 		bne.s	loc_183FE
 		moveq	#$40,d0
-		cmpi.w	#$22C,$38(a0)
+		cmpi.w	#$42C,$38(a0)
 		beq.s	loc_183E6
 		bcs.s	loc_183DE
 		neg.w	d0
@@ -176,7 +176,7 @@ Obj73_MakeLava:
 		jsr	(FindFreeObj).l
 		bne.s	loc_1844A
 		move.b	#id_LavaBall,0(a1) ; load lava ball object
-		move.w	#$2E8,obY(a1)	; set Y	position
+		move.w	#$4E8,obY(a1)	; set Y	position
 		jsr	(RandomNumber).l
 		andi.l	#$FFFF,d0
 		divu.w	#$50,d0
@@ -209,7 +209,7 @@ loc_18474:
 loc_18482:
 		clr.w	obVelX(a0)
 		move.w	#-$180,obVelY(a0)
-		cmpi.w	#$22C,$38(a0)
+		cmpi.w	#$42C,$38(a0)
 		bcc.s	loc_18498
 		neg.w	obVelY(a0)
 
@@ -223,9 +223,9 @@ locret_1849C:
 Obj73_MakeLava2:
 		bsr.w	BossMove
 		move.w	$38(a0),d0
-		subi.w	#$22C,d0
+		subi.w	#$42C,d0
 		bgt.s	locret_184F4
-		move.w	#$22C,d0
+		move.w	#$42C,d0
 		tst.w	obVelY(a0)
 		beq.s	loc_184EA
 		clr.w	obVelY(a0)
