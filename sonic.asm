@@ -2007,7 +2007,7 @@ GM_Title:
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
 		move.w	#0,($FFFFFFEA).w ; unused variable
-		move.w	#(id_GHZ<<8),(v_zone).w	; set level to GHZ (00)
+		move.w	#(7<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		bsr.w	LevelSizeLoad
 		bsr.w	DeformLayers
@@ -2155,9 +2155,9 @@ loc_3230:
 
 Tit_ChkLevSel:
 		tst.b	(f_levselcheat).w ; check if level select code is on
-		beq.w	PlayLevel	; if not, play level
+		beq.w	PlayLevelC	; if not, play level
 		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
-		beq.w	PlayLevel	; if not, play level
+		beq.w	PlayLevelC	; if not, play level
 
 		moveq	#palid_LevelSel,d0
 		bsr.w	PalLoad2	; load level select palette
@@ -2257,6 +2257,7 @@ LevSel_Level:
 		move.w	d0,(v_zone).w	; set level number
 
 PlayLevel:
+		move.w	#(0<<8),(v_zone).w	; set level to GHZ (00)
 		sfx	sfx_Lamppost,0,0,0	; play lamppost sound
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
 		move.b	#3,(v_lives).w	; set lives to 3
@@ -2275,6 +2276,7 @@ PlayLevel:
 		endc
 		sfx	bgm_Fade,0,1,1 ; fade out music
 		rts	
+
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Level	select - level pointers
@@ -2312,15 +2314,19 @@ LevSel_Ptrs:
 ; Level	select codes
 ; ---------------------------------------------------------------------------
 LevSelCode_J:	if Revision=0
-		dc.b btnUp,btnDn,btnL,btnR,0,$FF
+		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
 		else
-		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnR,0,$FF
+		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
 		endc
 		even
 
-LevSelCode_US:	dc.b btnUp,btnDn,btnL,btnR,0,$FF
+LevSelCode_US:	dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
 		even
 ; ===========================================================================
+
+PlayLevelC:
+		illegal
+		rts
 
 ; ---------------------------------------------------------------------------
 ; Demo mode
@@ -8120,7 +8126,7 @@ SS_AniEmeraldSparks:
 		clr.l	(a0)
 		clr.l	4(a0)
 		move.b	#4,($FFFFD024).w
-		sfx	sfx_SSGoal,0,0,0	; play special stage GOAL sound
+		sfx	$A2,0,0,0	; play special stage GOAL sound
 
 locret_1B60C:
 		rts	
@@ -9080,7 +9086,7 @@ ObjPos_Index:
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_IMZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
@@ -9185,6 +9191,8 @@ ObjPos_SBZ1pf5:	incbin	"objpos\sbz1pf5.bin"
 ObjPos_SBZ1pf6:	incbin	"objpos\sbz1pf6.bin"
 		even
 ObjPos_End:	incbin	"objpos\ending.bin"
+		even
+ObjPos_IMZ1:	incbin	"objpos\imz1.bin"
 		even
 ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 

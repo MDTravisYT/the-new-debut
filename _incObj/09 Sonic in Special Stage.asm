@@ -625,7 +625,7 @@ Obj09_GOAL:
 		cmpi.b	#$27,d0		; is the item a	"GOAL"?
 		bne.s	Obj09_UPblock
 		addq.b	#2,obRoutine(a0) ; run routine "Obj09_ExitStage"
-		sfx	sfx_SSGoal,0,0,0	; play "GOAL" sound
+		sfx	$A2,0,0,0	; play "GOAL" sound
 		rts	
 ; ===========================================================================
 
