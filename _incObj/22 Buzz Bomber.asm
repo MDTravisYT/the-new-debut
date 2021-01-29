@@ -46,8 +46,8 @@ Buzz_Action:	; Routine 2
 		btst	#1,buzz_buzzstatus(a0) ; is Buzz Bomber near Sonic?
 		bne.s	@fire		; if yes, branch
 		addq.b	#2,ob2ndRout(a0)
-		move.w	#127,buzz_timedelay(a0) ; set time delay to just over 2 seconds
-		move.w	#$400,obVelX(a0) ; move Buzz Bomber to the right
+		move.w	#254,buzz_timedelay(a0) ; set time delay to just over 2 seconds
+		move.w	#$200,obVelX(a0) ; move Buzz Bomber to the right
 		move.b	#1,obAnim(a0)	; use "flying" animation
 		btst	#0,obStatus(a0)	; is Buzz Bomber facing	left?
 		bne.s	@noflip		; if not, branch

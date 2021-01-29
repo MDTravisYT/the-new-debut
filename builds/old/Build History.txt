@@ -1,0 +1,47 @@
+Build 5/18
+	Initial start of the project, based on TTS Remake v0.6.
+	Added "MCT" logo in replacement to the SEGA logo in the beginning.
+	Title screen has been modified to replace "THE HEDGEHOG" with "THE TOYSHOW". This was a placeholder.
+	Demos have been enabled, however they're broken when exiting. This wasn't fixed until the reset happened.
+	Other levels now use their own music instead of Green Hill Zone's music.
+		Despite this, only Labyrinth Zone remains accessable as another level.
+
+Build 5/20
+	Title screen graphic has been added with an incomplete "ALPHA" word drawn on.
+		The subtitle "ALPHACEPTION 1" has been added as well, as a partial joke on the hack name.
+	A "WEST CREW" graphic has been made for the "YOU ARE WELCOME" sign to replace "SEGASONIC", however it never went used.
+	
+Build 5/26
+	All zones have been enabled. Most of them have been leftover from older TTS remake builds, or the final game.
+
+Build 5/29
+	Green Hill Zone Act 2 & 3's palettes have been modified.
+		Act 2's palette was modified from Sonic Mania Encore's palette, while Act 3 comes from the first ROM hack I've done, used as a placeholder until I made a better one.
+	Act 2 of Green Hill has been started on, being based on the normal Act 1.
+	Act 3 of Green Hill has been restored, but it's just the vanilla level.
+	Title cards have been added, and Spring Yard's title card has been modified to say "SPARKLING".
+	Super Sonic music from Sonic 2 has been added as a placeholder to invincible music.
+	
+Build 5/30
+	A jumping animation has been added.
+		Due to this, a strange bug with Sonic's hitbox when jumping has occurred.
+	A HUD has been added.
+	
+Build 6/11
+	"MCT" logo has changed.
+		Added "ORIGINAL GAME BY SEGA" graphic.
+	Title has been modified to finalize the "ALPHA" graphic.
+		"ALPHACEPTION 1" has also been shaded.
+		"PRESS START BUTTON" has became a new graphic, with a blue shine. The original graphic comes from Pokemon Emerald.
+	"xEVERYONEx" text has been added on the Green Hill sign.
+	Temporary object layout for Sparkling Zone Act 1 has been added.
+	"CLOCK WORK" title card has been added in, as well as the background for the zone.
+	
+Build 6/14
+	
+Build 6/15
+	An object layout has been added to Labyrinth Act 1.
+	
+Build 6/17
+	More modifications to Labyrinth Act 1.
+	Beta snare pitch added in.

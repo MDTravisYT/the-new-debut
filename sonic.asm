@@ -2257,7 +2257,6 @@ LevSel_Level:
 		move.w	d0,(v_zone).w	; set level number
 
 PlayLevel:
-		move.w	#(0<<8),(v_zone).w	; set level to GHZ (00)
 		sfx	sfx_Lamppost,0,0,0	; play lamppost sound
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
 		move.b	#3,(v_lives).w	; set lives to 3
@@ -5837,17 +5836,15 @@ M_Card_SYZ:	dc.b $A	;  GREEN HILL |     SPARKLING
 		dc.b $F8, 5, 0, $18, $38	; G
 		dc.b $F8, 5, 0,	$0C, $48
 		even
-M_Card_SBZ:	dc.b $A			; SCRAP BRAIN
-		dc.b $F8, 5, 0,	$3E, $AC
-		dc.b $F8, 5, 0,	8, $BC
-		dc.b $F8, 5, 0,	$3A, $CC
-		dc.b $F8, 5, 0,	0, $DC
-		dc.b $F8, 5, 0,	$36, $EC
-		dc.b $F8, 5, 0,	4, $C
-		dc.b $F8, 5, 0,	$3A, $1C
-		dc.b $F8, 5, 0,	0, $2C
-		dc.b $F8, 1, 0,	$20, $3C
-		dc.b $F8, 5, 0,	$2E, $44
+M_Card_SBZ:	dc.b $8	;  GREEN HILL |     CLOCK  ORK
+		dc.b $F8, 5, 0, 8, $C0		; C
+		dc.b $F8, 5, 0, $26, $D0	; L
+		dc.b $F8, 5, 0, $32, $E0	; O
+		dc.b $F8, 5, 0, 8, $F0		; C
+		dc.b $F8, 5, 0, $22, $0	; K
+		dc.b $F8, 5, 0, $32, $30	; O
+		dc.b $F8, 5, 0, $3A, $40	; R
+		dc.b $F8, 5, 0, $22, $50	; K
 		even
 M_Card_IMZ:	dc.b $B	;  GREEN HILL |   ICE MOUNTAIN
 		dc.b $F8, 1, 0, $20, $A0	; I
@@ -6920,6 +6917,23 @@ loc_12E5C:
 		rts	
 ; ===========================================================================
 
+Sonic_AirRoll:
+        cmpi.b  #$13,$1C(a0)      ; are we already in rolling animation
+        cmpi.b  #2,$1C(a0)      ; are we already in rolling animation
+        beq.s   AirRoll_Return   ; if yes, branch
+		
+AirRoll_CheckBtn:
+        move.b ($FFFFF603).w,d0 ; Move $FFFFF603 to d0
+        andi.b #$70,d0 ; Has A/B/C been pressed?
+        beq.s  AirRoll_Return
+		
+        move.b #$20,$1C(a0) ; Set Sonic's animation to rolling.
+        move.w    #$BC,d0
+        jsr    (PlaySound_Special).l ;    play Sonic rolling sound
+		
+AirRoll_Return:
+        rts
+
 Sonic_MdRoll:
 		bsr.w	Sonic_Jump
 		bsr.w	Sonic_RollRepel
@@ -6932,6 +6946,7 @@ Sonic_MdRoll:
 ; ===========================================================================
 
 Sonic_MdJump2:
+		bsr.w   Sonic_AirRoll
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_JumpDirection
 		bsr.w	Sonic_LevelBound
@@ -9219,4 +9234,5 @@ EndOfRom:
 ; RESTARTED
 ; POST-ALPHACPETION
 ; JUST ANOTHER BETA HACK
+; SONIC MEGAMIX 5.0 ALL OVER AGAIN
 

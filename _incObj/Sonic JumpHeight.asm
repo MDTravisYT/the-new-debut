@@ -20,10 +20,17 @@ loc_134AE:
 		andi.b	#btnABC,d0	; is A, B or C pressed?
 		bne.s	locret_134C2	; if yes, branch
 		move.w	d1,obVelY(a0)
-		move.b	#id_Fall,obAnim(a0) ; use "falling" animation
+		
+VictoryAnimTest:
+        tst.b   ($FFFFF5C0).w ; Has the victory animation flag been set?
+        beq.s   JumpFall ; If not, branch
+		move.b	#id_Leap2,obAnim(a0) ; use "victory" animation
 
 locret_134C2:
 		rts	
+		
+JumpFall:
+		move.b	#id_Fall,obAnim(a0) ; use "falling" animation
 ; ===========================================================================
 
 loc_134C4:

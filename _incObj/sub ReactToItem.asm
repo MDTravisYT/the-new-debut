@@ -166,11 +166,14 @@ React_Monitor:
 
 React_Enemy:
 		tst.b	(v_invinc).w	; is Sonic invincible?
-		bne.s	@donthurtsonic	; if yes, branch
+		bne.s	donthurtsonic	; if yes, branch
+		cmpi.b	#$20,obAnim(a0) ; is Sonic rolling/jumping?
+		bne.w	ChkRoll	; if not, branch
+ChkRoll:
 		cmpi.b	#id_Roll,obAnim(a0) ; is Sonic rolling/jumping?
 		bne.w	React_ChkHurt	; if not, branch
 
-	@donthurtsonic:
+donthurtsonic:
 		tst.b	obColProp(a1)
 		beq.s	@breakenemy
 
