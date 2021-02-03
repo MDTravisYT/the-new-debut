@@ -2665,7 +2665,7 @@ Level_ClrRam:
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
 		move.w	#$8A00+223,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
+		cmpi.b	#id_IMZ,(v_zone).w ; is level LZ?
 		bne.s	Level_LoadPal	; if not, branch
 
 		move.w	#$8014,(a6)	; enable H-interrupts
@@ -2686,7 +2686,7 @@ Level_LoadPal:
 		enable_ints
 		moveq	#palid_Sonic,d0
 		bsr.w	PalLoad2	; load Sonic's palette
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
+		cmpi.b	#id_IMZ,(v_zone).w ; is level LZ?
 		bne.s	Level_GetBgm	; if not, branch
 
 		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
@@ -2759,7 +2759,7 @@ Level_ChkDebug:
 Level_ChkWater:
 		move.w	#0,(v_jpadhold2).w
 		move.w	#0,(v_jpadhold1).w
-		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
+		cmpi.b	#id_IMZ,(v_zone).w ; is level LZ?
 		bne.s	Level_LoadObj	; if not, branch
 		move.b	#id_WaterSurface,(v_objspace+$780).w ; load water surface object
 		move.w	#$60,(v_objspace+$780+obX).w
@@ -2974,7 +2974,7 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_SBZ
 		zonewarning ColPointers,4
 		dc.l Col_GHZ ; Pointer for Ending is missing by default.
-		dc.l Col_GHZ
+		dc.l Col_IMZ
 		dc.l Col_SBZ
 
 		include	"_inc\Oscillatory Routines.asm"
@@ -6928,7 +6928,7 @@ AirRoll_CheckBtn:
         beq.s  AirRoll_Return
 		
         move.b #$20,$1C(a0) ; Set Sonic's animation to rolling.
-        move.w    #$BC,d0
+        move.w    #$A5,d0
         jsr    (PlaySound_Special).l ;    play Sonic rolling sound
 		
 AirRoll_Return:
@@ -8875,6 +8875,8 @@ Col_SYZ:	incbin	"collide\SYZ.bin"	; SYZ index
 		even
 Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
 		even
+Col_IMZ:	incbin	"collide\IMZ.bin"	; SBZ index
+		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
 ; ---------------------------------------------------------------------------
@@ -9217,12 +9219,11 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 		dcb.b $63C,$FF
 		endc
 		;dcb.b ($10000-(*%$10000))-(EndOfRom-SoundDriver),$FF
-
+	include "ErrorHandler.asm"
 SoundDriver:	include "s1.sounddriver.asm"
 
 ; end of 'ROM'
 		even
-	include "ErrorHandler.asm"
 	
 ;	incbin "stuffs\S2NA.7z"
 EndOfRom:

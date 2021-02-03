@@ -47,9 +47,9 @@ Van_RmvSonic:	; Routine 2
 ; ===========================================================================
 
 Van_LoadSonic:	; Routine 4
-		move.b	#id_Special,(v_gamemode).w ; set screen mode to $10 (Special Stage)
 		subq.w	#1,van_time(a0)	; subtract 1 from time
 		bne.s	@wait		; if time remains, branch
+		move.b	#id_Special,(v_gamemode).w ; set screen mode to $10 (Special Stage)
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		jmp	(DeleteObject).l
 

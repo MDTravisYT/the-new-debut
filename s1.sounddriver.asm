@@ -2681,14 +2681,14 @@ SoundD0:	incbin	"sound/sfx/SndD0 - Waterfall.bin"
 		if (*&$7FFF)+Size_of_SegaPCM>$8000
 			align $8000
 		endif
-SegaPCM:	incbin	"sound/dac/sega.pcm"
+SegaPCM:	;incbin	"sound/dac/sega.pcm"
 SegaPCM_End
 		even
 
-		if SegaPCM_End-SegaPCM>$8000
-			inform 3,"Sega sound must fit within $8000 bytes, but you have a $%h byte Sega sound.",SegaPCM_End-SegaPCM
-		endc
-		if SegaPCM_End-SegaPCM>Size_of_SegaPCM
-			inform 3,"Size_of_SegaPCM = $%h, but you have a $%h byte Sega sound.",Size_of_SegaPCM,SegaPCM_End-SegaPCM
-		endc
+	;	if SegaPCM_End-SegaPCM>$8000
+	;		inform 3,"Sega sound must fit within $8000 bytes, but you have a $%h byte Sega sound.",SegaPCM_End-SegaPCM
+	;	endc
+	;	if SegaPCM_End-SegaPCM>Size_of_SegaPCM
+	;		inform 3,"Size_of_SegaPCM = $%h, but you have a $%h byte Sega sound.",Size_of_SegaPCM,SegaPCM_End-SegaPCM
+	;	endc
 

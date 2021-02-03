@@ -64,6 +64,8 @@ Mon_Solid:	; Routine 2
 ; ===========================================================================
 
 @fall:		; 2nd Routine 4
+		bra.w	Mon_BreakOpen
+		rts
 		bsr.w	ObjectFall
 		jsr	(ObjFloorDist).l
 		tst.w	d1
