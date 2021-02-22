@@ -26,7 +26,7 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal
 	zonewarning LevelHeaders,$10
 	lhead	0,		Nem_GHZ,	0,		Blk16_GHZ,	Blk256_GHZ,	bgm_SBZ,	palid_Ending	; Ending
 	lhead	plcid_IMZ,		Nem_GHZ,	plcid_IMZ2,		Blk16_IMZ,	Blk256_IMZ,	bgm_SBZ,	palid_IMZ	; Ice Mountain
-	lhead	plcid_SBZ,	Nem_SBZ,	plcid_SBZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_SBZ1	; Cosmic Space
+	lhead	plcid_CSZ,	Nem_CSZ,	plcid_CSZ2,	Blk16_CSZ,	Blk256_CSZ,	bgm_SBZ,	palid_SBZ1	; Cosmic Space
 	even
 
 ;	* music and level gfx are actually set elsewhere, so these values are useless

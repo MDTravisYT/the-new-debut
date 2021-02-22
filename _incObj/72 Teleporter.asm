@@ -67,7 +67,7 @@ loc_1670E:
 		move.w	obX(a0),obX(a1)
 		move.w	obY(a0),obY(a1)
 		clr.b	$32(a0)
-		sfx	sfx_Roll,0,0,0	; play Sonic rolling sound
+		sfx	$A9,0,0,0	; play Sonic rolling sound
 
 locret_1675C:
 		rts	

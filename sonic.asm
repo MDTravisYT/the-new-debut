@@ -2581,7 +2581,7 @@ MusicList:
 		dc.b bgm_SBZ	; SBZ
 		dc.b bgm_FZ	; Ending
 		dc.b bgm_IMZ	; IMZ
-		dc.b bgm_FZ	; CSZ
+		dc.b bgm_CSZ	; CSZ
 		even
 ; ===========================================================================
 
@@ -2665,7 +2665,7 @@ Level_ClrRam:
 		move.w	#$8720,(a6)		; set background colour (line 3; colour 0)
 		move.w	#$8A00+223,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
-		cmpi.b	#id_IMZ,(v_zone).w ; is level LZ?
+		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
 		bne.s	Level_LoadPal	; if not, branch
 
 		move.w	#$8014,(a6)	; enable H-interrupts
@@ -2686,7 +2686,7 @@ Level_LoadPal:
 		enable_ints
 		moveq	#palid_Sonic,d0
 		bsr.w	PalLoad2	; load Sonic's palette
-		cmpi.b	#id_IMZ,(v_zone).w ; is level LZ?
+		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
 		bne.s	Level_GetBgm	; if not, branch
 
 		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
@@ -2759,7 +2759,7 @@ Level_ChkDebug:
 Level_ChkWater:
 		move.w	#0,(v_jpadhold2).w
 		move.w	#0,(v_jpadhold1).w
-		cmpi.b	#id_IMZ,(v_zone).w ; is level LZ?
+		cmpi.b	#id_LZ,(v_zone).w ; is level LZ?
 		bne.s	Level_LoadObj	; if not, branch
 		move.b	#id_WaterSurface,(v_objspace+$780).w ; load water surface object
 		move.w	#$60,(v_objspace+$780+obX).w
@@ -2975,7 +2975,7 @@ ColPointers:	dc.l Col_GHZ
 		zonewarning ColPointers,4
 		dc.l Col_GHZ ; Pointer for Ending is missing by default.
 		dc.l Col_IMZ
-		dc.l Col_SBZ
+		dc.l Col_CSZ
 
 		include	"_inc\Oscillatory Routines.asm"
 
@@ -6891,6 +6891,7 @@ MusicList2:
 ; ---------------------------------------------------------------------------
 
 Sonic_MdNormal:
+		bsr.w	Sonic_Dash
 		bsr.w	Sonic_Jump
 		bsr.w	Sonic_SlopeResist
 		bsr.w	Sonic_Move
@@ -6961,6 +6962,7 @@ loc_12EA6:
 		rts	
 
 		include	"_incObj\Sonic Move.asm"
+		include	"_incObj\Sonic Dash.asm"
 		include	"_incObj\Sonic RollSpeed.asm"
 		include	"_incObj\Sonic JumpDirection.asm"
 
@@ -8806,11 +8808,15 @@ Blk16_SBZ:	incbin	"map16\SBZ.bin"
 		even
 Nem_SBZ:	incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
 		even
-Blk256_SBZ:	if Revision=0
+Blk256_SBZ:
 		incbin	"map256\SBZ.bin"
-		else
-		incbin	"map256\SBZ (JP1).bin"
-		endc
+		even
+Blk16_CSZ:	incbin	"map16\CSZ.bin"
+		even
+Nem_CSZ:	incbin	"artnem\8x8 - CSZ.bin"	; SBZ primary patterns
+		even
+Blk256_CSZ:
+		incbin	"map256\CSZ.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
@@ -8875,7 +8881,9 @@ Col_SYZ:	incbin	"collide\SYZ.bin"	; SYZ index
 		even
 Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
 		even
-Col_IMZ:	incbin	"collide\IMZ.bin"	; SBZ index
+Col_IMZ:	incbin	"collide\IMZ.bin"	; IMZ index
+		even
+Col_CSZ:	incbin	"collide\CSZ.bin"	; CSZ index
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
@@ -8962,7 +8970,7 @@ Level_Index:
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
 		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
 		; CSZ
-		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
+		dc.w Level_CSZ1-Level_Index, Level_CSZbg-Level_Index, byte_6A2FC-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
 		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
@@ -9055,7 +9063,10 @@ byte_6A2FC:	dc.b 0,	0, 0, 0
 Level_End:	incbin	"levels\ending.bin"
 		even
 byte_6A320:	dc.b 0,	0, 0, 0
-
+Level_CSZ1:	incbin	"levels\csz1.bin"
+		even
+Level_CSZbg:	incbin	"levels\cszbg.bin"
+		even
 
 Art_BigRing:	incbin	"artunc\Giant Ring.bin"
 		even

@@ -10,7 +10,7 @@ ptr_Roll2:	dc.w SonAni_Roll2-Ani_Sonic
 ptr_Push:	dc.w SonAni_Push-Ani_Sonic
 ptr_Wait:	dc.w SonAni_Wait-Ani_Sonic
 ptr_Balance:	dc.w SonAni_Balance-Ani_Sonic
-ptr_LookUp:	dc.w SonAni_LookUp-Ani_Sonic
+ptr_LookUp:	dc.w SonAni_Dash-Ani_Sonic
 ptr_Duck:	dc.w SonAni_Duck-Ani_Sonic
 ptr_Warp1:	dc.w SonAni_Warp1-Ani_Sonic
 ptr_Warp2:	dc.w SonAni_Wait-Ani_Sonic
@@ -37,6 +37,7 @@ ptr_Float4:	dc.w SonAni_Float4-Ani_Sonic
 ptr_Jump:	dc.w SonAni_Jump-Ani_Sonic
 ptr_Jump2Roll:	dc.w SonAni_Jump2Roll-Ani_Sonic
 ptr_Fall:	dc.w SonAni_Fall-Ani_Sonic
+ptr_Dash:	dc.w SonAni_dash-Ani_Sonic
 
 SonAni_Walk:	dc.b $FF, 2, 3,	4, 5,	6, 7, afEnd
 		even
@@ -122,6 +123,8 @@ SonAni_Jump2Roll:	dc.b $2, $3B, afChange, id_Roll
 		even
 SonAni_Fall:	dc.b $7, $38, $39, $3A, $3A, $3A, $3A, $3A, $3A, $3A, $3A, afChange, id_Jump2Roll
 		even
+SonAni_Dash:	dc.b $7, $57, $58, afBack, 1
+		even
 
 id_Walk:	equ (ptr_Walk-Ani_Sonic)/2	; 0
 id_Run:		equ (ptr_Run-Ani_Sonic)/2	; 1
@@ -157,3 +160,4 @@ id_Float4:	equ (ptr_Float4-Ani_Sonic)/2	; $1E
 id_Jump:	equ	(ptr_Jump-Ani_Sonic)/2	;1F
 id_Jump2Roll:	equ	(ptr_Jump2Roll-Ani_Sonic)/2	;20
 id_Fall:	equ	(ptr_Fall-Ani_Sonic)/2	;21
+id_Dash:	equ	(ptr_Dash-Ani_Sonic)/2	;22

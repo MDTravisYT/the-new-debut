@@ -36,7 +36,7 @@ Sonic_Water:
 @abovewater:
 		bclr	#6,obStatus(a0)
 		beq.s	@exit
-		bsr.w	ResumeMusic
+	;	bsr.w	ResumeMusic
 		move.w	#$600,(v_sonspeedmax).w ; restore Sonic's speed
 		move.w	#$C,(v_sonspeedacc).w ; restore Sonic's acceleration
 		move.w	#$80,(v_sonspeeddec).w ; restore Sonic's deceleration

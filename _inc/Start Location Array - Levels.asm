@@ -42,7 +42,7 @@
 		dc.w	$80,$A8
 		dc.w	$80,$A8
 		
-		dc.w	$80,$A8
+		incbin	"startpos\csz1.bin"
 		dc.w	$80,$A8
 		dc.w	$80,$A8
 		dc.w	$80,$A8

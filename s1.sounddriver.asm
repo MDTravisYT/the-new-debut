@@ -2516,7 +2516,7 @@ Music91:	incbin	"sound/music/Mus91 - Credits.bin"
 		even
 Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
 		even
-Music93:	incbin	"sound/music/Mus93 - Get Emerald.bin"
+Music93:	incbin	"sound/music/Mus93 - CSZ.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound	effect pointers

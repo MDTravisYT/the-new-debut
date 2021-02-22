@@ -41,7 +41,7 @@ Deform_Index:	dc.w Deform_GHZ_TTS-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
 		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
-		dc.w Deform_SBZ-Deform_Index, Deform_SBZ-Deform_Index
+		dc.w Deform_CSZ-Deform_Index, Deform_SBZ-Deform_Index
 ; ---------------------------------------------------------------------------
 ; Green	Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------
@@ -479,6 +479,96 @@ loc_6576:
 		dbf	d1,loc_6576
 		rts	
 ; End of function Deform_SBZ
+
+Deform_CSZ:
+		move.w	(v_scrshiftx).w,d4
+		ext.l	d4
+		asl.l	#7,d4
+		move.w	(v_scrshifty).w,d5
+		ext.l	d5
+		asl.l	#7,d5
+		bsr.w	ScrollBlock1
+		move.w #$0,($FFFFF70C).w
+		move.w	(v_bgscreenposy).w,(v_bgscrposy_dup).w
+		lea	($FFFFCC00).w,a1	; load beginning address of horizontal scroll buffer to a1
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#8,d0			; divide by 256 (Slow down the scroll position)
+		move.w	#108-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+CSZ_Deform1:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,CSZ_Deform1	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#6,d0			; divide by 64 (Slow down the scroll position)
+		move.w	#12-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+CSZ_Deform2:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,CSZ_Deform2	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#5,d0			; divide by 32 (Slow down the scroll position)
+		move.w	#8-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+CSZ_Deform3:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,CSZ_Deform3	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#4,d0			; divide by 16 (Slow down the scroll position)
+		move.w	#8-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+CSZ_Deform4:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,CSZ_Deform4	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#3,d0			; divide by 8 (Slow down the scroll position)
+		move.w	#8-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+CSZ_Deform5:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,CSZ_Deform5	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#2,d0			; divide by 4 (Slow down the scroll position)
+		move.w	#32-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+CSZ_Deform6:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,CSZ_Deform6	; repeat d1 number of scanlines
+
+		move.w	($FFFFF700).w,d0	; load FG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		swap	d0			; send to the left side of d0
+		move.w	($FFFFF708).w,d0	; load BG screen's X position
+		neg.w	d0			; negate (positive to negative)
+		asr.w	#1,d0			; divide by 2 (Slow down the scroll position)
+		move.w	#54-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+CSZ_Deform7:
+		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
+		dbf	d1,CSZ_Deform7	; repeat d1 number of scanlines
+; End of function Deform_CSZ
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	scroll the level horizontally as Sonic moves

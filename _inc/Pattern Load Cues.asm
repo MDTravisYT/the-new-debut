@@ -22,6 +22,8 @@ ptr_PLC_SYZ:		dc.w PLC_SYZ-ArtLoadCues
 ptr_PLC_SYZ2:		dc.w PLC_SYZ2-ArtLoadCues
 ptr_PLC_SBZ:		dc.w PLC_SBZ-ArtLoadCues
 ptr_PLC_SBZ2:		dc.w PLC_SBZ2-ArtLoadCues
+ptr_PLC_CSZ:		dc.w PLC_CSZ-ArtLoadCues
+ptr_PLC_CSZ2:		dc.w PLC_CSZ2-ArtLoadCues
 ptr_PLC_TitleCard:	dc.w PLC_TitleCard-ArtLoadCues
 ptr_PLC_Boss:		dc.w PLC_Boss-ArtLoadCues
 ptr_PLC_Signpost:	dc.w PLC_Signpost-ArtLoadCues
@@ -259,6 +261,39 @@ PLC_SBZ2:	dc.w ((PLC_SBZ2end-PLC_SBZ2-2)/6)-1
 		plcm	Nem_Burrobot, $94C0	; burrobot enemy
 	PLC_SBZ2end:
 ; ---------------------------------------------------------------------------
+; Pattern load cues - Scrap Brain
+; ---------------------------------------------------------------------------
+PLC_CSZ:	dc.w ((PLC_csz2-PLC_csz-2)/6)-1
+		plcm	Nem_CSZ,0		; SBZ main patterns
+	;	plcm	Nem_Stomper, $5800	; moving platform and stomper
+	;	plcm	Nem_SbzDoor1, $5D00	; door
+	;	plcm	Nem_Girder, $5E00	; girder
+	;	plcm	Nem_BallHog, $6040	; ball hog enemy
+	;	plcm	Nem_SbzWheel1, $6880	; spot on large	wheel
+	;	plcm	Nem_SbzWheel2, $6900	; wheel	that grabs Sonic
+	;	plcm	Nem_SyzSpike1, $7220	; large	spikeball
+	;	plcm	Nem_Cutter, $76A0	; pizza	cutter
+	;	plcm	Nem_FlamePipe, $7B20	; flaming pipe
+	;	plcm	Nem_SbzFloor, $7EA0	; collapsing floor
+	;	plcm	Nem_SbzBlock, $9860	; vanishing block
+
+PLC_CSZ2:	dc.w ((PLC_CSZ2end-PLC_CSZ2-2)/6)-1
+	;	plcm	Nem_Cater, $5600	; caterkiller enemy
+	;	plcm	Nem_Bomb, $8000		; bomb enemy
+	;	plcm	Nem_Orbinaut, $8520	; orbinaut enemy
+	;	plcm	Nem_SlideFloor, $8C00	; floor	that slides away
+	;	plcm	Nem_SbzDoor2, $8DE0	; horizontal door
+	;	plcm	Nem_Electric, $8FC0	; electric orb
+	;	plcm	Nem_TrapDoor, $9240	; trapdoor
+	;	plcm	Nem_SbzFloor, $7F20	; collapsing floor
+	;	plcm	Nem_SpinPform, $9BE0	; small	spinning platform
+	;	plcm	Nem_LzSwitch, $A1E0	; switch
+	;	plcm	Nem_Spikes, $A360	; spikes
+	;	plcm	Nem_HSpring, $A460	; horizontal spring
+	;	plcm	Nem_VSpring, $A660	; vertical spring
+	;	plcm	Nem_Burrobot, $94C0	; burrobot enemy
+	PLC_CSZ2end:
+; ---------------------------------------------------------------------------
 ; Pattern load cues - title card
 ; ---------------------------------------------------------------------------
 PLC_TitleCard:	dc.w ((PLC_TitleCardend-PLC_TitleCard-2)/6)-1
@@ -439,6 +474,8 @@ plcid_SYZ:		equ (ptr_PLC_SYZ-ArtLoadCues)/2		; $C
 plcid_SYZ2:		equ (ptr_PLC_SYZ2-ArtLoadCues)/2	; $D
 plcid_SBZ:		equ (ptr_PLC_SBZ-ArtLoadCues)/2		; $E
 plcid_SBZ2:		equ (ptr_PLC_SBZ2-ArtLoadCues)/2	; $F
+plcid_CSZ:		equ (ptr_PLC_CSZ-ArtLoadCues)/2	; $F
+plcid_CSZ2:		equ (ptr_PLC_CSZ2-ArtLoadCues)/2	; $F
 plcid_TitleCard:	equ (ptr_PLC_TitleCard-ArtLoadCues)/2	; $10
 plcid_Boss:		equ (ptr_PLC_Boss-ArtLoadCues)/2	; $11
 plcid_Signpost:		equ (ptr_PLC_Signpost-ArtLoadCues)/2	; $12

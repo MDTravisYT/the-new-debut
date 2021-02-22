@@ -231,6 +231,16 @@ BGScrollBlockSizes:
 		dc.w $100
 		dc.w $100
 		dc.w $100
+		
+		dc.w $70
+		dc.w $100
+		dc.w $100
+		dc.w $100
+		
+		dc.w $70
+		dc.w $100
+		dc.w $100
+		dc.w $100
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	set scroll speed of some backgrounds
@@ -262,7 +272,7 @@ BgScroll_Index:	dc.w BgScroll_LZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
-		dc.w BgScroll_SBZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
+		dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 ; ===========================================================================
 
 BgScroll_GHZ:
