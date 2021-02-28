@@ -10,7 +10,7 @@ BGHZ_MakeBall:
 		addq.b	#2,ob2ndRout(a0)
 		jsr	(FindNextFreeObj).l
 		bne.s	loc_17910
-		move.b	#id_BossBall,0(a1) ; load swinging ball object
+	;	move.b	#id_BossBall,0(a1) ; load swinging ball object
 		move.w	$30(a0),obX(a1)
 		move.w	$38(a0),obY(a1)
 		move.l	a0,$34(a1)
@@ -27,11 +27,11 @@ BGHZ_ShipMove:
 		bpl.s	BGHZ_Reverse
 		addq.b	#2,ob2ndRout(a0)
 		move.w	#$3F,$3C(a0)
-		move.w	#$100,obVelX(a0) ; move the ship sideways
+		move.w	#$200,obVelX(a0) ; move the ship sideways
 		cmpi.w	#$2A00,$30(a0)
 		bne.s	BGHZ_Reverse
 		move.w	#$7F,$3C(a0)
-		move.w	#$40,obVelX(a0)
+		move.w	#$80,obVelX(a0)
 
 BGHZ_Reverse:
 		btst	#0,obStatus(a0)
