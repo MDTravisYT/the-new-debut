@@ -1866,8 +1866,8 @@ GM_OtherSega:
         lea (Eni_OtherSegaLogo).l,a0     ; load OtherSega logo mappings
         moveq   #1,d0               ; start from tile #1
         bsr.w   EniDec
-        copyTilemap $FF0000,(vram_bg+$61E),((96/8)-1),((32/8)-1)
-;        sfx $87,0,1,1          ; fade out music
+        copyTilemap $FF0000,(vram_bg+$404),((320/8)-1),((320/8)-1) ;not found
+        sfx $90,0,1,1          ; fade out music
  
 ;        tst.b   (v_megadrive).w         ; is console Japanese?
 ;        bpl.s   @jmp0               ; if yes, branch
@@ -1882,7 +1882,7 @@ GM_OtherSega:
         move.w  #$8174,$C00004          ; enable display
 ;        bsr.w   PaletteFadeIn
     ;    sfx $90,0,1,1          ; play "OtherSega" sound
-        move.w  #10*10,(v_demolength).w      ; stay for 3 seconds
+        move.w  #10*30,(v_demolength).w      ; stay for 3 seconds
  
 OtherSega_WaitEnd:
         move.b  #2,(v_vbla_routine).w
@@ -1895,9 +1895,9 @@ OtherSega_WaitEnd:
         beq.s   OtherSega_WaitEnd            ; if not, branch
  
 OtherSega_GotoTitle:
-		sfx	$C3,0,1,1	; play warp sound
-		bsr.w	PaletteWhiteOut
-        move.b  #$20,(v_gamemode).w
+	;	sfx	$C3,0,1,1	; play warp sound
+	;	bsr.w	PaletteWhiteOut
+        move.b  #$04,(v_gamemode).w
         rts
  
 Palcycle_OtherSega:
@@ -2582,6 +2582,7 @@ MusicList:
 		dc.b bgm_FZ	; Ending
 		dc.b bgm_IMZ	; IMZ
 		dc.b bgm_CSZ	; CSZ
+		dc.b $94	; CWZ3
 		even
 ; ===========================================================================
 
@@ -2712,13 +2713,15 @@ Level_GetBgm:
 	Level_BgmNotLZ4:
 		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
 		bne.s	Level_PlayBgm	; if not, branch
-		moveq	#6,d0		; use 6th music (FZ)
+		moveq	#9,d0		; use 6th music (FZ)
 
 	Level_PlayBgm:
 		lea	(MusicList).l,a1 ; load	music playlist
 		move.b	(a1,d0.w),d0
 		bsr.w	PlaySound	; play music
 		move.b	#id_TitleCard,(v_objspace+$80).w ; load title card object
+        move.w    #$D0,d0
+        jsr    (PlaySound_Special).l ;    play Sonic rolling sound
 
 Level_TtlCardLoop:
 		move.b	#$C,(v_vbla_routine).w

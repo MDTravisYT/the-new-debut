@@ -77,6 +77,7 @@ ptr_mus90:	dc.l Music90
 ptr_mus91:	dc.l Music91
 ptr_mus92:	dc.l Music92
 ptr_mus93:	dc.l Music93
+ptr_mus94:	dc.l Music94
 ptr_musend
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal
@@ -2517,6 +2518,8 @@ Music91:	incbin	"sound/music/Mus91 - Credits.bin"
 Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
 		even
 Music93:	incbin	"sound/music/Mus93 - CSZ.bin"
+		even
+Music94:	incbin	"sound/music/Mus95 - CWZ3.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound	effect pointers

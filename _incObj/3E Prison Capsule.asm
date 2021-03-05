@@ -19,7 +19,7 @@ Pri_Index:	dc.w Pri_Main-Pri_Index
 		dc.w Pri_Explosion-Pri_Index
 		dc.w Pri_Explosion-Pri_Index
 		dc.w Pri_Explosion-Pri_Index
-		dc.w Pri_Animals-Pri_Index
+	;	dc.w Pri_Animals-Pri_Index
 		dc.w Pri_EndAct-Pri_Index
 
 pri_origY:	equ $30		; original y-axis position
