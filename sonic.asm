@@ -25,6 +25,10 @@ ZoneCount:	equ 6	; discrete zones are: GHZ, MZ, SYZ, LZ, SLZ, and SBZ
 
 OptimiseSound:	equ 0	; change to 1 to optimise sound queuing
 
+; 0 is full game
+; 1 is demo mode
+IsDemo:	equ 0
+
 ; ===========================================================================
 
 StartOfRom:
@@ -2154,10 +2158,17 @@ loc_3230:
 		beq.w	Tit_MainLoop	; if not, branch
 
 Tit_ChkLevSel:
+		if IsDemo=1
+		tst.b	(f_levselcheat).w ; check if level select code is on
+		beq.w	DemoStart	; if not, play level
+		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
+		beq.w	DemoStart	; if not, play level
+		else
 		tst.b	(f_levselcheat).w ; check if level select code is on
 		beq.w	PlayLevelC	; if not, play level
 		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
 		beq.w	PlayLevelC	; if not, play level
+		endc
 
 		moveq	#palid_LevelSel,d0
 		bsr.w	PalLoad2	; load level select palette
@@ -2251,6 +2262,10 @@ LevSel_Level_SS:
 		endc
 		rts	
 ; ===========================================================================
+
+DemoStart:
+		move.w	#0,(v_zone).w	; set level to GHZ
+		bra.s	PlayLevel
 
 LevSel_Level:
 		andi.w	#$3FFF,d0
@@ -2580,9 +2595,12 @@ MusicList:
 		dc.b bgm_SYZ	; SYZ
 		dc.b bgm_SBZ	; SBZ
 		dc.b bgm_FZ	; Ending
+		if IsDemo=1
+		else
 		dc.b bgm_IMZ	; IMZ
 		dc.b bgm_CSZ	; CSZ
 		dc.b $94	; CWZ3
+		endc
 		even
 ; ===========================================================================
 
@@ -5827,7 +5845,7 @@ M_Card_SLZ:	dc.b 9			; STAR LIGHT
 		dc.b $F8, 5, 0,	$1C, $2C
 		dc.b $F8, 5, 0,	$42, $3C
 		even
-M_Card_SYZ:	dc.b $A	;  GREEN HILL |     SPARKLING
+M_Card_SYZ:	dc.b $9	;  GREEN HILL |     SPARKLING
 		dc.b $F8, 5, 0, $3E, $C0	; S
 		dc.b $F8, 5, 0, $36, $D0	; P
 		dc.b $F8, 5, 0, 0, $E0		; A
@@ -5837,7 +5855,6 @@ M_Card_SYZ:	dc.b $A	;  GREEN HILL |     SPARKLING
 		dc.b $F8, 1, 0, $20, $20	; I
 		dc.b $F8, 5, 0, $2E, $28	; N
 		dc.b $F8, 5, 0, $18, $38	; G
-		dc.b $F8, 5, 0,	$0C, $48
 		even
 M_Card_SBZ:	dc.b $8	;  GREEN HILL |     CLOCK  ORK
 		dc.b $F8, 5, 0, 8, $C0		; C
@@ -8773,7 +8790,10 @@ Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
 		even
 Blk256_GHZ:	incbin	"map256\GHZ.bin"
 		even
-Blk16_LZ:	incbin	"map16\LZ.bin"
+Blk16_LZ:	if IsDemo=1
+		else
+		incbin	"map16\LZ.bin"
+		endc
 		even
 Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
 		even
@@ -8781,45 +8801,69 @@ Blk256_LZ:	incbin	"map256\LZ.bin"
 		even
 Blk16_MZ:	incbin	"map16\MZ.bin"
 		even
-Nem_MZ:		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
-		even
-Blk256_MZ:	if Revision=0
-		incbin	"map256\MZ.bin"
+Nem_MZ:		if IsDemo=1
 		else
-		incbin	"map256\MZ (JP1).bin"
+		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
+		endc
+		even
+Blk256_MZ:	if IsDemo=1
+		else
+		incbin	"map256\MZ.bin"
 		endc
 		even
 Blk16_IMZ:	incbin	"map16\IMZ.bin"
 		even
-Nem_IMZ:	incbin	"artnem\8x8 - IMZ.bin"	; GHZ primary patterns
+Nem_IMZ:	if IsDemo=1
+		else
+		incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
+		endc
 		even
-Blk256_IMZ:	incbin	"map256\IMZ.bin"
+Blk256_IMZ:if IsDemo=1
+		else
+		incbin	"map256\IMZ.bin"
+		endc
 		even
 Blk16_SLZ:	incbin	"map16\SLZ.bin"
 		even
-Nem_SLZ:	incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
+Nem_SLZ:	if IsDemo=1
+		else
+		incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
+		endc
 		even
 Blk256_SLZ:	incbin	"map256\SLZ.bin"
 		even
 Blk16_SYZ:	incbin	"map16\SYZ.bin"
 		even
-Nem_SYZ:	incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
+Nem_SYZ:	if IsDemo=1
+		else
+		incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
+		endc
 		even
 Blk256_SYZ:	incbin	"map256\SYZ.bin"
 		even
 Blk16_SBZ:	incbin	"map16\SBZ.bin"
 		even
-Nem_SBZ:	incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
+Nem_SBZ:	if IsDemo=1
+		else
+		incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
+		endc
 		even
-Blk256_SBZ:
+Blk256_SBZ:if IsDemo=1
+		else
 		incbin	"map256\SBZ.bin"
+		endc
 		even
 Blk16_CSZ:	incbin	"map16\CSZ.bin"
 		even
-Nem_CSZ:	incbin	"artnem\8x8 - CSZ.bin"	; SBZ primary patterns
+Nem_CSZ:	if IsDemo=1
+		else
+		incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
+		endc
 		even
-Blk256_CSZ:
+Blk256_CSZ:if IsDemo=1
+		else
 		incbin	"map256\CSZ.bin"
+		endc
 		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence

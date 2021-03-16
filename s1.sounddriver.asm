@@ -75,9 +75,13 @@ ptr_mus8E:	dc.l Music8E
 ptr_mus8F:	dc.l Music8F
 ptr_mus90:	dc.l Music90
 ptr_mus91:	dc.l Music91
+	if IsDemo=1
+	else
 ptr_mus92:	dc.l Music92
 ptr_mus93:	dc.l Music93
 ptr_mus94:	dc.l Music94
+ptr_mus95:	dc.l Music95
+	endc
 ptr_musend
 ; ---------------------------------------------------------------------------
 ; Priority of sound. New music or SFX must have a priority higher than or equal
@@ -2520,6 +2524,8 @@ Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
 Music93:	incbin	"sound/music/Mus93 - CSZ.bin"
 		even
 Music94:	incbin	"sound/music/Mus95 - CWZ3.bin"
+		even
+Music95:	incbin	"sound/music/output.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound	effect pointers
