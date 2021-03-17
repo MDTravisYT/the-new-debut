@@ -2634,7 +2634,7 @@ SoundB6:	incbin	"sound/sfx/SndB6 - Spikes Move.bin"
 		even
 SoundB7:	incbin	"sound/sfx/SndB7 - Rumbling.bin"
 		even
-SoundB8:	incbin	"sound/sfx/SndB8.bin"
+SoundB8:	incbin	"sound/sfx/Bomb.bin"
 		even
 SoundB9:	incbin	"sound/sfx/SndB9 - Collapse.bin"
 		even

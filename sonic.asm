@@ -27,7 +27,7 @@ OptimiseSound:	equ 0	; change to 1 to optimise sound queuing
 
 ; 0 is full game
 ; 1 is demo mode
-IsDemo:	equ 0
+IsDemo:	equ 1
 
 ; ===========================================================================
 
@@ -4148,7 +4148,7 @@ Demo_EndGHZ2:	incbin	"demodata\Ending - GHZ2.bin"
 
 		if Revision=0
 		include	"_inc\LevelSizeLoad & BgScrollSpeed.asm"
-		include	"_inc\DeformLayers.asm"
+		include	"_inc\DeformLayers (JP1).asm"
 		else
 		include	"_inc\LevelSizeLoad & BgScrollSpeed (JP1).asm"
 		include	"_inc\DeformLayers (JP1).asm"

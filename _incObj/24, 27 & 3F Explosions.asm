@@ -22,7 +22,7 @@ MDis_Main:	; Routine 0
 		move.b	#$C,obActWid(a0)
 		move.b	#9,obTimeFrame(a0)
 		move.b	#0,obFrame(a0)
-		sfx	sfx_A5,0,0,0		 ; play sound
+		sfx	sfx_B8,0,0,0		 ; play sound
 
 MDis_Animate:	; Routine 2
 		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration

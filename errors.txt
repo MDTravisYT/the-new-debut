@@ -6,4 +6,4 @@ D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\SONIC.ASM(1831) : 
 D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\SONIC.ASM(1912) : Warning : Forward reference to redefinable symbol
 
 Assembly completed.
-0 error(s) from 55590 lines in 0.16 seconds
+0 error(s) from 55646 lines in 8.1 seconds

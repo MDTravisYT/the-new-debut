@@ -88,6 +88,7 @@ PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
 		plcm	Nem_Stalk, $6B00	; flower stalk
 		plcm	Nem_PplRock, $7A00	; purple rock
 		plcm	Nem_BallHog, $8000	; ballhog enemy
+		plcm	Nem_UnkExplode, $8380	; cannonball enemy
 		plcm	Nem_Buzz, $8880		; buzz bomber enemy
 		plcm	Nem_Chopper, $8F60	; chopper enemy
 		plcm	Nem_Imp, $94C0	; imp enemy
