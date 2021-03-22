@@ -15,20 +15,21 @@ Pyl_Index:	dc.w Pyl_Main-Pyl_Index
 Pyl_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Pylon,obMap(a0)
-		move.w	#$83CC,obGfx(a0)
+	;	move.w	#$83CC,obGfx(a0)
+		move.w	#$0000,obGfx(a0)
 		move.b	#$10,obActWid(a0)
 
 Pyl_Display:	; Routine 2
-		move.l	(v_screenposx).w,d1
+		move.l	(v_screenposx).w,d1 ; start x
 		add.l	d1,d1
 		swap	d1
 		neg.w	d1
 		move.w	d1,obX(a0)
-		move.l	(v_screenposy).w,d1
+		move.l	(v_screenposy).w,d1 ; start y
 		add.l	d1,d1
 		swap	d1
-		andi.w	#$3F,d1
+	;	andi.w	#$3F,d1 ; how far up before reset to bottom of screen
 		neg.w	d1
-		addi.w	#$100,d1
+		addi.w	#$100,d1 ; offset default spawn value
 		move.w	d1,obScreenY(a0)
 		bra.w	DisplaySprite

@@ -86,16 +86,16 @@ locret_6E08:
 ; ===========================================================================
 
 DLE_GHZ2:
-		move.w	#$300,(v_limitbtm1).w
-		cmpi.w	#$ED0,(v_screenposx).w
-		bcs.s	locret_6E3A
-		move.w	#$200,(v_limitbtm1).w
-		cmpi.w	#$1600,(v_screenposx).w
-		bcs.s	locret_6E3A
-		move.w	#$400,(v_limitbtm1).w
-		cmpi.w	#$1D60,(v_screenposx).w
-		bcs.s	locret_6E3A
-		move.w	#$300,(v_limitbtm1).w
+	;	move.w	#$300,(v_limitbtm1).w
+	;	cmpi.w	#$ED0,(v_screenposx).w
+	;	bcs.s	locret_6E3A
+	;	move.w	#$200,(v_limitbtm1).w
+	;	cmpi.w	#$1600,(v_screenposx).w
+	;	bcs.s	locret_6E3A
+	;	move.w	#$400,(v_limitbtm1).w
+	;	cmpi.w	#$1D60,(v_screenposx).w
+	;	bcs.s	locret_6E3A
+	;	move.w	#$300,(v_limitbtm1).w
 
 locret_6E3A:
 		rts	
