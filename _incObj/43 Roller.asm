@@ -28,7 +28,7 @@ entry_BFBE:
                 move.b  #4,1(a0)
                 move.b  #4,$19(a0)
                 move.b  #$10,$18(a0)
-                move.b  #$8E,$20(a0)
+				move.b	#$E,obColType(a0)
 
 locret_C00A:
                 rts
@@ -58,6 +58,7 @@ entry_C030:
                 addq.b  #2,$25(a0)
                 move.b  #1,$1C(a0)
                 move.w  #$400,$10(a0)
+				move.b	#$8E,obColType(a0) ; make Roller invincible
 
 locret_C050:
                 rts

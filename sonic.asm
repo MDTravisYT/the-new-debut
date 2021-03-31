@@ -2093,8 +2093,8 @@ Tit_MainLoop:
 	;	bsr.w	PCycle_Title
 		bsr.w	RunPLC
 		move.w	(v_objspace+obX).w,d0
-		addq.w	#2,d0
-		move.w	d0,(v_objspace+obX).w ; move Sonic to the right
+		addq.w	#1,d0
+		move.w	d0,(v_objspace+obY).w ; move Sonic to the right
 		cmpi.w	#$1C00,d0	; has Sonic object passed $1C00 on x-axis?
 		blo.s	Tit_ChkRegion	; if not, branch
 
@@ -2621,7 +2621,7 @@ GM_Level:
 		tst.w	(f_demo).w	; is an ending sequence demo running?
 		bmi.s	Level_ClrRam	; if yes, branch
 		disable_ints
-		locVRAM	$B000
+		locVRAM	$AF80
 		lea	(Nem_TitleCard).l,a0 ; load title card patterns
 		bsr.w	NemDec
 		enable_ints
@@ -5798,6 +5798,21 @@ Map_Over:	include	"_maps\Game Over.asm"
 ; Sprite mappings - "SONIC HAS PASSED" title card
 ; ---------------------------------------------------------------------------
 Map_Got:	include	"_maps\Got Through Card.asm"
+M_Card_Oval:	dc.b $D			; Oval
+		dc.b $E4, $C, 0, $70, $F4
+		dc.b $E4, 2, 0,	$74, $14
+		dc.b $EC, 4, 0,	$77, $EC
+		dc.b $F4, 5, 0,	$79, $E4
+		dc.b $14, $C, $18, $70,	$EC
+		dc.b 4,	2, $18,	$74, $E4
+		dc.b $C, 4, $18, $77, 4
+		dc.b $FC, 5, $18, $79, $C
+		dc.b $EC, 8, 0,	$7D, $FC
+		dc.b $F4, $C, 0, $7C, $F4
+		dc.b $FC, 8, 0,	$7C, $F4
+		dc.b 4,	$C, 0, $7C, $EC
+		dc.b $C, 8, 0, $7C, $EC
+		even
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - special stage results screen
 ; ---------------------------------------------------------------------------

@@ -61,7 +61,7 @@ Card_Loop:
 	Card_MakeSprite:
 		move.b	d0,obFrame(a1)	; display frame	number d0
 		move.l	#Map_Card,obMap(a1)
-		move.w	#$8580,obGfx(a1)
+		move.w	#$857C,obGfx(a1)
 		move.b	#$78,obActWid(a1)
 		move.b	#0,obRender(a1)
 		move.b	#0,obPriority(a1)
