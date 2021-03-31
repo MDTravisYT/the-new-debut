@@ -8455,6 +8455,8 @@ Nem_Lava:	incbin	"artnem\MZ Lava.bin"
 		even
 Nem_MzBlock:	incbin	"artnem\MZ Green Pushable Block.bin"
 		even
+Nem_ImzCube:	incbin	"artnem\IMZ Ice Cube.bin"
+		even
 Nem_MzUnkBlock:	incbin	"artnem\Unused - MZ Background.bin"
 		even
 ; ---------------------------------------------------------------------------
@@ -8843,7 +8845,7 @@ Level_Index:
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
 		; IMZ
-		dc.w Level_IMZ1-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+		dc.w Level_IMZ1-Level_Index, Level_IMZbg-Level_Index, byte_6A2FC-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
 		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
@@ -8900,7 +8902,8 @@ byte_697EA:	dc.b 0,	0, 0, 0
 
 Level_IMZ1:	incbin	"levels\imz1.bin"
 		even
-
+Level_IMZbg:	incbin	"levels\imzbg.bin"
+		even
 Level_SLZ1:	incbin	"levels\slz1.bin"
 		even
 Level_SLZbg:	incbin	"levels\slzbg.bin"
