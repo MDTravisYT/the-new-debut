@@ -348,7 +348,7 @@ MainGameLoop:
 
 GameModeArray:
 
-ptr_GM_Sega:	bra.w	GM_OtherSega		; Sega Screen ($00)
+ptr_GM_Sega:	bra.w	GM_Sega		; Sega Screen ($00)
 
 ptr_GM_Title:	bra.w	GM_Title	; Title	Screen ($04)
 
@@ -364,7 +364,7 @@ ptr_GM_Ending:	bra.w	GM_Ending	; End of game sequence ($18)
 
 ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
 
-ptr_GM_OtherSega:	bra.w	GM_Sega		; Sega Screen ($20)
+ptr_GM_OtherSega:	bra.w	GM_RadNexAff		; Sega Screen ($20)
 
 ptr_GM_Hacker:	bra.w	GM_Hacker		; Inaccessable Level! ($24)
 
@@ -1751,106 +1751,7 @@ WaitForVBla:
 		include	"_incObj\sub CalcSine.asm"
 		include	"_incObj\sub CalcAngle.asm"
 
-; ---------------------------------------------------------------------------
-; Sega screen
-; ---------------------------------------------------------------------------
-
 GM_Sega:
-		sfx	$90,0,1,1	; play "SEGA" sound
-		bsr.w	PaletteWhiteIn
-		bsr.w	ClearPLC
-		bsr.w	PaletteFadeOut
-		lea	(vdp_control_port).l,a6
-		move.w	#$8004,(a6)	; use 8-colour mode
-		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
-		move.w	#$8400+(vram_bg>>13),(a6) ; set background nametable address
-		move.w	#$8700,(a6)	; set background colour (palette entry 0)
-		move.w	#$8B00,(a6)	; full-screen vertical scrolling
-		clr.b	(f_wtr_state).w
-		disable_ints
-		move.w	(v_vdp_buffer1).w,d0
-		andi.b	#$BF,d0
-		move.w	d0,(vdp_control_port).l
-		bsr.w	ClearScreen
-		locVRAM	0
-		lea	(Nem_SegaLogo).l,a0 ; load Sega	logo patterns
-		bsr.w	NemDec
-		lea	($FF0000).l,a1
-		lea	(Eni_SegaLogo).l,a0 ; load Sega	logo mappings
-		move.w	#0,d0
-		bsr.w	EniDec
-
-		copyTilemap	$FF0000,$E510,$17,7
-		copyTilemap	$FF0180,$C000,$27,$1B
-
-		if Revision=0
-		else
-			tst.b   (v_megadrive).w	; is console Japanese?
-			bmi.s   @loadpal
-			copyTilemap	$FF0A40,$C53A,2,1 ; hide "TM" with a white rectangle
-		endc
-
-	@loadpal:
-		moveq	#palid_Ending,d0
-		bsr.w	PalLoad2	; load Sega logo palette
-		move.w	#-$A,(v_pcyc_num).w
-		move.w	#0,(v_pcyc_time).w
-		move.w	#0,(v_pal_buffer+$12).w
-		move.w	#0,(v_pal_buffer+$10).w
-		move.w	(v_vdp_buffer1).w,d0
-		ori.b	#$40,d0
-		move.w	d0,(vdp_control_port).l
-
-Sega_WaitPal:
-		move.b	#2,(v_vbla_routine).w
-		bsr.w	WaitForVBla
-		bsr.w	PalCycle_Sega
-	;	bne.s	Sega_WaitPal
-
-		move.b	#$14,(v_vbla_routine).w
-		bsr.w	WaitForVBla
-		move.w	#$120,(v_demolength).w
-
-Sega_WaitEnd:
-		move.b	#2,(v_vbla_routine).w
-		bsr.w	WaitForVBla
-		tst.w	(v_demolength).w
-		beq.s	Sega_GotoTitle
-		andi.b	#btnStart,(v_jpadpress1).w ; is Start button pressed?
-		beq.s	Sega_WaitEnd	; if not, branch
-
-Sega_GotoTitle:
-		move.b	#id_Title,(v_gamemode).w ; go to title screen
-		rts	
-
-PalCycle_Sega:
-        subq.w  #1,v_pcyc_time
-        bne.s   @return
-        move.w  #3,v_pcyc_time
-        addq.w  #2,v_pcyc_num
-        cmpi.w  #@cycle_size,v_pcyc_num     ; past cycle's size?
-        bne.s   @jmp0               ; if not, branch
-        move.w  #0,v_pcyc_num           ; if yes, reset
-@jmp0:      move.w  v_pcyc_num,d0
-        lea @cycle(pc,d0.w),a0
-        rept    4               ; repeat next line 4 times      ; --> transfer 9 colors in total
-            move.l  (a0)+,(a1)+     ; copy 2 colors and increment pointers
-        endr
-        move.w  (a0),(a1)           ; copy last color
-@return:    rts
- 
-@cycle:     dc.w    $EC0
-        dc.w    $EA0, $E80, $E60, $E40, $E20, $E00
-        dc.w    $C00
-        dc.w    $E00, $E20, $E40, $E60, $E80, $EA0
-@cycle_end: ; remaining half copy before loop. Making it CPU-friendly
-        dc.w    $EC0
-        dc.w    $EA0, $E80, $E60, $E40, $E20, $E00
-        dc.w    $C00
-@cycle_size:=   @cycle_end-@cycle
-; End of function PalCycle_Sega
-
-GM_OtherSega:
         bsr.w   ClearPLC
         bsr.w   PaletteFadeOut
         lea ($C00004).l,a6
@@ -1930,6 +1831,48 @@ Palcycle_OtherSega:
         dc.w    $C00
 @cycle_size:=   @cycle_end-@cycle
 ; ===========================================================================
+
+GM_RadNexAff:
+    move.b  #$E4,d0             ; set music ID to "stop music"
+    jsr     Playsound_Special.w     ; play ID
+    jsr     PaletteFadeOut          ; fade palettes out
+    jsr     ClearScreen.w           ; clear the plane mappings
+    ; load art, mappings and the palette
+    lea     ($FF0000).l,a1          ; load dump location
+    lea     MAPS_RAD.l,a0          ; load compressed mappings address
+    move.w #320,d0                  ; prepare pattern index value to patch to mappings
+    jsr    EniDec.w                 ; decompress and dump
+    move.l #$60000003,d0            ; prepare VRAM write mode address (Plane B E000)
+    moveq  #$28-$01,d1              ; set map box draw width
+    moveq  #$1E-$01,d2              ; set map box draw height
+    bsr.w   TilemapToVRAM         ; flush mappings to VRAM
+    lea    ($FFC00004).l,a6         ; load VDP control port
+    move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
+    lea     ART_RAD.l,a0           ; load background art
+    jsr     NemDec              ; run NemDec to decompress art for display
+    lea Pal_RAD.l,a0        ; load this palette
+    lea ($FFFFFB80).l,a1        ; set as line 2
+    move.w  #$F,d0
+ 
+RadNexAff_PalLoop:
+    move.l  (a0)+,(a1)+         ; copy colours to buffer
+    move.l  (a0)+,(a1)+         ; ''
+    dbf d0,RadNexAff_PalLoop      ; repeat until done
+    jsr PaletteFadeIn          ; fade palette in
+    move.w  #3*60,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
+ 
+Rad_MainLoop:
+    move.b  #2,($FFFFF62A).w        ; set V-blank routine to run
+    jsr WaitForVBla          ; wait for V-blank (decreases "Demo_Time_left")
+    tst.b   ($FFFFF605).w           ; has player 1 pressed start button?
+    bmi.s   Rad_GotoTitle         ; if so, branch
+    tst.w   ($FFFFF614).w           ; has the delay time finished?
+    bne.s   Rad_MainLoop          ; if not, branch
+ 
+Rad_GotoTitle:
+    move.b  #$04,($FFFFF600).w      ; set the screen mode to Title Screen
+    rts                     ; return
+
 ; ===========================================================================
 
 ; ---------------------------------------------------------------------------
@@ -8282,6 +8225,12 @@ Eni_OtherSegaLogo:	incbin	"tilemaps\Sega Logo.bin" ; large Sega logo (mappings)
 	Eni_SegaLogo:	incbin	"tilemaps\Sega Logo (JP1).bin" ; large Sega logo (mappings)
 			even
 		endc
+	MAPS_RAD:	incbin	"tilemaps\Radnex Affiliate.bin"
+			even
+	ART_RAD:	incbin	"artnem\Radnex Affiliate.bin"
+			even
+	PAL_RAD:	incbin	"palette\Radnex Affiliate.bin"
+			even
 Eni_Title:	incbin	"tilemaps\Title Screen.bin" ; title screen foreground (mappings)
 		even
 Nem_TitleFg:	incbin	"artnem\Title Screen Foreground.bin"
