@@ -1957,15 +1957,16 @@ GM_Title:
 		move.w	#(7<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		bsr.w	LevelSizeLoad
-		bsr.w	DeformLayers
-		lea	(v_16x16).w,a1
-		lea	(Blk16_GHZ).l,a0 ; load	GHZ 16x16 mappings
-		move.w	#0,d0
-		bsr.w	EniDec
-		lea	(Blk256_MZ).l,a0 ; load GHZ 256x256 mappings
-		lea	(v_256x256).l,a1
-		bsr.w	KosDec
-		bsr.w	LevelLayoutLoad
+	; fuck this shit - MCT
+	;	bsr.w	DeformLayers
+	;	lea	(v_16x16).w,a1
+	;	lea	(Blk16_GHZ).l,a0 ; load	GHZ 16x16 mappings
+	;	move.w	#0,d0
+	;	bsr.w	EniDec
+	;	lea	(Blk256_MZ).l,a0 ; load GHZ 256x256 mappings
+	;	lea	(v_256x256).l,a1
+	;	bsr.w	KosDec
+	;	bsr.w	LevelLayoutLoad
 		bsr.w	PaletteFadeOut
 		disable_ints
 		bsr.w	ClearScreen
