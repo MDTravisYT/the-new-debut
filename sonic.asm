@@ -366,7 +366,7 @@ ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
 
 ptr_GM_OtherSega:	bra.w	GM_RadNexAff		; Sega Screen ($20)
 
-ptr_GM_Hacker:	bra.w	GM_Hacker		; Inaccessable Level! ($24)
+;ptr_GM_Hacker:	bra.w	GM_Hacker		; Inaccessable Level! ($24)
 
 		rts	
 ; ===========================================================================
@@ -1833,7 +1833,7 @@ Palcycle_OtherSega:
 ; ===========================================================================
 
 GM_RadNexAff:
-    move.b  #$E4,d0             ; set music ID to "stop music"
+    move.b  #$96,d0             ; set music ID 
     jsr     Playsound_Special.w     ; play ID
     jsr     PaletteFadeOut          ; fade palettes out
     jsr     ClearScreen.w           ; clear the plane mappings

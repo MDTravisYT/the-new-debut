@@ -81,6 +81,7 @@ ptr_mus92:	dc.l Music92
 ptr_mus93:	dc.l Music93
 ptr_mus94:	dc.l Music94
 ptr_mus95:	dc.l Music95
+ptr_mus96:	dc.l Music96
 	endc
 ptr_musend
 ; ---------------------------------------------------------------------------
@@ -2526,6 +2527,8 @@ Music93:	incbin	"sound/music/Mus93 - CSZ.bin"
 Music94:	incbin	"sound/music/Mus95 - CWZ3.bin"
 		even
 Music95:	incbin	"sound/music/output.bin"
+		even
+Music96:	incbin	"sound/music/RadNex.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound	effect pointers
