@@ -5676,6 +5676,12 @@ Map_Ring:	include	"_maps\Rings.asm"
 Map_Ring:		include	"_maps\Rings (JP1).asm"
 		endc
 Map_GRing:	include	"_maps\Giant Ring.asm"
+Map_Null:	dc.b	0, 0, 0, 0
+		dc.b	0, 0, 0, 0
+		dc.b	0, 0, 0, 0
+		dc.b	0, 0, 0, 0
+		dc.b	0, 0, 0, 0
+		even
 Map_Flash:	include	"_maps\Ring Flash.asm"
 		include	"_incObj\26 Monitor.asm"
 		include	"_incObj\2E Monitor Content Power-Up.asm"
