@@ -2502,9 +2502,9 @@ Music87:	incbin	"sound/music/Mus87 - Invincibility.bin"
 		even
 Music88:	incbin	"sound/music/Mus88 - Extra Life.bin"
 		even
-Music89:	incbin	"sound/music/Mus89 - Special Stage.bin"
+Music89:	include	"sound/music/Mus89 - Special Stage.asm"
 		even
-Music8A:	incbin	"sound/music/Mus8A - Title Screen.bin"
+Music8A:	include	"sound/music/TOSTH.asm"
 		even
 Music8B:	incbin	"sound/music/Mus8B - Ending.bin"
 		even
@@ -2512,7 +2512,7 @@ Music8C:	incbin	"sound/music/Mus8C - Boss.bin"
 		even
 Music8D:	incbin	"sound/music/Mus8D - FZ.bin"
 		even
-Music8E:	incbin	"sound/music/Mus8E - Sonic Got Through.bin"
+Music8E:	include	"sound/music/Mus8E - Sonic Got Through.asm"
 		even
 Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
