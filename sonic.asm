@@ -11,6 +11,7 @@
 	include	"Constants.asm"
 	include	"Variables.asm"
 	include	"Macros.asm"
+	include "_smps2asm_inc.asm"
 
 EnableSRAM:	equ 0	; change to 1 to enable SRAM
 BackupSRAM:	equ 1
