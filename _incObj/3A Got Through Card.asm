@@ -172,7 +172,7 @@ Got_Display2:
 ; ---------------------------------------------------------------------------
 LevelOrder:
 		; Green Hill Zone
-		dc.b 0, 0	; Act 1
+		dc.b id_GHZ, 1	; Act 1
 		dc.b id_GHZ, 2	; Act 2
 		dc.b id_LZ, 0	; Act 3
 		dc.b 0, 0

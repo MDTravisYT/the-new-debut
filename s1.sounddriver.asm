@@ -2496,7 +2496,7 @@ Music84:	incbin	"sound/music/Mus84 - SLZ.bin"
 		even
 Music85:	incbin	"sound/music/Mus85 - SYZ.bin"
 		even
-Music86:	incbin	"sound/music/Mus86 - SBZ.bin"
+Music86:	include	"sound/music/Mus86 - SBZ.asm"
 		even
 Music87:	incbin	"sound/music/Mus87 - Invincibility.bin"
 		even
