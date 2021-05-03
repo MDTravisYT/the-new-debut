@@ -457,7 +457,7 @@ Mus86_SBZ_Voices:
 	smpsVcFeedback      $05
 	smpsVcUnusedBits    $00
 	smpsVcDetune        $03, $07, $07, $03
-	smpsVcCoarseFreq    $01, $01, $04, $06
+	smpsVcCoarseFreq    $01, $00, $04, $06
 	smpsVcRateScale     $00, $00, $00, $00
 	smpsVcAttackRate    $1D, $05, $04, $04
 	smpsVcAmpMod        $00, $00, $00, $00

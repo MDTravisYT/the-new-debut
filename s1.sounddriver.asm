@@ -1282,7 +1282,7 @@ FadeOutMusic:
 		jsr	StopSpecialSFX(pc)
 		move.b	#3,v_fadeout_delay(a6)			; Set fadeout delay to 3
 		move.b	#$28,v_fadeout_counter(a6)		; Set fadeout counter
-		clr.b	v_music_dac_track+TrackPlaybackControl(a6)	; Stop DAC track
+	;	clr.b	v_music_dac_track+TrackPlaybackControl(a6)	; Stop DAC track
 		clr.b	f_speedup(a6)				; Disable speed shoes tempo
 		rts	
 
@@ -1382,7 +1382,7 @@ FMSilenceAll:
 ; ---------------------------------------------------------------------------
 ; Sound_E4: StopSoundAndMusic:
 StopAllSound:
-		moveq	#$2B,d0		; Enable/disable DAC
+	;	moveq	#$2B,d0		; Enable/disable DAC
 		move.b	#$80,d1		; Enable DAC
 		jsr	WriteFMI(pc)
 		moveq	#$27,d0		; Timers, FM3/FM6 mode
@@ -2492,7 +2492,7 @@ Music82:	incbin	"sound/music/Mus82 - LZ.bin"
 		even
 Music83:	incbin	"sound/music/Mus83 - MZ.bin"
 		even
-Music84:	incbin	"sound/music/Mus84 - SLZ.bin"
+Music84:	include	"sound/music/Mus84 - SLZ.asm"
 		even
 Music85:	incbin	"sound/music/Mus85 - SYZ.bin"
 		even
