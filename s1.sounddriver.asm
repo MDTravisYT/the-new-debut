@@ -2591,7 +2591,7 @@ ptr_sndD0:	dc.l SoundD0
 ptr_specend
 SoundA0:	incbin	"sound/sfx/SndA0 - Jump.bin"
 		even
-SoundA1:	incbin	"sound/sfx/SndA1 - Lamppost.bin"
+SoundA1:	include	"sound/sfx/SndA1 - Lamppost.asm"
 		even
 SoundA2:	incbin	"sound/sfx/SndA2.bin"
 		even

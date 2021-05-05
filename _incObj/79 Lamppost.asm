@@ -118,7 +118,7 @@ Lamp_Twirl:	; Routine 6
 
 	@continue:
 		move.b	obAngle(a0),d0
-		subi.b	#$10,obAngle(a0)
+		subi.b	#$8,obAngle(a0)
 		subi.b	#$40,d0
 		jsr	(CalcSine).l
 		muls.w	#$C00,d1
