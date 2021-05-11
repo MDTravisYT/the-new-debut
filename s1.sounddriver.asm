@@ -714,37 +714,33 @@ PlaySegaSound:
 ; ---------------------------------------------------------------------------
 ; Sound_81to9F:
 Sound_PlayBGM:
-		cmpi.b	#bgm_ExtraLife,d7	; is the "extra life" music to be played?
-		bne.s	@bgmnot1up		; if not, branch
-		tst.b	f_1up_playing(a6)	; Is a 1-up music playing?
-		bne.w	@locdblret		; if yes, branch
-		lea	v_music_track_ram(a6),a5
-		moveq	#((v_music_track_ram_end-v_music_track_ram)/TrackSz)-1,d0	; 1 DAC + 6 FM + 3 PSG tracks
-; loc_71FE6:
-@clearsfxloop:
-		bclr	#2,(a5)			; Clear 'SFX is overriding' bit (TrackPlaybackControl)
-		adda.w	#TrackSz,a5
-		dbf	d0,@clearsfxloop
+		cmpi.b	#$88,d7
+		bne.s	@bgmnot1up
+		tst.b	$27(a6)
+		bne.w	@locdblret
+		lea	$40(a6),a5
+		moveq	#9,d0
 
-		lea	v_sfx_track_ram(a6),a5
-		moveq	#((v_sfx_track_ram_end-v_sfx_track_ram)/TrackSz)-1,d0	; 3 FM + 3 PSG tracks (SFX)
-; loc_71FF8:
-@cleartrackplayloop:
-		bclr	#7,(a5)			; Clear 'track is playing' bit (TrackPlaybackControl)
-		adda.w	#TrackSz,a5
-		dbf	d0,@cleartrackplayloop
+@noint:
+		bclr	#2,(a5)
+		adda.w	#$30,a5
+		dbf	d0,@noint
+		lea	$220(a6),a5
+		moveq	#5,d0
 
-		clr.b	v_sndprio(a6)		; Clear priority
+@loop0:
+		bclr	#7,(a5)					; does this disable sfx?
+		adda.w	#$30,a5
+		dbf	d0,@loop0
 		movea.l	a6,a0
-		lea	v_1up_ram_copy(a6),a1
-		move.w	#((v_music_track_ram_end-v_startofvariables)/4)-1,d0	; Backup $220 bytes: all variables and music track data
-; loc_72012:
-@backupramloop:
-		move.l	(a0)+,(a1)+
-		dbf	d0,@backupramloop
+		lea	$3A0(a6),a1
+		move.w	#$87,d0
 
-		move.b	#$80,f_1up_playing(a6)
-		clr.b	v_sndprio(a6)		; Clear priority again (?)
+@memcopy:
+		move.l	(a0)+,(a1)+
+		dbf	d0,@memcopy
+		move.b	#$80,$27(a6)
+		clr.b	0(a6)
 		bra.s	@bgm_loadMusic
 ; ===========================================================================
 ; loc_72024:
@@ -755,20 +751,20 @@ Sound_PlayBGM:
 @bgm_loadMusic:
 		jsr	InitMusicPlayback(pc)
 		movea.l	(Go_SpeedUpIndex).l,a4
-		subi.b	#bgm__First,d7
-		move.b	(a4,d7.w),v_speeduptempo(a6)
+		subi.b	#$81,d7
+		move.b	(a4,d7.w),$29(a6)
 		movea.l	(Go_MusicIndex).l,a4
 		lsl.w	#2,d7
-		movea.l	(a4,d7.w),a4		; a4 now points to (uncompressed) song data
+		movea.l	(a4,d7.w),a4
 		moveq	#0,d0
-		move.w	(a4),d0			; load voice pointer
-		add.l	a4,d0			; It is a relative pointer
-		move.l	d0,v_voice_ptr(a6)
-		move.b	5(a4),d0		; load tempo
-		move.b	d0,v_tempo_mod(a6)
-		tst.b	f_speedup(a6)
+		move.w	(a4),d0
+		add.l	a4,d0
+		move.l	d0,$18(a6)
+		move.b	5(a4),d0
+		move.b	d0,$28(a6)
+		tst.b	$2A(a6)
 		beq.s	@nospeedshoes
-		move.b	v_speeduptempo(a6),d0
+		move.b	$29(a6),d0
 ; loc_72068:
 @nospeedshoes:
 		move.b	d0,v_main_tempo(a6)
@@ -1183,6 +1179,7 @@ StopSFX:
 		; DANGER! there is a missing 'movea.l	a5,a3' here, without which the
 		; code is broken. It is dangerous to do a fade out when a GHZ waterfall
 		; is playing its sound!
+		movea.l	a5,a3
 		lea	v_spcsfx_fm4_track(a6),a5
 		movea.l	v_special_voice_ptr(a6),a1	; Get special voice pointer
 		bra.s	@gotfmpointer
@@ -1280,66 +1277,62 @@ StopSpecialSFX:
 FadeOutMusic:
 		jsr	StopSFX(pc)
 		jsr	StopSpecialSFX(pc)
-		move.b	#3,v_fadeout_delay(a6)			; Set fadeout delay to 3
-		move.b	#$28,v_fadeout_counter(a6)		; Set fadeout counter
-	;	clr.b	v_music_dac_track+TrackPlaybackControl(a6)	; Stop DAC track
-		clr.b	f_speedup(a6)				; Disable speed shoes tempo
-		rts	
+		move.b	#3,6(a6)
+		move.b	#$28,4(a6)
+		clr.b	$40(a6)
+		clr.b	$2A(a6)
+		rts
+; ---------------------------------------------------------------------------
 
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-; sub_72504:
 DoFadeOut:
-		move.b	v_fadeout_delay(a6),d0	; Has fadeout delay expired?
-		beq.s	@continuefade		; Branch if yes
-		subq.b	#1,v_fadeout_delay(a6)
-		rts	
-; ===========================================================================
-; loc_72510:
-@continuefade:
-		subq.b	#1,v_fadeout_counter(a6)	; Update fade counter
-		beq.w	StopAllSound			; Branch if fade is done
-		move.b	#3,v_fadeout_delay(a6)		; Reset fade delay
-		lea	v_music_fm_tracks(a6),a5
-		moveq	#((v_music_fm_tracks_end-v_music_fm_tracks)/TrackSz)-1,d7	; 6 FM tracks
-; loc_72524:
-@fmloop:
-		tst.b	(a5)			; Is track playing? (TrackPlaybackControl)
-		bpl.s	@nextfm			; Branch if not
-		addq.b	#1,TrackVolume(a5)	; Increase volume attenuation
-		bpl.s	@sendfmtl		; Branch if still positive
-		bclr	#7,(a5)			; Stop track (TrackPlaybackControl)
-		bra.s	@nextfm
-; ===========================================================================
-; loc_72534:
-@sendfmtl:
+		move.b	6(a6),d0
+		beq.s	@dotick
+		subq.b	#1,6(a6)
+		rts
+; ---------------------------------------------------------------------------
+
+@dotick:
+		subq.b	#1,4(a6)
+		beq.w	StopAllSound
+		move.b	#3,6(a6)
+		lea	$70(a6),a5
+		moveq	#5,d7
+
+@loopfm:
+		tst.b	(a5)
+		bpl.s	@nofm
+		addq.b	#1,9(a5)
+		bpl.s	@updatefm
+		bclr	#7,(a5)
+		bra.s	@nofm
+; ---------------------------------------------------------------------------
+
+@updatefm:
 		jsr	SendVoiceTL(pc)
-; loc_72538:
-@nextfm:
-		adda.w	#TrackSz,a5
-		dbf	d7,@fmloop
 
-		moveq	#((v_music_psg_tracks_end-v_music_psg_tracks)/TrackSz)-1,d7	; 3 PSG tracks
-; loc_72542:
-@psgloop:
-		tst.b	(a5)			; Is track playing? (TrackPlaybackControl)
-		bpl.s	@nextpsg		; branch if not
-		addq.b	#1,TrackVolume(a5)	; Increase volume attenuation
-		cmpi.b	#$10,TrackVolume(a5)	; Is it greater than $F?
-		blo.s	@sendpsgvol		; Branch if not
-		bclr	#7,(a5)			; Stop track (TrackPlaybackControl)
-		bra.s	@nextpsg
-; ===========================================================================
-; loc_72558:
-@sendpsgvol:
-		move.b	TrackVolume(a5),d6	; Store new volume attenuation
+@nofm:
+		adda.w	#$30,a5
+		dbf	d7,@loopfm
+		moveq	#2,d7
+
+@looppsg:
+		tst.b	(a5)
+		bpl.s	@nopsg
+		addq.b	#1,9(a5)
+		cmpi.b	#$10,9(a5)
+		bcs.s	@updatpsg
+		bclr	#7,(a5)
+		bra.s	@nopsg
+; ---------------------------------------------------------------------------
+
+@updatpsg:
+		move.b	9(a5),d6
 		jsr	SetPSGVolume(pc)
-; loc_72560:
-@nextpsg:
-		adda.w	#TrackSz,a5
-		dbf	d7,@psgloop
 
-		rts	
+@nopsg:
+		adda.w	#$30,a5
+		dbf	d7,@looppsg
+		rts
 ; End of function DoFadeOut
 
 

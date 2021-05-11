@@ -114,7 +114,8 @@ loc_E0:
 	endif
 ConsoleName:	dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 Date:		dc.b "MCT 2021        " ; Copyright holder and release date (generally year)
-Title_Local:	dc.b "SONIC DEBUT BY MCTRAVISYT                       " ; Domestic name
+Title_Local:	dc.b "SONIC DEBUT BY MCTRAVISYT " ; Domestic name
+		incbin "buildtime.txt"
 Title_Int:	dc.b "SONIC DEBUT BY MCTRAVISYT                       " ; International name
 Serial:		if Revision=0
 		dc.b "GM XXXXXXXX-XX"   ; Serial/version number (Rev 0)
@@ -1426,6 +1427,8 @@ FadeOut_DecColour:
 
 PaletteWhiteIn:
 		move.w	#$003F,(v_pfade_start).w ; start position = 0; size = $40
+		
+PaletteWhiteIn_Alt:
 		moveq	#0,d0
 		lea	(v_pal_dry).w,a0
 		move.b	(v_pfade_start).w,d0
@@ -2562,6 +2565,8 @@ GM_Level:
 
 	Level_NoMusicFade:
 		bsr.w	ClearPLC
+		subq.w	#1,(v_palchgspeed).w
+		move.w	#2,(v_palchgspeed).w
 		bsr.w	PaletteFadeOut
 		tst.w	(f_demo).w	; is an ending sequence demo running?
 		bmi.s	Level_ClrRam	; if yes, branch
@@ -2799,9 +2804,13 @@ Level_Delay:
 		move.b	#8,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		dbf	d1,Level_DelayLoop
+		
+		cmp.b	#8, (v_zone)
+		beq		@CSZTitle
 
 		move.w	#$202F,(v_pfade_start).w ; fade in 2nd, 3rd & 4th palette lines
 		bsr.w	PalFadeIn_Alt
+	@cont:
 		tst.w	(f_demo).w	; is an ending sequence demo running?
 		bmi.s	Level_ClrCardArt ; if yes, branch
 		addq.b	#2,(v_objspace+$80+obRoutine).w ; make title card move
@@ -2809,6 +2818,13 @@ Level_Delay:
 		addq.b	#4,(v_objspace+$100+obRoutine).w
 		addq.b	#4,(v_objspace+$140+obRoutine).w
 		bra.s	Level_StartGame
+		rts
+		
+	@CSZTitle:
+		move.w	#$202F,(v_pfade_start).w ; fade in 2nd, 3rd & 4th palette lines
+		bsr.w	PaletteWhiteIn_Alt
+		jsr @cont
+		rts
 ; ===========================================================================
 
 Level_ClrCardArt:

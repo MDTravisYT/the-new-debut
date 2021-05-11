@@ -89,6 +89,7 @@ id_SYZ:		equ 4
 id_SBZ:		equ 5
 id_EndZ:	equ 6
 id_IMZ:		equ 7
+id_CSZ:		equ 8
 
 ; Colours
 cBlack:		equ $000		; colour black
