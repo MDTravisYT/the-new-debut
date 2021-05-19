@@ -368,7 +368,7 @@ ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
 
 ptr_GM_OtherSega:	bra.w	GM_RadNexAff		; Sega Screen ($20)
 
-;ptr_GM_Hacker:	bra.w	GM_Hacker		; Inaccessable Level! ($24)
+ptr_GM_Hacker:	bra.w	GM_SimpleCreds		; Credits ($24)
 
 		rts	
 ; ===========================================================================
@@ -1874,6 +1874,47 @@ Rad_MainLoop:
     bne.s   Rad_MainLoop          ; if not, branch
  
 Rad_GotoTitle:
+    move.b  #$04,($FFFFF600).w      ; set the screen mode to Title Screen
+    rts                     ; return
+	
+GM_SimpleCreds:
+    move.b  #$91,d0             ; set music ID 
+    jsr     Playsound_Special.w     ; play ID
+    jsr     PaletteFadeOut          ; fade palettes out
+    jsr     ClearScreen.w           ; clear the plane mappings
+    ; load art, mappings and the palette
+    lea     ($FF0000).l,a1          ; load dump location
+    lea     MAPS_CRED.l,a0          ; load compressed mappings address
+    move.w #320,d0                  ; prepare pattern index value to patch to mappings
+    jsr    EniDec.w                 ; decompress and dump
+    move.l #$60000003,d0            ; prepare VRAM write mode address (Plane B E000)
+    moveq  #$28-$01,d1              ; set map box draw width
+    moveq  #$1E-$01,d2              ; set map box draw height
+    bsr.w   TilemapToVRAM         ; flush mappings to VRAM
+    lea    ($FFC00004).l,a6         ; load VDP control port
+    move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
+    lea     ART_CRED.l,a0           ; load background art
+    jsr     NemDec              ; run NemDec to decompress art for display
+    lea Pal_CRED.l,a0        ; load this palette
+    lea ($FFFFFB80).l,a1        ; set as line 2
+    move.w  #$F,d0
+ 
+Creds_PalLoop:
+    move.l  (a0)+,(a1)+         ; copy colours to buffer
+    move.l  (a0)+,(a1)+         ; ''
+    dbf d0,Creds_PalLoop      ; repeat until done
+    jsr PaletteFadeIn          ; fade palette in
+    move.w  #147*60,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
+ 
+Creds_MainLoop:
+    move.b  #2,($FFFFF62A).w        ; set V-blank routine to run
+    jsr WaitForVBla          ; wait for V-blank (decreases "Demo_Time_left")
+    tst.b   ($FFFFF605).w           ; has player 1 pressed start button?
+    bmi.s   Creds_GotoTitle         ; if so, branch
+    tst.w   ($FFFFF614).w           ; has the delay time finished?
+    bne.s   Creds_MainLoop          ; if not, branch
+ 
+Creds_GotoTitle:
     move.b  #$04,($FFFFF600).w      ; set the screen mode to Title Screen
     rts                     ; return
 
@@ -8253,6 +8294,12 @@ Eni_OtherSegaLogo:	incbin	"tilemaps\Sega Logo.bin" ; large Sega logo (mappings)
 	ART_RAD:	incbin	"artnem\Radnex Affiliate.bin"
 			even
 	PAL_RAD:	incbin	"palette\Radnex Affiliate.bin"
+			even
+	MAPS_CRED:	incbin	"tilemaps\Credits.bin"
+			even
+	ART_CRED:	incbin	"artnem\Credits.bin"
+			even
+	PAL_CRED:	incbin	"palette\Credits.bin"
 			even
 Eni_Title:	incbin	"tilemaps\Title Screen.bin" ; title screen foreground (mappings)
 		even

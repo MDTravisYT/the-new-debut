@@ -149,7 +149,7 @@ Got_NextLevel:	; Routine $A
 		move.w	d0,(v_zone).w	; set level number
 		tst.w	d0
 		bne.s	Got_ChkSS
-		move.b	#$20,(v_gamemode).w
+		move.b	#$24,(v_gamemode).w
 		bra.s	Got_Display2
 ; ===========================================================================
 
@@ -174,7 +174,7 @@ LevelOrder:
 		; Green Hill Zone
 		dc.b id_GHZ, 1	; Act 1
 		dc.b id_GHZ, 2	; Act 2
-		dc.b id_LZ, 0	; Act 3
+		dc.b 0, 0	; Act 3
 		dc.b 0, 0
 
 		; Labyrinth Zone

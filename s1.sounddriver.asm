@@ -2511,7 +2511,7 @@ Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
 Music90:	incbin	"sound/music/prelude.bin"
 		even
-Music91:	incbin	"sound/music/Mus91 - Credits.bin"
+Music91:	include	"sound/music/Mus91 - Credits.asm"
 		even
 Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
 		even
