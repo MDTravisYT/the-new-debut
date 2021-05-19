@@ -39,14 +39,13 @@ Over_Move:	; Routine 2
 		beq.s	Over_SetWait	; if yes, branch
 		bcs.s	Over_UpdatePos
 		neg.w	d1
-
 	Over_UpdatePos:
 		add.w	d1,obX(a0)	; change item's position
 		bra.w	DisplaySprite
 ; ===========================================================================
 
 Over_SetWait:
-		move.w	#720,obTimeFrame(a0) ; set time delay to 12 seconds
+		move.w	#18*60,obTimeFrame(a0) ; set time delay to 12 seconds
 		addq.b	#2,obRoutine(a0)
 		rts	
 ; ===========================================================================
@@ -82,3 +81,4 @@ Over_ResetLvl:
 
 Over_Display:
 		bra.w	DisplaySprite
+		rts

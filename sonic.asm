@@ -2220,7 +2220,6 @@ LevSel_Level:
 		move.w	d0,(v_zone).w	; set level number
 
 PlayLevel:
-		sfx	sfx_Lamppost,0,0,0	; play lamppost sound
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
 		move.b	#3,(v_lives).w	; set lives to 3
 		moveq	#0,d0

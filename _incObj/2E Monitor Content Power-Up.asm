@@ -130,8 +130,14 @@ Pow_ChkRings:
 
 Pow_ChkS:
 		cmpi.b	#7,d0		; does monitor contain 'S'?
-		bne.s	Pow_ChkEnd
+		bne.s	Pow_ChkGoggle
 		nop	
+	
+Pow_ChkGoggle:	
+		cmpi.b	#8,d0		; does monitor contain 'S'?
+		bne.s	Pow_ChkGoggle
+		music	sfx_Signpost,1,0,0	; play ring sound
+		move.b	#$FF,(v_airbyte)
 
 Pow_ChkEnd:
 		rts			; 'S' and goggles monitors do nothing
