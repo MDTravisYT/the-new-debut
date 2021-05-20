@@ -2587,7 +2587,7 @@ MusicList:
 		else
 		dc.b bgm_IMZ	; IMZ
 		dc.b bgm_CSZ	; CSZ
-		dc.b $94	; CWZ3
+		dc.b $8D	; CWZ3
 		endc
 		even
 ; ===========================================================================
