@@ -95,14 +95,9 @@ Pow_ChkInvinc:
 		move.b	#3,(v_objspace+$280+obAnim).w
 		move.b	#id_ShieldItem,(v_objspace+$2C0).w ; load stars object ($3804)
 		move.b	#4,(v_objspace+$2C0+obAnim).w
-	;	tst.b	(f_lockscreen).w ; is boss mode on?
-	;	bra.s	Pow_NoMusic	; if yes, branch
-	;	if Revision=0
-	;	else
-	;		cmpi.w	#$C,(v_air).w
-	;		bls.s	Pow_NoMusic
-	;	endc
-	;	music	bgm_Invincible,1,0,0 ; play invincibility music
+		tst.b	(f_lockscreen).w ; is boss mode on?
+		bra.s	Pow_NoMusic	; if yes, branch
+		music	bgm_Invincible,1,0,0 ; play invincibility music
 ; ===========================================================================
 
 Pow_NoMusic:
@@ -131,11 +126,17 @@ Pow_ChkRings:
 Pow_ChkS:
 		cmpi.b	#7,d0		; does monitor contain 'S'?
 		bne.s	Pow_ChkGoggle
-		nop	
+		music	$AB,1,0,0	; play ring sound
 	
 Pow_ChkGoggle:	
 		cmpi.b	#8,d0		; does monitor contain 'S'?
-		bne.s	Pow_ChkGoggle
+		bne.s	Pow_ChkCycle
+		music	sfx_Signpost,1,0,0	; play ring sound
+		move.b	#$FF,(v_airbyte)
+		
+Pow_ChkCycle:	
+		cmpi.b	#$A,d0		; does monitor contain 'S'?
+		bne.s	Pow_ChkEnd
 		music	sfx_Signpost,1,0,0	; play ring sound
 		move.b	#$FF,(v_airbyte)
 

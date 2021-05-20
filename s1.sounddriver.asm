@@ -58,6 +58,30 @@ SpeedUpIndex:
 ; Music	Pointers
 ; ---------------------------------------------------------------------------
 MusicIndex:
+	if IsDemo=1
+ptr_mus81:	dc.l Music81
+ptr_mus82:	dc.l MusicLOCK
+ptr_mus83:	dc.l MusicLOCK
+ptr_mus84:	dc.l MusicLOCK
+ptr_mus85:	dc.l MusicLOCK
+ptr_mus86:	dc.l MusicLOCK
+ptr_mus87:	dc.l Music87
+ptr_mus88:	dc.l Music88
+ptr_mus89:	dc.l Music89
+ptr_mus8A:	dc.l Music8A
+ptr_mus8B:	dc.l MusicLOCK
+ptr_mus8C:	dc.l Music8C
+ptr_mus8D:	dc.l MusicLOCK
+ptr_mus8E:	dc.l Music8E
+ptr_mus8F:	dc.l Music8F
+ptr_mus90:	dc.l Music90
+ptr_mus91:	dc.l Music91
+ptr_mus92:	dc.l MusicLOCK
+ptr_mus93:	dc.l MusicLOCK
+ptr_mus94:	dc.l MusicLOCK
+ptr_mus95:	dc.l Music95
+ptr_mus96:	dc.l Music96
+	else
 ptr_mus81:	dc.l Music81
 ptr_mus82:	dc.l Music82
 ptr_mus83:	dc.l Music83
@@ -75,8 +99,6 @@ ptr_mus8E:	dc.l Music8E
 ptr_mus8F:	dc.l Music8F
 ptr_mus90:	dc.l Music90
 ptr_mus91:	dc.l Music91
-	if IsDemo=1
-	else
 ptr_mus92:	dc.l Music92
 ptr_mus93:	dc.l Music93
 ptr_mus94:	dc.l Music94
@@ -2478,7 +2500,8 @@ Kos_Z80:
 		dc.w (((SegaPCM_End-SegaPCM)&$FF)<<8)+(((SegaPCM_End-SegaPCM)&$FF00)>>8)	; ... the size of the Sega PCM (little endian)
 		incbin	"sound\z80.bin", $B5, $16AB
 		even
-
+MusicLOCK:	incbin	"sound/music/Mus94 - Test Track.bin"
+		even
 Music81:	incbin	"sound/music/Mus81 - GHZ.bin"
 		even
 Music82:	incbin	"sound/music/Mus82 - LZ.bin"
@@ -2604,7 +2627,7 @@ SoundA9:	incbin	"sound/sfx/SndA9 - SS Item.bin"
 		even
 SoundAA:	incbin	"sound/sfx/SndAA - Splash.bin"
 		even
-SoundAB:	incbin	"sound/sfx/SndAB.bin"
+SoundAB:	include	"sound/sfx/heart.asm"
 		even
 SoundAC:	incbin	"sound/sfx/SndAC - Hit Boss.bin"
 		even

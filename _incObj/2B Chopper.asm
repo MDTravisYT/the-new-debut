@@ -18,7 +18,7 @@ chop_origY:	equ $30
 Chop_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Chop,obMap(a0)
-		move.w	#$47B,obGfx(a0)
+		move.w	#$247B,obGfx(a0)
 		move.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#9,obColType(a0)

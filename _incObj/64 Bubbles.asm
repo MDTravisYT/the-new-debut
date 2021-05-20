@@ -80,10 +80,10 @@ Bub_ChkWater:	; Routine 4
 		beq.s	@display	; if not, branch
 
 		bsr.w	ResumeMusic	; cancel countdown music
-		sfx	sfx_Bubble,0,0,0	; play collecting bubble sound
+	;	sfx	sfx_Bubble,0,0,0	; play collecting bubble sound
 		lea	(v_player).w,a1
-		clr.w	obVelX(a1)
-		clr.w	obVelY(a1)
+	;	clr.w	obVelX(a1)
+	;	clr.w	obVelY(a1)
 	;	clr.w	obInertia(a1)	; stop Sonic
 		move.b	#id_GetAir,obAnim(a1) ; use bubble-collecting animation
 		move.w	#$23,$3E(a1)
@@ -218,7 +218,7 @@ Bub_BblMaker:	; Routine $A
 
 ; 0 = small bubble, 1 =	large bubble
 
-Bub_BblTypes:	dc.b 0,	1, 0, 0, 0, 0, 1, 0, 0,	0, 0, 1, 0, 1, 0, 0, 1,	0
+Bub_BblTypes:	dc.b 0,	1, 0, 0, 1, 0, 1, 0, 0,	1, 0, 1, 0, 1, 0, 0, 1,	0
 
 ; ===========================================================================
 

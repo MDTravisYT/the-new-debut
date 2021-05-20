@@ -88,7 +88,7 @@ SonAni_Leap2:	dc.b $F, $35, $36, afBack, 1
 		even
 SonAni_Surf:	dc.b $3F, fr_surf, afEnd
 		even
-SonAni_GetAir:	dc.b $B, $45, $45, fr_walk16, afChange, id_Walk
+SonAni_GetAir:	dc.b $B, $45, $45, 5, 6, 7, afChange, id_Walk
 		even
 SonAni_Burnt:	dc.b $20, $30, afEnd
 		even
