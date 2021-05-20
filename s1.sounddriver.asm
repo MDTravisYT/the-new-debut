@@ -2483,7 +2483,7 @@ Music81:	incbin	"sound/music/Mus81 - GHZ.bin"
 		even
 Music82:	incbin	"sound/music/Mus82 - LZ.bin"
 		even
-Music83:	incbin	"sound/music/Mus83 - MZ.bin"
+Music83:	include	"sound/music/Mus83 - MZ.asm"
 		even
 Music84:	include	"sound/music/Mus84 - SLZ.asm"
 		even
@@ -2503,7 +2503,7 @@ Music8B:	incbin	"sound/music/Mus8B - Ending.bin"
 		even
 Music8C:	incbin	"sound/music/Mus8C - Boss.bin"
 		even
-Music8D:	incbin	"sound/music/Mus8D - FZ.bin"
+Music8D:	include	"sound/music/Mus8D - FZ.asm"
 		even
 Music8E:	include	"sound/music/Mus8E - Sonic Got Through.asm"
 		even
