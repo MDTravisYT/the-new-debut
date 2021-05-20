@@ -147,7 +147,7 @@ DLE_GHZ3boss:
 		subq.b	#2,(v_dle_routine).w
 
 loc_6EB0:
-		cmpi.w	#$2960,(v_screenposx).w
+		cmpi.w	#$2900,(v_screenposx).w
 		bcs.s	locret_6EE8
 		bsr.w	FindFreeObj
 		bne.s	loc_6ED0

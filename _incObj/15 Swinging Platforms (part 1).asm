@@ -109,7 +109,7 @@ Swing_Main:	; Routine 0
 		move.w	#$43AA,obGfx(a0)
 		move.b	#1,obFrame(a0)
 		move.b	#2,obPriority(a0)
-	;	move.b	#$81,obColType(a0) ; make object hurt when touched
+		move.b	#$81,obColType(a0) ; make object hurt when touched
 
 	@not1X:
 		cmpi.b	#id_SBZ,(v_zone).w ; is zone SBZ?
