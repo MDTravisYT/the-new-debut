@@ -11,7 +11,7 @@ Ani_Bub:	dc.w @small-Ani_Bub
 @small:		dc.b $E, 0, 1, 2, afRoutine ; small bubble forming
 		even
 @medium:	dc.b $E, 1, 2, 3, 4, afRoutine ; medium bubble forming
-@large:		dc.b $E, 2, 3, 4, 5, 6,	afRoutine ; full size bubble forming
+@large:		dc.b $7, 2, 3, 4, 5, 6,	afRoutine ; full size bubble forming
 		even
 @incroutine:	dc.b 4,	afRoutine	; increment routine counter (no animation)
 @burst:		dc.b 4,	6, 7, 8, afRoutine ; large bubble bursts

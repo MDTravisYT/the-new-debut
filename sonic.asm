@@ -1878,7 +1878,7 @@ Rad_GotoTitle:
     rts                     ; return
 	
 GM_SimpleCreds:
-    move.b  #$91,d0             ; set music ID 
+    move.b  #$90,d0             ; set music ID 
     jsr     Playsound_Special.w     ; play ID
     jsr     PaletteFadeOut          ; fade palettes out
     jsr     ClearScreen.w           ; clear the plane mappings
@@ -8059,6 +8059,7 @@ Map_SS_R:	include	"_maps\SS R Block.asm"
 Map_SS_Glass:	include	"_maps\SS Glass Block.asm"
 Map_SS_Up:	include	"_maps\SS UP Block.asm"
 Map_SS_Down:	include	"_maps\SS DOWN Block.asm"
+Map_SS_GOAL:	include	"_maps\SS GOAL Block.asm"
 		include	"_maps\SS Chaos Emeralds.asm"
 
 		include	"_incObj\02 Force Debug.asm"

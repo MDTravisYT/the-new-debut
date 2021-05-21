@@ -75,10 +75,10 @@
 	dc.w $6142
 	dc.l Map_Bump
 	dc.w $23B
-	dc.l Map_SS_R
-	dc.w $570
-	dc.l Map_SS_R
+	dc.l Map_SS_GOAL ; goal
 	dc.w $251
+	dc.l Map_SS_GOAL ; red goal
+	dc.w $25A
 	dc.l Map_SS_R
 	dc.w $370
 	dc.l Map_SS_Up
