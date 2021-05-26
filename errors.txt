@@ -2,7 +2,7 @@
 SN 68k version 2.53
 
 D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\_INC\PALETTE POINTERS.ASM(26) : Warning : Size of pal_levels ($7) does not match ZoneCount ($6).
-D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\SONIC.ASM(1817) : Warning : Forward reference to redefinable symbol
+D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\SONIC.ASM(1816) : Warning : Forward reference to redefinable symbol
 
 Assembly completed.
-0 error(s) from 69312 lines in 3.30 seconds
+0 error(s) from 69294 lines in 10.39 seconds

@@ -284,7 +284,7 @@ PLC_CSZ2:	dc.w ((PLC_CSZ2end-PLC_CSZ2-2)/6)-1
 ; Pattern load cues - title card
 ; ---------------------------------------------------------------------------
 PLC_TitleCard:	dc.w ((PLC_TitleCardend-PLC_TitleCard-2)/6)-1
-		plcm	Nem_TitleCard, $B000
+		plcm	Nem_TitleCard, $AF40
 	PLC_TitleCardend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - act 3 boss

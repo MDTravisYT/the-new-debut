@@ -40,3 +40,24 @@ JayKuriN
 Inferno
 	Air roll code
 	Health system code
+	
+-- Real thing starts here: --
+SONIC DEBUT CREDITS
+
+Creator:
+  MCTravisYT
+
+Arts: 
+  BladeOfChaos
+  ManiacShard
+  PepsiJuan666
+  Gastón A. Guzman (Title Screen)
+  Joshyflip (GHZ Cloud)
+
+Unsorted:
+  CaioST
+  Miles "Tails" Power
+  JayKuriN
+  Inferno
+  Joey the Rabbit
+  
