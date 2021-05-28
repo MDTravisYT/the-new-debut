@@ -57,6 +57,7 @@ PLC_Main:	dc.w ((PLC_Mainend-PLC_Main-2)/6)-1
 		plcm	Nem_Lives, $FA80	; lives	counter
 		plcm	Nem_Ring, $F640 	; rings
 		plcm	Nem_Points, $F2E0	; points from enemy
+		plcm	Nem_Key, $D800 	; key
 	PLC_Mainend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - standard block 2

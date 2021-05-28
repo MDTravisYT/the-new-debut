@@ -28,7 +28,7 @@ OptimiseSound:	equ 0	; change to 1 to optimise sound queuing
 
 ; 0 is full game
 ; 1 is demo mode
-IsDemo:	equ 1
+IsDemo:	equ 0
 
 ; ===========================================================================
 
@@ -5724,13 +5724,11 @@ Map_Missile:	include	"_maps\Buzz Bomber Missile.asm"
 		include	"_incObj\25 & 37 Rings.asm"
 		include	"_incObj\4B Giant Ring.asm"
 		include	"_incObj\7C Ring Flash.asm"
+		include	"_incObj\04 Key.asm"
 
 		include	"_anim\Rings.asm"
-		if Revision=0
 Map_Ring:	include	"_maps\Rings.asm"
-		else
-Map_Ring:		include	"_maps\Rings (JP1).asm"
-		endc
+Map_Key:	include	"_maps\Key.asm"
 Map_GRing:	include	"_maps\Giant Ring.asm"
 Map_Null:	dc.b	0, 0, 0, 0
 		dc.b	0, 0, 0, 0
@@ -8505,6 +8503,8 @@ Nem_Hud:	incbin	"artnem\HUD.bin"	; HUD (rings, time, score)
 Nem_Lives:	incbin	"artnem\HUD - Life Counter Icon.bin"
 		even
 Nem_Ring:	incbin	"artnem\Rings.bin"
+		even
+Nem_Key:	incbin	"artnem\Key.bin"
 		even
 Nem_Monitors:	incbin	"artnem\Monitors.bin"
 		even

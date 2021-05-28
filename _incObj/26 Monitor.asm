@@ -40,10 +40,10 @@ Mon_Main:	; Routine 0
 		move.b	obSubtype(a0),obAnim(a0)
 
 Mon_Solid:	; Routine 2
-		move.b	ob2ndRout(a0),d0 ; is monitor set to fall?
-		beq.s	@normal		; if not, branch
-		subq.b	#2,d0
-		bne.s	@fall
+	;	move.b	ob2ndRout(a0),d0 ; is monitor set to fall?
+	;	beq.s	@normal		; if not, branch
+	;	subq.b	#2,d0
+	;	bne.s	@fall
 
 		; 2nd Routine 2
 		moveq	#0,d1

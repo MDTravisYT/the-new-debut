@@ -4,7 +4,7 @@
 ptr_SonicPlayer:	dc.l SonicPlayer	; $01
 ptr_Obj02:		dc.l ForceDebug
 ptr_Obj03:		dc.l Hacker
-ptr_Obj04:		dc.l NullObject
+ptr_Obj04:		dc.l Key
 ptr_Obj05:		dc.l NullObject
 ptr_Obj06:		dc.l NullObject
 ptr_Obj07:		dc.l Imp
