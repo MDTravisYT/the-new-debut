@@ -2693,7 +2693,7 @@ SoundCA:	incbin	"sound/sfx/SndCA - Enter SS.bin"
 		even
 SoundCB:	incbin	"sound/sfx/SndCB - Wall Smash.bin"
 		even
-SoundCC:	incbin	"sound/sfx/SndCC - Spring.bin"
+SoundCC:	include	"sound/sfx/SndCC - Spring.asm"
 		even
 SoundCD:	incbin	"sound/sfx/SndCD - Switch.bin"
 		even

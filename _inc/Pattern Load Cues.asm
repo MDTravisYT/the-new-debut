@@ -93,7 +93,6 @@ PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
 		plcm	Nem_Buzz, $8880		; buzz bomber enemy
 		plcm	Nem_Chopper, $8F60	; chopper enemy
 		plcm	Nem_Imp, $94C0	; imp enemy
-		plcm	Nem_Motobug, $9E00	; motobug enemy
 		plcm	Nem_Spikes, $A360	; spikes
 		plcm	Nem_HSpring, $A460	; horizontal spring
 		plcm	Nem_VSpring, $A660	; vertical spring
