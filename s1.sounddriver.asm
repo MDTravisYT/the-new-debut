@@ -34,7 +34,7 @@ PSG9:		incbin	"sound/psg/psg9.bin"
 ; their "correct" sped-up main tempos to the list.
 ; byte_71A94:
 SpeedUpIndex:
-		dc.b 7		; GHZ
+		dc.b $12		; GHZ
 		dc.b $72	; LZ
 		dc.b $73	; MZ
 		dc.b $26	; SLZ
@@ -2502,7 +2502,7 @@ Kos_Z80:
 		even
 MusicLOCK:	incbin	"sound/music/Mus94 - Test Track.bin"
 		even
-Music81:	incbin	"sound/music/Mus81 - GHZ.bin"
+Music81:	include	"sound/music/Mus81 - GHZ.asm"
 		even
 Music82:	incbin	"sound/music/Mus82 - LZ.bin"
 		even
@@ -2679,7 +2679,7 @@ SoundC3:	incbin	"sound/sfx/SndC3 - Giant Ring.bin"
 		even
 SoundC4:	incbin	"sound/sfx/SndC4 - Bomb.bin"
 		even
-SoundC5:	incbin	"sound/sfx/SndC5 - Cash Register.bin"
+SoundC5:	include	"sound/sfx/SndC5 - Cash Register.asm"
 		even
 SoundC6:	incbin	"sound/sfx/SndC6 - Ring Loss.bin"
 		even
@@ -2695,7 +2695,7 @@ SoundCB:	incbin	"sound/sfx/SndCB - Wall Smash.bin"
 		even
 SoundCC:	include	"sound/sfx/SndCC - Spring.asm"
 		even
-SoundCD:	incbin	"sound/sfx/SndCD - Switch.bin"
+SoundCD:	include	"sound/sfx/SndCD - Switch.asm"
 		even
 SoundCE:	incbin	"sound/sfx/SndCE - Ring Left Speaker.bin"
 		even

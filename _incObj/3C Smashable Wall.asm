@@ -50,7 +50,7 @@ Smash_Solid:	; Routine 2
 		cmpi.w	#$480,d0	; is Sonic's speed $480 or higher?
 		bcs.s	@donothing	; if not, branch
 		move.w	smash_speed(a0),obVelX(a1)
-		addq.w	#4,obX(a1)
+		addq.w	#8,obX(a1)
 		lea	(Smash_FragSpd1).l,a4 ;	use fragments that move	right
 		move.w	obX(a0),d0
 		cmp.w	obX(a1),d0	; is Sonic to the right	of the block?

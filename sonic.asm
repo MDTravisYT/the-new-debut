@@ -2289,7 +2289,6 @@ LevSel_Ptrs:
 		dc.b id_LZ, 0
 		dc.b id_LZ, 1
 		dc.b id_LZ, 2
-		dc.b id_LZ, 3
 		dc.b id_MZ, 0
 		dc.b id_MZ, 1
 		dc.b id_MZ, 2
@@ -2308,6 +2307,7 @@ LevSel_Ptrs:
 		dc.b $08, 0
 		dc.b $08, 1
 		dc.b $08, 2
+		dc.b id_GHZ, 0
 		dc.b $06, 0
 		dc.w $8000
 		even
