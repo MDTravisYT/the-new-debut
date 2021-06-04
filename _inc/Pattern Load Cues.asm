@@ -167,7 +167,9 @@ PLC_MZ2:	dc.w ((PLC_MZ2end-PLC_MZ2-2)/6)-1
 ; ---------------------------------------------------------------------------
 PLC_IMZ:	dc.w ((PLC_IMZ2-PLC_IMZ-2)/6)-1
 		plcm	Nem_IMZ, 0		; GHZ main patterns
-
+		plcm	Nem_Spikes, $A360	; spikes
+		plcm	Nem_HSpring, $A460	; horizontal spring
+		plcm	Nem_VSpring, $A660	; vertical spring
 
 PLC_IMZ2:	dc.w ((PLC_IMZ2end-PLC_IMZ2-2)/6)-1
 		plcm	Nem_ImzCube, $5700	; green	stone block

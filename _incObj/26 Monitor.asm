@@ -17,13 +17,13 @@ Mon_Index:	dc.w Mon_Main-Mon_Index
 
 Mon_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
-		move.b	#$E,obHeight(a0)
-		move.b	#$E,obWidth(a0)
+		move.b	#$D,obHeight(a0)
+		move.b	#$D,obWidth(a0)
 		move.l	#Map_Monitor,obMap(a0)
 		move.w	#$680,obGfx(a0)
 		move.b	#4,obRender(a0)
 		move.b	#3,obPriority(a0)
-		move.b	#$F,obActWid(a0)
+		move.b	#$E,obActWid(a0)
 		lea	(v_objstate).w,a2
 		moveq	#0,d0
 		move.b	obRespawnNo(a0),d0

@@ -1998,7 +1998,7 @@ GM_Title:
 		move.w	#0,(v_debuguse).w ; disable debug item placement mode
 		move.w	#0,(f_demo).w	; disable debug mode
 		move.w	#0,($FFFFFFEA).w ; unused variable
-		move.w	#(7<<8),(v_zone).w	; set level to GHZ (00)
+		move.w	#(6<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		bsr.w	LevelSizeLoad
 	; fuck this shit - MCT
