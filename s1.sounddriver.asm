@@ -119,8 +119,8 @@ SoundPriorities:
 		dc.b     $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $81
 		dc.b $90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90,$90	; $90
 		dc.b $80,$70,$70,$70,$70,$70,$70,$70,$70,$70,$68,$70,$70,$70,$60,$70	; $A0
-		dc.b $70,$60,$70,$60,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$7F	; $B0
-		dc.b $60,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70	; $C0
+		dc.b $70,$60,$70,$60,$90,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$7F	; $B0
+		dc.b $60,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$70,$90,$70	; $C0
 		dc.b $80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80,$80	; $D0
 		dc.b $90,$90,$90,$90,$90                                            	; $E0
 
@@ -2611,7 +2611,7 @@ SoundA1:	include	"sound/sfx/SndA1 - Lamppost.asm"
 		even
 SoundA2:	incbin	"sound/sfx/SndA2.bin"
 		even
-SoundA3:	incbin	"sound/sfx/SndA3 - Death.bin"
+SoundA3:	include	"sound/sfx/SndA3 - Death.asm"
 		even
 SoundA4:	incbin	"sound/sfx/SndA4 - Skid.bin"
 		even
@@ -2699,7 +2699,7 @@ SoundCD:	include	"sound/sfx/SndCD - Switch.asm"
 		even
 SoundCE:	incbin	"sound/sfx/SndCE - Ring Left Speaker.bin"
 		even
-SoundCF:	incbin	"sound/sfx/SndCF - Signpost.bin"
+SoundCF:	include	"sound/sfx/SndCF - Signpost.asm"
 		even
 SoundD0:	incbin	"sound/sfx/SndD0 - Waterfall.bin"
 		even

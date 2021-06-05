@@ -66,7 +66,7 @@ MDemo_On:
 		lea	(v_jpadhold1).w,a0
 		move.b	d0,d1
 		if Revision=0
-		move.b	(a0),d2
+		move.b -2(a0),d2
 		else
 			moveq	#0,d2
 		endc
@@ -89,10 +89,10 @@ MDemo_On:
 ; ---------------------------------------------------------------------------
 DemoDataPtr:	dc.l Demo_GHZ		; demos run after the title screen
 		dc.l Demo_GHZ
+		dc.l Demo_LZ
+		dc.l Demo_LZ
 		dc.l Demo_MZ
 		dc.l Demo_MZ
-		dc.l Demo_SYZ
-		dc.l Demo_SYZ
 		dc.l Demo_SS
 		dc.l Demo_SS
 

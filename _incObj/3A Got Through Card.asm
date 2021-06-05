@@ -123,7 +123,7 @@ Got_ChkBonus:
 		addq.b	#4,obRoutine(a0)
 
 Got_SetDelay:
-		move.w	#180,obTimeFrame(a0) ; set time delay to 3 seconds
+		move.w	#90,obTimeFrame(a0) ; set time delay to 3 seconds
 
 locret_C692:
 		rts	

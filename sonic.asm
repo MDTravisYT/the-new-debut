@@ -2235,7 +2235,7 @@ LevSel_Level_SS:
 		add.w	d0,d0
 		move.w	LevSel_Ptrs(pc,d0.w),d0 ; load level number
 		bmi.w	LevelSelect
-		cmpi.w	#$06*$100,d0	; check	if level is 0700 (Special Stage)
+		cmpi.w	#$09*$100,d0	; check	if level is 0700 (Special Stage)
 		bne.s	LevSel_Level	; if not, branch
 		move.b	#id_Special,(v_gamemode).w ; set screen mode to $10 (Special Stage)
 		clr.w	(v_zone).w	; clear	level
@@ -2307,8 +2307,8 @@ LevSel_Ptrs:
 		dc.b $08, 0
 		dc.b $08, 1
 		dc.b $08, 2
-		dc.b id_GHZ, 0
 		dc.b $06, 0
+		dc.b $09, 0
 		dc.w $8000
 		even
 ; ---------------------------------------------------------------------------
@@ -3084,8 +3084,8 @@ SignpostArtLoad:
 
 ; ===========================================================================
 Demo_GHZ:	incbin	"demodata\Intro - GHZ.bin"
+Demo_LZ:	incbin	"demodata\Intro - LZ.bin"
 Demo_MZ:	incbin	"demodata\Intro - MZ.bin"
-Demo_SYZ:	incbin	"demodata\Intro - SYZ.bin"
 Demo_SS:	incbin	"demodata\Intro - Special Stage.bin"
 ; ===========================================================================
 
