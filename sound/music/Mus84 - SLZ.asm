@@ -1,7 +1,7 @@
 Mus84_SLZ_Header:
 smpsHeaderStartSong = 1
 	smpsHeaderVoice     Mus84_SLZ_Voices
-	smpsHeaderChan      $06, $00
+	smpsHeaderChan      $06, $03
 	smpsHeaderTempo     $02, $0C
 
 	smpsHeaderDAC       Mus84_SLZ_DAC

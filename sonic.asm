@@ -1734,6 +1734,7 @@ Pal_SBZ3SonWat:	incbin	"palette\Sonic - SBZ3 Underwater.bin"
 Pal_SSResult:	incbin	"palette\Special Stage Results.bin"
 Pal_Continue:	incbin	"palette\Special Stage Continue Bonus.bin"
 Pal_Ending:	incbin	"palette\Ending.bin"
+Pal_CSZ:	incbin	"palette\Cosmic Space Zone.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	wait for VBlank routines to complete
@@ -1976,6 +1977,9 @@ GM_Title:
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
 		disable_ints
+		locVRAM	$0000
+		lea	(Nem_TitleBlank).l,a0 ;	load Sonic title screen	patterns
+		bsr.w	NemDec
 		locVRAM	$6700
 		lea	(Nem_TitleSonic).l,a0 ;	load Sonic title screen	patterns
 		bsr.w	NemDec
@@ -2326,7 +2330,7 @@ LevSelCode_US:	dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
 ; ===========================================================================
 
 PlayLevelC:
-		illegal
+		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal2>You didn't enter the right code.%<endl> %<endl>%<pal3>Please refer to the pinned message in the test DM for the right combination.%<endl>%<endl>%<pal0>If you're not apart of the tester%<endl>group, %<pal1>good luck%<pal0>.%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
 		rts
 
 ; ---------------------------------------------------------------------------
@@ -2368,6 +2372,12 @@ loc_33E4:
 		move.w	#0,(v_demonum).w ; reset demo number to	0
 
 loc_3422:
+		if IsDemo=1
+		else
+		cmp.b	#0, (f_levselcheat)
+		beq	PlayLevelC
+		endif
+
 		move.w	#1,(f_demo).w	; turn demo mode on
 		move.b	#id_Demo,(v_gamemode).w ; set screen mode to 08 (demo)
 		cmpi.w	#$600,d0	; is level number 0600 (special	stage)?
@@ -8218,6 +8228,8 @@ Eni_OtherSegaLogo:	incbin	"tilemaps\Sega Logo.bin" ; large Sega logo (mappings)
 			even
 	PAL_CRED:	incbin	"palette\Credits.bin"
 			even
+Nem_TitleBlank:	incbin	"artnem\Title Screen Blank Top VRAM.bin" ; title screen foreground (mappings)
+		even
 Eni_Title:	incbin	"tilemaps\Title Screen.bin" ; title screen foreground (mappings)
 		even
 Nem_TitleFg:	incbin	"artnem\Title Screen Foreground.bin"
@@ -9049,6 +9061,7 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 		dcb.b $63C,$FF
 		endc
 		;dcb.b ($10000-(*%$10000))-(EndOfRom-SoundDriver),$FF
+    include   "TitleLock.asm"
 	include "ErrorHandler.asm"
 SoundDriver:	include "s1.sounddriver.asm"
 

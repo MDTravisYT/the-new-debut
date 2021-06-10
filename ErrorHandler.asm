@@ -62,6 +62,9 @@ Line1111Emu:
 
 ErrorExcept:
 	__ErrorMessage "ERROR EXCEPTION", _eh_default
+	
+WrongComb:
+;	__ErrorMessage "%<pal2>You didn't enter the right code.                                            %<pal3>Please refer to the pinned message in the test DM for the right combination.                                      %<pal0>If you're not apart of the tester     group, %<pal1>good luck%<pal0>.", _eh_default
 
 
 

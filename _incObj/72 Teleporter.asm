@@ -216,24 +216,18 @@ loc_168A6:
 ; ===========================================================================
 Tele_Data:	dc.w @type00-Tele_Data, @type01-Tele_Data, @type02-Tele_Data
 		dc.w @type03-Tele_Data, @type04-Tele_Data, @type05-Tele_Data
-		dc.w @type06-Tele_Data, @type07-Tele_Data
-@type00:	dc.w 4,	$794, $98C
-@type01:	dc.w 4,	$94, $38C
-@type02:	dc.w $1C, $794,	$2E8
-		dc.w $7A4, $2C0, $7D0
-		dc.w $2AC, $858, $2AC
-		dc.w $884, $298, $894
-		dc.w $270, $894, $190
-@type03:	dc.w 4,	$894, $690
-@type04:	dc.w $1C, $1194, $470
-		dc.w $1184, $498, $1158
-		dc.w $4AC, $FD0, $4AC
-		dc.w $FA4, $4C0, $F94
-		dc.w $4E8, $F94, $590
-@type05:	dc.w 4,	$1294, $490
-@type06:	dc.w $1C, $1594, $FFE8
-		dc.w $1584, $FFC0, $1560
-		dc.w $FFAC, $14D0, $FFAC
-		dc.w $14A4, $FF98, $1494
-		dc.w $FF70, $1494, $FD90
-@type07:	dc.w 4,	$894, $90
+		dc.w @type06-Tele_Data, @type07-Tele_Data, @type07-Tele_Data
+@type00:	dc.w $28,	$1190, $0488, $114C, $04AC
+		dc.w	$10C0, $04AC, $103C, $04CC, $0FC4, $04CC, $0F40, $04AC
+		dc.w	$0EF0, $04AC, $0ECC, $04A4, $0E94, $04E0, $0E90, $0588
+@type01:	dc.w $20,	$0AC0, $05B0, $0A40, $05CC, $09C4, $05CC, $093C, $05AC
+		dc.w	$08F0, $05AC, $08CC, $05A4, $0894, $05E8, $0890, $0688
+@type02:	dc.w $18, $0794, $007C, $0758, $00AC, $06F4, $00AC, $06CC, $00A4
+		dc.w	$0694, $00E4, $0690, $0184
+@type03:	dc.w 4,	$0094, $0388
+@type04:	dc.w $2C, $1394, $0370, $13D0, $03AC, $142C, $03AC, $1450, $03A4
+		dc.w	$1494, $03DC, $1494, $0474, $14CC, $04AC, $1530, $04AC, $1550, $04A4
+		dc.w	$1594, $04E0, $1598, $0588
+@type05:	dc.w 4,	$1298, $0688
+@type06:	dc.w 4, $0994, $0084
+@type07:	dc.w 4,	$1794, $0788

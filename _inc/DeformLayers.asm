@@ -508,7 +508,7 @@ CSZ_Deform1:
 		swap	d0			; send to the left side of d0
 		move.w	($FFFFF708).w,d0	; load BG screen's X position
 		neg.w	d0			; negate (positive to negative)
-		asr.w	#6,d0			; divide by 64 (Slow down the scroll position)
+		asr.w	#5,d0			; divide by 64 (Slow down the scroll position)
 		move.w	#12-1,d1		; set number of scan lines to dump (minus 1 for dbf)
 CSZ_Deform2:
 		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
