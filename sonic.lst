@@ -1,3 +1,21 @@
+00000000 =00000000                  EnableSRAM:	equ 0	; change to 1 to enable SRAM
+00000000 =00000001                  BackupSRAM:	equ 1
+00000000 =00000003                  AddressSRAM:	equ 3	; 0 = odd+even; 2 = even only; 3 = odd only
+00000000                            
+00000000                            ; Change to 0 to build the original version of the game, dubbed REV00
+00000000                            ; Change to 1 to build the later vesion, dubbed REV01, which includes various bugfixes and enhancements
+00000000                            ; Change to 2 to build the version from Sonic Mega Collection, dubbed REVXB, which fixes the infamous "spike bug"
+00000000 =00000000                  Revision:	equ 0
+00000000                            
+00000000 =00000006                  ZoneCount:	equ 6	; discrete zones are: GHZ, MZ, SYZ, LZ, SLZ, and SBZ
+00000000                            
+00000000 =00000000                  OptimiseSound:	equ 0	; change to 1 to optimise sound queuing
+00000000                            
+00000000                            ; 0 is full game
+00000000                            ; 1 is demo mode
+00000000 =00000000                  IsDemo:	equ 0
+00000000                            
+00000000                                include "sonic.asm"
 00000000                            ;  =========================================================================
 00000000                            ; |           Sonic Debut for Sega Mega Drive                              |
 00000000                            ;  =========================================================================
@@ -2024,23 +2042,6 @@
 00000000                            	endm
 00000000                            
 00000000                            
-00000000                            
-00000000 =00000000                  EnableSRAM:	equ 0	; change to 1 to enable SRAM
-00000000 =00000001                  BackupSRAM:	equ 1
-00000000 =00000003                  AddressSRAM:	equ 3	; 0 = odd+even; 2 = even only; 3 = odd only
-00000000                            
-00000000                            ; Change to 0 to build the original version of the game, dubbed REV00
-00000000                            ; Change to 1 to build the later vesion, dubbed REV01, which includes various bugfixes and enhancements
-00000000                            ; Change to 2 to build the version from Sonic Mega Collection, dubbed REVXB, which fixes the infamous "spike bug"
-00000000 =00000000                  Revision:	equ 0
-00000000                            
-00000000 =00000006                  ZoneCount:	equ 6	; discrete zones are: GHZ, MZ, SYZ, LZ, SLZ, and SBZ
-00000000                            
-00000000 =00000000                  OptimiseSound:	equ 0	; change to 1 to optimise sound queuing
-00000000                            
-00000000                            ; 0 is full game
-00000000                            ; 1 is demo mode
-00000000 =00000000                  IsDemo:	equ 0
 00000000                            
 00000000                            ; ===========================================================================
 00000000                            
