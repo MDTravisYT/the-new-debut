@@ -1960,13 +1960,10 @@ GM_Title:
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
 		disable_ints
-		locVRAM	$0000
-		lea	(Nem_TitleBlank).l,a0 ;	load Sonic title screen	patterns
-		bsr.w	NemDec
 		locVRAM	$6700
 		lea	(Nem_TitleSonic).l,a0 ;	load Sonic title screen	patterns
 		bsr.w	NemDec
-		locVRAM	$4000
+		locVRAM	$5800
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
 	;	locVRAM	$A200
@@ -1988,16 +1985,15 @@ GM_Title:
 		move.w	#(6<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		bsr.w	LevelSizeLoad
-	; fuck this shit - MCT
-	;	bsr.w	DeformLayers
-	;	lea	(v_16x16).w,a1
-	;	lea	(Blk16_GHZ).l,a0 ; load	GHZ 16x16 mappings
-	;	move.w	#0,d0
-	;	bsr.w	EniDec
-	;	lea	(Blk256_MZ).l,a0 ; load GHZ 256x256 mappings
-	;	lea	(v_256x256).l,a1
-	;	bsr.w	KosDec
-	;	bsr.w	LevelLayoutLoad
+		bsr.w	DeformLayers
+		lea	(v_16x16).w,a1
+		lea	(Blk16_GHZ).l,a0 ; load	GHZ 16x16 mappings
+		move.w	#0,d0
+		bsr.w	EniDec
+		lea	(Blk256_GHZ).l,a0 ; load GHZ 256x256 mappings
+		lea	(v_256x256).l,a1
+		bsr.w	KosDec
+		bsr.w	LevelLayoutLoad
 		bsr.w	PaletteFadeOut
 		disable_ints
 		bsr.w	ClearScreen
@@ -2014,12 +2010,15 @@ GM_Title:
 
 		copyTilemap	$FF0000,$C208,$21,$15
 
-	;	locVRAM	0
-	;	lea	(Nem_GHZ).l,a0 ; load GHZ patterns
-	;	bsr.w	NemDec
+		locVRAM	0
+		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
+		bsr.w	NemDec
+		locVRAM	$5120
+		lea	(Nem_TitleBlank).l,a0 ;	load vram blanker
+		bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
-		locVRAM	$4000
+		locVRAM	$5800
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
 		sfx	bgm_Title,0,1,1	; play title screen music

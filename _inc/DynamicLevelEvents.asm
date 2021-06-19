@@ -277,7 +277,7 @@ loc_6FBA:
 		cmpi.w	#$700,(v_screenposx).w
 		bcs.s	locret_6FE8
 		move.w	#$220,(v_limitbtm1).w
-		cmpi.w	#$D00,(v_screenposx).w
+		cmpi.w	#$C00,(v_screenposx).w
 		bcs.s	locret_6FE8
 		move.w	#$340,(v_limitbtm1).w
 		cmpi.w	#$340,(v_screenposy).w
