@@ -2604,6 +2604,7 @@ ptr_sndend
 ; ---------------------------------------------------------------------------
 SpecSoundIndex:
 ptr_sndD0:	dc.l SoundD0
+;ptr_sndD1:	dc.l SoundD1
 ptr_specend
 SoundA0:	incbin	"sound/sfx/SndA0 - Jump.bin"
 		even
@@ -2703,6 +2704,8 @@ SoundCF:	include	"sound/sfx/SndCF - Signpost.asm"
 		even
 SoundD0:	incbin	"sound/sfx/SndD0 - Waterfall.bin"
 		even
+;SoundD1:	dc.b	0,	0
+;		even
 
 		; Don't let Sega sample cross $8000-byte boundary
 		; (DAC driver doesn't switch banks automatically)

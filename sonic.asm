@@ -2720,7 +2720,7 @@ Level_GetBgm:
 		bsr.w	PlaySound	; play music
 		move.b	#id_TitleCard,(v_objspace+$80).w ; load title card object
         move.w    #$D0,d0
-        jsr    (PlaySound_Special).l ;    play Sonic rolling sound
+        jsr    (PlaySound_Special).l ;    thingy to disable sound glitching
 
 Level_TtlCardLoop:
 		move.b	#$C,(v_vbla_routine).w

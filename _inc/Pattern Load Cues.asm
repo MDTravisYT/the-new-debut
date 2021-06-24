@@ -191,7 +191,7 @@ PLC_SLZ:	dc.w ((PLC_SLZ2-PLC_SLZ-2)/6)-1
 PLC_SLZ2:	dc.w ((PLC_SLZ2end-PLC_SLZ2-2)/6)-1
 		plcm	Nem_Seesaw, $6E80	; seesaw
 		plcm	Nem_Fan, $7400		; fan
-		plcm	Nem_Pylon, $7980	; foreground pylon
+	;	plcm	Nem_Pylon, $7980	; foreground pylon
 		plcm	Nem_SlzSwing, $7B80	; swinging platform
 		plcm	Nem_SlzCannon, $9B00	; fireball launcher
 		plcm	Nem_SlzSpike, $9E00	; spikeball

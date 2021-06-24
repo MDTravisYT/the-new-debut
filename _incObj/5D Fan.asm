@@ -28,7 +28,7 @@ Fan_Delay:	; Routine 2
 		bne.s	@blow		; if yes, branch
 		subq.w	#1,fan_time(a0)	; subtract 1 from time delay
 		bpl.s	@blow		; if time remains, branch
-		move.w	#120,fan_time(a0) ; set delay to 2 seconds
+		move.w	#119,fan_time(a0) ; set delay to 2 seconds
 		bchg	#0,fan_switch(a0) ; switch fan on/off
 		beq.s	@blow		; if fan is off, branch
 		move.w	#180,fan_time(a0) ; set delay to 3 seconds
@@ -79,9 +79,9 @@ Fan_Delay:	; Routine 2
 		bpl.s	@chkdel
 		move.b	#0,obTimeFrame(a0)
 		addq.b	#1,obAniFrame(a0)
-		cmpi.b	#3,obAniFrame(a0)
+		cmpi.b	#4,obAniFrame(a0)
 		bcs.s	@noreset
-		move.b	#0,obAniFrame(a0) ; reset after 4 frames
+		move.b	#1,obAniFrame(a0) ; reset after 4 frames
 
 	@noreset:
 		moveq	#0,d0
