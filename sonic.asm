@@ -2269,6 +2269,7 @@ PlayLevel:
 ; Level	select - level pointers
 ; ---------------------------------------------------------------------------
 LevSel_Ptrs:	
+	if IsDemo=0
 		dc.b id_GHZ, 0
 		dc.b id_GHZ, 1
 		dc.b id_GHZ, 2
@@ -2297,6 +2298,36 @@ LevSel_Ptrs:
 		dc.b $09, 0
 		dc.w $8000
 		even
+	else
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 1
+		dc.b id_GHZ, 2
+		dc.b id_LZ, 0
+		dc.b id_LZ, 1
+		dc.b id_LZ, 2
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $06, 0
+		dc.b $09, 0
+		dc.w $8000
+		even
+	endif
 ; ---------------------------------------------------------------------------
 ; Level	select codes
 ; ---------------------------------------------------------------------------
@@ -8554,6 +8585,12 @@ Blk16_GHZ:	incbin	"map16\GHZ.bin"
 Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
 		even
 Blk256_GHZ:	incbin	"map256\GHZ.bin"
+		even
+Blk16_Lock:	incbin	"map16\lockout.bin"
+		even
+Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
+		even
+Blk256_Lock:	incbin	"map256\lockout.bin"
 		even
 Blk16_LZ:	if IsDemo=1
 		else

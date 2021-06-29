@@ -2500,7 +2500,7 @@ Kos_Z80:
 		dc.w (((SegaPCM_End-SegaPCM)&$FF)<<8)+(((SegaPCM_End-SegaPCM)&$FF00)>>8)	; ... the size of the Sega PCM (little endian)
 		incbin	"sound\z80.bin", $B5, $16AB
 		even
-MusicLOCK:	incbin	"sound/music/Mus94 - Test Track.bin"
+MusicLOCK:	incbin	"sound/music/CHAPTER6.bin"
 		even
 Music81:	include	"sound/music/Mus81 - GHZ.asm"
 		even

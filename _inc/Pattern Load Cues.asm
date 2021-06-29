@@ -10,6 +10,7 @@ ptr_PLC_GameOver:	dc.w PLC_GameOver-ArtLoadCues
 PLC_Levels:
 ptr_PLC_GHZ:		dc.w PLC_GHZ-ArtLoadCues
 ptr_PLC_GHZ2:		dc.w PLC_GHZ2-ArtLoadCues
+ptr_PLC_lock:		dc.w PLC_lock-ArtLoadCues
 ptr_PLC_LZ:		dc.w PLC_LZ-ArtLoadCues
 ptr_PLC_LZ2:		dc.w PLC_LZ2-ArtLoadCues
 ptr_PLC_MZ:		dc.w PLC_MZ-ArtLoadCues
@@ -105,6 +106,9 @@ PLC_GHZ2:	dc.w ((PLC_GHZ2end-PLC_GHZ2-2)/6)-1
 		plcm	Nem_GhzWall1, $A1E0	; breakable wall
 		plcm	Nem_GhzWall2, $6980	; normal wall
 	PLC_GHZ2end:
+PLC_lock:	dc.w ((PLClockend-PLC_lock-2)/6)-1
+		plcm	Nem_lock, 0		; GHZ main patterns
+	PLCLockend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Labyrinth
 ; ---------------------------------------------------------------------------
@@ -451,6 +455,7 @@ plcid_Explode:		equ (ptr_PLC_Explode-ArtLoadCues)/2	; 2
 plcid_GameOver:		equ (ptr_PLC_GameOver-ArtLoadCues)/2	; 3
 plcid_GHZ:		equ (ptr_PLC_GHZ-ArtLoadCues)/2		; 4
 plcid_GHZ2:		equ (ptr_PLC_GHZ2-ArtLoadCues)/2	; 5
+plcid_lock:		equ (ptr_PLC_lock-ArtLoadCues)/2		; 4
 plcid_LZ:		equ (ptr_PLC_LZ-ArtLoadCues)/2		; 6
 plcid_LZ2:		equ (ptr_PLC_LZ2-ArtLoadCues)/2		; 7
 plcid_MZ:		equ (ptr_PLC_MZ-ArtLoadCues)/2		; 8

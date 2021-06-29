@@ -23,8 +23,8 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal
 	lhead	plcid_SLZ,	Nem_SLZ,	plcid_SLZ2,	Blk16_SLZ,	Blk256_SLZ,	bgm_SLZ,	palid_SLZ	; Star Light
 	lhead	plcid_SYZ,	Nem_SYZ,	plcid_SYZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SYZ	; Spring Yard
 	lhead	plcid_SBZ,	Nem_SBZ,	plcid_SBZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_SBZ2	; Scrap Brain
-	zonewarning LevelHeaders,$10
-	lhead	plcid_GHZ,		Nem_GHZ,	plcid_GHZ2,		Blk16_GHZ,	Blk256_GHZ,	bgm_GHZ,	palid_GHZ	; Ending
+;	zonewarning LevelHeaders,$10
+	lhead	plcid_lock,		Nem_lock,	plcid_lock,		Blk16_lock,	Blk256_lock,	bgm_GHZ,	palid_GHZ	; Ending
 	lhead	plcid_IMZ,		Nem_GHZ,	plcid_IMZ2,		Blk16_IMZ,	Blk256_IMZ,	bgm_SBZ,	palid_IMZ	; Ice Mountain
 	lhead	plcid_CSZ,	Nem_CSZ,	plcid_CSZ2,	Blk16_CSZ,	Blk256_CSZ,	bgm_SBZ,	palid_CSZ	; Cosmic Space
 	even
