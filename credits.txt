@@ -54,10 +54,10 @@ Arts:
   Gastón A. Guzman (Title Screen)
   Joshyflip (GHZ Cloud)
 
-Unsorted:
-  CaioST
-  Miles "Tails" Power
+Music:
   JayKuriN
-  Inferno
-  Joey the Rabbit
+  MCTravisYT
+  EmmaNerd (Prelude MIDI)
+  cardevero (Prelude)
+  THiN CRUST (Prelude)
   
