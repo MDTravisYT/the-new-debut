@@ -2144,6 +2144,8 @@ Tit_ChkLevSel:
 		beq.w	PlayLevelC	; if not, play level
 		endc
 
+		move.b	#1,(f_debugcheat).w ; enable debug mode
+		sfx	sfx_Ring,0,1,1	; play ring sound when code is entered
 		moveq	#palid_LevelSel,d0
 		bsr.w	PalLoad2	; load level select palette
 		lea	(v_hscrolltablebuffer).w,a1
@@ -2779,7 +2781,7 @@ Level_TtlCardLoop:
 		bsr.w	LZWaterFeatures
 		move.b	#id_SonicPlayer,(v_player).w ; load Sonic object
 		tst.w	(f_demo).w
-		bmi.s	Level_ChkDebug
+		bne.s	Level_ChkDebug
 		move.b	#id_HUD,(v_objspace+$40).w ; load HUD object
 
 Level_ChkDebug:
