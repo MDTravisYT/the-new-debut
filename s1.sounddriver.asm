@@ -2524,7 +2524,7 @@ Music8A:	include	"sound/music/TOSTH.asm"
 		even
 Music8B:	incbin	"sound/music/Mus8B - Ending.bin"
 		even
-Music8C:	incbin	"sound/music/Mus8C - Boss.bin"
+Music8C:	include	"sound/music/Mus8C - Boss.asm"
 		even
 Music8D:	include	"sound/music/Mus8D - FZ.asm"
 		even
