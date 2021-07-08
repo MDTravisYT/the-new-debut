@@ -5,4 +5,4 @@ D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\_INC\PALETTE POINT
 D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\SONIC.ASM(1800) : Warning : Forward reference to redefinable symbol
 
 Assembly completed.
-0 error(s) from 73851 lines in 0.17 seconds
+0 error(s) from 82877 lines in 0.17 seconds
