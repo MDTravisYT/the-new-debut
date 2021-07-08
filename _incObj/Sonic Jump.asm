@@ -60,6 +60,6 @@ locret_1348E:
 ; ===========================================================================
 
 loc_13490:
-		bset	#4,obStatus(a0)
+		move.b	#id_Roll,obAnim(a0) ; roll lock stupids!
 		rts	
 ; End of function Sonic_Jump

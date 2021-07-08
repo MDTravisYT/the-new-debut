@@ -21,10 +21,13 @@ loc_134AE:
 		bne.s	locret_134C2	; if yes, branch
 		move.w	d1,obVelY(a0)
 		
-VictoryAnimTest:
+AnimTests:
         tst.b   ($FFFFF5C0).w ; Has the victory animation flag been set?
-        beq.s   JumpFall ; If not, branch
-		move.b	#id_Leap2,obAnim(a0) ; use "victory" animation
+        beq.s   @rolltest ; If not, branch
+		rts
+	@rolltest:
+        cmpi.b  #id_Roll,obAnim(a0)      ; Are we rolling?
+        bne.s   JumpFall ; If not, branch
 
 locret_134C2:
 		rts	
