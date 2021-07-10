@@ -33,7 +33,7 @@ ptr_Pal_LZSonWater:	palp	Pal_LZSonWater,v_pal_dry,$10	; $F (15) - LZ Sonic under
 ptr_Pal_SBZ3SonWat:	palp	Pal_SBZ3SonWat,v_pal_dry,$10	; $10 (16) - SBZ3 Sonic underwater
 ptr_Pal_SSResult:	palp	Pal_SSResult,v_pal_dry,$40		; $11 (17) - special stage results
 ptr_Pal_Continue:	palp	Pal_Continue,v_pal_dry,$20		; $12 (18) - special stage results continue
-ptr_Pal_Ending:		palp	Pal_Sega2,v_pal_dry,$40		; $13 (19) - ending sequence
+ptr_Pal_Ending:		palp	Pal_Ending,v_pal_dry,$40		; $13 (19) - ending sequence
 ptr_Pal_CSZ:		palp	Pal_CSZ,v_pal_dry+$20,$30		; 8 - SYZ
 			even
 

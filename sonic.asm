@@ -1936,7 +1936,7 @@ GM_Title:
 		lea	(Nem_JapNames).l,a0 ; load Japanese credits
 		bsr.w	NemDec
 		locVRAM	$14C0
-		lea	(Nem_CreditText).l,a0 ;	load alphabet
+		lea	(Nem_TitleCard).l,a0 ;	load alphabet
 		bsr.w	NemDec
 		lea	($FF0000).l,a1
 		lea	(Eni_JapNames).l,a0 ; load mappings for	Japanese credits
@@ -1953,9 +1953,12 @@ GM_Title:
 		move.l	d0,(a1)+
 		dbf	d1,Tit_ClrPal	; fill palette with 0 (black)
 
-		moveq	#palid_Sonic,d0	; load Sonic's palette
+		moveq	#palid_Ending,d0	; load Sonic's palette
 		bsr.w	PalLoad1
-	;	move.b	#id_CreditsText,(v_objspace+$80).w ; load "SONIC TEAM PRESENTS" object
+	if IsDemo=0
+		move.b	#id_CreditsText,(v_objspace+$80).w ; load "SONIC TEAM PRESENTS" object
+	else
+	endif
 		jsr	(ExecuteObjects).l
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
@@ -3975,7 +3978,7 @@ GM_Credits:
 		dbf	d1,Cred_ClrObjRam ; clear object RAM
 
 		locVRAM	$B400
-		lea	(Nem_CreditText).l,a0 ;	load credits alphabet patterns
+		lea	(Nem_TitleCard).l,a0 ;	load credits alphabet patterns
 		bsr.w	NemDec
 
 		lea	(v_pal_dry_dup).w,a1
@@ -3985,7 +3988,7 @@ GM_Credits:
 		move.l	d0,(a1)+
 		dbf	d1,Cred_ClrPal ; fill palette with black
 
-		moveq	#palid_Sonic,d0
+		moveq	#palid_Ending,d0
 		bsr.w	PalLoad1	; load Sonic's palette
 		move.b	#id_CreditsText,(v_objspace+$80).w ; load credits object
 		jsr	(ExecuteObjects).l
