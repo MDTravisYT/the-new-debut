@@ -26,11 +26,19 @@ Card_CheckSBZ3:	; Routine 0
 		moveq	#5,d0		; load title card number 5 (SBZ)
 
 	Card_CheckFZ:
+		if IsDemo=0
 		move.w	d0,d2
 		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; check if level is FZ
 		bne.s	Card_LoadConfig
 		moveq	#6,d0		; load title card number 6 (FZ)
 		moveq	#$D,d2		; use "FINAL" mappings
+		else
+		move.w	d0,d2
+		cmpi.w	#(6<<8),(v_zone).w ; check if level is soMEWHERE ELSE
+		bne.s	Card_LoadConfig
+		moveq	#6,d0		; load title card number 6 (FZ)
+		moveq	#$7,d2		; use "FINAL" mappings
+		endif
 
 	Card_LoadConfig:
 		lea	(Card_ConData).l,a3

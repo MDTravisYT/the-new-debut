@@ -5819,7 +5819,11 @@ Map_Push:	include	"_maps\Pushable Blocks.asm"
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - zone title cards
 ; ---------------------------------------------------------------------------
-Map_Card:	include	"_maps\Title Cards.asm"
+Map_Card:	if IsDemo=0
+		include	"_maps\Title Cards.asm"
+		else
+		include	"_maps\Title Cards Demo.asm"
+		endif
 
 Map_Over:	include	"_maps\Game Over.asm"
 

@@ -2534,17 +2534,17 @@ Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
 Music90:	incbin	"sound/music/prelude.bin"
 		even
-Music91:	include	"sound/music/Mus91 - Credits.asm"
+Music91:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
 Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
 		even
 Music93:	incbin	"sound/music/Mus93 - CSZ.bin"
 		even
-Music94:	incbin	"sound/music/Mus95 - CWZ3.bin"
+Music94:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
-Music95:	incbin	"sound/music/output.bin"
+Music95:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
-Music96:	incbin	"sound/music/RadNex.bin"
+Music96:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound	effect pointers
