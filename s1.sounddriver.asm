@@ -2688,7 +2688,7 @@ SoundC7:	incbin	"sound/sfx/SndC7 - Chain Rising.bin"
 		even
 SoundC8:	incbin	"sound/sfx/SndC8 - Burning.bin"
 		even
-SoundC9:	incbin	"sound/sfx/SndC9 - Hidden Bonus.bin"
+SoundC9:	include	"sound/sfx/SndC9 - Error.asm"
 		even
 SoundCA:	incbin	"sound/sfx/SndCA - Enter SS.bin"
 		even

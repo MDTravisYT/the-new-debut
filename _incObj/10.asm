@@ -3,7 +3,6 @@
 ; ---------------------------------------------------------------------------
 
 WelcomeSign:
-		rts
         move.l    #Map_Welcome,obMap(a0)
         move.w    #$0300,obGfx(a0)
         move.b    #4,obRender(a0)

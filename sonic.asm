@@ -2344,6 +2344,8 @@ LevSelCode_US:	dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
 ; ===========================================================================
 
 PlayLevelC:
+		sfx	$C9,0,0,0 ; fade out music
+		jsr	ClearScreen
 		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>You didn't enter the right code.%<endl> %<endl>%<pal2>Please refer to the pinned message in the test DM for the right combination.%<endl>%<endl>%<pal3>If you're not apart of the tester%<endl>group, %<pal1>good luck%<pal0>.%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
 		rts
 
