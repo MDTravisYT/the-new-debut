@@ -1739,84 +1739,80 @@ WaitForVBla:
 		include	"_incObj\sub CalcAngle.asm"
 
 GM_Sega:
-        bsr.w   ClearPLC
-        bsr.w   PaletteFadeOut
-        lea ($C00004).l,a6
-        move.w  #$8004,(a6)
-        move.w  #$8200+(vram_fg>>10),(a6)   ; set foreground nametable address
-        move.w  #$8400+(vram_bg>>13),(a6)   ; set background nametable address
- ;       move.w  #$8700,(a6)         ; set background colour (palette entry 0)
-        move.w  #$8B00,(a6)         ; full-screen vertical scrolling
-        move.w  #$8134,(a6)         ; disable display
-        clr.b   (f_wtr_state).w
-        move    #$2700,sr
-        bsr.w   ClearScreen
-        locVRAM $20
-        lea (Nem_OtherSegaLogo).l,a0     ; load OtherSega logo patterns on tile #1
-        bsr.w   NemDec
-        lea ($FF0000).l,a1
-        lea (Eni_OtherSegaLogo).l,a0     ; load OtherSega logo mappings
-        moveq   #1,d0               ; start from tile #1
-        bsr.w   EniDec
-        copyTilemap $FF0000,(vram_bg+$404),((320/8)-1),((320/8)-1) ;not found
-        sfx $90,0,1,1          ; fade out music
- 
-;        tst.b   (v_megadrive).w         ; is console Japanese?
-;        bpl.s   @jmp0               ; if yes, branch
-        locVRAM (vram_fg+$634),4(a6)        ; set position to write to..
-;        move.l  #$00310032,(a6)         ; and write "TM"
-@jmp0:      move.w  #$EEE,v_pal_dry+$02
-        move.w  #-2,v_pcyc_num          ; minus size of an entry
-        move.w  #1,(v_pcyc_time).w
- 
-        lea v_pal_dry+$04,a1
-        bsr Palcycle_OtherSega
-        move.w  #$8174,$C00004          ; enable display
-;        bsr.w   PaletteFadeIn
-    ;    sfx $90,0,1,1          ; play "OtherSega" sound
-        move.w  #10*30,(v_demolength).w      ; stay for 3 seconds
- 
-OtherSega_WaitEnd:
-        move.b  #2,(v_vbla_routine).w
-        bsr.w   WaitForVBla
-        lea v_pal_dry+$04,a1
-        bsr Palcycle_OtherSega
-        tst.w   (v_demolength).w
-        beq.s   OtherSega_GotoTitle
-        andi.b  #btnStart,(v_jpadpress1).w  ; is Start button pressed?
-        beq.s   OtherSega_WaitEnd            ; if not, branch
- 
-OtherSega_GotoTitle:
-	;	sfx	$C3,0,1,1	; play warp sound
-	;	bsr.w	PaletteWhiteOut
-        move.b  #$04,(v_gamemode).w
-        rts
- 
-Palcycle_OtherSega:
-        subq.w  #1,v_pcyc_time
-        bne.s   @return
-        move.w  #3,v_pcyc_time
-        addq.w  #2,v_pcyc_num
-        cmpi.w  #@cycle_size,v_pcyc_num     ; past cycle's size?
-        bne.s   @jmp0               ; if not, branch
-        move.w  #0,v_pcyc_num           ; if yes, reset
-@jmp0:      move.w  v_pcyc_num,d0
-        lea @cycle(pc,d0.w),a0
-        rept    4               ; repeat next line 4 times      ; --> transfer 9 colors in total
-            move.l  (a0)+,(a1)+     ; copy 2 colors and increment pointers
-        endr
-        move.w  (a0),(a1)           ; copy last color
-@return:    rts
- 
-@cycle:     dc.w    $EC0
-        dc.w    $EA0, $E80, $E60, $E40, $E20, $E00
-        dc.w    $C00
-        dc.w    $E00, $E20, $E40, $E60, $E80, $EA0
-@cycle_end: ; remaining half copy before loop. Making it CPU-friendly
-        dc.w    $EC0
-        dc.w    $EA0, $E80, $E60, $E40, $E20, $E00
-        dc.w    $C00
-@cycle_size:=   @cycle_end-@cycle
+		sfx	$E0,0,1,1
+		bsr.w	ClearPLC
+		bsr.w	PaletteFadeOut
+		lea	($C00004).l,a6
+		move.w	#$8004,(a6)
+		move.w	#$8230,(a6)
+		move.w	#$8407,(a6)
+		move.w	#$8700,(a6)
+		move.w	#$8B00,(a6)
+		move.w	(v_vdp_buffer1).w,d0
+		andi.b	#$BF,d0
+		move.w	d0,($C00004).l
+
+loc_24BC:
+		bsr.w	ClearScreen
+		move.l	#$40000000,($C00004).l
+		lea	(Nem_OtherSegaLogo).l,a0
+		bsr.w	NemDec
+		lea	((v_256x256)&$FFFFFF).l,a1
+		lea	(Eni_OtherSegaLogo).l,a0
+		move.w	#0,d0
+		bsr.w	EniDec
+		copyTilemap $FF0000,(vram_bg+$404),((320/8)-1),((320/8)-1) ;not found
+		move.l	#$461C0003,d0
+		moveq	#$B,d1
+		moveq	#3,d2
+		bsr.w	TilemapToVRAM
+		moveq	#0,d0
+		bsr.w	PalLoad1
+		move.w	#$80,(v_pcyc_num).w
+		move.w	#0,($FFFFF662).w
+		move.w	#0,($FFFFF660).w
+		move.w	#10*30,(v_demolength).w
+		move.w	(v_vdp_buffer1).w,d0
+		move.w  #$EEE,v_pal_dry+$02
+		ori.b	#$40,d0
+		move.w	d0,($C00004).l
+		sfx	$90,0,1,1
+
+loc_2528:
+		move.b	#2,(v_vbla_routine).w
+		bsr.w	WaitForVBla
+		bsr.w	sub_1A3A
+		tst.w	(v_demolength).w
+		beq.s	loc_2544
+		andi.b	#$80,(v_jpadpress1).w
+		beq.s	loc_2528
+
+loc_2544:
+		move.b	#4,(v_gamemode).w
+		rts
+		
+sub_1A3A:
+		subq.w	#1,($FFFFF634).w
+		bpl.s	locret_1A68
+		move.w	#3,($FFFFF634).w
+		move.w	($FFFFF632).w,d0
+		bmi.s	locret_1A68
+		subq.w	#2,($FFFFF632).w
+		lea	(word_1A6A).l,a0
+		lea	((v_pal_dry+4)).w,a1
+		adda.w	d0,a0
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.l	(a0)+,(a1)+
+		move.w	(a0)+,(a1)+
+
+locret_1A68:
+		rts
+; ---------------------------------------------------------------------------
+word_1A6A:	incbin "palette/Sega.pal"
+		even
 ; ===========================================================================
 
 GM_RadNexAff:
@@ -1966,7 +1962,7 @@ GM_Title:
 		locVRAM	$6700
 		lea	(Nem_TitleSonic).l,a0 ;	load Sonic title screen	patterns
 		bsr.w	NemDec
-		locVRAM	$5800
+		locVRAM	$4000
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
 	;	locVRAM	$A200
@@ -1990,10 +1986,10 @@ GM_Title:
 		bsr.w	LevelSizeLoad
 		bsr.w	DeformLayers
 		lea	(v_16x16).w,a1
-		lea	(Blk16_GHZ).l,a0 ; load	GHZ 16x16 mappings
+		lea	(Blk16_Lock).l,a0 ; load	GHZ 16x16 mappings
 		move.w	#0,d0
 		bsr.w	EniDec
-		lea	(Blk256_GHZ).l,a0 ; load GHZ 256x256 mappings
+		lea	(Blk256_Lock).l,a0 ; load GHZ 256x256 mappings
 		lea	(v_256x256).l,a1
 		bsr.w	KosDec
 		bsr.w	LevelLayoutLoad
@@ -2014,14 +2010,14 @@ GM_Title:
 		copyTilemap	$FF0000,$C208,$21,$15
 
 		locVRAM	0
-		lea	(Nem_GHZ).l,a0 ; load GHZ patterns
+		lea	(Nem_Lock).l,a0 ; load GHZ patterns
 		bsr.w	NemDec
-		locVRAM	$5120
-		lea	(Nem_TitleBlank).l,a0 ;	load vram blanker
-		bsr.w	NemDec
+	;	locVRAM	$5120
+	;	lea	(Nem_TitleBlank).l,a0 ;	load vram blanker
+	;	bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
-		locVRAM	$5800
+		locVRAM	$4000
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
 		sfx	bgm_Title,0,1,1	; play title screen music
@@ -8821,7 +8817,7 @@ Level_Index:
 		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
 		zonewarning Level_Index,24
 		; Ending
-		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
+		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
 		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
 		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
@@ -8924,7 +8920,7 @@ byte_6A2F8:	dc.b 0,	0, 0, 0
 byte_6A2FC:	dc.b 0,	0, 0, 0
 Level_End:	incbin	"levels\ending.bin"
 		even
-byte_6A320:	dc.b 0,	0, 0, 0
+byte_6A320:	incbin	"levels\endingbg.bin"
 Level_CSZ1:	incbin	"levels\csz1.bin"
 		even
 Level_CSZbg:	incbin	"levels\cszbg.bin"
