@@ -1771,7 +1771,7 @@ loc_24BC:
 		move.w	#$80,(v_pcyc_num).w
 		move.w	#0,($FFFFF662).w
 		move.w	#0,($FFFFF660).w
-		move.w	#10*30,(v_demolength).w
+		move.w	#11*30,(v_demolength).w
 		move.w	(v_vdp_buffer1).w,d0
 		move.w  #$EEE,v_pal_dry+$02
 		ori.b	#$40,d0
