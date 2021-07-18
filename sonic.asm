@@ -6726,8 +6726,9 @@ loc_12E5C:
 ; ===========================================================================
 
 Sonic_AirRoll:
-        cmpi.b  #$13,$1C(a0)      ; are we already in rolling animation
-        cmpi.b  #2,$1C(a0)      ; are we already in rolling animation
+        cmpi.b  #$1F,$1C(a0)      ; are we already in rolling animation
+        cmpi.b  #$21,$1C(a0)      ; are we already in rolling animation
+        cmpi.b  #$2,$1C(a0)      ; are we already in rolling animation
         beq.s   AirRoll_Return   ; if yes, branch
 		
 AirRoll_CheckBtn:
@@ -9096,8 +9097,10 @@ SoundDriver:	include "s1.sounddriver.asm"
 
 ; end of 'ROM'
 		even
-	
-;	incbin "stuffs\S2NA.7z"
+	if IsDemo=1
+	incbin "stuffs\s1built.7z"
+	else
+	endif
 EndOfRom:
 
 
