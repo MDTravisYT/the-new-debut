@@ -2674,7 +2674,7 @@ SoundC0:	incbin	"sound/sfx/SndC0 - Basaran Flap.bin"
 		even
 SoundC1:	incbin	"sound/sfx/SndC1 - Break Item.bin"
 		even
-SoundC2:	incbin	"sound/sfx/SndC2 - Drown Warning.bin"
+SoundC2:	include	"sound/sfx/SndC2 - Drown Warning.asm"
 		even
 SoundC3:	incbin	"sound/sfx/SndC3 - Giant Ring.bin"
 		even

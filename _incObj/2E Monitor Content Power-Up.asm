@@ -131,7 +131,7 @@ Pow_ChkS:
 Pow_ChkGoggle:	
 		cmpi.b	#8,d0		; does monitor contain 'S'?
 		bne.s	Pow_ChkCycle
-		music	sfx_Signpost,1,0,0	; play ring sound
+		music	$C2,1,0,0	; play ring sound
 		move.b	#$FF,(v_airbyte)
 		
 Pow_ChkCycle:	
