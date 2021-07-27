@@ -2544,7 +2544,7 @@ Music94:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
 Music95:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
-Music96:	incbin	"sound/music/Mus90 - Continue Screen.bin"
+Music96:	incbin	"sound/music/LOCKOUTNORM.bin"
 		even
 ; ---------------------------------------------------------------------------
 ; Sound	effect pointers
@@ -2650,7 +2650,7 @@ SoundB4:	incbin	"sound/sfx/SndB4 - Bumper.bin"
 		even
 SoundB5:	incbin	"sound/sfx/SndB5 - Ring.bin"
 		even
-SoundB6:	incbin	"sound/sfx/SndB6 - Spikes Move.bin"
+SoundB6:	include	"sound/sfx/SndB6 - Spikes Move.asm"
 		even
 SoundB7:	incbin	"sound/sfx/SndB7 - Rumbling.bin"
 		even
@@ -2684,7 +2684,7 @@ SoundC5:	include	"sound/sfx/SndC5 - Cash Register.asm"
 		even
 SoundC6:	incbin	"sound/sfx/SndC6 - Ring Loss.bin"
 		even
-SoundC7:	incbin	"sound/sfx/SndC7 - Chain Rising.bin"
+SoundC7:	include	"sound/sfx/SndC7 - Chain Rising.asm"
 		even
 SoundC8:	incbin	"sound/sfx/SndC8 - Burning.bin"
 		even

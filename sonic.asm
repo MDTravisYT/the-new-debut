@@ -2607,11 +2607,12 @@ MusicList:
 		dc.b bgm_SLZ	; SLZ
 		dc.b bgm_SYZ	; SYZ
 		dc.b bgm_SBZ	; SBZ
-		dc.b bgm_FZ	; Ending
+		dc.b $96	; Ending
 		if IsDemo=1
 		else
 		dc.b bgm_IMZ	; IMZ
 		dc.b bgm_CSZ	; CSZ
+		dc.b $8D	; CWZ3
 		dc.b $8D	; CWZ3
 		endc
 		even
@@ -3023,6 +3024,8 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_GHZ ; Pointer for Ending is missing by default.
 		dc.l Col_IMZ
 		dc.l Col_CSZ
+		dc.l Col_GHZ ; Pointer for Ending is missing by default.
+		dc.l Col_GHZ ; Pointer for Ending is missing by default.
 
 		include	"_inc\Oscillatory Routines.asm"
 
@@ -8678,6 +8681,12 @@ Blk256_CSZ:if IsDemo=1
 		incbin	"map256\CSZ.bin"
 		endc
 		even
+Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
+		even
+Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
+		even
+Blk256_LockN:	incbin	"map256\lockoutNORM.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -8835,6 +8844,11 @@ Level_Index:
 		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
 		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
 		
+		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
+		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+		
 
 Level_GHZ1:	incbin	"levels\ghz1.bin"
 		even
@@ -8980,6 +8994,14 @@ ObjPos_Index:
 		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index		
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index		
 		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index

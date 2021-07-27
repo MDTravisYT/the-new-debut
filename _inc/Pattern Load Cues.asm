@@ -107,7 +107,7 @@ PLC_GHZ2:	dc.w ((PLC_GHZ2end-PLC_GHZ2-2)/6)-1
 		plcm	Nem_GhzWall2, $6980	; normal wall
 	PLC_GHZ2end:
 PLC_lock:	dc.w ((PLClockend-PLC_lock-2)/6)-1
-		plcm	Nem_lock, 0		; GHZ main patterns
+		plcm	Nem_lockN, 0		; GHZ main patterns
 	PLCLockend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - Labyrinth

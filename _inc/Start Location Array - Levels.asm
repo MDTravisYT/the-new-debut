@@ -46,5 +46,14 @@
 		dc.w	$80,$A8
 		dc.w	$80,$A8
 		dc.w	$80,$A8
+		
+		dc.w	$80,$A8
+		dc.w	$80,$A8
+		dc.w	$80,$A8
+		dc.w	$80,$A8		
+		dc.w	$80,$A8
+		dc.w	$80,$A8
+		dc.w	$80,$A8
+		dc.w	$80,$A8
 
 		even

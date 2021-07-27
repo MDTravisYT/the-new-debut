@@ -42,6 +42,7 @@ Deform_Index:	dc.w Deform_GHZ_TTS-Deform_Index, Deform_LZ-Deform_Index
 		zonewarning Deform_Index,2
 		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
 		dc.w Deform_CSZ-Deform_Index, Deform_SBZ-Deform_Index
+		dc.w Deform_CSZ-Deform_Index, Deform_SBZ-Deform_Index
 ; ---------------------------------------------------------------------------
 ; Green	Hill Zone background layer deformation code
 ; ---------------------------------------------------------------------------

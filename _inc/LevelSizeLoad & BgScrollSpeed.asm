@@ -85,6 +85,14 @@ LevelSizeArray:
 		dc.w $0004, $0000, $1E40, $FF00, $0800, $0060
 		dc.w $0004, $2080, $2460, $0510, $0510, $0060
 		dc.w $0004, $0000, $3EC0, $0000, $0720, $0060
+		dc.w $0004, $0000, $21C0, $0000, $0720, $0060
+		dc.w $0004, $0000, $1E40, $FF00, $0800, $0060
+		dc.w $0004, $2080, $2460, $0510, $0510, $0060
+		dc.w $0004, $0000, $3EC0, $0000, $0720, $0060		
+		dc.w $0004, $0000, $21C0, $0000, $0720, $0060
+		dc.w $0004, $0000, $1E40, $FF00, $0800, $0060
+		dc.w $0004, $2080, $2460, $0510, $0510, $0060
+		dc.w $0004, $0000, $3EC0, $0000, $0720, $0060
 
 ; ---------------------------------------------------------------------------
 ; Ending start location array
@@ -272,6 +280,7 @@ BgScroll_Index:	dc.w BgScroll_LZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
 		dc.w BgScroll_End-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
+		dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 ; ===========================================================================
 
