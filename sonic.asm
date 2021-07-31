@@ -2012,13 +2012,13 @@ GM_Title:
 		locVRAM	0
 		lea	(Nem_Lock).l,a0 ; load GHZ patterns
 		bsr.w	NemDec
-	;	locVRAM	$5120
-	;	lea	(Nem_TitleBlank).l,a0 ;	load vram blanker
-	;	bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
 		locVRAM	$4000
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
+		bsr.w	NemDec
+		locVRAM	$6000
+		lea	(Nem_TitleText).l,a0 ;	load vram blanker
 		bsr.w	NemDec
 		sfx	bgm_Title,0,1,1	; play title screen music
 		move.b	#0,(f_debugmode).w ; disable debug mode
@@ -8265,6 +8265,13 @@ Nem_TitleSonic:	incbin	"artnem\Title Screen Sonic.bin"
 		even
 Nem_TitleTM:	incbin	"artnem\Title Screen TM.bin"
 		even
+Nem_TitleText:	
+		if IsDemo = 1
+		incbin	"artnem\TitleText\demo.bin"
+		else
+		incbin	"artnem\TitleText\demont.bin"
+		endif
+		even
 Eni_JapNames:	incbin	"tilemaps\Hidden Japanese Credits.bin" ; Japanese credits (mappings)
 		even
 Nem_JapNames:	incbin	"artnem\Hidden Japanese Credits.bin"
@@ -9134,9 +9141,10 @@ EndOfRom:
 ; JUST ANOTHER BETA HACK
 ; SONIC MEGAMIX 5.0 ALL OVER AGAIN
 ; YOU ARE WELCOME!
-; CRAP DUDE, RUN!
+; CRAP DUDE, RUN!	
 ; DE' BOOT
 ; NOT KAWARINO
 ; SORRY NOTHING
 ; A VERY GOOD EDIT
+; REAL
 
