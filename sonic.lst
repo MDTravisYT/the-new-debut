@@ -53371,12 +53371,12 @@
 0008111E 0703                       	smpsHeaderChan	$07,	$03
 00081120 0100                       	smpsHeaderTempo	$01,	$00
 00081122                            
-00081126 0000 0000                  	smpsHeaderFM	invinc_FM1,	$00,	$00
-0008112A 0000 0000                  	smpsHeaderFM	invinc_FM2,	$00,	$00
-0008112E 0000 0000                  	smpsHeaderFM	invinc_FM3,	$00,	$00
-00081132 0000 0000                  	smpsHeaderFM	invinc_FM4,	$00,	$00
-00081136 0000 0000                  	smpsHeaderFM	invinc_FM5,	$00,	$00
-0008113A 0000 0000                  	smpsHeaderFM	invinc_FM6,	$00,	$00
+00081126 0000 0100                  	smpsHeaderFM	invinc_FM6,	$01,	$00
+0008112A 0000 0100                  	smpsHeaderFM	invinc_FM2,	$01,	$00
+0008112E 0000 0100                  	smpsHeaderFM	invinc_FM3,	$01,	$00
+00081132 0000 0100                  	smpsHeaderFM	invinc_FM4,	$01,	$00
+00081136 0000 0100                  	smpsHeaderFM	invinc_FM5,	$01,	$00
+0008113A 0000 0100                  	smpsHeaderFM	invinc_FM6,	$01,	$00
 0008113E 0000 0000 0005             	smpsHeaderPSG	invinc_PSG1,	$00,	$00,	$00, fTone_05
 00081144 0000 0000 0005             	smpsHeaderPSG	invinc_PSG2,	$00,	$00,	$00, fTone_05
 0008114A 0000 0000 0005             	smpsHeaderPSG	invinc_PSG3,	$00,	$00,	$00, fTone_05
@@ -53449,109 +53449,109 @@
 0008126F                            invinc_FM3:
 00081271 E60E                       	smpsAlterVol	$0E
 00081273 E0C0                       	smpsPan		panCentre,	$00
-00081275 8001 E781 0780 01E7        	dc.b		nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$01,	smpsNoAttack
-0008127D 8107 8108 8107 8103        	dc.b		nC0,	$07,	nC0,	$08,	nC0,	$07,	nC0,	$03
-00081285 8105                       	dc.b		nC0,	$05
+00081275 8001 E782 0780 01E7        	dc.b		nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$01,	smpsNoAttack
+0008127D 8207 8208 8207 8203        	dc.b		dSnare,	$07,	dSnare,	$08,	dSnare,	$07,	dSnare,	$03
+00081285 8205                       	dc.b		dSnare,	$05
 00081289 E6FE                       	smpsAlterVol	$FE
-0008128B 8107 800F E780 01          	dc.b		nC0,	$07,	nRst,	$0F,	smpsNoAttack,	nRst,	$01
+0008128B 8107 800F E780 01          	dc.b		dKick,	$07,	nRst,	$0F,	smpsNoAttack,	nRst,	$01
 00081292                            invinc_Jump03:
-00081292 E781 0780 08               	dc.b		smpsNoAttack,	nC0,	$07,	nRst,	$08
+00081292 E782 0780 08               	dc.b		smpsNoAttack,	dSnare,	$07,	nRst,	$08
 00081299 E602                       	smpsAlterVol	$02
-0008129B E780 01E7 8107 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+0008129B E780 01E7 8207 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
 000812A5 E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 000812AA E6FE                       	smpsAlterVol	$FE
-000812AC 8108 8007                  	dc.b		nC0,	$08,	nRst,	$07
+000812AC 8108 8007                  	dc.b		dKick,	$08,	nRst,	$07
 000812B2 E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 000812B7 E602                       	smpsAlterVol	$02
-000812B9 8107 8008                  	dc.b		nC0,	$07,	nRst,	$08
+000812B9 8207 8008                  	dc.b		dSnare,	$07,	nRst,	$08
 000812BF E6FE                       	smpsAlterVol	$FE
-000812C1 8180 07                    	dc.b		nC0,	nRst,	$07
+000812C1 8180 07                    	dc.b		dKick,	nRst,	$07
 000812C6 E602                       	smpsAlterVol	$02
-000812C8 E780 01E7 8107 8008        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$08
+000812C8 E780 01E7 8207 8008        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
 000812D2 E6FE                       	smpsAlterVol	$FE
-000812D4 8107 80                    	dc.b		nC0,	$07,	nRst
+000812D4 8107 80                    	dc.b		dKick,	$07,	nRst
 000812D9 E602                       	smpsAlterVol	$02
-000812DB E780 01E7 8107 8008        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$08
+000812DB E780 01E7 8207 8008        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
 000812E5 E6FE                       	smpsAlterVol	$FE
-000812E7 8107 8008                  	dc.b		nC0,	$07,	nRst,	$08
+000812E7 8107 8008                  	dc.b		dKick,	$07,	nRst,	$08
 000812ED E602                       	smpsAlterVol	$02
-000812EF 8180                       	dc.b		nC0,	nRst
+000812EF 8280                       	dc.b		dSnare,	nRst
 000812F3 E6FE                       	smpsAlterVol	$FE
-000812F5 8107 8008                  	dc.b		nC0,	$07,	nRst,	$08
+000812F5 8107 8008                  	dc.b		dKick,	$07,	nRst,	$08
 000812FB E602                       	smpsAlterVol	$02
-000812FD 8180 07                    	dc.b		nC0,	nRst,	$07
+000812FD 8280 07                    	dc.b		dSnare,	nRst,	$07
 00081302 E6FE                       	smpsAlterVol	$FE
-00081304 8108 8007                  	dc.b		nC0,	$08,	nRst,	$07
+00081304 8108 8007                  	dc.b		dKick,	$08,	nRst,	$07
 0008130A E602                       	smpsAlterVol	$02
-0008130C 8108 8007                  	dc.b		nC0,	$08,	nRst,	$07
+0008130C 8208 8007                  	dc.b		dSnare,	$08,	nRst,	$07
 00081312 E6FE                       	smpsAlterVol	$FE
-00081314 8108 8002                  	dc.b		nC0,	$08,	nRst,	$02
+00081314 8108 8002                  	dc.b		dKick,	$08,	nRst,	$02
 0008131A E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 0008131F E602                       	smpsAlterVol	$02
-00081321 8104 E781 01E7 8107        	dc.b		nC0,	$04,	smpsNoAttack,	nC0,	$01,	smpsNoAttack,	nC0,	$07
+00081321 8204 E782 01E7 8207        	dc.b		dSnare,	$04,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack,	dSnare,	$07
 00081329 8007                       	dc.b		nRst,	$07
 0008132D E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 00081332 E6FE                       	smpsAlterVol	$FE
-00081334 8108 8007                  	dc.b		nC0,	$08,	nRst,	$07
+00081334 8108 8007                  	dc.b		dKick,	$08,	nRst,	$07
 0008133A E602                       	smpsAlterVol	$02
-0008133C E780 01E7 8107 8008        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$08
+0008133C E780 01E7 8207 8008        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
 00081346 E6FE                       	smpsAlterVol	$FE
-00081348 8180 07                    	dc.b		nC0,	nRst,	$07
+00081348 8180 07                    	dc.b		dKick,	nRst,	$07
 0008134D E602                       	smpsAlterVol	$02
-0008134F E780 01E7 8107 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+0008134F E780 01E7 8207 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
 00081359 E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 0008135E E6FE                       	smpsAlterVol	$FE
-00081360 8107 80                    	dc.b		nC0,	$07,	nRst
+00081360 8107 80                    	dc.b		dKick,	$07,	nRst
 00081365 E602                       	smpsAlterVol	$02
-00081367 8108 80                    	dc.b		nC0,	$08,	nRst
+00081367 8208 80                    	dc.b		dSnare,	$08,	nRst
 0008136C E6FE                       	smpsAlterVol	$FE
-0008136E 8107 80                    	dc.b		nC0,	$07,	nRst
+0008136E 8107 80                    	dc.b		dKick,	$07,	nRst
 00081373 E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 00081378 E602                       	smpsAlterVol	$02
-0008137A 8107 8008                  	dc.b		nC0,	$07,	nRst,	$08
+0008137A 8207 8008                  	dc.b		dSnare,	$07,	nRst,	$08
 00081380 E6FE                       	smpsAlterVol	$FE
-00081382 E780 01E7 8107 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+00081382 E780 01E7 8107 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07,	nRst,	$07
 0008138C E602                       	smpsAlterVol	$02
-0008138E E780 01E7 8107 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+0008138E E780 01E7 8207 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
 00081398 E6FE                       	smpsAlterVol	$FE
-0008139A E780 01E7 8107 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+0008139A E780 01E7 8107 8007        	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07,	nRst,	$07
 000813A4 E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 000813A9 E602                       	smpsAlterVol	$02
-000813AB 8107 80                    	dc.b		nC0,	$07,	nRst
+000813AB 8207 80                    	dc.b		dSnare,	$07,	nRst
 000813B0 E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 000813B5 E6FE                       	smpsAlterVol	$FE
-000813B7 8108 8007                  	dc.b		nC0,	$08,	nRst,	$07
+000813B7 8108 8007                  	dc.b		dKick,	$08,	nRst,	$07
 000813BD E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 000813C2 E602                       	smpsAlterVol	$02
-000813C4 8107 80                    	dc.b		nC0,	$07,	nRst
+000813C4 8207 80                    	dc.b		dSnare,	$07,	nRst
 000813C9 E6FE                       	smpsAlterVol	$FE
-000813CB 8108 8002                  	dc.b		nC0,	$08,	nRst,	$02
+000813CB 8108 8002                  	dc.b		dKick,	$08,	nRst,	$02
 000813D1 E602                       	smpsAlterVol	$02
-000813D3 8106 8107 80               	dc.b		nC0,	$06,	nC0,	$07,	nRst
+000813D3 8206 8207 80               	dc.b		dSnare,	$06,	dSnare,	$07,	nRst
 000813DA E6FE                       	smpsAlterVol	$FE
-000813DC E780 01E7 8107             	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07
+000813DC E780 01E7 8107             	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07
 000813E4 E602                       	smpsAlterVol	$02
-000813E6 8180 10                    	dc.b		nC0,	nRst,	$10
+000813E6 8280 10                    	dc.b		dSnare,	nRst,	$10
 000813EB E6FE                       	smpsAlterVol	$FE
-000813ED 8108 8007                  	dc.b		nC0,	$08,	nRst,	$07
+000813ED 8108 8007                  	dc.b		dKick,	$08,	nRst,	$07
 000813F3 E602                       	smpsAlterVol	$02
-000813F5 8108 8007 E780 01E7        	dc.b		nC0,	$08,	nRst,	$07,	smpsNoAttack,	nRst,	$01,	smpsNoAttack
-000813FD 8107                       	dc.b		nC0,	$07
+000813F5 8208 8007 E780 01E7        	dc.b		dSnare,	$08,	nRst,	$07,	smpsNoAttack,	nRst,	$01,	smpsNoAttack
+000813FD 8207                       	dc.b		dSnare,	$07
 00081401 E6FE                       	smpsAlterVol	$FE
-00081403 8180 1081 0780             	dc.b		nC0,	nRst,	$10,	nC0,	$07,	nRst
+00081403 8180 1081 0780             	dc.b		dKick,	nRst,	$10,	dKick,	$07,	nRst
 0008140B E780 01                    	dc.b		smpsNoAttack,	nRst,	$01
 00081410 E602                       	smpsAlterVol	$02
-00081412 8107 80E7 8001 E781        	dc.b		nC0,	$07,	nRst,	smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0
+00081412 8207 80E7 8001 E782        	dc.b		dSnare,	$07,	nRst,	smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare
 0008141A 07                         	dc.b		$07
 0008141D E6FE                       	smpsAlterVol	$FE
-0008141F 8108 800F 8107 8008        	dc.b		nC0,	$08,	nRst,	$0F,	nC0,	$07,	nRst,	$08
+0008141F 8108 800F 8107 8008        	dc.b		dKick,	$08,	nRst,	$0F,	dKick,	$07,	nRst,	$08
 00081429 E602                       	smpsAlterVol	$02
-0008142B 8107 8008 8105 E781        	dc.b		nC0,	$07,	nRst,	$08,	nC0,	$05,	smpsNoAttack,	nC0
-00081433 01E7 8104 E781 01E7        	dc.b		$01,	smpsNoAttack,	nC0,	$04,	smpsNoAttack,	nC0,	$01,	smpsNoAttack
-0008143B 8105 81E7 8101 E781        	dc.b		nC0,	$05,	nC0,	smpsNoAttack,	nC0,	$01,	smpsNoAttack,	nC0
-00081443 0480 01E7 8104 E781        	dc.b		$04,	nRst,	$01,	smpsNoAttack,	nC0,	$04,	smpsNoAttack,	nC0
-0008144B 01E7 8105 8181 8180        	dc.b		$01,	smpsNoAttack,	nC0,	$05,	nC0,	nC0,	nC0,	nRst
-00081453 01E7 8104 8105             	dc.b		$01,	smpsNoAttack,	nC0,	$04,	nC0,	$05
+0008142B 8207 8008 8205 E782        	dc.b		dSnare,	$07,	nRst,	$08,	dSnare,	$05,	smpsNoAttack,	dSnare
+00081433 01E7 8204 E782 01E7        	dc.b		$01,	smpsNoAttack,	dSnare,	$04,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack
+0008143B 8205 82E7 8201 E782        	dc.b		dSnare,	$05,	dSnare,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack,	dSnare
+00081443 0480 01E7 8204 E782        	dc.b		$04,	nRst,	$01,	smpsNoAttack,	dSnare,	$04,	smpsNoAttack,	dSnare
+0008144B 01E7 8205 8282 8280        	dc.b		$01,	smpsNoAttack,	dSnare,	$05,	dSnare,	dSnare,	dSnare,	nRst
+00081453 01E7 8204 8205             	dc.b		$01,	smpsNoAttack,	dSnare,	$04,	dSnare,	$05
 0008145B E6FE                       	smpsAlterVol	$FE
 0008145D E0C0                       	smpsPan		panCentre,	$00
 0008145F F6FE 31                    	smpsJump	invinc_Jump03

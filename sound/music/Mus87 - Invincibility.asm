@@ -11,13 +11,13 @@ smpsHeaderStartSong = 1
 	smpsHeaderChan	$07,	$03
 	smpsHeaderTempo	$01,	$00
 
-	smpsHeaderDAC	invinc_DAC
-	smpsHeaderFM	invinc_FM1,	$00,	$00
-	smpsHeaderFM	invinc_FM2,	$00,	$00
-	smpsHeaderFM	invinc_FM3,	$00,	$00
-	smpsHeaderFM	invinc_FM4,	$00,	$00
-	smpsHeaderFM	invinc_FM5,	$00,	$00
-	smpsHeaderFM	invinc_FM6,	$00,	$00
+	smpsHeaderDAC	invinc_FM3
+	smpsHeaderFM	invinc_FM6,	$01,	$00
+	smpsHeaderFM	invinc_FM2,	$01,	$00
+	smpsHeaderFM	invinc_FM3,	$01,	$00
+	smpsHeaderFM	invinc_FM4,	$01,	$00
+	smpsHeaderFM	invinc_FM5,	$01,	$00
+	smpsHeaderFM	invinc_FM6,	$01,	$00
 	smpsHeaderPSG	invinc_PSG1,	$00,	$00,	$00, fTone_05
 	smpsHeaderPSG	invinc_PSG2,	$00,	$00,	$00, fTone_05
 	smpsHeaderPSG	invinc_PSG3,	$00,	$00,	$00, fTone_05
@@ -94,159 +94,159 @@ invinc_FM3:
 	smpsSetvoice	$02
 	smpsAlterVol	$0E
 	smpsPan		panCentre,	$00
-	dc.b		nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$01,	smpsNoAttack
-	dc.b		nC0,	$07,	nC0,	$08,	nC0,	$07,	nC0,	$03
-	dc.b		nC0,	$05
+	dc.b		nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$01,	smpsNoAttack
+	dc.b		dSnare,	$07,	dSnare,	$08,	dSnare,	$07,	dSnare,	$03
+	dc.b		dSnare,	$05
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$07,	nRst,	$0F,	smpsNoAttack,	nRst,	$01
+	dc.b		dKick,	$07,	nRst,	$0F,	smpsNoAttack,	nRst,	$01
 invinc_Jump03:
-	dc.b		smpsNoAttack,	nC0,	$07,	nRst,	$08
+	dc.b		smpsNoAttack,	dSnare,	$07,	nRst,	$08
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
 	smpsSetvoice	$06
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$07
+	dc.b		dKick,	$08,	nRst,	$07
 	smpsSetvoice	$07
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$07,	nRst,	$08
+	dc.b		dSnare,	$07,	nRst,	$08
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	nRst,	$07
+	dc.b		dKick,	nRst,	$07
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$08
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$07,	nRst
+	dc.b		dKick,	$07,	nRst
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$08
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$07,	nRst,	$08
+	dc.b		dKick,	$07,	nRst,	$08
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	nRst
+	dc.b		dSnare,	nRst
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$07,	nRst,	$08
+	dc.b		dKick,	$07,	nRst,	$08
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	nRst,	$07
+	dc.b		dSnare,	nRst,	$07
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$07
+	dc.b		dKick,	$08,	nRst,	$07
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$08,	nRst,	$07
+	dc.b		dSnare,	$08,	nRst,	$07
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$02
+	dc.b		dKick,	$08,	nRst,	$02
 	smpsSetvoice	$08
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$04,	smpsNoAttack,	nC0,	$01,	smpsNoAttack,	nC0,	$07
+	dc.b		dSnare,	$04,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack,	dSnare,	$07
 	dc.b		nRst,	$07
 	smpsSetvoice	$09
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$07
+	dc.b		dKick,	$08,	nRst,	$07
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$08
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	nRst,	$07
+	dc.b		dKick,	nRst,	$07
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
 	smpsSetvoice	$0A
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$07,	nRst
+	dc.b		dKick,	$07,	nRst
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$08,	nRst
+	dc.b		dSnare,	$08,	nRst
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$07,	nRst
+	dc.b		dKick,	$07,	nRst
 	smpsSetvoice	$0B
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$07,	nRst,	$08
+	dc.b		dSnare,	$07,	nRst,	$08
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07,	nRst,	$07
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07,	nRst,	$07
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07,	nRst,	$07
 	smpsSetvoice	$08
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$07,	nRst
+	dc.b		dSnare,	$07,	nRst
 	smpsSetvoice	$09
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$07
+	dc.b		dKick,	$08,	nRst,	$07
 	smpsSetvoice	$0C
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$07,	nRst
+	dc.b		dSnare,	$07,	nRst
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$02
+	dc.b		dKick,	$08,	nRst,	$02
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$06,	nC0,	$07,	nRst
+	dc.b		dSnare,	$06,	dSnare,	$07,	nRst
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0,	$07
+	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	nRst,	$10
+	dc.b		dSnare,	nRst,	$10
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$07
+	dc.b		dKick,	$08,	nRst,	$07
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$08,	nRst,	$07,	smpsNoAttack,	nRst,	$01,	smpsNoAttack
-	dc.b		nC0,	$07
+	dc.b		dSnare,	$08,	nRst,	$07,	smpsNoAttack,	nRst,	$01,	smpsNoAttack
+	dc.b		dSnare,	$07
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	nRst,	$10,	nC0,	$07,	nRst
+	dc.b		dKick,	nRst,	$10,	dKick,	$07,	nRst
 	smpsSetvoice	$0D
 	dc.b		smpsNoAttack,	nRst,	$01
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$07,	nRst,	smpsNoAttack,	nRst,	$01,	smpsNoAttack,	nC0
+	dc.b		dSnare,	$07,	nRst,	smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare
 	dc.b		$07
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
-	dc.b		nC0,	$08,	nRst,	$0F,	nC0,	$07,	nRst,	$08
+	dc.b		dKick,	$08,	nRst,	$0F,	dKick,	$07,	nRst,	$08
 	smpsSetvoice	$02
 	smpsAlterVol	$02
-	dc.b		nC0,	$07,	nRst,	$08,	nC0,	$05,	smpsNoAttack,	nC0
-	dc.b		$01,	smpsNoAttack,	nC0,	$04,	smpsNoAttack,	nC0,	$01,	smpsNoAttack
-	dc.b		nC0,	$05,	nC0,	smpsNoAttack,	nC0,	$01,	smpsNoAttack,	nC0
-	dc.b		$04,	nRst,	$01,	smpsNoAttack,	nC0,	$04,	smpsNoAttack,	nC0
-	dc.b		$01,	smpsNoAttack,	nC0,	$05,	nC0,	nC0,	nC0,	nRst
-	dc.b		$01,	smpsNoAttack,	nC0,	$04,	nC0,	$05
+	dc.b		dSnare,	$07,	nRst,	$08,	dSnare,	$05,	smpsNoAttack,	dSnare
+	dc.b		$01,	smpsNoAttack,	dSnare,	$04,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack
+	dc.b		dSnare,	$05,	dSnare,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack,	dSnare
+	dc.b		$04,	nRst,	$01,	smpsNoAttack,	dSnare,	$04,	smpsNoAttack,	dSnare
+	dc.b		$01,	smpsNoAttack,	dSnare,	$05,	dSnare,	dSnare,	dSnare,	nRst
+	dc.b		$01,	smpsNoAttack,	dSnare,	$04,	dSnare,	$05
 	smpsSetvoice	$05
 	smpsAlterVol	$FE
 	smpsPan		panCentre,	$00
