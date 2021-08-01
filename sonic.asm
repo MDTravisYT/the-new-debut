@@ -9136,6 +9136,8 @@ EndOfRom:
 		END
 
 
+; DEMO (demo build)
+; DEMON'T (test build)
 ; RESTARTED
 ; POST-ALPHACPETION
 ; JUST ANOTHER BETA HACK
