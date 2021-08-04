@@ -44,3 +44,4 @@ loc_134C4:
 locret_134D2:
 		rts	
 ; End of function Sonic_JumpHeight
+

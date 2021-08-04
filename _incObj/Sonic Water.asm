@@ -39,7 +39,7 @@ Sonic_Water:
 		bsr.w	ResumeMusic
 		move.w	#$600,(v_sonspeedmax).w ; restore Sonic's speed
 		move.w	#$C,(v_sonspeedacc).w ; restore Sonic's acceleration
-		move.w	#$80,(v_sonspeeddec).w ; restore Sonic's deceleration
+		move.w	#$40,(v_sonspeeddec).w ; restore Sonic's deceleration
 		asl	obVelY(a0)
 		beq.w	@exit
 		move.b	#id_Splash,(v_objspace+$300).w ; load splash object

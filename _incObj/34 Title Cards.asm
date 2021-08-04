@@ -78,7 +78,7 @@ Card_Loop:
 		dbf	d1,Card_Loop	; repeat sequence another 3 times
 
 Card_ChkPos:	; Routine 2
-		moveq	#$10,d1		; set horizontal speed
+		moveq	#$08,d1		; set horizontal speed
 		move.w	card_mainX(a0),d0
 		cmp.w	obX(a0),d0	; has item reached the target position?
 		beq.s	Card_NoMove	; if yes, branch
@@ -110,7 +110,7 @@ Card_Wait:	; Routine 4/6
 Card_ChkPos2:
 		tst.b	obRender(a0)
 		bpl.s	Card_ChangeArt
-		moveq	#$20,d1
+		moveq	#$08,d1
 		move.w	card_finalX(a0),d0
 		cmp.w	obX(a0),d0	; has item reached the finish position?
 		beq.s	Card_ChangeArt	; if yes, branch
@@ -143,13 +143,13 @@ Card_ChangeArt:
 Card_Delete:
 		bra.w	DeleteObject
 ; ===========================================================================
-Card_ItemData:	dc.w $D0	; y-axis position
+Card_ItemData:	dc.w $C0	; y-axis position
 		dc.b 2,	0	; routine number, frame	number (changes)
-		dc.w $E4
+		dc.w $D4
 		dc.b 2,	6
-		dc.w $EA
+		dc.w $DA
 		dc.b 2,	9
-		dc.w $E0
+		dc.w $D0
 		dc.b 2,	$C
 ; ---------------------------------------------------------------------------
 ; Title	card configuration data
