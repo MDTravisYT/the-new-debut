@@ -16,7 +16,7 @@ Pyl_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Pylon,obMap(a0)
 	;	move.w	#$83CC,obGfx(a0)
-		move.w	#$0000,obGfx(a0)
+		move.w	#$8000,obGfx(a0)
 		move.b	#$10,obActWid(a0)
 
 Pyl_Display:	; Routine 2
@@ -26,7 +26,7 @@ Pyl_Display:	; Routine 2
 		neg.w	d1
 		move.w	d1,obX(a0)
 		move.l	(v_screenposy).w,d1 ; start y
-		add.l	d1,d1
+		asr.w #1, d0     ;Divides d0 by 2 signed
 		swap	d1
 	;	andi.w	#$3F,d1 ; how far up before reset to bottom of screen
 		neg.w	d1
