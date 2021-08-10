@@ -15,10 +15,10 @@ Sonic_Jump:
 		bsr.w	sub_14D48
 		cmpi.w	#6,d1
 		blt.w	locret_1348E
-		move.w	#$680,d2
+		move.w	#$638,d2	; jump height
 		btst	#6,obStatus(a0)
 		beq.s	loc_1341C
-		move.w	#$380,d2
+		move.w	#$338,d2	; jump height (underwater)
 
 loc_1341C:
 		moveq	#0,d0
