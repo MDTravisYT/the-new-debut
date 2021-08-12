@@ -1754,6 +1754,7 @@ GM_Sega:
 
 loc_24BC:
 		bsr.w	ClearScreen
+		jsr SHC2021 
 		move.l	#$40000000,($C00004).l
 		lea	(Nem_OtherSegaLogo).l,a0
 		bsr.w	NemDec
@@ -9121,6 +9122,8 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 		endc
 		;dcb.b ($10000-(*%$10000))-(EndOfRom-SoundDriver),$FF
     include   "TitleLock.asm"
+SHC2021:    incbin "SHC21_Lite_Sonic12.bin"
+		even
 	include "ErrorHandler.asm"
 SoundDriver:	include "s1.sounddriver.asm"
 
