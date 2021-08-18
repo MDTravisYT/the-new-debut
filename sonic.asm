@@ -96,7 +96,7 @@ loc_E0:
 		dc.l ErrorTrap
 	endif
 ConsoleName:	dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
-Date:		dc.b "MCT 2021        " ; Copyright holder and release date (generally year)
+Date:		dc.b "MCT/SHC21 OCT'21" ; Copyright holder and release date (generally year)
 Title_Local:	dc.b "SONIC DEBUT BY MCTRAVISYT                       " ; Domestic name
 Title_Int:	dc.b "SONIC DEBUT BY MCTRAVISYT                       " ; International name
 Serial:		if Revision=0
@@ -117,7 +117,7 @@ SRAMSupport:	if EnableSRAM=1
 		endc
 		dc.l $20202020		; SRAM start ($200001)
 		dc.l $20202020		; SRAM end ($20xxxx)
-Notes:		dc.b 'Compiled on YY/MM/DD at HH:MM:SS                    ' ; Notes (unused, anything can be put in this space, but it has to be 52 bytes.)
+Notes:		dc.b 'Compiled on YY/MM/DD at HH:MM:SS            get out ' ; Notes (unused, anything can be put in this space, but it has to be 52 bytes.)
 Region:		dc.b "JUE             " ; Region (Country code)
 EndOfHeader:
 
