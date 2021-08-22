@@ -2592,10 +2592,10 @@ LevSel_ChgLine:
 ; ---------------------------------------------------------------------------
 ; Level	select menu text
 ; ---------------------------------------------------------------------------
-LevelMenuText:	if Revision=0
+LevelMenuText:	if IsDemo=0
 		incbin	"misc\Level Select Text.bin"
 		else
-		incbin	"misc\Level Select Text (JP1).bin"
+		incbin	"misc\Level Select Text Demo.bin"
 		endc
 		even
 ; ---------------------------------------------------------------------------

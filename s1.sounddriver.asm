@@ -2618,7 +2618,7 @@ SoundA4:	incbin	"sound/sfx/SndA4 - Skid.bin"
 		even
 SoundA5:	incbin	"sound/sfx/SndA5.bin"
 		even
-SoundA6:	incbin	"sound/sfx/SndA6 - Hit Spikes.bin"
+SoundA6:	include	"sound/sfx/SndA6 - Hit Spikes.asm"
 		even
 SoundA7:	incbin	"sound/sfx/SndA7 - Push Block.bin"
 		even
