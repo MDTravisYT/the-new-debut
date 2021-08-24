@@ -86,8 +86,9 @@ PLC_GameOver:	dc.w ((PLC_GameOverend-PLC_GameOver-2)/6)-1
 ; ---------------------------------------------------------------------------
 PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
 		plcm	Nem_GHZ, 0		; GHZ main patterns
+		plcm	Nem_Rock, $6A40	; foreground rock
 		plcm	Nem_Welcome, $6000	; purple rock
-		plcm	Nem_Stalk, $6B00	; flower stalk
+	;	plcm	Nem_Stalk, $6B00	; flower stalk
 		plcm	Nem_PplRock, $7A00	; purple rock
 		plcm	Nem_BallHog, $8000	; ballhog enemy
 		plcm	Nem_UnkExplode, $8380	; cannonball enemy
@@ -105,7 +106,6 @@ PLC_GHZ2:	dc.w ((PLC_GHZ2end-PLC_GHZ2-2)/6)-1
 		plcm	Nem_Ball, $7540		; giant	ball
 		plcm	Nem_GhzWall1, $A1E0	; breakable wall
 	;	plcm	Nem_GhzWall2, $6980	; normal wall
-		plcm	Nem_Rock, $6A40	; breakable wall
 	PLC_GHZ2end:
 PLC_lock:	dc.w ((PLClockend-PLC_lock-2)/6)-1
 		plcm	Nem_lockN, 0		; GHZ main patterns
