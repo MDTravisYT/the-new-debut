@@ -8386,6 +8386,8 @@ Nem_GhzWall1:	incbin	"artnem\GHZ Breakable Wall.bin"
 		even
 Nem_GhzWall2:	incbin	"artnem\GHZ Edge Wall.bin"
 		even
+Nem_Rock:	incbin	"artnem\GHZ Rock.bin"
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - LZ stuff
 ; ---------------------------------------------------------------------------

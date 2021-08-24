@@ -92,7 +92,7 @@ ptr_BigSpikeBall:	dc.l BigSpikeBall	; $58
 ptr_Elevator:		dc.l Elevator
 ptr_CirclingPlatform:	dc.l CirclingPlatform
 ptr_Staircase:		dc.l Staircase
-ptr_Pylon:		dc.l Pylon
+ptr_Pylon:		dc.l Parallax_Object
 ptr_Fan:		dc.l Fan
 ptr_Seesaw:		dc.l Seesaw
 ptr_Bomb:		dc.l Bomb

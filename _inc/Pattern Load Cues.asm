@@ -105,6 +105,7 @@ PLC_GHZ2:	dc.w ((PLC_GHZ2end-PLC_GHZ2-2)/6)-1
 		plcm	Nem_Ball, $7540		; giant	ball
 		plcm	Nem_GhzWall1, $A1E0	; breakable wall
 	;	plcm	Nem_GhzWall2, $6980	; normal wall
+		plcm	Nem_Rock, $6A40	; breakable wall
 	PLC_GHZ2end:
 PLC_lock:	dc.w ((PLClockend-PLC_lock-2)/6)-1
 		plcm	Nem_lockN, 0		; GHZ main patterns

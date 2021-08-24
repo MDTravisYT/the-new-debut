@@ -1,5 +1,5 @@
 ; ---------------------------------------------------------------------------
-; Object 5C - metal pylons in foreground (SLZ)
+; Object 10 - TTS Sign.
 ; ---------------------------------------------------------------------------
 
 Parallax_Object:
@@ -14,8 +14,7 @@ GHZ2TreeFG_Index:	dc.w GHZ2TreeFG_Main-GHZ2TreeFG_Index
 
 GHZ2TreeFG_Main:
 		addq.b	#2,obRoutine(a0)
-		move.l	#Map_Pylon,obMap(a0)
-		move.b obSubtype(a0),obFrame(a0)
+		move.l	#Map_GHZ2Tree,obMap(a0)
 		move.w	#$C000,obGfx(a0)
 		move.b	#4,obRender(a0)
 		move.b	#32,obActWid(a0)
@@ -36,7 +35,11 @@ GHZ2TreeFG_Display:
 	@displaydelete:
 		jsr	DisplaySprite
 
+		if S3ObjectAndRingManager=1
+		out_of_range_s3	@delete,@nodel,$30(a0)
+		else
 		out_of_range	@delete,$30(a0)
+		endc
 		
 @nodel:
 		rts	
