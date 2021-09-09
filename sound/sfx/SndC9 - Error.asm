@@ -9,7 +9,7 @@ smpsHeaderStartSong = 1
 ; FM5 Data
 Sound6D_Error_FM5:
 	smpsSetvoice        $00
-	dc.b	nB5, $18
+	dc.b	nB4, $18
 	smpsStop
 
 Sound6D_Error_Voices:
