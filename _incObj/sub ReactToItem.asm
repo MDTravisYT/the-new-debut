@@ -266,12 +266,6 @@ HurtSonic:
 		tst.w	(v_health).w	; does Sonic have any rings?
 		beq.w	@norings	; if not, branch
 
-		jsr	(FindFreeObj).l
-		bne.s	@hasshield
-		move.b	#id_RingLoss,0(a1) ; load bouncing multi rings object
-		move.w	obX(a0),obX(a1)
-		move.w	obY(a0),obY(a1)
-
 	@hasshield:
 		tst.b   (v_shield).w
 		bne.s   @skipthis

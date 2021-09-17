@@ -126,7 +126,7 @@ Pow_ChkRings:
 Pow_ChkS:
 		cmpi.b	#7,d0		; does monitor contain 'S'?
 		bne.s	Pow_ChkGoggle
-		cmpi.b  #4,(v_health).w
+		cmpi.b  #9,(v_health).w
 		bge.s   Pow_ChkGoggle
 		addq.b  #1,(v_health).w
 		music	$AB,1,0,0	; play ring sound
