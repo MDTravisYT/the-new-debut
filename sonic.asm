@@ -2824,6 +2824,17 @@ Level_LoadObj:
 		move.w	d0,(v_debuguse).w
 		move.w	d0,(f_restart).w
 		move.w	d0,(v_framecount).w
+		cmpi.b  #2,(v_health).w
+		bgt.s   @skip
+		
+		move.b  #2,(v_health).w
+	@skip:
+		cmpi.b  #4,(v_health).w
+		blt.s   @skipahead
+		
+		move.b  #4,(v_health).w
+		
+	@skipahead:
 		bsr.w	OscillateNumInit
 		move.b	#1,(f_scorecount).w ; update score counter
 		move.b	#1,(f_ringcount).w ; update rings counter

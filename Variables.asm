@@ -100,6 +100,8 @@ v_1up_ram_copy:		equ v_spcsfx_track_ram_end
 ; From here on, no longer relative to sound driver RAM
 ; =================================================================================
 
+v_health:	equ $FFFFF5C0 ; health variable ; upon 0, you hit death. Default is 3. Max is 5.
+
 v_gamemode:	equ $FFFFF600	; game mode (00=Sega; 04=Title; 08=Demo; 0C=Level; 10=SS; 14=Cont; 18=End; 1C=Credit; +8C=PreLevel)
 v_jpadhold2:	equ $FFFFF602	; joypad input - held, duplicate
 v_jpadpress2:	equ $FFFFF603	; joypad input - pressed, duplicate

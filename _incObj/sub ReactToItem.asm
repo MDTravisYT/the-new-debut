@@ -263,7 +263,7 @@ React_ChkHurt:
 HurtSonic:
 		tst.b	(v_shield).w	; does Sonic have a shield?
 		bne.s	@hasshield	; if yes, branch
-		tst.w	(v_rings).w	; does Sonic have any rings?
+		tst.w	(v_health).w	; does Sonic have any rings?
 		beq.w	@norings	; if not, branch
 
 		jsr	(FindFreeObj).l
@@ -273,6 +273,12 @@ HurtSonic:
 		move.w	obY(a0),obY(a1)
 
 	@hasshield:
+		tst.b   (v_shield).w
+		bne.s   @skipthis
+		
+		subq.b	#1,(v_health).w
+				
+	@skipthis:
 		move.b	#0,(v_shield).w	; remove shield
 		move.b	#4,obRoutine(a0)
 		bsr.w	Sonic_ResetOnFloor
