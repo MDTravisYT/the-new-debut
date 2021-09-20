@@ -13,6 +13,8 @@
 	include	"Macros.asm"
 	include "_smps2asm_inc.asm"
 
+SHCDemo = 1
+
 ; ===========================================================================
 
 StartOfRom:
@@ -117,7 +119,7 @@ SRAMSupport:	if EnableSRAM=1
 		endc
 		dc.l $20202020		; SRAM start ($200001)
 		dc.l $20202020		; SRAM end ($20xxxx)
-Notes:		dc.b 'Compiled on YY/MM/DD at HH:MM:SS            get out ' ; Notes (unused, anything can be put in this space, but it has to be 52 bytes.)
+Notes:		dc.b 'Compiled on GET OUT at WHY ARE YOU IN HERE          ' ; Notes (unused, anything can be put in this space, but it has to be 52 bytes.)
 Region:		dc.b "JUE             " ; Region (Country code)
 EndOfHeader:
 
@@ -1754,7 +1756,9 @@ GM_Sega:
 
 loc_24BC:
 		bsr.w	ClearScreen
+	if SHCDemo = 1
 		jsr SHC2021 
+	endif
 		move.l	#$40000000,($C00004).l
 		lea	(Nem_OtherSegaLogo).l,a0
 		bsr.w	NemDec
@@ -2173,6 +2177,9 @@ Tit_ChkLevSel:
 ; ---------------------------------------------------------------------------
 
 LevelSelect:
+	if	IsDemo = 1
+		jsr	PlayLevelC
+	endif
 		move.b	#4,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		bsr.w	LevSelControls
@@ -2333,10 +2340,10 @@ LevSel_Ptrs:
 ; ---------------------------------------------------------------------------
 ; Level	select codes
 ; ---------------------------------------------------------------------------
-LevSelCode_J:	if Revision=0
+LevSelCode_J:	if IsDemo=0
 		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
 		else
-		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
+		dc.b btnUp,btnDn,btnL,btnR,0,$FF
 		endc
 		even
 
@@ -2347,7 +2354,11 @@ LevSelCode_US:	dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
 PlayLevelC:
 		sfx	$C9,0,0,0 ; fade out music
 		jsr	ClearScreen
+	if IsDemo = 1
+		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>*SONIC DEBUT*%<endl>%<endl>%<pal2>*SONIC DEBUT* is not responding%<endl>%<endl>%<pal3>Hang on while Windows reports the %<endl>problem to Microsoft...%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
+	else
 		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>You didn't enter the right code.%<endl> %<endl>%<pal2>Please refer to the pinned message in the test DM for the right combination.%<endl>%<endl>%<pal3>If you're not apart of the tester%<endl>group, %<pal1>good luck%<pal0>.%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
+	endif
 		rts
 
 ; ---------------------------------------------------------------------------
@@ -9142,10 +9153,9 @@ SoundDriver:	include "s1.sounddriver.asm"
 
 ; end of 'ROM'
 		even
-	if IsDemo=1
-	incbin "stuffs\s1built.7z"
-	else
-	endif
+;	if IsDemo=1
+;	incbin "stuffs\s1built.7z"
+;	endif
 EndOfRom:
 
 
