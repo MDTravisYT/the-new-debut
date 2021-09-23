@@ -2668,7 +2668,7 @@ SoundBD:	incbin	"sound/sfx/SndBD - ChainStomp.bin"
 		even
 SoundBE:	incbin	"sound/sfx/SndBE - Roll.bin"
 		even
-SoundBF:	incbin	"sound/sfx/SndBF - Get Continue.bin"
+SoundBF:	include	"sound/sfx/SndBF - Get Continue.asm"
 		even
 SoundC0:	incbin	"sound/sfx/SndC0 - Basaran Flap.bin"
 		even

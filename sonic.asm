@@ -13,7 +13,7 @@
 	include	"Macros.asm"
 	include "_smps2asm_inc.asm"
 
-SHCDemo = 1
+SHCDemo = 0
 
 ; ===========================================================================
 
@@ -1793,7 +1793,11 @@ loc_2528:
 		beq.s	loc_2528
 
 loc_2544:
+	if SHCDemo = 1
 		move.b	#4,(v_gamemode).w
+	else
+		move.b	#$20,(v_gamemode).w
+	endif
 		rts
 		
 sub_1A3A:
@@ -1821,8 +1825,7 @@ word_1A6A:	incbin "palette/Sega.pal"
 ; ===========================================================================
 
 GM_RadNexAff:
-    move.b  #$96,d0             ; set music ID 
-    jsr     Playsound_Special.w     ; play ID
+	sfx	bgm_Stop,0,1,1 ; stop music
     jsr     PaletteFadeOut          ; fade palettes out
     jsr     ClearScreen.w           ; clear the plane mappings
     ; load art, mappings and the palette
@@ -1838,6 +1841,8 @@ GM_RadNexAff:
     move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
     lea     ART_RAD.l,a0           ; load background art
     jsr     NemDec              ; run NemDec to decompress art for display
+    move.b  #$BF,d0             ; set music ID 
+    jsr     Playsound_Special.w     ; play ID
     lea Pal_RAD.l,a0        ; load this palette
     lea ($FFFFFB80).l,a1        ; set as line 2
     move.w  #$F,d0
@@ -1847,7 +1852,7 @@ RadNexAff_PalLoop:
     move.l  (a0)+,(a1)+         ; ''
     dbf d0,RadNexAff_PalLoop      ; repeat until done
     jsr PaletteFadeIn          ; fade palette in
-    move.w  #3*60,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
+    move.w  #4*60,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
  
 Rad_MainLoop:
     move.b  #2,($FFFFF62A).w        ; set V-blank routine to run
