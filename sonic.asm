@@ -13,7 +13,7 @@
 	include	"Macros.asm"
 	include "_smps2asm_inc.asm"
 
-SHCDemo = 0
+SHCDemo = 1
 
 ; ===========================================================================
 
@@ -2360,8 +2360,8 @@ PlayLevelC:
 		sfx	$C9,0,0,0 ; fade out music
 		jsr	ClearScreen
 	if IsDemo = 1
-		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>*SONIC DEBUT*%<endl>%<endl>%<pal2>*SONIC DEBUT* is not responding%<endl>%<endl>%<pal3>Hang on while Windows reports the %<endl>problem to Microsoft...%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
-	;	RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>*SONIC DEBUT*%<endl>%<endl>%<pal2>A fatal exception 00 has occurred at%<endl>00000000. The current application willbe terminated.%<endl>%<endl>%<pal3>* Press any CTRL+ALT+DEL to terminate%<endl>the current application.%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock ; alt for CGS demo	
+		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>*SONIC DEBUT*%<endl>%<endl>%<pal2>*SONIC DEBUT* is not responding%<endl>%<endl>%<pal3>Hang on while Windows reports the %<endl>problem to Microsoft...%<endl>%<endl>NICE TRY LOL%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
+	;	RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>*SONIC DEBUT*%<endl>%<endl>%<pal2>A fatal exception 00 has occurred at%<endl>00000000. The current application willbe terminated.%<endl>%<endl>%<pal3>* Press any CTRL+ALT+DEL to terminate%<endl>the current application.%<endl>%<endl>%NICE TRY LOL<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock ; alt for CGS demo	
 	else
 		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>You didn't enter the right code.%<endl> %<endl>%<pal2>Please refer to the pinned message in the test DM for the right combination.%<endl>%<endl>%<pal3>If you're not apart of the tester%<endl>group, %<pal1>good luck%<pal0>.%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
 	endif
@@ -9159,9 +9159,9 @@ SoundDriver:	include "s1.sounddriver.asm"
 
 ; end of 'ROM'
 		even
-;	if IsDemo=1
-;	incbin "stuffs\s1built.7z"
-;	endif
+	if IsDemo=1
+	incbin "stuffs\im in the disc.7z"
+	endif
 EndOfRom:
 
 
