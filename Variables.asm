@@ -335,6 +335,7 @@ v_levselsound:	equ $FFFFFF84	; level select - sound selected (2 bytes)
 v_scorecopy:	equ $FFFFFFC0	; score, duplicate (4 bytes)
 v_scorelife:	equ $FFFFFFC0	; points required for an extra life (4 bytes) (JP1 only)
 v_health:	equ $FFFFFFC4 ; health variable ; upon 0, you hit death. Default is 3. Max is 5.
+f_healthcount:	equ $FFFFFFC6 ; health counter flag
 f_levselcheat:	equ $FFFFF608	; level select cheat flag
 f_slomocheat:	equ $FFFFFFE1	; slow motion & frame advance cheat flag
 f_debugcheat:	equ $FFFFFFE2	; debug mode cheat flag

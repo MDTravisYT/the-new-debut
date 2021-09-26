@@ -40,7 +40,7 @@ HUD_Update:
 		bne.s	@chklives	; if yes, branch
 		lea	(v_time).w,a1
 		cmpi.l	#(9*$10000)+(59*$100)+59,(a1)+ ; is the time 9:59:59?
-		beq.s	TimeOver	; if yes, branch
+		beq.w	TimeOver	; if yes, branch
 
 		addq.b	#1,-(a1)	; increment 1/60s counter
 		cmpi.b	#60,(a1)	; check if passed 60
@@ -72,6 +72,12 @@ HUD_Update:
 		bsr.w	Hud_Lives
 
 	@chkbonus:
+		tst.b	(f_healthcount).w ; does the lives counter need updating?
+		beq.s	@chkbonus2	; if not, branch
+		clr.b	(f_healthcount).w
+		bsr.w	Hud_Health
+		
+	@chkbonus2:
 		tst.b	(f_endactbonus).w ; do time/ring bonus counters need updating?
 		beq.s	@finish		; if not, branch
 		clr.b	(f_endactbonus).w
@@ -121,6 +127,12 @@ HudDebug:
 		bsr.w	Hud_Lives
 
 	@chkbonus:
+		tst.b	(f_healthcount).w ; does the lives counter need updating?
+		beq.s	@chkbonus2	; if not, branch
+		clr.b	(f_healthcount).w
+		bsr.w	Hud_Health
+		
+	@chkbonus2:
 		tst.b	(f_endactbonus).w ; does the ring/time bonus counter need updating?
 		beq.s	@finish		; if not, branch
 		clr.b	(f_endactbonus).w
@@ -160,6 +172,7 @@ Hud_LoadZero:
 Hud_Base:
 		lea	($C00000).l,a6
 		bsr.w	Hud_Lives
+		bsr.w	Hud_Health
 		locVRAM	$DC40
 		lea	Hud_TilesBase(pc),a2
 		move.w	#$E,d2

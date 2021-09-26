@@ -271,6 +271,7 @@ HurtSonic:
 		bne.s   @skipthis
 		
 		subq.b	#1,(v_health).w
+		move.b  #1,(f_healthcount).w
 				
 	@skipthis:
 		move.b	#0,(v_shield).w	; remove shield
@@ -322,6 +323,8 @@ HurtSonic:
 KillSonic:
 		tst.w	(v_debuguse).w	; is debug mode	active?
 		bne.s	@dontdie	; if yes, branch
+		move.b	#$FF,(v_health).w
+		move.b  #1,(f_healthcount).w
 		move.b	#0,(v_invinc).w	; remove invincibility
 		move.b	#6,obRoutine(a0)
 		bsr.w	Sonic_ResetOnFloor

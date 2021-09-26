@@ -2846,11 +2846,13 @@ Level_LoadObj:
 		bgt.s   @skip
 		
 		move.b  #4,(v_health).w
+		move.b  #1,(f_healthcount).w
 	@skip:
 		cmpi.b  #9,(v_health).w
 		blt.s   @skipahead
 		
 		move.b  #9,(v_health).w
+		move.b  #1,(f_healthcount).w
 		
 	@skipahead:
 		bsr.w	OscillateNumInit

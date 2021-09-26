@@ -129,6 +129,7 @@ Pow_ChkS:
 		cmpi.b  #9,(v_health).w
 		bge.s   Pow_ChkGoggle
 		addq.b  #1,(v_health).w
+		move.b  #1,(f_healthcount).w
 		music	$AB,1,0,0	; play ring sound
 	
 Pow_ChkGoggle:	

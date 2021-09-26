@@ -211,3 +211,63 @@ Hud_ClrLivesLoop:
 		dbf	d5,Hud_ClrLivesLoop
 		bra.s	loc_1CABC
 ; End of function Hud_Lives
+
+HUD_Health:
+		hudVRAM	$FB80		; set VRAM address
+		moveq	#0,d1
+		move.b	(v_health).w,d1	; load number of lives
+		addq.b  #1,d1
+		lea	(Hud_10).l,a2
+		moveq	#1,d6
+		moveq	#0,d4
+		lea	Art_LivesNums(pc),a1
+
+Hud_HealthLoop:
+		move.l	d0,4(a6)
+		moveq	#0,d2
+		move.l	(a2)+,d3
+
+loc_1CA902:
+		sub.l	d3,d1
+		bcs.s	loc_1CA982
+		addq.w	#1,d2
+		bra.s	loc_1CA902
+; ===========================================================================
+
+loc_1CA982:
+		add.l	d3,d1
+		tst.w	d2
+		beq.s	loc_1CAA22
+		move.w	#1,d4
+
+loc_1CAA22:
+		tst.w	d4
+		beq.s	Hud_ClrHealth
+
+loc_1CAA62:
+		lsl.w	#5,d2
+		lea	(a1,d2.w),a3
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+		move.l	(a3)+,(a6)
+
+loc_1CABC2:
+		addi.l	#$400000,d0
+		dbf	d6,Hud_HealthLoop ; repeat 1 more time
+
+		rts	
+		
+Hud_ClrHealth:
+		tst.w	d6
+		beq.s	loc_1CAA62
+		moveq	#7,d5
+
+Hud_ClrHealthLoop:
+		move.l	#0,(a6)
+		dbf	d5,Hud_ClrHealthLoop
+		bra.s	loc_1CABC2
