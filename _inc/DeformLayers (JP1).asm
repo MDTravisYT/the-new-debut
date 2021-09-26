@@ -84,8 +84,8 @@ Deform_GHZ_TTS: ; BG scroll for real background
 		asl.l	#2,d4
 		add.l	d1,d4
   moveq	#0,d5
-		bsr.w	BGScroll_Block1
-		bsr.w	BGScroll_Block4  
+		bsr.w	ScrollBlock1
+		bsr.w	ScrollBlock4  
 		lea	(v_hscrolltablebuffer).w,a1
 		move.w	(v_screenposy).w,d0
 		andi.w	#$7FF,d0
@@ -94,32 +94,54 @@ Deform_GHZ_TTS: ; BG scroll for real background
 		addi.w	#$26,d0              
 		move.w	d0,(v_bg2screenposy).w
 		move.w	d0,d4
-		bsr.w	BGScroll_Block3
-		move.w #$D,($FFFFF70C).w
+		bsr.w	ScrollBlock3
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_dup).w
-		lea	($FFFFCC00).w,a1	; load beginning address of horizontal scroll buffer to a1
+		move.w	#$6F,d1
+		sub.w	d4,d1
+		move.w	(v_screenposx).w,d0
+		cmpi.b	#id_Title,(v_gamemode).w
+		bne.s	loc_633C
+		moveq	#0,d0
 
-		move.w	($FFFFF700).w,d0	; load FG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		swap	d0			; send to the left side of d0
-		move.w	($FFFFF708).w,d0	; load BG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		asr.w	#3,d0			; divide by 8 (Slow down the scroll position)
-		move.w	#167-1,d1		; set number of scan lines to dump (minus 1 for dbf)
-GHZ_DeformLoop_1:
-		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
-		dbf	d1,GHZ_DeformLoop_1	; repeat d1 number of scanlines
+loc_633C:
+		neg.w	d0
+		swap	d0
+		move.w	(v_bgscreenposx).w,d0
+		neg.w	d0
 
-		move.w	($FFFFF700).w,d0	; load FG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		swap	d0			; send to the left side of d0
-		move.w	($FFFFF708).w,d0	; load BG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		asr.w	#2,d0			; divide by 4 (Slow down the scroll position)
-		move.w	#58-1,d1		; set number of scan lines to dump (minus 1 for dbf)
-GHZ_DeformLoop_2:
-		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
-		dbf	d1,GHZ_DeformLoop_2	; repeat d1 number of scanlines
+loc_6346:
+		move.l	d0,(a1)+
+		dbf	d1,loc_6346
+		move.w	#$27,d1
+		move.w	(v_bg2screenposx).w,d0
+		neg.w	d0
+
+loc_6356:
+		move.l	d0,(a1)+
+		dbf	d1,loc_6356
+	;	move.w	(v_bg2screenposx).w,d0 ; Bottom portion, maybe use to scroll buildings
+		addi.w	#0,d0
+		move.w	(v_screenposx).w,d2
+		addi.w	#-$200,d2
+		sub.w	d0,d2
+		ext.l	d2
+		asl.l	#8,d2
+		divs.w	#$68,d2
+		ext.l	d2
+		asl.l	#8,d2
+		moveq	#0,d3
+		move.w	d0,d3
+		move.w	#$47,d1
+		add.w	d4,d1
+
+loc_6384:
+		move.w	d3,d0
+	;	neg.w	d0
+		move.l	d0,(a1)+
+	;	swap	d3
+	;	add.l	d2,d3
+	;	swap	d3
+		dbf	d1,loc_6384
 		rts
 ; End of function Deform_GHZ
 
