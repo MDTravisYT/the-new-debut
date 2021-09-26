@@ -16,7 +16,7 @@ Edge_Index:	dc.w Edge_Main-Edge_Index
 Edge_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Edge,obMap(a0)
-		move.w	#$434C,obGfx(a0)
+		move.w	#$4346,obGfx(a0)
 		ori.b	#4,obRender(a0)
 		move.b	#8,obActWid(a0)
 		move.b	#6,obPriority(a0)

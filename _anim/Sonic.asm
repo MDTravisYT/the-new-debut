@@ -50,7 +50,7 @@ SonAni_Roll2:	dc.b $FE,  $2B,  $2A,  $2C,  $2A,  $2D,	$2A,	$2E,	afEnd, afEnd
 SonAni_Push:	dc.b $FD, $4D, $4E, $4F, $50, afEnd, afEnd, afEnd
 		even
 SonAni_Wait:	dc.b   7,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1 ; big block of frames, someone please tell me how to optimize this - MCT
-		dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1         ; im screaming into a void
+		dc.b   1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  afBack, 4        ; im screaming into a void
 		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46 ; he stare
 		dc.b   $47,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
 		dc.b   $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46,  $46
