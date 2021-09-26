@@ -1919,13 +1919,12 @@ GM_Title:
 		bsr.w	PaletteFadeOut
 		disable_ints
 		lea	(vdp_control_port).l,a6
-		move.w	#$9011,(a6)	; 64-cell hscroll size
 		bsr.w	SoundDriverLoad
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; 8-colour mode
 		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
 		move.w	#$8400+(vram_bg>>13),(a6) ; set background nametable address
-		move.w	#$9001,(a6)	; 64-cell hscroll size
+		move.w	#$9011,(a6)	; 64-cell hscroll size
 		move.w	#$9200,(a6)	; window vertical position
 		move.w	#$8B03,(a6)
 		move.w	#$8720,(a6)	; set background colour (palette line 2, entry 0)
@@ -1981,7 +1980,7 @@ GM_Title:
 	;	lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
 	;	bsr.w	NemDec
 		lea	(vdp_data_port).l,a6
-		locVRAM	$D000,4(a6)
+		locVRAM	$A8E0,4(a6)
 		lea	(Art_Text).l,a5	; load level select font
 		move.w	#$28F,d1
 
@@ -2019,7 +2018,7 @@ GM_Title:
 		move.w	#0,d0
 		bsr.w	EniDec
 
-		copyTilemap	$FF0000,$C208,$21,$15
+		copyTilemap	$FF0000,$C208,$21,$47
 
 		locVRAM	0
 		lea	(Nem_Lock).l,a0 ; load GHZ patterns
@@ -2526,7 +2525,7 @@ LevSelTextLoad:
 		lea	(LevelMenuText).l,a1
 		lea	(vdp_data_port).l,a6
 		move.l	#$608C0003,d4	; text position on screen
-		move.w	#$E680,d3	; VRAM setting (4th palette, $680th tile)
+		move.w	#$E547,d3	; VRAM setting (4th palette, $680th tile)
 		moveq	#$1A,d1		; number of lines of text
 
 	LevSel_DrawAll:
@@ -2548,10 +2547,10 @@ LevSelTextLoad:
 		add.w	d1,d1
 		add.w	d0,d1
 		adda.w	d1,a1
-		move.w	#$C680,d3	; VRAM setting (3rd palette, $680th tile)
+		move.w	#$C547,d3	; VRAM setting (3rd palette, $680th tile)
 		move.l	d4,4(a6)
 		bsr.w	LevSel_ChgLine	; recolour selected line
-		move.w	#$E680,d3
+		move.w	#$E547,d3
 		cmpi.w	#$1A,(v_levselitem).w
 		bne.s	LevSel_DrawSnd
 		move.w	#$C680,d3
