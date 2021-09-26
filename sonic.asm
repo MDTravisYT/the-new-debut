@@ -1918,6 +1918,8 @@ GM_Title:
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
 		disable_ints
+		lea	(vdp_control_port).l,a6
+		move.w	#$9011,(a6)	; 64-cell hscroll size
 		bsr.w	SoundDriverLoad
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; 8-colour mode
