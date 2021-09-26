@@ -17,9 +17,10 @@ GHZ2TreeFG_Main:
 		move.l	#Map_Pylon,obMap(a0)
 		move.b obSubtype(a0),obFrame(a0)
 		move.w	#$C000,obGfx(a0)
-		move.b	#4,obRender(a0)
+		move.b	#$14,obRender(a0)
 		move.b	#32,obActWid(a0)
 		move.b	#1,obPriority(a0)
+		move.b  #$40,obHeight(a0)
 		move.w	obX(a0), $30(a0)
 
 GHZ2TreeFG_Display:
@@ -37,8 +38,6 @@ GHZ2TreeFG_Display:
 		jsr	DisplaySprite
 
 		out_of_range	@delete,$30(a0)
-		
-@nodel:
 		rts	
 		
 @delete:
