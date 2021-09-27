@@ -72,7 +72,7 @@ SonAni_Warp3:	dc.b $3F, fr_warp3, afEnd
 		even
 SonAni_Warp4:	dc.b $3F, fr_warp4, afEnd
 		even
-SonAni_Stop:	dc.b 5,	$3D, $53, afBack, 1
+SonAni_Stop:	dc.b 5,	$3D, afEnd;, $53, afBack, 1
 		even
 SonAni_Float1:	dc.b 7,	fr_float1, fr_float4, afEnd
 		even
