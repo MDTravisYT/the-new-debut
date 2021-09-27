@@ -205,15 +205,7 @@ BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 ; ===========================================================================
 
 BgScroll_GHZ:
-		clr.l	(v_bgscreenposx).w
-		clr.l	(v_bgscreenposy).w
-		clr.l	(v_bg2screenposy).w
-		clr.l	(v_bg3screenposy).w
-		lea	($FFFFA800).w,a2
-		clr.l	(a2)+
-		clr.l	(a2)+
-		clr.l	(a2)+
-		rts
+		bra.w	Deform_GHZ_TTS
 ; ===========================================================================
 
 BgScroll_LZ:
