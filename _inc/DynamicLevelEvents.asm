@@ -125,11 +125,11 @@ DLE_GHZ3main:
 		bcs.s	locret_6E96
 		cmpi.w	#$280,(v_screenposy).w
 		bcs.s	loc_6E98
-		move.w	#$400,(v_limitbtm1).w
+		move.w	#$300,(v_limitbtm1).w
 		cmpi.w	#$1380,(v_screenposx).w
 		bcc.s	loc_6E8E
-		move.w	#$4C0,(v_limitbtm1).w
-		move.w	#$4C0,(v_limitbtm2).w
+		move.w	#$3C0,(v_limitbtm1).w
+		move.w	#$3C0,(v_limitbtm2).w
 
 loc_6E8E:
 		cmpi.w	#$1700,(v_screenposx).w
