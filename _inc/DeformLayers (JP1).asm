@@ -97,7 +97,7 @@ Deform_GHZ_TTS: ; BG scroll for real background
 		bsr.w	BGScroll_Block3
 		move.w #$D,($FFFFF70C).w
 		move.w	(v_bgscreenposy).w,(v_bgscrposy_dup).w
-		lea	($FFFFCC00).w,a1	; load beginning address of horizontal scroll buffer to a1
+		lea	(v_hscrolltablebuffer).w,a1	; load beginning address of horizontal scroll buffer to a1
 
 		move.w	($FFFFF700).w,d0	; load FG screen's X position
 		neg.w	d0			; negate (positive to negative)
@@ -105,7 +105,7 @@ Deform_GHZ_TTS: ; BG scroll for real background
 		move.w	($FFFFF708).w,d0	; load BG screen's X position
 		neg.w	d0			; negate (positive to negative)
 		asr.w	#3,d0			; divide by 8 (Slow down the scroll position)
-		move.w	#167-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+		move.w	#162-1,d1		; set number of scan lines to dump (minus 1 for dbf)
 GHZ_DeformLoop_1:
 		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
 		dbf	d1,GHZ_DeformLoop_1	; repeat d1 number of scanlines
@@ -116,7 +116,7 @@ GHZ_DeformLoop_1:
 		move.w	($FFFFF708).w,d0	; load BG screen's X position
 		neg.w	d0			; negate (positive to negative)
 		asr.w	#2,d0			; divide by 4 (Slow down the scroll position)
-		move.w	#58-1,d1		; set number of scan lines to dump (minus 1 for dbf)
+		move.w	#80-1,d1		; set number of scan lines to dump (minus 1 for dbf)
 GHZ_DeformLoop_2:
 		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
 		dbf	d1,GHZ_DeformLoop_2	; repeat d1 number of scanlines
