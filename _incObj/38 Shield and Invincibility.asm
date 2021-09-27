@@ -27,7 +27,7 @@ Shi_Main:	; Routine 0
 
 @stars:
 		addq.b	#2,obRoutine(a0) ; goto Shi_Stars next
-		move.w	#$55C,obGfx(a0)
+		move.w	#$541,obGfx(a0)
 		rts	
 ; ===========================================================================
 
