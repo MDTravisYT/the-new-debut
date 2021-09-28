@@ -41,12 +41,14 @@ Bonus_Main:	; Routine 0
 		move.b	#$10,obActWid(a0)
 		move.b	obSubtype(a0),obFrame(a0)
 		move.w	#119,bonus_timelen(a0) ; set display time to 2 seconds
-		sfx	sfx_Bonus,0,0,0	; play bonus sound
+		sfx	$AB,0,0,0	; play bonus sound
 		moveq	#0,d0
 		move.b	obSubtype(a0),d0
 		add.w	d0,d0
 		move.w	@points(pc,d0.w),d0 ; load bonus points array
-		jsr	(AddPoints).l
+		addq.b  #1,(v_health).w
+		move.b  #1,(f_healthcount).w
+		rts
 
 	@chkdel:
 		out_of_range.s	@delete
@@ -57,8 +59,8 @@ Bonus_Main:	; Routine 0
 
 ; ===========================================================================
 @points:	dc.w 0			; Bonus	points array
-		dc.w 1000
-		dc.w 100
+		dc.w 3
+		dc.w 2
 		dc.w 1
 ; ===========================================================================
 
