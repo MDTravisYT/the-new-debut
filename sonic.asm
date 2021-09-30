@@ -2347,13 +2347,17 @@ LevSel_Ptrs:
 ; Level	select codes
 ; ---------------------------------------------------------------------------
 LevSelCode_J:	if IsDemo=0
-		dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
+		dc.b btnUp,btnUp,btnUp,btnDn,btnDn,btnDn,btnR,btnDn,btnL,0,$FF
 		else
 		dc.b btnUp,btnDn,btnL,btnR,0,$FF
 		endc
 		even
 
-LevSelCode_US:	dc.b btnUp,btnDn,btnDn,btnDn,btnL,btnDn,btnR,btnDn,0,$FF
+LevSelCode_US:	if IsDemo=0
+		dc.b btnUp,btnUp,btnUp,btnDn,btnDn,btnDn,btnR,btnDn,btnL,0,$FF
+		else
+		dc.b btnUp,btnDn,btnL,btnR,0,$FF
+		endc
 		even
 ; ===========================================================================
 
