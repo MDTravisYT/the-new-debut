@@ -76,9 +76,9 @@ Pow_ChkShield:
 		cmpi.b	#4,d0		; does monitor contain a shield?
 		bne.s	Pow_ChkInvinc
 
-		move.b	#1,(v_shield).w	; give Sonic a shield
-		move.b	#id_ShieldItem,(v_objspace+$180).w ; load shield object ($38)
-		music	sfx_Shield,1,0,0	; play shield sound
+		move.w	#$600,(v_sonspeedmax).w ; Sonic's top speed
+		move.w	#$6,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$20,(v_sonspeeddec).w ; Sonic's deceleration
 ; ===========================================================================
 
 Pow_ChkInvinc:
