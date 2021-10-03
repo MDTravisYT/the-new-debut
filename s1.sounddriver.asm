@@ -2648,7 +2648,7 @@ SoundB3:	incbin	"sound/sfx/SndB3 - Flamethrower.bin"
 		even
 SoundB4:	incbin	"sound/sfx/SndB4 - Bumper.bin"
 		even
-SoundB5:	incbin	"sound/sfx/SndB5 - Ring.bin"
+SoundB5:	include	"sound/sfx/SndB5 - Ring.asm"
 		even
 SoundB6:	include	"sound/sfx/SndB6 - Spikes Move.asm"
 		even
@@ -2698,7 +2698,7 @@ SoundCC:	include	"sound/sfx/SndCC - Spring.asm"
 		even
 SoundCD:	include	"sound/sfx/SndCD - Switch.asm"
 		even
-SoundCE:	incbin	"sound/sfx/SndCE - Ring Left Speaker.bin"
+SoundCE:	include	"sound/sfx/SndCE - Ring Left Speaker.asm"
 		even
 SoundCF:	include	"sound/sfx/SndCF - Signpost.asm"
 		even

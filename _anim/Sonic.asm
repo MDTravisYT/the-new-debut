@@ -30,7 +30,7 @@ ptr_Drown:	dc.w SonAni_Drown-Ani_Sonic
 ptr_Death:	dc.w SonAni_Death-Ani_Sonic
 ptr_Shrink:	dc.w SonAni_Wait-Ani_Sonic
 ptr_Hurt:	dc.w SonAni_Hurt-Ani_Sonic
-ptr_WaterSlide:	dc.w SonAni_Hurt-Ani_Sonic
+ptr_WaterSlide:	dc.w SonAni_WaterSlide-Ani_Sonic
 ptr_Null:	dc.w SonAni_Null-Ani_Sonic
 ptr_Float3:	dc.w SonAni_Float2-Ani_Sonic
 ptr_Float4:	dc.w SonAni_Float4-Ani_Sonic
@@ -101,7 +101,7 @@ SonAni_Shrink:	dc.b 3,	fr_shrink1, fr_shrink2, fr_shrink3, fr_shrink4, fr_shrink
 SonAni_Hurt:	dc.b 4, $3C, $3A, $31, afBack, 1
 		even
 SonAni_WaterSlide:
-		dc.b 7, $31, afEnd
+		dc.b 7, $31, $54, afEnd
 		even
 SonAni_Null:	dc.b $77, fr_null, afChange, id_Walk
 		even
