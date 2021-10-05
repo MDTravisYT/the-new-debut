@@ -77,7 +77,7 @@ Pow_ChkShield:
 		bne.s	Pow_ChkInvinc
 
 		move.w	#$600,(v_sonspeedmax).w ; Sonic's top speed
-		move.w	#$6,(v_sonspeedacc).w ; Sonic's acceleration
+		move.w	#$A,(v_sonspeedacc).w ; Sonic's acceleration
 		move.w	#$20,(v_sonspeeddec).w ; Sonic's deceleration
 ; ===========================================================================
 

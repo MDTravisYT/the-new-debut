@@ -1,24 +1,54 @@
 Operating system: Microsoft Windows NT 6.2.9200.0
 Opening INI file "D:\Disassembly\BetaSonic in Sonic 1\debut again\the-new-debut\SonPLN.ini"...
 Game type is S1.
-Loading Sega...
-Loading plane mappings from file "tilemaps/Sega Logo.bin", using compression Enigma...
-Loading 8x8 tiles from file "artnem/Sega Logo.bin", using compression Nemesis...
+Loading Title Screen...
+Loading plane mappings from file "tilemaps/Title Screen.bin", using compression Enigma...
 Loading palette file "palette/Title Screen.bin"...
-Source: 0 Destination: 0 Length: 16
-Mappings data size does not match given width/height. Expected: 3200 (40x40*2) Actual: 96.
+Source: 0 Destination: 0 Length: 32
+Loading dummy tile data.
+Loading 8x8 tiles from file "artnem/Title Screen Foreground.bin", using compression Nemesis...
 Load completed.
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at SonicRetro.SonLVL.PatternIndexSearchControl.UpdateStuff() in E:\Programs\SonLVL\SonPLN\PatternIndexSearchControl.cs:line 22
-   at SonicRetro.SonLVL.ReplaceTilesDialog.ReplaceBlockTilesDialog_VisibleChanged(Object sender, EventArgs e) in E:\Programs\SonLVL\SonPLN\ReplaceTilesDialog.cs:line 17
-   at System.Windows.Forms.Control.OnVisibleChanged(EventArgs e)
-   at System.Windows.Forms.ScrollableControl.OnVisibleChanged(EventArgs e)
-   at System.Windows.Forms.Form.OnVisibleChanged(EventArgs e)
-   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+Loading Title Screen...
+Loading dummy tile data.
+Loading 8x8 tiles from file "artnem/Title Screen Foreground.bin", using compression Nemesis...
+Loading plane mappings from file "tilemaps/Title Screen.bin", using compression Enigma...
+Loading palette file "palette/Title Screen.bin"...
+Source: 0 Destination: 0 Length: 32
+Load completed.
+System.ArgumentOutOfRangeException: Value of '1299' is not valid for 'Value'. 'Value' should be between 'minimum' and 'maximum'.
+Parameter name: Value
+   at System.Windows.Forms.ScrollBar.set_Value(Int32 value)
+   at SonicRetro.SonLVL.API.TileList.ScrollToSelected() in E:\Programs\SonLVL\SonLVLAPI\TileList.cs:line 358
+   at SonicRetro.SonLVL.API.TileList.set_SelectedIndex(Int32 value) in E:\Programs\SonLVL\SonLVLAPI\TileList.cs:line 19
+   at SonicRetro.SonLVL.SonPLN.MainForm.removeDuplicateTilesToolStripButton_Click(Object sender, EventArgs e) in E:\Programs\SonLVL\SonPLN\MainForm.cs:line 2342
+   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   at System.Windows.Forms.ToolStripButton.OnClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
    at System.Windows.Forms.Control.WndProc(Message& m)
    at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
-   at System.Windows.Forms.Form.WmShowWindow(Message& m)
-   at System.Windows.Forms.Form.WndProc(Message& m)
+   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+System.ArgumentOutOfRangeException: Value of '17034' is not valid for 'Value'. 'Value' should be between 'minimum' and 'maximum'.
+Parameter name: Value
+   at System.Windows.Forms.ScrollBar.set_Value(Int32 value)
+   at SonicRetro.SonLVL.API.TileList.ScrollToSelected() in E:\Programs\SonLVL\SonLVLAPI\TileList.cs:line 358
+   at SonicRetro.SonLVL.API.TileList.TileList_Resize(Object sender, EventArgs e) in E:\Programs\SonLVL\SonLVLAPI\TileList.cs:line 107
+   at System.Windows.Forms.Control.OnResize(EventArgs e)
+   at System.Windows.Forms.UserControl.OnResize(EventArgs e)
+   at System.Windows.Forms.Control.OnSizeChanged(EventArgs e)
+   at System.Windows.Forms.Control.UpdateBounds(Int32 x, Int32 y, Int32 width, Int32 height, Int32 clientWidth, Int32 clientHeight)
+   at System.Windows.Forms.Control.UpdateBounds()
+   at System.Windows.Forms.Control.WndProc(Message& m)
+   at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
+   at System.Windows.Forms.ContainerControl.WndProc(Message& m)
+   at System.Windows.Forms.UserControl.WndProc(Message& m)
    at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
    at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
    at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
