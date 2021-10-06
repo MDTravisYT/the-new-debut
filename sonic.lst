@@ -54860,8 +54860,53 @@
 0008F548                            		even
 0008F548                            SoundB1:	incbin	"sound/sfx/SndB1 - Electric.bin"
 0008F574                            		even
-0008F574                            SoundB2:	incbin	"sound/sfx/SndB2 - Drown Death.bin"
-0008F5C4                            		even
+0008F574                            SoundB2:	include	"sound/sfx/SndB2 - Drown Death.asm"
+0008F574                            SndB2_Header:
+0008F574 =00000001                  smpsHeaderStartSong = 1
+0008F574 0000                       	smpsHeaderVoice     SndB6_Voices
+0008F576 01                         	smpsHeaderTempoSFX  $01
+0008F577 02                         	smpsHeaderChanSFX   $02
+0008F578                            
+0008F584                            
+0008F584                            ; FM1 Data
+0008F584                            SndB6_FM1:
+0008F586 F001 0183 0C               	smpsModSet          $01, $01, $83, $0C
+0008F58B                            
+0008F58B                            SndB6_Loop01:
+0008F58B 8A05 05                    	dc.b	nA0, $05, $05
+0008F590 F700 0AFF F7               	smpsLoop            $00, $0A, SndB6_Loop01
+0008F595 F2                         	smpsStop
+0008F596                            
+0008F596                            ; FM2 Data
+0008F596                            SndB6_FM2:
+0008F596 8004                       	dc.b	nRst, $04
+0008F59A F001 016F 0E               	smpsModSet          $01, $01, $6F, $0E
+0008F59F                            
+0008F59F                            SndB6_Loop00:
+0008F59F 8D04 05                    	dc.b	nC1, $04, $05
+0008F5A4 F700 0AFF F7               	smpsLoop            $00, $0A, SndB6_Loop00
+0008F5A9 F2                         	smpsStop
+0008F5AA                            
+0008F5AA                            SndB6_Voices:
+0008F5AA                            ;	Voice $00
+0008F5AA                            ;	$35
+0008F5AA                            ;	$14, $1A, $04, $09, 	$0E, $10, $11, $0E, 	$0C, $15, $03, $06
+0008F5AA                            ;	$16, $0E, $09, $10, 	$2F, $2F, $4F, $4F, 	$2F, $12, $12, $80
+0008F5AA                            	smpsVcAlgorithm     $05
+0008F5AA                            	smpsVcFeedback      $06
+0008F5AA                            	smpsVcUnusedBits    $00
+0008F5AA                            	smpsVcDetune        $00, $00, $01, $01
+0008F5AA                            	smpsVcCoarseFreq    $09, $04, $0A, $04
+0008F5AA                            	smpsVcRateScale     $00, $00, $00, $00
+0008F5AA                            	smpsVcAttackRate    $0E, $11, $10, $0E
+0008F5AA                            	smpsVcAmpMod        $00, $00, $00, $00
+0008F5AA                            	smpsVcDecayRate1    $06, $03, $15, $0C
+0008F5AA                            	smpsVcDecayRate2    $10, $09, $0E, $16
+0008F5AA                            	smpsVcDecayLevel    $04, $04, $02, $02
+0008F5AA                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+0008F5AA 3514 1A04 090E 1011 0E0C+  	smpsVcTotalLevel    $80, $12, $12, $2F
+0008F5AA 3514 1A04 090E 1011 0E0C+  	smpsVcTotalLevel    $80, $12, $12, $2F
+0008F5C4 00                         		even
 0008F5C4                            SoundB3:	incbin	"sound/sfx/SndB3 - Flamethrower.bin"
 0008F60E                            		even
 0008F60E                            SoundB4:	incbin	"sound/sfx/SndB4 - Bumper.bin"

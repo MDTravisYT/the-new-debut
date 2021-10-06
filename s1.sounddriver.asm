@@ -2642,7 +2642,7 @@ SoundB0:	incbin	"sound/sfx/SndB0 - Saw.bin"
 		even
 SoundB1:	incbin	"sound/sfx/SndB1 - Electric.bin"
 		even
-SoundB2:	incbin	"sound/sfx/SndB2 - Drown Death.bin"
+SoundB2:	include	"sound/sfx/SndB2 - Drown Death.asm"
 		even
 SoundB3:	incbin	"sound/sfx/SndB3 - Flamethrower.bin"
 		even
