@@ -13,8 +13,6 @@
 	include	"Macros.asm"
 	include "_smps2asm_inc.asm"
 
-SHCDemo = 0
-
 ; ===========================================================================
 
 StartOfRom:
@@ -1756,9 +1754,6 @@ GM_Sega:
 
 loc_24BC:
 		bsr.w	ClearScreen
-	if SHCDemo = 1
-		jsr SHC2021 
-	endif
 		move.l	#$40000000,($C00004).l
 		lea	(Nem_OtherSegaLogo).l,a0
 		bsr.w	NemDec
@@ -1793,11 +1788,7 @@ loc_2528:
 		beq.s	loc_2528
 
 loc_2544:
-	if SHCDemo = 1
 		move.b	#4,(v_gamemode).w
-	else
-		move.b	#$20,(v_gamemode).w
-	endif
 		rts
 		
 sub_1A3A:
@@ -9159,8 +9150,6 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 		endc
 		;dcb.b ($10000-(*%$10000))-(EndOfRom-SoundDriver),$FF
     include   "TitleLock.asm"
-SHC2021:    incbin "SHC21_Lite_Sonic12.bin"
-		even
 	include "ErrorHandler.asm"
 SoundDriver:	include "s1.sounddriver.asm"
 
