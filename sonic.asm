@@ -7577,7 +7577,7 @@ SS_ShowLayout:
 		move.w	d5,-(sp)
 		lea	($FFFF8000).w,a1
 		move.b	(v_ssangle).w,d0
-		andi.b	#$FC,d0
+	;	andi.b	#$FC,d0
 		jsr	(CalcSine).l
 		move.w	d0,d4
 		move.w	d1,d5

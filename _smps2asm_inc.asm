@@ -57,12 +57,12 @@ nF1:	EQU nE1+1	; $92
 nFs1:	EQU nF1+1	; $93
 nG1:	EQU nFs1+1	; $94
 nAb1:	EQU nG1+1	; $95
-nA1:	EQU nAb1+1	; $96
+nA1:	EQU nAb1+1	; $96 g6
 nBb1:	EQU nA1+1	; $97
-nB1:	EQU nBb1+1	; $98
+nB1:	EQU nBb1+1	; $98 a6
 nC2:	EQU nB1+1	; $99
-nCs2:	EQU nC2+1	; $9A
-nD2:	EQU nCs2+1	; $9B
+nCs2:	EQU nC2+1	; $9A b6
+nD2:	EQU nCs2+1	; $9B c7
 nEb2:	EQU nD2+1	; $9C
 nE2:	EQU nEb2+1	; $9D
 nF2:	EQU nE2+1	; $9E

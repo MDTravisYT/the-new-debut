@@ -10,8 +10,8 @@ smpsHeaderStartSong = 1
 	smpsHeaderFM        Mus81_GHZ_FM3,	$F4, $14
 	smpsHeaderFM        Mus81_GHZ_FM5,	$F4, $16
 	smpsHeaderFM        Mus81_GHZ_FM4,	$F4, $08
-	smpsHeaderPSG       Mus81_GHZ_PSG1,	$F5, $0A, $00, fTone_03
-	smpsHeaderPSG       Mus81_GHZ_PSG2,	$F4, $06, $00, fTone_07
+	smpsHeaderPSG       Mus81_GHZ_PSG1,	$D0, $03, $00, fTone_03
+	smpsHeaderPSG       Mus81_GHZ_PSG2,	$D0, $03, $00, fTone_07
 	smpsHeaderPSG       Mus81_GHZ_PSG3,	$00, $03, $00, fTone_04
 
 ; FM1 Data
@@ -378,35 +378,15 @@ Mus81_GHZ_PSG1:
 	smpsModSet          $0E, $01, $01, $03
 	dc.b	nRst, $40
 	smpsNoteFill        $10
-	dc.b	nE5, $18, nD5, nE5, nD5, nE5, $08, nRst, nD5, nRst, nF5, $18
-	dc.b	nE5
-	smpsNoteFill        $00
-	dc.b	nD5, $28, smpsNoAttack, $28
-	smpsNoteFill        $10
-	dc.b	nD5, $18, nE5, nF5, $10, nD5, $18, nE5, nF5, $10, $18
-	smpsNoteFill        $00
-	dc.b	nE5, $34, smpsNoAttack, $34
-	smpsModOff
-
-Mus81_GHZ_Loop13:
-	smpsPSGvoice        fTone_01
-
-Mus81_GHZ_Loop12:
-	dc.b	nRst, $10, nRst, $04, nRst, $14, nRst, $08, nRst, $20, nRst, $04
-	dc.b	nRst, $14, nRst, $08, nRst, $10
-	smpsLoop            $01, $03, Mus81_GHZ_Loop12
-	dc.b	nRst, $10, nRst, $04, nRst, $14, nRst, $08, nRst, $20, nRst, $04
-	dc.b	nRst, $14, nRst, $08, nRst, $10
-	smpsLoop            $00, $02, Mus81_GHZ_Loop13
-	smpsPSGvoice        fTone_05
 	dc.b	nRst, $18, nRst, nRst, nRst, nRst, $08, nRst, nRst, nRst, nRst, $18
-	dc.b	nRst, nRst, nRst, nRst, $08, nRst, nRst, nRst, nRst, $18, nRst, nRst
-	dc.b	nRst, nRst, $10, nRst, $08, nRst, nRst, $08, nRst, nRst, nRst, $10
-	dc.b	$08, nRst, nRst, $10
-	smpsPSGAlterVol     $01
-	dc.b	nRst, $18, $08, nRst, nRst, nRst
-	smpsPSGAlterVol     $FF
-	smpsPSGvoice        fTone_03
+	dc.b	nRst
+	smpsNoteFill        $00
+	dc.b	nRst, $28, smpsNoAttack, $28
+	smpsNoteFill        $10
+	dc.b	nRst, $18, nRst, nRst, $10, nRst, $18, nRst, nRst, $10, $18
+	smpsNoteFill        $00
+	dc.b	nRst, $34, smpsNoAttack, $34
+	smpsModOff
 	
 Mus81_GHZ_Loop132:
 	smpsPSGvoice        fTone_01
@@ -419,12 +399,11 @@ Mus81_GHZ_Loop122:
 	dc.b	nRst, $14, nG5, $08, nRst, $10
 	smpsLoop            $00, $02, Mus81_GHZ_Loop132
 	smpsPSGvoice        fTone_05
-	dc.b	nBb6, $18, nA6, nG6, nF6, nE6, $08, nRst, nD6, nRst, nA5, $18
-	dc.b	nB5, nC6, nD6, nE6, $08, nRst, nA6, nRst, nAb6, $18, nG6, nF6
-	dc.b	nEb6, nD6, $10, nC6, $08, nRst, nRst, $08, nG6, nA6, nG6, $10
-	dc.b	$08, nA6, nRst, $10
-	smpsPSGAlterVol     $01
-	dc.b	nA5, $18, $08, nRst, nA5, nRst
+	dc.b	nF6, $34, smpsNoAttack, $34, nE6, $08, nFs6, nAb6, $38, smpsNoAttack, $38, nE6
+	dc.b	$08, nE6, nAb6, nG6, $34, smpsNoAttack, $34, nE6, $08, nFs6, nE6
+	smpsPSGvoice        fTone_05
+	dc.b	nE6, $18, $18, $18, $18, $08, nRst, nE6, nRst
+	smpsPSGvoice        fTone_03
 	smpsPSGAlterVol     $FF
 	smpsPSGvoice        fTone_03
 	smpsJump            Mus81_GHZ_Loop132
@@ -435,26 +414,11 @@ Mus81_GHZ_PSG2:
 	smpsPSGAlterVol     $FE
 
 Mus81_GHZ_Loop0F:
-	smpsNoteFill        $06
+;	smpsNoteFill        $06
 	dc.b	nC7, $08, nB6, nA6, nG6, nC7, nB6, nA6, nG6
 	smpsLoop            $00, $08, Mus81_GHZ_Loop0F
 	smpsNoteFill        $00
-
-Mus81_GHZ_Loop11:
-	smpsPSGvoice        fTone_01
-
-Mus81_GHZ_Loop10:
-	dc.b	nRst, $10, nRst, $04, nRst, $14, nRst, $08, nRst, $20, nRst, $04
-	dc.b	nRst, $14, nRst, $08, nRst, $10
-	smpsLoop            $01, $03, Mus81_GHZ_Loop10
-	dc.b	nRst, $10, nRst, $04, nRst, $14, nRst, $08, nRst, $20, nRst, $04
-	dc.b	nRst, $14, nRst, $08, nRst, $10
-	smpsLoop            $00, $02, Mus81_GHZ_Loop11
-	dc.b	nRst, $34, smpsNoAttack, $34, nRst, $08, nRst, nRst, $38, smpsNoAttack, $38, nRst
-	dc.b	$08, nRst, nRst, nEb6, $34, smpsNoAttack, $34, nRst, $08, nEb6, nRst
-	smpsPSGvoice        fTone_05
-	dc.b	nC5, $18, $18, $18, $18, $08, nRst, nC5, nRst
-	smpsPSGvoice        fTone_03
+	smpsJump            Mus81_GHZ_Loop112
 	
 Mus81_GHZ_Loop112:
 	smpsPSGvoice        fTone_01
