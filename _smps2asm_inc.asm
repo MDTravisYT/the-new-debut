@@ -109,11 +109,11 @@ nA5:	EQU nAb5+1	; $C6
 nBb5:	EQU nA5+1	; $C7
 nB5:	EQU nBb5+1	; $C8
 nC6:	EQU nB5+1	; $C9
-nCs6:	EQU nC6+1	; $CA
-nD6:	EQU nCs6+1	; $CB
-nEb6:	EQU nD6+1	; $CC
-nE6:	EQU nEb6+1	; $CD
-nF6:	EQU nE6+1	; $CE
+nCs6:	EQU nC6+1	; $CA s
+nD6:	EQU nCs6+1	; $CB 2
+nEb6:	EQU nD6+1	; $CC 3
+nE6:	EQU nEb6+1	; $CD 4
+nF6:	EQU nE6+1	; $CE e5
 nFs6:	EQU nF6+1	; $CF
 nG6:	EQU nFs6+1	; $D0
 nAb6:	EQU nG6+1	; $D1
