@@ -45,5 +45,6 @@ loc_103DC:				; CODE XREF: Sonic_Spindash+3Cj
 
 loc_103EA:				; CODE XREF: Sonic_Spindash+82j
 		addq.l	#4,sp
+		move.b	#$1,(v_invinc).w	; is Sonic invincible?
 		rts
 ; End of function Sonic_Spindash
