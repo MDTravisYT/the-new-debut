@@ -738,6 +738,8 @@ PlaySegaSound:
 Sound_PlayBGM:
 		cmpi.b	#$88,d7
 		bne.s	@bgmnot1up
+
+@becomefader:
 		tst.b	$27(a6)
 		bne.w	@locdblret
 		lea	$40(a6),a5
@@ -2534,7 +2536,7 @@ Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
 Music90:	incbin	"sound/music/prelude.bin"
 		even
-Music91:	incbin	"sound/music/Mus90 - Continue Screen.bin"
+Music91:	include	"sound/music/Key Collected.asm"
 		even
 Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
 		even
