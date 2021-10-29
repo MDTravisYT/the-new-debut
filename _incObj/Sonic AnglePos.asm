@@ -4,7 +4,6 @@
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
-
 Sonic_AnglePos:
 		btst	#3,obStatus(a0)
 		beq.s	loc_14602
