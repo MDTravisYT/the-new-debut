@@ -96,7 +96,7 @@ loc_E0:
 		dc.l ErrorTrap
 	endif
 ConsoleName:	dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
-Date:		dc.b "MCT/SHC21 OCT'21" ; Copyright holder and release date (generally year)
+Date:		dc.b "MCT/SHC22 SEP'22" ; Copyright holder and release date (generally year)
 	if	IsDemo = 1
 Title_Local:	dc.b "SONIC DEBUT BY MCTRAVISYT - DEV BUILD -         " ; Domestic name
 Title_Int:	dc.b "SONIC DEBUT BY MCTRAVISYT - DEV BUILD -         " ; International name

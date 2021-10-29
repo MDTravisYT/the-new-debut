@@ -97,9 +97,9 @@ DLE_GHZ2:
 	;	cmpi.w	#$1600,(v_screenposx).w
 	;	bcs.s	locret_6E3A
 	;	move.w	#$400,(v_limitbtm1).w
-		cmpi.w	#$1AE0,(v_screenposx).w
-		bcs.s	locret_6E3A
-		move.w	#$200,(v_limittop2).w
+	;	cmpi.w	#$1AE0,(v_screenposx).w
+	;	bcs.s	locret_6E3A
+	;	move.w	#$200,(v_limittop2).w
 
 locret_6E3A:
 		rts	
