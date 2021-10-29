@@ -55261,9 +55261,20 @@
 00087C41                            ;	$04
 00087C41                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
 00087C41                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
-00087C41 0437 7277 021F 1F1F 1F07+  	dc.b	$04,$37,$72,$77,$02,$1F,$1F,$1F,$1F,$07,$0A,$07,$0D,$00,$00,$00,$00,$10,$07,$10,$07,$23,$00,$23,$00
-00087C5A                            
-00087C5A                            
+00087C41                            	smpsVcAlgorithm     $04
+00087C41                            	smpsVcFeedback      $00
+00087C41                            	smpsVcUnusedBits    $00
+00087C41                            	smpsVcDetune        $02, $07, $07, $03
+00087C41                            	smpsVcCoarseFreq    $02, $07, $02, $07
+00087C41                            	smpsVcRateScale     $00, $00, $00, $00
+00087C41                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00087C41                            	smpsVcAmpMod        $00, $00, $00, $00
+00087C41                            	smpsVcDecayRate1    $0D, $07, $0A, $07
+00087C41                            	smpsVcDecayRate2    $0B, $00, $0B, $00
+00087C41                            	smpsVcDecayLevel    $00, $01, $00, $01
+00087C41                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00087C41 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00087C41 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
 00087C5A                            		even
 00087C5A                            SoundB6:	include	"sound/sfx/SndB6 - Spikes Move.asm"
 00087C5A                            SndB7_Header:
@@ -55652,8 +55663,20 @@
 00088229                            ;	$04
 00088229                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
 00088229                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
-00088229 0437 7277 021F 1F1F 1F07+  	dc.b	$04,$37,$72,$77,$02,$1F,$1F,$1F,$1F,$07,$0A,$07,$0D,$00,$00,$00,$00,$10,$07,$10,$07,$23,$00,$23,$00
-00088229 0437 7277 021F 1F1F 1F07+  	dc.b	$04,$37,$72,$77,$02,$1F,$1F,$1F,$1F,$07,$0A,$07,$0D,$00,$00,$00,$00,$10,$07,$10,$07,$23,$00,$23,$00
+00088229                            	smpsVcAlgorithm     $04
+00088229                            	smpsVcFeedback      $00
+00088229                            	smpsVcUnusedBits    $00
+00088229                            	smpsVcDetune        $02, $07, $07, $03
+00088229                            	smpsVcCoarseFreq    $02, $07, $02, $07
+00088229                            	smpsVcRateScale     $00, $00, $00, $00
+00088229                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00088229                            	smpsVcAmpMod        $00, $00, $00, $00
+00088229                            	smpsVcDecayRate1    $0D, $07, $0A, $07
+00088229                            	smpsVcDecayRate2    $0B, $00, $0B, $00
+00088229                            	smpsVcDecayLevel    $00, $01, $00, $01
+00088229                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00088229 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00088229 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
 00088242                            		even
 00088242                            SoundCF:	include	"sound/sfx/SndCF - Signpost.asm"
 00088242                            SndCF_Signpost_Header:
