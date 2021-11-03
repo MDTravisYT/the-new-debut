@@ -399,10 +399,10 @@ Mus81_GHZ_Loop122:
 	dc.b	nRst, $14, nG5, $08, nRst, $10
 	smpsLoop            $00, $02, Mus81_GHZ_Loop132
 	smpsPSGvoice        fTone_05
-	dc.b	nF6, $34, smpsNoAttack, $34, nE6, $08, nFs6, nAb6, $38, smpsNoAttack, $38, nE6
-	dc.b	$08, nE6, nAb6, nG6, $34, smpsNoAttack, $34, nE6, $08, nFs6, nE6
+	dc.b	nF6, $34, smpsNoAttack, $34, nRst, $08, nRst, nRst, $38, smpsNoAttack, $38, nRst
+	dc.b	$08, nE6, nRst, nRst, $34, smpsNoAttack, $34, nRst, $08, nRst, nRst
 	smpsPSGvoice        fTone_05
-	dc.b	nE6, $18, $18, $18, $18, $08, nRst, nE6, nRst
+	dc.b	nRst, $18, $18, $18, $18, $08, nRst, nRst, nRst
 	smpsPSGvoice        fTone_03
 	smpsPSGAlterVol     $FF
 	smpsPSGvoice        fTone_03
