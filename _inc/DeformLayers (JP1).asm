@@ -32,7 +32,7 @@ DeformLayers:
 ; ---------------------------------------------------------------------------
 ; Offset index for background layer deformation	code
 ; ---------------------------------------------------------------------------
-Deform_Index:	dc.w Deform_GHZ_TTS-Deform_Index, Deform_LZ-Deform_Index
+Deform_Index:	dc.w Deform_GHZ-Deform_Index, Deform_LZ-Deform_Index
 		dc.w Deform_MZ-Deform_Index, Deform_SLZ-Deform_Index
 		dc.w Deform_SYZ-Deform_Index, Deform_SBZ-Deform_Index
 		dc.w Deform_GHZ-Deform_Index, Deform_GHZ-Deform_Index
@@ -42,86 +42,6 @@ Deform_Index:	dc.w Deform_GHZ_TTS-Deform_Index, Deform_LZ-Deform_Index
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-Deform_Plain:
-	; plain background scroll
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#7,d4
-		move.w	(v_scrshifty).w,d5
-		ext.l	d5
-		asl.l	#7,d5
-		bsr.w	BGScroll_XY
-
-		move.w	(v_bgscreenposy).w,(v_bgscrposy_dup).w
-;		lea	(Lz_Scroll_Data).l,a3
-;		lea	(Drown_WobbleData).l,a2
-		move.b	(v_lz_deform).w,d2
-		move.b	d2,d3
-		addi.w	#$80,(v_lz_deform).w
-
-		add.w	(v_bgscreenposy).w,d2
-		andi.w	#$FF,d2
-		add.w	(v_screenposy).w,d3
-		andi.w	#$FF,d3
-		lea	(v_hscrolltablebuffer).w,a1
-		move.w	#$DF,d1
-		move.w	(v_screenposx).w,d0
-		neg.w	d0
-		move.w	d0,d6
-		swap.w	d0
-		move.w	(v_bgscreenposx).w,d0
-		neg.w	d0
-		move.w	(v_waterpos1).w,d4
-		move.w	(v_screenposy).w,d5
-; End of function Deform_Plain
-
-Deform_GHZ_TTS: ; BG scroll for real background
-		move.w	(v_scrshiftx).w,d4
-		ext.l	d4
-		asl.l	#5,d4
-		move.l	d4,d1
-		asl.l	#2,d4
-		add.l	d1,d4
-  moveq	#0,d5
-		bsr.w	BGScroll_Block1
-		bsr.w	BGScroll_Block4  
-		lea	(v_hscrolltablebuffer).w,a1
-		move.w	(v_screenposy).w,d0
-		andi.w	#$7FF,d0
-		lsr.w	#5,d0
-		neg.w	d0
-		addi.w	#$26,d0              
-		move.w	d0,(v_bg2screenposy).w
-		move.w	d0,d4
-		bsr.w	BGScroll_Block3
-		move.w #$D,($FFFFF70C).w
-		move.w	(v_bgscreenposy).w,(v_bgscrposy_dup).w
-		lea	(v_hscrolltablebuffer).w,a1	; load beginning address of horizontal scroll buffer to a1
-
-		move.w	($FFFFF700).w,d0	; load FG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		swap	d0			; send to the left side of d0
-		move.w	($FFFFF708).w,d0	; load BG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		asr.w	#3,d0			; divide by 8 (Slow down the scroll position)
-		move.w	#162-1,d1		; set number of scan lines to dump (minus 1 for dbf)
-GHZ_DeformLoop_1:
-		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
-		dbf	d1,GHZ_DeformLoop_1	; repeat d1 number of scanlines
-
-		move.w	($FFFFF700).w,d0	; load FG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		swap	d0			; send to the left side of d0
-		move.w	($FFFFF708).w,d0	; load BG screen's X position
-		neg.w	d0			; negate (positive to negative)
-		asr.w	#2,d0			; divide by 4 (Slow down the scroll position)
-		move.w	#80-1,d1		; set number of scan lines to dump (minus 1 for dbf)
-GHZ_DeformLoop_2:
-		move.l	d0,(a1)+		; dump both the FG and BG scanline position to buffer
-		dbf	d1,GHZ_DeformLoop_2	; repeat d1 number of scanlines
-		rts
-; End of function Deform_GHZ
 
 Deform_GHZ:
 	; block 3 - distant mountains
@@ -145,7 +65,7 @@ Deform_GHZ:
 		andi.w	#$7FF,d0
 		lsr.w	#5,d0
 		neg.w	d0
-		addi.w	#$20,d0
+		addi.w	#$10,d0
 		bpl.s	@limitY
 		moveq	#0,d0
 	@limitY:
@@ -157,7 +77,7 @@ Deform_GHZ:
 		moveq	#0,d0	; reset foreground position in title screen
 	@notTitle:
 		neg.w	d0
-		swap.w	d0
+		swap	d0
 	; auto-scroll clouds
 		lea	(v_bgscroll_buffer).w,a2
 		addi.l	#$10000,(a2)+
@@ -221,9 +141,9 @@ Deform_GHZ:
 		move.w	d3,d0
 		neg.w	d0
 		move.l	d0,(a1)+
-		swap.w	d3
+		swap	d3
 		add.l	d2,d3
-		swap.w	d3
+		swap	d3
 		dbf	d1,@waterLoop
 		rts
 ; End of function Deform_GHZ

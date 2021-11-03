@@ -204,7 +204,7 @@ LevSz_LoadScrollBlockSize:
 ; dword_61B4:
 BGScrollBlockSizes:
 		; GHZ
-		dc.w $800
+		dc.w $70
 		dc.w $100	; I guess these used to be per act?
 		dc.w $100	; Or maybe each scroll block got its own size?
 		dc.w $100	; Either way, these are unused now.
@@ -233,18 +233,7 @@ BGScrollBlockSizes:
 		dc.w $100
 		dc.w $100
 		dc.w 0
-		zonewarning BGScrollBlockSizes,8
 		; Ending
-		dc.w $70
-		dc.w $100
-		dc.w $100
-		dc.w $100
-		
-		dc.w $70
-		dc.w $100
-		dc.w $100
-		dc.w $100
-		
 		dc.w $70
 		dc.w $100
 		dc.w $100
@@ -275,17 +264,23 @@ loc_6206:
 ; End of function BgScrollSpeed
 
 ; ===========================================================================
-BgScroll_Index:	dc.w BgScroll_LZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
+BgScroll_Index:	dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_LZ-BgScroll_Index
 		dc.w BgScroll_MZ-BgScroll_Index, BgScroll_SLZ-BgScroll_Index
 		dc.w BgScroll_SYZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
 		zonewarning BgScroll_Index,2
-		dc.w BgScroll_End-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
-		dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
-		dc.w BgScroll_GHZ-BgScroll_Index, BgScroll_SBZ-BgScroll_Index
+		dc.w BgScroll_End-BgScroll_Index
 ; ===========================================================================
 
 BgScroll_GHZ:
-		bra.w	Deform_GHZ
+		clr.l	(v_bgscreenposx).w
+		clr.l	(v_bgscreenposy).w
+		clr.l	(v_bg2screenposy).w
+		clr.l	(v_bg3screenposy).w
+		lea	($FFFFA800).w,a2
+		clr.l	(a2)+
+		clr.l	(a2)+
+		clr.l	(a2)+
+		rts
 ; ===========================================================================
 
 BgScroll_LZ:
@@ -302,6 +297,7 @@ BgScroll_SLZ:
 		asr.l	#1,d0
 		addi.w	#$C0,d0
 		move.w	d0,(v_bgscreenposy).w
+		clr.l	(v_bgscreenposx).w
 		rts	
 ; ===========================================================================
 
@@ -311,26 +307,35 @@ BgScroll_SYZ:
 		asl.l	#1,d0
 		add.l	d2,d0
 		asr.l	#8,d0
+		addq.w	#1,d0
 		move.w	d0,(v_bgscreenposy).w
-		move.w	d0,(v_bg2screenposy).w
+		clr.l	(v_bgscreenposx).w
 		rts	
 ; ===========================================================================
 
 BgScroll_SBZ:
-		asl.l	#4,d0
-		asl.l	#1,d0
-		asr.l	#8,d0
+		andi.w	#$7F8,d0
+		asr.w	#3,d0
+		addq.w	#1,d0
 		move.w	d0,(v_bgscreenposy).w
 		rts	
 ; ===========================================================================
 
 BgScroll_End:
-		move.w	#$1E,(v_bgscreenposy).w
-		move.w	#$1E,(v_bg2screenposy).w
-		rts	
-; ===========================================================================
-		move.w	#$A8,(v_bgscreenposx).w
-		move.w	#$1E,(v_bgscreenposy).w
-		move.w	#-$40,(v_bg2screenposx).w
-		move.w	#$1E,(v_bg2screenposy).w
+		move.w	(v_screenposx).w,d0
+		asr.w	#1,d0
+		move.w	d0,(v_bgscreenposx).w
+		move.w	d0,(v_bg2screenposx).w
+		asr.w	#2,d0
+		move.w	d0,d1
+		add.w	d0,d0
+		add.w	d1,d0
+		move.w	d0,(v_bg3screenposx).w
+		clr.l	(v_bgscreenposy).w
+		clr.l	(v_bg2screenposy).w
+		clr.l	(v_bg3screenposy).w
+		lea	($FFFFA800).w,a2
+		clr.l	(a2)+
+		clr.l	(a2)+
+		clr.l	(a2)+
 		rts
