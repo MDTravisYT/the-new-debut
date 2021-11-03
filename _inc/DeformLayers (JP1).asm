@@ -47,7 +47,7 @@ Deform_GHZ:
 	; block 3 - distant mountains
 		move.w	(v_scrshiftx).w,d4
 		ext.l	d4
-		asl.l	#5,d4
+		asl.l	#2,d4
 		move.l	d4,d1
 		asl.l	#1,d4
 		add.l	d1,d4
@@ -56,7 +56,7 @@ Deform_GHZ:
 	; block 2 - hills & waterfalls
 		move.w	(v_scrshiftx).w,d4
 		ext.l	d4
-		asl.l	#7,d4
+		asl.l	#5,d4
 		moveq	#0,d6
 		bsr.w	BGScroll_Block2
 	; calculate Y position
@@ -80,8 +80,8 @@ Deform_GHZ:
 		swap	d0
 	; auto-scroll clouds
 		lea	(v_bgscroll_buffer).w,a2
-		addi.l	#$10000,(a2)+
-		addi.l	#$C000,(a2)+
+		addi.l	#$8000,(a2)+
+		addi.l	#$8000,(a2)+
 		addi.l	#$8000,(a2)+
 	; calculate background scroll	
 		move.w	(v_bgscroll_buffer).w,d0
@@ -111,14 +111,14 @@ Deform_GHZ:
 		move.l	d0,(a1)+
 		dbf	d1,@cloudLoop3
 
-		move.w	#$2F,d1
+		move.w	#$6E,d1
 		move.w	(v_bg3screenposx).w,d0
 		neg.w	d0
 	@mountainLoop:		; distant mountains (48px)
 		move.l	d0,(a1)+
 		dbf	d1,@mountainLoop
 
-		move.w	#$27,d1
+		move.w	#$00,d1
 		move.w	(v_bg2screenposx).w,d0
 		neg.w	d0
 	@hillLoop:			; hills & waterfalls (40px)
@@ -141,9 +141,9 @@ Deform_GHZ:
 		move.w	d3,d0
 		neg.w	d0
 		move.l	d0,(a1)+
-		swap	d3
-		add.l	d2,d3
-		swap	d3
+	;	swap	d3
+	;	add.l	d2,d3
+	;	swap	d3
 		dbf	d1,@waterLoop
 		rts
 ; End of function Deform_GHZ
