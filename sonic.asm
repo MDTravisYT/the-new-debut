@@ -1935,19 +1935,6 @@ GM_Title:
 		move.l	d0,(a1)+
 		dbf	d1,Tit_ClrObj1	; fill object space ($D000-$EFFF) with 0
 
-		locVRAM	0
-		lea	(Nem_JapNames).l,a0 ; load Japanese credits
-		bsr.w	NemDec
-		locVRAM	$14C0
-		lea	(Nem_TitleCard).l,a0 ;	load alphabet
-		bsr.w	NemDec
-		lea	($FF0000).l,a1
-		lea	(Eni_JapNames).l,a0 ; load mappings for	Japanese credits
-		move.w	#0,d0
-		bsr.w	EniDec
-
-		copyTilemap	$FF0000,$C000,$27,$1B
-
 		lea	(v_pal_dry_dup).w,a1
 		moveq	#cBlack,d0
 		move.w	#$1F,d1
@@ -1991,15 +1978,6 @@ GM_Title:
 		move.w	#(6<<8),(v_zone).w	; set level to GHZ (00)
 		move.w	#0,(v_pcyc_time).w ; disable palette cycling
 		bsr.w	LevelSizeLoad
-		bsr.w	DeformLayers
-		lea	(v_16x16).w,a1
-		lea	(Blk16_Lock).l,a0 ; load	GHZ 16x16 mappings
-		move.w	#0,d0
-		bsr.w	EniDec
-		lea	(Blk256_Lock).l,a0 ; load GHZ 256x256 mappings
-		lea	(v_256x256).l,a1
-		bsr.w	KosDec
-		bsr.w	LevelLayoutLoad
 		bsr.w	PaletteFadeOut
 		disable_ints
 		bsr.w	ClearScreen
@@ -2017,7 +1995,19 @@ GM_Title:
 		copyTilemap	$FF0000,$C208,$21,$47
 
 		locVRAM	0
-		lea	(Nem_Lock).l,a0 ; load GHZ patterns
+		lea	(Nem_JapNames).l,a0 ; load Japanese credits
+		bsr.w	NemDec
+		locVRAM	$14C0
+		lea	(Nem_CreditText).l,a0 ;	load alphabet
+		bsr.w	NemDec
+		lea	($FF0000).l,a1
+		lea	(Eni_JapNames).l,a0 ; load mappings for	Japanese credits
+		move.w	#0,d0
+		bsr.w	EniDec
+                move.l  #$60000003,d0
+		moveq	#39,d1
+		moveq	#33,d2
+		bsr.w	TilemapToVRAM
 		bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
