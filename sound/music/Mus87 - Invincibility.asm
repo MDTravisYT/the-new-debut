@@ -1,367 +1,164 @@
-; =============================================================================================
-; Project Name:		invinc
-; Created:		29th July 2021
-; ---------------------------------------------------------------------------------------------
-; ASM'd using S1SMPS2ASM version 1.1 by Marc Gordon (AKA Cinossu)
-; =============================================================================================
-
-invinc_Header:
+Mus87_Invincibility_Header:
 smpsHeaderStartSong = 1
-	smpsHeaderVoice	invinc_Voices
-	smpsHeaderChan	$07,	$03
-	smpsHeaderTempo	$01,	$00
+	smpsHeaderVoice     Mus87_Invincibility_Voices
+	smpsHeaderChan      $06, $03
+	smpsHeaderTempo     $01, $04
 
-	smpsHeaderDAC	invinc_FM3
-	smpsHeaderFM	invinc_FM6,	$01,	$00
-	smpsHeaderFM	invinc_FM2,	$01,	$00
-	smpsHeaderFM	invinc_FM3,	$01,	$00
-	smpsHeaderFM	invinc_FM4,	$01,	$00
-	smpsHeaderFM	invinc_FM5,	$01,	$00
-	smpsHeaderFM	invinc_FM6,	$01,	$00
-	smpsHeaderPSG	invinc_PSG1,	$00,	$00,	$00, fTone_05
-	smpsHeaderPSG	invinc_PSG2,	$00,	$00,	$00, fTone_05
-	smpsHeaderPSG	invinc_PSG3,	$00,	$00,	$00, fTone_05
-
-; PSG1 Data
-invinc_PSG1:
-
-; PSG2 Data
-invinc_PSG2:
-
-; PSG3 Data
-invinc_PSG3:
-	smpsStop
-
-; FM1 Data
-invinc_FM1:
-	smpsSetvoice	$00
-	smpsAlterVol	$11
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$3E
-invinc_Jump01:
-	dc.b		nRst,	$0F,	nC5,	$1C,	nRst,	$04,	nC5,	$07
-	dc.b		nRst,	$08,	nCs5,	$13,	nRst,	$04,	nCs5,	$1E
-	dc.b		nRst,	$08,	nC5,	$07,	nRst,	$08,	nC5,	nRst
-	dc.b		nC5,	$07,	nRst,	$08,	nAb4,	nRst,	$07,	nFs4
-	dc.b		$13,	nRst,	$04,	nFs4,	$1E,	nRst,	$17,	nC5
-	dc.b		$1C,	nRst,	$03,	nC5,	$08,	nRst,	nCs5,	$12
-	dc.b		nRst,	$04,	nCs5,	$1E,	nRst,	$08,	nC5,	nRst
-	dc.b		$07,	nC5,	$08,	nRst,	$07,	nC5,	$08,	nRst
-	dc.b		nAb4,	$07,	nRst,	$08,	nFs4,	$13,	nRst,	$04
-	dc.b		nFs4,	$1E,	nRst,	$07
-	smpsAlterVol	$FD
-	dc.b		smpsNoAttack,	nRst,	$79,	nAb4,	$06,	nAb4,	$05,	nAb4
-	dc.b		nAb4,	nEb5,	nF5,	nBb4,	$04,	nBb4,	$06,	nD5
-	dc.b		$05,	nEb5,	nEb5,	nG5,	nC5,	$06,	nC5,	$04
-	dc.b		nC5,	$06,	nC5,	$05,	nC5,	nC5,	nC5,	$06
-	dc.b		nC5,	$05,	nC5,	nC5,	nC5,	nC5
-	smpsAlterVol	$03
-	smpsPan		panCentre,	$00
-	smpsJump	invinc_Jump01
-
-; FM2 Data
-invinc_FM2:
-	smpsSetvoice	$01
-	smpsAlterVol	$7F
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$01
-	smpsSetvoice	$04
-	smpsAlterVol	$88
-	dc.b		smpsNoAttack,	nRst,	$3C,	nAb2,	$01
-invinc_Jump02:
-	dc.b		smpsNoAttack,	nAb2,	$07,	nRst,	$08,	nAb2,	nRst,	nEb2
-	dc.b		nRst,	nEb2,	$07,	nRst,	$08,	nFs2,	$17,	nFs2
-	dc.b		$0F,	nFs2,	$07,	nF2,	$10,	nAb2,	$07,	nRst
-	dc.b		$08,	nAb2,	nRst,	nEb2,	$07,	nRst,	$08,	nEb2
-	dc.b		nRst,	$07,	nCs3,	$17,	nCs3,	$0F,	nCs3,	$08
-	dc.b		nCs3,	$0F,	nAb2,	$08,	nRst,	nAb2,	$07,	nRst
-	dc.b		$08,	nEb2,	nRst,	$07,	nEb2,	$08,	nRst,	nFs2
-	dc.b		$16,	nFs2,	$0F,	nFs2,	$08,	nF2,	$0F,	nAb2
-	dc.b		$08,	nRst,	$07,	nAb2,	$08,	nRst,	$07,	nEb2
-	dc.b		$08,	nRst,	nEb2,	$07,	nRst,	$08,	nCs3,	$17
-	dc.b		nCs3,	$0F,	nCs3,	$08,	nCs3,	$0E,	nBb1,	$08
-	dc.b		nBb1,	$17,	nAb1,	$08,	nRst,	$07,	nBb1,	$08
-	dc.b		nRst,	nBb1,	$07,	nBb1,	$17,	nAb1,	$07,	nRst
-	dc.b		$08,	nBb1,	$07,	nRst,	nAb1,	$10,	nAb1,	$0F
-	dc.b		nC2,	nD2,	nBb1,	$08,	nBb1,	nBb1,	$07,	nRst
-	dc.b		$01,	nBb1,	$07,	nRst,	$01,	nBb1,	$07,	nBb1
-	dc.b		$08,	nBb1,	$07,	nBb1,	$08
-	smpsPan		panCentre,	$00
-	smpsJump	invinc_Jump02
-
-; FM3 Data
-invinc_FM3:
-	smpsSetvoice	$02
-	smpsAlterVol	$0E
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$01,	smpsNoAttack
-	dc.b		dSnare,	$07,	dSnare,	$08,	dSnare,	$07,	dSnare,	$03
-	dc.b		dSnare,	$05
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$07,	nRst,	$0F,	smpsNoAttack,	nRst,	$01
-invinc_Jump03:
-	dc.b		smpsNoAttack,	dSnare,	$07,	nRst,	$08
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
-	smpsSetvoice	$06
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$07
-	smpsSetvoice	$07
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$07,	nRst,	$08
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	nRst,	$07
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$07,	nRst
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$07,	nRst,	$08
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	nRst
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$07,	nRst,	$08
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	nRst,	$07
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$07
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$08,	nRst,	$07
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$02
-	smpsSetvoice	$08
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$04,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack,	dSnare,	$07
-	dc.b		nRst,	$07
-	smpsSetvoice	$09
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$07
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$08
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	nRst,	$07
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
-	smpsSetvoice	$0A
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$07,	nRst
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$08,	nRst
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$07,	nRst
-	smpsSetvoice	$0B
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$07,	nRst,	$08
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07,	nRst,	$07
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare,	$07,	nRst,	$07
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07,	nRst,	$07
-	smpsSetvoice	$08
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$07,	nRst
-	smpsSetvoice	$09
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$07
-	smpsSetvoice	$0C
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$07,	nRst
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$02
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$06,	dSnare,	$07,	nRst
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dKick,	$07
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	nRst,	$10
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$07
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$08,	nRst,	$07,	smpsNoAttack,	nRst,	$01,	smpsNoAttack
-	dc.b		dSnare,	$07
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	nRst,	$10,	dKick,	$07,	nRst
-	smpsSetvoice	$0D
-	dc.b		smpsNoAttack,	nRst,	$01
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$07,	nRst,	smpsNoAttack,	nRst,	$01,	smpsNoAttack,	dSnare
-	dc.b		$07
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	dc.b		dKick,	$08,	nRst,	$0F,	dKick,	$07,	nRst,	$08
-	smpsSetvoice	$02
-	smpsAlterVol	$02
-	dc.b		dSnare,	$07,	nRst,	$08,	dSnare,	$05,	smpsNoAttack,	dSnare
-	dc.b		$01,	smpsNoAttack,	dSnare,	$04,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack
-	dc.b		dSnare,	$05,	dSnare,	smpsNoAttack,	dSnare,	$01,	smpsNoAttack,	dSnare
-	dc.b		$04,	nRst,	$01,	smpsNoAttack,	dSnare,	$04,	smpsNoAttack,	dSnare
-	dc.b		$01,	smpsNoAttack,	dSnare,	$05,	dSnare,	dSnare,	dSnare,	nRst
-	dc.b		$01,	smpsNoAttack,	dSnare,	$04,	dSnare,	$05
-	smpsSetvoice	$05
-	smpsAlterVol	$FE
-	smpsPan		panCentre,	$00
-	smpsJump	invinc_Jump03
-
-; FM4 Data
-invinc_FM4:
-	smpsSetvoice	$03
-	smpsAlterVol	$7F
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$01
-	smpsSetvoice	$00
-	smpsAlterVol	$90
-	dc.b		smpsNoAttack,	nRst,	$3C,	nEb4,	$01
-invinc_Jump04:
-	dc.b		smpsNoAttack,	nEb4,	$07,	nRst,	$08,	nEb4,	nRst,	nC4
-	dc.b		nRst,	nC4,	$07,	nRst,	$08,	nCs4,	$17,	nCs4
-	dc.b		$26,	nEb4,	$07,	nRst,	$08,	nEb4,	nRst,	nC4
-	dc.b		$07,	nRst,	$08,	nC4,	nRst,	$07,	nFs4,	$17
-	dc.b		nFs4,	$26,	nEb4,	$08,	nRst,	nEb4,	$07,	nRst
-	dc.b		$08,	nC4,	nRst,	$07,	nC4,	$08,	nRst,	nCs4
-	dc.b		$16,	nCs4,	$26,	nEb4,	$08,	nRst,	$07,	nEb4
-	dc.b		$08,	nRst,	$07,	nC4,	$08,	nRst,	nC4,	$07
-	dc.b		nRst,	$08,	nFs4,	$17,	nFs4,	$25,	nRst,	$08
-	dc.b		nFs4,	$17,	nAb3,	$08,	nRst,	$1E,	nAb3,	$17
-	dc.b		nAb3,	$07,	nRst,	$1E,	nAb3,	$17,	nAb3,	$07
-	dc.b		nRst,	$1F,	nAb3,	$18,	nAb3,	$07,	nRst,	$17
-	smpsPan		panCentre,	$00
-	smpsJump	invinc_Jump04
+	smpsHeaderDAC       Mus87_Invincibility_DAC
+	smpsHeaderFM        Mus87_Invincibility_FM1,	$F4, $11
+	smpsHeaderFM        Mus87_Invincibility_FM2,	$F4, $07
+	smpsHeaderFM        Mus87_Invincibility_FM3,	$E8, $0F
+	smpsHeaderFM        Mus87_Invincibility_FM4,	$E8, $0F
+	smpsHeaderFM        Mus87_Invincibility_FM5,	$F4, $11
+	smpsHeaderPSG       Mus87_Invincibility_PSG1,	$D0, $05, $00, fTone_05
+	smpsHeaderPSG       Mus87_Invincibility_PSG2,	$DC, $05, $00, fTone_05
+	smpsHeaderPSG       Mus87_Invincibility_PSG3,	$00, $03, $00, fTone_04
 
 ; FM5 Data
-invinc_FM5:
-	smpsSetvoice	$03
-	smpsAlterVol	$7F
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$01
-	smpsSetvoice	$00
-	smpsAlterVol	$90
-	dc.b		smpsNoAttack,	nRst,	$3C,	nC4,	$01
-invinc_Jump05:
-	dc.b		smpsNoAttack,	nC4,	$07,	nRst,	$08,	nC4,	nRst,	nAb3
-	dc.b		nRst,	nAb3,	$07,	nRst,	$08,	nBb3,	$17,	nBb3
-	dc.b		$26,	nC4,	$07,	nRst,	$08,	nC4,	nRst,	nAb3
-	dc.b		$07,	nRst,	$08,	nAb3,	nRst,	$07,	nCs4,	$17
-	dc.b		nCs4,	$26,	nC4,	$08,	nRst,	nC4,	$07,	nRst
-	dc.b		$08,	nAb3,	nRst,	$07,	nAb3,	$08,	nRst,	nBb3
-	dc.b		$16,	nBb3,	$26,	nC4,	$08,	nRst,	$07,	nC4
-	dc.b		$08,	nRst,	$07,	nAb3,	$08,	nRst,	nAb3,	$07
-	dc.b		nRst,	$08,	nCs4,	$17,	nCs4,	$25,	nRst,	$08
-	dc.b		nCs4,	$17,	nC4,	$08,	nRst,	$1E,	nC4,	$17
-	dc.b		nC4,	$07,	nRst,	$1E,	nC4,	$17,	nC4,	$07
-	dc.b		nRst,	$1F,	nC4,	$18,	nC4,	$07,	nRst,	$17
-	smpsPan		panCentre,	$00
-	smpsJump	invinc_Jump05
+Mus87_Invincibility_FM5:
+	smpsAlterNote       $03
 
-; FM6 Data
-invinc_FM6:
-	smpsSetvoice	$03
-	smpsAlterVol	$7F
-	smpsPan		panCentre,	$00
-	dc.b		nRst,	$01
-	smpsSetvoice	$00
-	smpsAlterVol	$92
-	dc.b		smpsNoAttack,	nRst,	$3D
-invinc_Jump06:
-	dc.b		nRst,	$0F,	nC5,	$1C,	nRst,	$04,	nC5,	$07
-	dc.b		nRst,	$08,	nCs5,	$13,	nRst,	$04,	nCs5,	$1E
-	dc.b		nRst,	$08,	nC5,	$07,	nRst,	$08,	nC5,	nRst
-	dc.b		nC5,	$07,	nRst,	$08,	nAb4,	nRst,	$07,	nFs4
-	dc.b		$13,	nRst,	$04,	nFs4,	$1E,	nRst,	$18,	nC5
-	dc.b		$1B,	nRst,	$03,	nC5,	$08,	nRst,	nCs5,	$12
-	dc.b		nRst,	$04,	nCs5,	$1E,	nRst,	$08,	nC5,	nRst
-	dc.b		$07,	nC5,	$08,	nRst,	$07,	nC5,	$08,	nRst
-	dc.b		nAb4,	$07,	nRst,	$08,	nFs4,	$13,	nRst,	$04
-	dc.b		nFs4,	$1E,	nRst,	$07
-	smpsAlterVol	$FD
-	dc.b		smpsNoAttack,	nRst,	$79,	nAb4,	$06,	nAb4,	$05,	nAb4
-	dc.b		nAb4,	nEb5,	nF5,	nBb4,	$04,	nRst,	$01,	nBb4
-	dc.b		$05,	nD5,	nEb5,	nEb5,	nG5,	nC5,	$06,	nC5
-	dc.b		$05,	nC5,	nC5,	nRst,	$01,	nC5,	$04,	nC5
-	dc.b		$06,	nC5,	$05,	nC5,	nC5,	nC5,	nC5,	nC5
-	smpsAlterVol	$03
-	smpsPan		panCentre,	$00
-	smpsJump	invinc_Jump06
-	
-invinc_dac:
-	smpsstop
+; FM1 Data
+Mus87_Invincibility_FM1:
+	smpsSetvoice        $00
+	dc.b	nRst, $30
 
-invinc_Voices:
-	dc.b		$3A,$01,$07,$01,$01,$8E,$8E,$8D,$53,$0E,$0E,$0E,$03,$00,$00,$00
-	dc.b		$00,$1F,$FF,$1F,$0F,$18,$28,$27,$00;			Voice 00
-	dc.b		$3A,$61,$3C,$14,$31,$9C,$DB,$9C,$DA,$04,$09,$04,$03,$00,$00,$00
-	dc.b		$00,$FF,$FF,$FF,$FF,$7F,$7F,$7F,$00;			Voice 01
-	dc.b		$3C,$0F,$00,$00,$00,$1F,$1A,$18,$1C,$17,$11,$1A,$0E,$00,$0F,$14
-	dc.b		$10,$1F,$EC,$FF,$FF,$05,$00,$0C,$00;			Voice 02
-	dc.b		$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00
-	dc.b		$00,$FF,$FF,$FF,$FF,$7F,$7F,$7F,$00;			Voice 03
-	dc.b		$3A,$61,$3C,$14,$31,$9C,$DB,$9C,$DA,$04,$09,$04,$03,$03,$01,$03
-	dc.b		$00,$1F,$0F,$0F,$AF,$21,$47,$31,$00;			Voice 04
-	dc.b		$3C,$01,$00,$00,$00,$1F,$9F,$9F,$1F,$15,$13,$1F,$11,$00,$00,$0E
-	dc.b		$0D,$F5,$FF,$09,$F6,$0A,$04,$20,$00;			Voice 05
-	dc.b		$3C,$01,$00,$00,$00,$1F,$9F,$18,$1C,$17,$11,$1A,$0E,$00,$0F,$14
-	dc.b		$10,$FF,$FF,$FF,$FF,$05,$00,$0C,$00;			Voice 06
-	dc.b		$3C,$0F,$00,$00,$00,$1F,$1A,$18,$1C,$17,$11,$1A,$0E,$00,$0F,$14
-	dc.b		$10,$1F,$EC,$FF,$FF,$0A,$04,$20,$00;			Voice 07
-	dc.b		$3C,$0F,$00,$00,$00,$1F,$9F,$9F,$1F,$15,$13,$1F,$11,$00,$00,$0E
-	dc.b		$0D,$FF,$FF,$FF,$FF,$0A,$04,$20,$00;			Voice 08
-	dc.b		$3C,$01,$00,$00,$00,$1F,$9F,$9F,$1F,$17,$11,$1A,$0E,$00,$0F,$14
-	dc.b		$10,$FF,$FF,$FF,$FF,$05,$00,$0C,$00;			Voice 09
-	dc.b		$3C,$01,$00,$00,$00,$1F,$9F,$9F,$1F,$15,$13,$1F,$11,$00,$00,$0E
-	dc.b		$0D,$F5,$FF,$FF,$FF,$05,$00,$0C,$00;			Voice 0A
-	dc.b		$3C,$01,$00,$00,$00,$1F,$9F,$9F,$1F,$15,$13,$1F,$11,$00,$00,$0E
-	dc.b		$0D,$FF,$FF,$FF,$FF,$0A,$04,$20,$00;			Voice 0B
-	dc.b		$3C,$0F,$00,$00,$00,$1F,$1A,$18,$1C,$17,$11,$1A,$0E,$00,$0F,$14
-	dc.b		$10,$1F,$EC,$FF,$FF,$05,$02,$20,$00;			Voice 0C
-	dc.b		$3C,$0F,$00,$00,$00,$1F,$1A,$18,$1C,$17,$13,$1F,$11,$00,$00,$0E
-	dc.b		$0D,$FF,$FF,$FF,$FF,$0A,$04,$20,$00;			Voice 0D
-	even
+Mus87_Invincibility_Jump00:
+	dc.b	nRst, $0C, nCs6, $15, nRst, $03, nCs6, $06, nRst, nD6, $0F, nRst
+	dc.b	$03, nB5, $18, nRst, $06, nCs6, $06, nRst, nCs6, nRst, nCs6, nRst
+	dc.b	nA5, nRst, nG5, $0F, nRst, $03, nB5, $18, nRst, $06, nRst, $0C
+	dc.b	nCs6, $15, nRst, $03, nCs6, $06, nRst, nD6, $0F, nRst, $03, nB5
+	dc.b	$18, nRst, $06, nCs6, $06, nRst, nCs6, nRst, nCs6, nRst, nA5, nRst
+	dc.b	nG5, $0F, nRst, $03, nB5, $18, nRst, $06
+	smpsAlterVol        $FD
+	dc.b	nRst, $30, nRst, nA5, $04, nB5, nCs6, nD6, nE6, nFs6, nB5, nCs6
+	dc.b	nEb6, nE6, nFs6, nAb6, nCs6, nEb6, nF6, nFs6, nAb6, nBb6, nF6, nFs6
+	dc.b	nAb6, nBb6, nC7, nCs7
+	smpsAlterVol        $03
+	smpsJump            Mus87_Invincibility_Jump00
+
+; FM2 Data
+Mus87_Invincibility_FM2:
+	smpsNop             $01
+	smpsSetvoice        $01
+	dc.b	nRst, $30
+
+Mus87_Invincibility_Loop05:
+	dc.b	nA3, $06, nRst, nA3, nRst, nE3, nRst, nE3, nRst, nG3, $12, nFs3
+	dc.b	$0C, nG3, $06, nFs3, $0C, nA3, $06, nRst, nA3, nRst, nE3, nRst
+	dc.b	nE3, nRst, nD4, $12, nCs4, $0C, nD4, $06, nCs4, $0C
+	smpsLoop            $00, $02, Mus87_Invincibility_Loop05
+
+Mus87_Invincibility_Loop06:
+	dc.b	nB2, $06, nG2, $12, nA2, $06, nRst, nB2, nRst
+	smpsLoop            $00, $02, Mus87_Invincibility_Loop06
+	dc.b	nA2, $0C, nB2, nCs3, nEb3, nB2, $06, nCs3, nEb3, nF3, nCs3, nEb3
+	dc.b	nF3, nFs3
+	smpsNop             $01
+	smpsJump            Mus87_Invincibility_Loop05
+
+; FM3 Data
+Mus87_Invincibility_FM3:
+	smpsSetvoice        $00
+	dc.b	nRst, $30
+
+Mus87_Invincibility_Loop03:
+	dc.b	nE6, $06, nRst, nE6, nRst, nCs6, nRst, nCs6, nRst, nD6, $12, nD6
+	dc.b	$1E, nE6, $06, nRst, nE6, nRst, nCs6, nRst, nCs6, nRst, nG6, $12
+	dc.b	nG6, $1E
+	smpsLoop            $00, $02, Mus87_Invincibility_Loop03
+
+Mus87_Invincibility_Loop04:
+	dc.b	nRst, $06, nG5, $12, nA5, $06, nRst, $12
+	smpsLoop            $00, $04, Mus87_Invincibility_Loop04
+	smpsJump            Mus87_Invincibility_Loop03
+
+; FM4 Data
+Mus87_Invincibility_FM4:
+	smpsSetvoice        $00
+	dc.b	nRst, $30
+
+Mus87_Invincibility_Loop01:
+	dc.b	nCs6, $06, nRst, nCs6, nRst, nA5, nRst, nA5, nRst, nB5, $12, nB5
+	dc.b	$1E, nCs6, $06, nRst, nCs6, nRst, nA5, nRst, nA5, nRst, nD6, $12
+	dc.b	nD6, $1E
+	smpsLoop            $00, $02, Mus87_Invincibility_Loop01
+
+Mus87_Invincibility_Loop02:
+	dc.b	nRst, $06, nB5, $12, nCs6, $06, nRst, $12
+	smpsLoop            $00, $04, Mus87_Invincibility_Loop02
+	smpsJump            Mus87_Invincibility_Loop01
+
+; PSG1 Data
+Mus87_Invincibility_PSG1:
+; PSG2 Data
+Mus87_Invincibility_PSG2:
+	smpsStop
+
+; PSG3 Data
+Mus87_Invincibility_PSG3:
+	smpsPSGform         $E7
+	dc.b	nRst, $30
+
+Mus87_Invincibility_Jump01:
+	smpsNoteFill        $03
+	dc.b	nA5, $0C
+	smpsNoteFill        $0C
+	dc.b	$0C
+	smpsNoteFill        $03
+	dc.b	$0C
+	smpsNoteFill        $0C
+	dc.b	$0C
+	smpsJump            Mus87_Invincibility_Jump01
+
+; DAC Data
+Mus87_Invincibility_DAC:
+	dc.b	dSnare, $06, dSnare, dSnare, dSnare, dSnare, $02, dSnare, $04, dKick, $12
+
+Mus87_Invincibility_Loop00:
+	dc.b	dKick, $0C, dSnare, dKick, dSnare, dKick, $0C, dSnare, dKick, dSnare, dKick, $0C
+	dc.b	dSnare, dKick, dSnare, dKick, $0C, dSnare, dKick, $04, nRst, dSnare, dSnare, $0C
+	smpsLoop            $00, $02, Mus87_Invincibility_Loop00
+	dc.b	dKick, $06, dSnare, $12, dKick, $0C, dSnare, dSnare, $06, dKick, $12, dKick
+	dc.b	$0C, dSnare, dSnare, $06, dKick, $12, dKick, $0C, dSnare, dSnare, $04, dSnare
+	dc.b	dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare, dSnare
+	smpsJump            Mus87_Invincibility_Loop00
+	smpsStop
+
+Mus87_Invincibility_Voices:
+;	Voice $00
+;	$3A
+;	$01, $07, $01, $01, 	$8E, $8E, $8D, $53, 	$0E, $0E, $0E, $03
+;	$00, $00, $00, $00, 	$1F, $FF, $1F, $0F, 	$18, $28, $27, $80
+	smpsVcAlgorithm     $02
+	smpsVcFeedback      $07
+	smpsVcUnusedBits    $00
+	smpsVcDetune        $00, $00, $00, $00
+	smpsVcCoarseFreq    $01, $01, $07, $01
+	smpsVcRateScale     $01, $02, $02, $02
+	smpsVcAttackRate    $13, $0D, $0E, $0E
+	smpsVcAmpMod        $00, $00, $00, $00
+	smpsVcDecayRate1    $03, $0E, $0E, $0E
+	smpsVcDecayRate2    $00, $00, $00, $00
+	smpsVcDecayLevel    $00, $01, $0F, $01
+	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+	smpsVcTotalLevel    $00, $27, $28, $18
+
+;	Voice $01
+;	$3A
+;	$61, $3C, $14, $31, 	$9C, $DB, $9C, $DA, 	$04, $09, $04, $03
+;	$03, $01, $03, $00, 	$1F, $0F, $0F, $AF, 	$21, $47, $31, $80
+	smpsVcAlgorithm     $02
+	smpsVcFeedback      $07
+	smpsVcUnusedBits    $00
+	smpsVcDetune        $03, $01, $03, $06
+	smpsVcCoarseFreq    $01, $04, $0C, $01
+	smpsVcRateScale     $03, $02, $03, $02
+	smpsVcAttackRate    $1A, $1C, $1B, $1C
+	smpsVcAmpMod        $00, $00, $00, $00
+	smpsVcDecayRate1    $03, $04, $09, $04
+	smpsVcDecayRate2    $00, $03, $01, $03
+	smpsVcDecayLevel    $0A, $00, $00, $01
+	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+	smpsVcTotalLevel    $00, $31, $47, $21
+
