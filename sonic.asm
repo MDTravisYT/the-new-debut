@@ -2676,7 +2676,7 @@ GM_Level:
 		locVRAM	$AF80
 		
 	@CheckCWZ:
-		cmpi.b	#(id_CWZ),(v_zone).w ; check if level is SBZ
+		cmpi.b	#(id_CWZ),(v_zone).w ; check if level is CWZ
 		bne.s	@NotCWZ
 		lea	(Nem_TitleCard_Spec).l,a0 ; load title card patterns
 		bra		@cont
