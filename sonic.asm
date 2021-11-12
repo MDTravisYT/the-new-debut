@@ -2674,7 +2674,16 @@ GM_Level:
 		bmi.s	Level_ClrRam	; if yes, branch
 		disable_ints
 		locVRAM	$AF80
+		
+	@CheckCWZ:
+		cmpi.b	#(id_SBZ),(v_zone).w ; check if level is SBZ
+		bne.s	@NotCWZ
+		lea	(Nem_TitleCard_Spec).l,a0 ; load title card patterns
+		bra		@cont
+	@NotCWZ:
 		lea	(Nem_TitleCard).l,a0 ; load title card patterns
+	
+	@cont:	
 		bsr.w	NemDec
 		enable_ints
 		moveq	#0,d0
@@ -3323,7 +3332,7 @@ loc_47D4:
 		move.w	#$9001,(a6)		; 64-cell hscroll size
 		bsr.w	ClearScreen
 		locVRAM	$B000
-		lea	(Nem_TitleCard).l,a0 ; load title card patterns
+		lea	(Nem_TitleCard_Spec).l,a0 ; load title card patterns
 		bsr.w	NemDec
 		jsr	(Hud_Base).l
 		enable_ints
@@ -8594,6 +8603,8 @@ Nem_Cater:	incbin	"artnem\Enemy Caterkiller.bin"
 ; Compressed graphics - various
 ; ---------------------------------------------------------------------------
 Nem_TitleCard:	incbin	"artnem\Title Cards.bin"
+		even
+Nem_TitleCard_Spec:	incbin	"artnem\Title Cards Special.bin"
 		even
 Nem_Hud:	incbin	"artnem\HUD.bin"	; HUD (rings, time, score)
 		even
