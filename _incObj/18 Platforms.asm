@@ -20,7 +20,7 @@ Plat_Main:	; Routine 0
 		move.w	#$4000,obGfx(a0)
 		move.l	#Map_Plat_GHZ,obMap(a0)
 		move.b	#$20,obActWid(a0)
-		cmpi.b	#id_SYZ,(v_zone).w ; check if level is SYZ
+		cmpi.b	#id_SZ,(v_zone).w ; check if level is SYZ
 		bne.s	@notSYZ
 
 		move.l	#Map_Plat_SYZ,obMap(a0) ; SYZ specific code

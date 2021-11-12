@@ -28,7 +28,7 @@ Card_CheckSBZ3:	; Routine 0
 	Card_CheckFZ:
 		if IsDemo=0
 		move.w	d0,d2
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; check if level is FZ
+		cmpi.w	#(id_CWZ<<8)+2,(v_zone).w ; check if level is FZ
 		bne.s	Card_LoadConfig
 		moveq	#6,d0		; load title card number 6 (FZ)
 		moveq	#$D,d2		; use "FINAL" mappings

@@ -20,7 +20,7 @@ orb_parent:	equ $3C		; address of parent object
 Orb_Main:	; Routine 0
 		move.l	#Map_Orb,obMap(a0)
 		move.w	#$429,obGfx(a0)	; SBZ specific code
-		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+		cmpi.b	#id_CWZ,(v_zone).w ; check if level is SBZ
 		beq.s	@isscrap
 		move.w	#$2429,obGfx(a0) ; SLZ specific code
 

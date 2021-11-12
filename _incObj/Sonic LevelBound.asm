@@ -39,7 +39,7 @@ Sonic_LevelBound:
 		move.w (v_limitbtm2).w,d1
 		cmp.w d0,d1
 		blt.s @cont
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2 ?
+		cmpi.w	#(id_CWZ<<8)+1,(v_zone).w ; is level SBZ2 ?
 		bne.w	KillSonic	; if not, kill Sonic
 		cmpi.w	#$2000,(v_player+obX).w
 		bcs.w	KillSonic

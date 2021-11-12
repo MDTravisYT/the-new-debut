@@ -38,7 +38,7 @@ Swing_Main:	; Routine 0
 		move.b	#$99,obColType(a0)
 
 	@notSLZ:
-		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+		cmpi.b	#id_CWZ,(v_zone).w ; check if level is SBZ
 		bne.s	@length
 
 		move.l	#Map_BBall,obMap(a0) ; SBZ specific code
@@ -112,7 +112,7 @@ Swing_Main:	; Routine 0
 		move.b	#$81,obColType(a0) ; make object hurt when touched
 
 	@not1X:
-		cmpi.b	#id_SBZ,(v_zone).w ; is zone SBZ?
+		cmpi.b	#id_CWZ,(v_zone).w ; is zone SBZ?
 		beq.s	Swing_Action	; if yes, branch
 
 Swing_SetSolid:	; Routine 2

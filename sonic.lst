@@ -383,8 +383,8 @@
 00000000 =00000001                  id_LZ:		equ 1
 00000000 =00000002                  id_MZ:		equ 2
 00000000 =00000003                  id_SLZ:		equ 3
-00000000 =00000004                  id_SYZ:		equ 4
-00000000 =00000005                  id_SBZ:		equ 5
+00000000 =00000004                  id_SZ:		equ 4
+00000000 =00000005                  id_CWZ:		equ 5
 00000000 =00000006                  id_EndZ:	equ 6
 00000000 =00000007                  id_IMZ:		equ 7
 00000000 =00000008                  id_CSZ:		equ 8
@@ -4770,15 +4770,15 @@
 00001F5E =00000006                  palid_MZ:		equ (ptr_Pal_MZ-PalPointers)/8
 00001F5E =00000007                  palid_IMZ:		equ (ptr_Pal_IMZ-PalPointers)/8
 00001F5E =00000008                  palid_SLZ:		equ (ptr_Pal_SLZ-PalPointers)/8
-00001F5E =00000009                  palid_SYZ:		equ (ptr_Pal_SYZ-PalPointers)/8
-00001F5E =0000000A                  palid_SBZ1:		equ (ptr_Pal_SBZ1-PalPointers)/8
+00001F5E =00000009                  palid_SZ:		equ (ptr_Pal_SYZ-PalPointers)/8
+00001F5E =0000000A                  palid_CWZ1:		equ (ptr_Pal_SBZ1-PalPointers)/8
 00001F5E =0000000B                  palid_Special:		equ (ptr_Pal_Special-PalPointers)/8
 00001F5E =0000000C                  palid_LZWater:		equ (ptr_Pal_LZWater-PalPointers)/8
-00001F5E =0000000D                  palid_SBZ3:		equ (ptr_Pal_SBZ3-PalPointers)/8
-00001F5E =0000000E                  palid_SBZ3Water:	equ (ptr_Pal_SBZ3Water-PalPointers)/8
-00001F5E =0000000F                  palid_SBZ2:		equ (ptr_Pal_SBZ2-PalPointers)/8
+00001F5E =0000000D                  palid_CWZ3:		equ (ptr_Pal_SBZ3-PalPointers)/8
+00001F5E =0000000E                  palid_CWZ3Water:	equ (ptr_Pal_SBZ3Water-PalPointers)/8
+00001F5E =0000000F                  palid_CWZ2:		equ (ptr_Pal_SBZ2-PalPointers)/8
 00001F5E =00000010                  palid_LZSonWater:	equ (ptr_Pal_LZSonWater-PalPointers)/8
-00001F5E =00000011                  palid_SBZ3SonWat:	equ (ptr_Pal_SBZ3SonWat-PalPointers)/8
+00001F5E =00000011                  palid_CWZ3SonWat:	equ (ptr_Pal_SBZ3SonWat-PalPointers)/8
 00001F5E =00000012                  palid_SSResult:		equ (ptr_Pal_SSResult-PalPointers)/8
 00001F5E =00000013                  palid_Continue:		equ (ptr_Pal_Continue-PalPointers)/8
 00001F5E =00000014                  palid_Ending:		equ (ptr_Pal_Ending-PalPointers)/8
@@ -5491,12 +5491,12 @@
 0000336E 0300                       		dc.b id_SLZ, 0
 00003370 0301                       		dc.b id_SLZ, 1
 00003372 0302                       		dc.b id_SLZ, 2
-00003374 0400                       		dc.b id_SYZ, 0
-00003376 0401                       		dc.b id_SYZ, 1
-00003378 0402                       		dc.b id_SYZ, 2
-0000337A 0500                       		dc.b id_SBZ, 0
-0000337C 0501                       		dc.b id_SBZ, 1
-0000337E 0502                       		dc.b id_SBZ, 2
+00003374 0400                       		dc.b id_SZ, 0
+00003376 0401                       		dc.b id_SZ, 1
+00003378 0402                       		dc.b id_SZ, 2
+0000337A 0500                       		dc.b id_CWZ, 0
+0000337C 0501                       		dc.b id_CWZ, 1
+0000337E 0502                       		dc.b id_CWZ, 2
 00003380 0800                       		dc.b $08, 0
 00003382 0801                       		dc.b $08, 1
 00003384 0802                       		dc.b $08, 2
@@ -5819,7 +5819,7 @@
 0000395C 46FC 2700                  		disable_ints
 0000396A                            		
 0000396A                            	@CheckCWZ:
-0000396A 0C38 0005 FE10             		cmpi.b	#(id_SBZ),(v_zone).w ; check if level is SBZ
+0000396A 0C38 0005 FE10             		cmpi.b	#(id_CWZ),(v_zone).w ; check if level is SBZ
 00003970 6600                       		bne.s	@NotCWZ
 00003972 41F9 0000 0000             		lea	(Nem_TitleCard_Spec).l,a0 ; load title card patterns
 00003978 6000 0000                  		bra		@cont
@@ -5915,7 +5915,7 @@
 00003A70 7010                       		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
 00003A72 0C38 0003 FE11             		cmpi.b	#3,(v_act).w	; is act number 3?
 00003A78 6600                       		bne.s	Level_WaterPal	; if not, branch
-00003A7A 7011                       		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+00003A7A 7011                       		moveq	#palid_CWZ3SonWat,d0 ; palette number $10 (SBZ3)
 00003A7C                            
 00003A7C                            	Level_WaterPal:
 00003A7C 6100 E3F8                  		bsr.w	PalLoad3_Water	; load underwater palette
@@ -5933,7 +5933,7 @@
 00003AA0 7005                       		moveq	#5,d0		; use 5th music (SBZ)
 00003AA2                            
 00003AA2                            	Level_BgmNotLZ4:
-00003AA2 0C78 0502 FE10             		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
+00003AA2 0C78 0502 FE10             		cmpi.w	#(id_CWZ<<8)+2,(v_zone).w ; is level FZ?
 00003AA8 6600                       		bne.s	Level_PlayBgm	; if not, branch
 00003AAA 7009                       		moveq	#9,d0		; use 6th music (FZ)
 00003AAC                            
@@ -6059,7 +6059,7 @@
 00003C5C 700C                       		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
 00003C5E 0C38 0003 FE11             		cmpi.b	#3,(v_act).w	; is level SBZ3?
 00003C64 6600                       		bne.s	Level_WtrNotSbz	; if not, branch
-00003C66 700E                       		moveq	#palid_SBZ3Water,d0 ; palette $D (SBZ3 underwater)
+00003C66 700E                       		moveq	#palid_CWZ3Water,d0 ; palette $D (SBZ3 underwater)
 00003C68                            
 00003C68                            	Level_WtrNotSbz:
 00003C68 6100 E228                  		bsr.w	PalLoad4_Water
@@ -7075,7 +7075,7 @@
 000048A2 4A78 FFF0                  		tst.w	(f_demo).w	; is demo mode on?
 000048A6 6600 0000                  		bne.w	SS_ToSegaScreen	; if yes, branch
 000048AA 11FC 0000 F600             		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
-000048B0 0C78 0503 FE10             		cmpi.w	#(id_SBZ<<8)+3,(v_zone).w ; is level number higher than FZ?
+000048B0 0C78 0503 FE10             		cmpi.w	#(id_CWZ<<8)+3,(v_zone).w ; is level number higher than FZ?
 000048B6 6500                       		blo.s	SS_Finish	; if not, branch
 000048B8 4278 FE10                  		clr.w	(v_zone).w	; set to GHZ1
 000048BC                            
@@ -11051,16 +11051,16 @@
 000073DA 0240 00FF                  		andi.w	#$FF,d0
 000073DE 0C78 0103 FE10             		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; is level SBZ3 (LZ4) ?
 000073E4 6600                       		bne.s	@notSBZ3	; if not, branch
-000073E6 700D                       		moveq	#palid_SBZ3,d0	; use SB3 palette
+000073E6 700D                       		moveq	#palid_CWZ3,d0	; use SB3 palette
 000073E8                            
 000073E8                            	@notSBZ3:
-000073E8 0C78 0501 FE10             		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2?
+000073E8 0C78 0501 FE10             		cmpi.w	#(id_CWZ<<8)+1,(v_zone).w ; is level SBZ2?
 000073EE 6700                       		beq.s	@isSBZorFZ	; if yes, branch
-000073F0 0C78 0502 FE10             		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
+000073F0 0C78 0502 FE10             		cmpi.w	#(id_CWZ<<8)+2,(v_zone).w ; is level FZ?
 000073F6 6600                       		bne.s	@normalpal	; if not, branch
 000073F8                            
 000073F8                            	@isSBZorFZ:
-000073F8 700F                       		moveq	#palid_SBZ2,d0	; use SBZ2/FZ palette
+000073F8 700F                       		moveq	#palid_CWZ2,d0	; use SBZ2/FZ palette
 000073FA                            
 000073FA                            	@normalpal:
 000073FA 6100 AA46                  		bsr.w	PalLoad1	; load palette (based on d0)
@@ -11369,7 +11369,7 @@
 00007658 6400                       		bcc.s	locret_6F8C	; if not, branch
 0000765A 4238 FE30                  		clr.b	(v_lastlamp).w
 0000765E 31FC 0001 FE02             		move.w	#1,(f_restart).w ; restart level
-00007664 31FC 0502 FE10             		move.w	#(id_SBZ<<8)+2,(v_zone).w ; set level number to 0502 (FZ)
+00007664 31FC 0502 FE10             		move.w	#(id_CWZ<<8)+2,(v_zone).w ; set level number to 0502 (FZ)
 0000766A 11FC 0001 F7C8             		move.b	#1,(f_lockmulti).w ; freeze Sonic
 00007670                            
 00007670                            locret_6F8C:
@@ -12263,7 +12263,7 @@
 00007FD2 117C 0099 0020             		move.b	#$99,obColType(a0)
 00007FD8                            
 00007FD8                            	@notSLZ:
-00007FD8 0C38 0005 FE10             		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+00007FD8 0C38 0005 FE10             		cmpi.b	#id_CWZ,(v_zone).w ; check if level is SBZ
 00007FDE 6600                       		bne.s	@length
 00007FE0                            
 00007FE0 217C 0000 0000 0004        		move.l	#Map_BBall,obMap(a0) ; SBZ specific code
@@ -12337,7 +12337,7 @@
 000080DA 117C 0081 0020             		move.b	#$81,obColType(a0) ; make object hurt when touched
 000080E0                            
 000080E0                            	@not1X:
-000080E0 0C38 0005 FE10             		cmpi.b	#id_SBZ,(v_zone).w ; is zone SBZ?
+000080E0 0C38 0005 FE10             		cmpi.b	#id_CWZ,(v_zone).w ; is zone SBZ?
 000080E6 6700                       		beq.s	Swing_Action	; if yes, branch
 000080E8                            
 000080E8                            Swing_SetSolid:	; Routine 2
@@ -12748,7 +12748,7 @@
 0000845A 317C 4000 0002             		move.w	#$4000,obGfx(a0)
 00008460 217C 0000 0000 0004        		move.l	#Map_Plat_GHZ,obMap(a0)
 00008468 117C 0020 0019             		move.b	#$20,obActWid(a0)
-0000846E 0C38 0004 FE10             		cmpi.b	#id_SYZ,(v_zone).w ; check if level is SYZ
+0000846E 0C38 0004 FE10             		cmpi.b	#id_SZ,(v_zone).w ; check if level is SYZ
 00008474 6600                       		bne.s	@notSYZ
 00008476                            
 00008476 217C 0000 0000 0004        		move.l	#Map_Plat_SYZ,obMap(a0) ; SYZ specific code
@@ -13500,7 +13500,7 @@
 00008B84 5428 001A                  		addq.b	#2,obFrame(a0)
 00008B88                            
 00008B88                            	@notSLZ:
-00008B88 0C38 0005 FE10             		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+00008B88 0C38 0005 FE10             		cmpi.b	#id_CWZ,(v_zone).w ; check if level is SBZ
 00008B8E 6600                       		bne.s	@notSBZ
 00008B90 317C 43F5 0002             		move.w	#$43F5,obGfx(a0) ; SBZ specific code
 00008B96                            
@@ -20002,7 +20002,7 @@
 0000D0B0                            
 0000D0B0                            	Card_CheckFZ:
 0000D0B0 3400                       		move.w	d0,d2
-0000D0B2 0C78 0502 FE10             		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; check if level is FZ
+0000D0B2 0C78 0502 FE10             		cmpi.w	#(id_CWZ<<8)+2,(v_zone).w ; check if level is FZ
 0000D0B8 6600                       		bne.s	Card_LoadConfig
 0000D0BA 7006                       		moveq	#6,d0		; load title card number 6 (FZ)
 0000D0BC 740D                       		moveq	#$D,d2		; use "FINAL" mappings
@@ -20339,7 +20339,7 @@
 0000D432 4A40                       		tst.w	d0		; is there any bonus?
 0000D434 6600                       		bne.s	Got_AddBonus	; if yes, branch
 0000D440 5428 0024                  		addq.b	#2,obRoutine(a0)
-0000D444 0C78 0501 FE10             		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w
+0000D444 0C78 0501 FE10             		cmpi.w	#(id_CWZ<<8)+1,(v_zone).w
 0000D44A 6600                       		bne.s	Got_SetDelay
 0000D44C 5828 0024                  		addq.b	#4,obRoutine(a0)
 0000D450                            
@@ -20410,20 +20410,20 @@
 0000D4CE 0000                       		dc.b 0, 0
 0000D4D0                            
 0000D4D0                            		; Star Light Zone
-0000D4D0 0400                       		dc.b id_SYZ, 0	; Act 1
+0000D4D0 0400                       		dc.b id_SZ, 0	; Act 1
 0000D4D2 0302                       		dc.b id_SLZ, 2	; Act 2
-0000D4D4 0400                       		dc.b id_SYZ, 0	; Act 3
+0000D4D4 0400                       		dc.b id_SZ, 0	; Act 3
 0000D4D6 0000                       		dc.b 0, 0
 0000D4D8                            
 0000D4D8                            		; Spring Yard Zone
-0000D4D8 0500                       		dc.b id_SBZ, 0	; Act 1
-0000D4DA 0402                       		dc.b id_SYZ, 2	; Act 2
-0000D4DC 0500                       		dc.b id_SBZ, 0	; Act 3
+0000D4D8 0500                       		dc.b id_CWZ, 0	; Act 1
+0000D4DA 0402                       		dc.b id_SZ, 2	; Act 2
+0000D4DC 0500                       		dc.b id_CWZ, 0	; Act 3
 0000D4DE 0000                       		dc.b 0, 0
 0000D4E0                            
 0000D4E0                            		; Scrap Brain Zone
-0000D4E0 0501                       		dc.b id_SBZ, 1	; Act 1
-0000D4E2 0502                       		dc.b id_SBZ, 2	; Act 2
+0000D4E0 0501                       		dc.b id_CWZ, 1	; Act 1
+0000D4E2 0502                       		dc.b id_CWZ, 2	; Act 2
 0000D4E4 0800                       		dc.b 8, 0	; Final Zone
 0000D4E6 0000                       		dc.b 0, 0
 0000D4E8                            		even
@@ -25925,7 +25925,7 @@
 00010C92 117C 0007 0016             		move.b	#7,obHeight(a0)
 00010C98                            
 00010C98                            loc_FE44:
-00010C98 0C38 0005 FE10             		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+00010C98 0C38 0005 FE10             		cmpi.b	#id_CWZ,(v_zone).w ; check if level is SBZ
 00010C9E 6600                       		bne.s	loc_FE60
 00010CA0 317C 22C0 0002             		move.w	#$22C0,obGfx(a0) ; SBZ specific code (object 5228)
 00010CA6 0C28 0028 0028             		cmpi.b	#$28,obSubtype(a0) ; is object 5228 ?
@@ -29001,7 +29001,7 @@
 00012C0E                            Orb_Main:	; Routine 0
 00012C0E 217C 0000 0000 0004        		move.l	#Map_Orb,obMap(a0)
 00012C16 317C 0429 0002             		move.w	#$429,obGfx(a0)	; SBZ specific code
-00012C1C 0C38 0005 FE10             		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+00012C1C 0C38 0005 FE10             		cmpi.b	#id_CWZ,(v_zone).w ; check if level is SBZ
 00012C22 6700                       		beq.s	@isscrap
 00012C24 317C 2429 0002             		move.w	#$2429,obGfx(a0) ; SLZ specific code
 00012C2A                            
@@ -31331,7 +31331,7 @@
 00014320 3238 F72E                  		move.w (v_limitbtm2).w,d1
 00014324 B240                       		cmp.w d0,d1
 00014326 6D00                       		blt.s @cont
-00014328 0C78 0501 FE10             		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2 ?
+00014328 0C78 0501 FE10             		cmpi.w	#(id_CWZ<<8)+1,(v_zone).w ; is level SBZ2 ?
 0001432E 6600 0000                  		bne.w	KillSonic	; if not, kill Sonic
 00014332 0C78 2000 D008             		cmpi.w	#$2000,(v_player+obX).w
 00014338 6500 0000                  		bcs.w	KillSonic
@@ -36827,7 +36827,7 @@
 000179F8 5428 0024                  		addq.b	#2,obRoutine(a0)
 000179FC 217C 0000 0000 0004        		move.l	#Map_Cat,obMap(a0)
 00017A04 317C 22B0 0002             		move.w	#$22B0,obGfx(a0)
-00017A0A 0C38 0005 FE10             		cmpi.b	#id_SBZ,(v_zone).w ; if level is SBZ, branch
+00017A0A 0C38 0005 FE10             		cmpi.b	#id_CWZ,(v_zone).w ; if level is SBZ, branch
 00017A10 6700                       		beq.s	@isscrapbrain
 00017A12 317C 24FF 0002             		move.w	#$24FF,obGfx(a0) ; MZ specific code
 00017A18                            
@@ -46782,8 +46782,8 @@
 0001E69A 0000 0000 0000 0000 0000+  	lhead	plcid_LZ,	Nem_LZ,		plcid_LZ2,	Blk16_LZ,	Blk256_LZ,	bgm_LZ,		palid_LZ	; Labyrinth
 0001E6AA 0000 0000 0000 0000 0000+  	lhead	plcid_MZ,	Nem_MZ,		plcid_MZ2,	Blk16_MZ,	Blk256_MZ,	bgm_MZ,		palid_MZ	; Marble
 0001E6BA 0000 0000 0000 0000 0000+  	lhead	plcid_SLZ,	Nem_SLZ,	plcid_SLZ2,	Blk16_SLZ,	Blk256_SLZ,	bgm_SLZ,	palid_SLZ	; Star Light
-0001E6CA 0000 0000 0000 0000 0000+  	lhead	plcid_SYZ,	Nem_SYZ,	plcid_SYZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SYZ	; Spring Yard
-0001E6DA 0000 0000 0000 0000 0000+  	lhead	plcid_SBZ,	Nem_SBZ,	plcid_SBZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_SBZ2	; Scrap Brain
+0001E6CA 0000 0000 0000 0000 0000+  	lhead	plcid_SZ,	Nem_SYZ,	plcid_SZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SZ	; Spring Yard
+0001E6DA 0000 0000 0000 0000 0000+  	lhead	plcid_CWZ,	Nem_SBZ,	plcid_CWZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_CWZ2	; Scrap Brain
 0001E6EA                            ;	zonewarning LevelHeaders,$10
 0001E6EA 0000 0000 0000 0000 0000+  	lhead	plcid_lock,		Nem_lockN,	plcid_lock,		Blk16_lockN,	Blk256_lockN,	bgm_GHZ,	palid_IMZ	; Ending
 0001E6FA 0000 0000 0000 0000 0000+  	lhead	plcid_IMZ,		Nem_GHZ,	plcid_IMZ2,		Blk16_IMZ,	Blk256_IMZ,	bgm_SBZ,	palid_IMZ	; Ice Mountain
@@ -47252,10 +47252,10 @@
 0001EC6C =0000000C                  plcid_IMZ2:		equ (ptr_PLC_IMZ2-ArtLoadCues)/2		; 9
 0001EC6C =0000000D                  plcid_SLZ:		equ (ptr_PLC_SLZ-ArtLoadCues)/2		; $A
 0001EC6C =0000000E                  plcid_SLZ2:		equ (ptr_PLC_SLZ2-ArtLoadCues)/2	; $B
-0001EC6C =0000000F                  plcid_SYZ:		equ (ptr_PLC_SYZ-ArtLoadCues)/2		; $C
-0001EC6C =00000010                  plcid_SYZ2:		equ (ptr_PLC_SYZ2-ArtLoadCues)/2	; $D
-0001EC6C =00000011                  plcid_SBZ:		equ (ptr_PLC_SBZ-ArtLoadCues)/2		; $E
-0001EC6C =00000012                  plcid_SBZ2:		equ (ptr_PLC_SBZ2-ArtLoadCues)/2	; $F
+0001EC6C =0000000F                  plcid_SZ:		equ (ptr_PLC_SYZ-ArtLoadCues)/2		; $C
+0001EC6C =00000010                  plcid_SZ2:		equ (ptr_PLC_SYZ2-ArtLoadCues)/2	; $D
+0001EC6C =00000011                  plcid_CWZ:		equ (ptr_PLC_SBZ-ArtLoadCues)/2		; $E
+0001EC6C =00000012                  plcid_CWZ2:		equ (ptr_PLC_SBZ2-ArtLoadCues)/2	; $F
 0001EC6C =00000013                  plcid_CSZ:		equ (ptr_PLC_CSZ-ArtLoadCues)/2	; $F
 0001EC6C =00000014                  plcid_CSZ2:		equ (ptr_PLC_CSZ2-ArtLoadCues)/2	; $F
 0001EC6C =00000015                  plcid_TitleCard:	equ (ptr_PLC_TitleCard-ArtLoadCues)/2	; $10
@@ -47267,8 +47267,8 @@
 0001EC6C =0000001B                  plcid_LZAnimals:	equ (ptr_PLC_LZAnimals-ArtLoadCues)/2	; $16
 0001EC6C =0000001C                  plcid_MZAnimals:	equ (ptr_PLC_MZAnimals-ArtLoadCues)/2	; $17
 0001EC6C =0000001D                  plcid_SLZAnimals:	equ (ptr_PLC_SLZAnimals-ArtLoadCues)/2	; $18
-0001EC6C =0000001E                  plcid_SYZAnimals:	equ (ptr_PLC_SYZAnimals-ArtLoadCues)/2	; $19
-0001EC6C =0000001F                  plcid_SBZAnimals:	equ (ptr_PLC_SBZAnimals-ArtLoadCues)/2	; $1A
+0001EC6C =0000001E                  plcid_SZAnimals:	equ (ptr_PLC_SYZAnimals-ArtLoadCues)/2	; $19
+0001EC6C =0000001F                  plcid_CWZAnimals:	equ (ptr_PLC_SBZAnimals-ArtLoadCues)/2	; $1A
 0001EC6C =00000020                  plcid_SSResult:		equ (ptr_PLC_SSResult-ArtLoadCues)/2	; $1B
 0001EC6C =00000021                  plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	; $1C
 0001EC6C =00000022                  plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	; $1D

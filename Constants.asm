@@ -85,8 +85,8 @@ id_GHZ:		equ 0
 id_LZ:		equ 1
 id_MZ:		equ 2
 id_SLZ:		equ 3
-id_SYZ:		equ 4
-id_SBZ:		equ 5
+id_SZ:		equ 4
+id_CWZ:		equ 5
 id_EndZ:	equ 6
 id_IMZ:		equ 7
 id_CSZ:		equ 8

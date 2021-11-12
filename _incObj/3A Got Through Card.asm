@@ -118,7 +118,7 @@ Got_ChkBonus:
 		bne.s	Got_AddBonus	; if yes, branch
 		sfx	sfx_Cash,0,0,0	; play "ker-ching" sound
 		addq.b	#2,obRoutine(a0)
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w
+		cmpi.w	#(id_CWZ<<8)+1,(v_zone).w
 		bne.s	Got_SetDelay
 		addq.b	#4,obRoutine(a0)
 
@@ -190,20 +190,20 @@ LevelOrder:
 		dc.b 0, 0
 
 		; Star Light Zone
-		dc.b id_SYZ, 0	; Act 1
+		dc.b id_SZ, 0	; Act 1
 		dc.b id_SLZ, 2	; Act 2
-		dc.b id_SYZ, 0	; Act 3
+		dc.b id_SZ, 0	; Act 3
 		dc.b 0, 0
 
 		; Spring Yard Zone
-		dc.b id_SBZ, 0	; Act 1
-		dc.b id_SYZ, 2	; Act 2
-		dc.b id_SBZ, 0	; Act 3
+		dc.b id_CWZ, 0	; Act 1
+		dc.b id_SZ, 2	; Act 2
+		dc.b id_CWZ, 0	; Act 3
 		dc.b 0, 0
 
 		; Scrap Brain Zone
-		dc.b id_SBZ, 1	; Act 1
-		dc.b id_SBZ, 2	; Act 2
+		dc.b id_CWZ, 1	; Act 1
+		dc.b id_CWZ, 2	; Act 2
 		dc.b 8, 0	; Final Zone
 		dc.b 0, 0
 		even

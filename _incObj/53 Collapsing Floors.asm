@@ -27,7 +27,7 @@ CFlo_Main:	; Routine 0
 		addq.b	#2,obFrame(a0)
 
 	@notSLZ:
-		cmpi.b	#id_SBZ,(v_zone).w ; check if level is SBZ
+		cmpi.b	#id_CWZ,(v_zone).w ; check if level is SBZ
 		bne.s	@notSBZ
 		move.w	#$43F5,obGfx(a0) ; SBZ specific code
 

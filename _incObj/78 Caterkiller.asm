@@ -35,7 +35,7 @@ Cat_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
 		move.l	#Map_Cat,obMap(a0)
 		move.w	#$22B0,obGfx(a0)
-		cmpi.b	#id_SBZ,(v_zone).w ; if level is SBZ, branch
+		cmpi.b	#id_CWZ,(v_zone).w ; if level is SBZ, branch
 		beq.s	@isscrapbrain
 		move.w	#$24FF,obGfx(a0) ; MZ specific code
 

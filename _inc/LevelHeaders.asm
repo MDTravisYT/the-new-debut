@@ -21,8 +21,8 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal
 	lhead	plcid_LZ,	Nem_LZ,		plcid_LZ2,	Blk16_LZ,	Blk256_LZ,	bgm_LZ,		palid_LZ	; Labyrinth
 	lhead	plcid_MZ,	Nem_MZ,		plcid_MZ2,	Blk16_MZ,	Blk256_MZ,	bgm_MZ,		palid_MZ	; Marble
 	lhead	plcid_SLZ,	Nem_SLZ,	plcid_SLZ2,	Blk16_SLZ,	Blk256_SLZ,	bgm_SLZ,	palid_SLZ	; Star Light
-	lhead	plcid_SYZ,	Nem_SYZ,	plcid_SYZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SYZ	; Spring Yard
-	lhead	plcid_SBZ,	Nem_SBZ,	plcid_SBZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_SBZ2	; Scrap Brain
+	lhead	plcid_SZ,	Nem_SYZ,	plcid_SZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SZ	; Spring Yard
+	lhead	plcid_CWZ,	Nem_SBZ,	plcid_CWZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_CWZ2	; Scrap Brain
 ;	zonewarning LevelHeaders,$10
 	lhead	plcid_lock,		Nem_lockN,	plcid_lock,		Blk16_lockN,	Blk256_lockN,	bgm_GHZ,	palid_IMZ	; Ending
 	lhead	plcid_IMZ,		Nem_GHZ,	plcid_IMZ2,		Blk16_IMZ,	Blk256_IMZ,	bgm_SBZ,	palid_IMZ	; Ice Mountain

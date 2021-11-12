@@ -2286,12 +2286,12 @@ LevSel_Ptrs:
 		dc.b id_SLZ, 0
 		dc.b id_SLZ, 1
 		dc.b id_SLZ, 2
-		dc.b id_SYZ, 0
-		dc.b id_SYZ, 1
-		dc.b id_SYZ, 2
-		dc.b id_SBZ, 0
-		dc.b id_SBZ, 1
-		dc.b id_SBZ, 2
+		dc.b id_SZ, 0
+		dc.b id_SZ, 1
+		dc.b id_SZ, 2
+		dc.b id_CWZ, 0
+		dc.b id_CWZ, 1
+		dc.b id_CWZ, 2
 		dc.b $08, 0
 		dc.b $08, 1
 		dc.b $08, 2
@@ -2676,7 +2676,7 @@ GM_Level:
 		locVRAM	$AF80
 		
 	@CheckCWZ:
-		cmpi.b	#(id_SBZ),(v_zone).w ; check if level is SBZ
+		cmpi.b	#(id_CWZ),(v_zone).w ; check if level is SBZ
 		bne.s	@NotCWZ
 		lea	(Nem_TitleCard_Spec).l,a0 ; load title card patterns
 		bra		@cont
@@ -2772,7 +2772,7 @@ Level_LoadPal:
 		moveq	#palid_LZSonWater,d0 ; palette number $F (LZ)
 		cmpi.b	#3,(v_act).w	; is act number 3?
 		bne.s	Level_WaterPal	; if not, branch
-		moveq	#palid_SBZ3SonWat,d0 ; palette number $10 (SBZ3)
+		moveq	#palid_CWZ3SonWat,d0 ; palette number $10 (SBZ3)
 
 	Level_WaterPal:
 		bsr.w	PalLoad3_Water	; load underwater palette
@@ -2790,7 +2790,7 @@ Level_GetBgm:
 		moveq	#5,d0		; use 5th music (SBZ)
 
 	Level_BgmNotLZ4:
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
+		cmpi.w	#(id_CWZ<<8)+2,(v_zone).w ; is level FZ?
 		bne.s	Level_PlayBgm	; if not, branch
 		moveq	#9,d0		; use 6th music (FZ)
 
@@ -2916,7 +2916,7 @@ Level_ChkWaterPal:
 		moveq	#palid_LZWater,d0 ; palette $B (LZ underwater)
 		cmpi.b	#3,(v_act).w	; is level SBZ3?
 		bne.s	Level_WtrNotSbz	; if not, branch
-		moveq	#palid_SBZ3Water,d0 ; palette $D (SBZ3 underwater)
+		moveq	#palid_CWZ3Water,d0 ; palette $D (SBZ3 underwater)
 
 	Level_WtrNotSbz:
 		bsr.w	PalLoad4_Water
@@ -3298,7 +3298,7 @@ SS_MainLoop:
 		bne.w	SS_ToLevel
 		endc
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
-		cmpi.w	#(id_SBZ<<8)+3,(v_zone).w ; is level number higher than FZ?
+		cmpi.w	#(id_CWZ<<8)+3,(v_zone).w ; is level number higher than FZ?
 		blo.s	SS_Finish	; if not, branch
 		clr.w	(v_zone).w	; set to GHZ1
 
@@ -4582,7 +4582,7 @@ locret_6AD6:
 
 			tst.b	(a2)
 			beq.w	locj_6DF2
-			cmpi.b	#id_SBZ,(v_zone).w
+			cmpi.b	#id_CWZ,(v_zone).w
 			beq.w	Draw_SBz
 			bclr	#0,(a2)
 			beq.s	locj_6DD2
@@ -5095,7 +5095,7 @@ LoadTilesFromStart:
 			beq.w	Draw_GHz_Bg
 			cmpi.b	#id_MZ,(v_zone).w
 			beq.w	Draw_Mz_Bg
-			cmpi.w	#(id_SBZ<<8)+0,(v_zone).w
+			cmpi.w	#(id_CWZ<<8)+0,(v_zone).w
 			beq.w	Draw_SBz_Bg
 			cmpi.b	#id_EndZ,(v_zone).w
 			beq.w	Draw_GHz_Bg
@@ -5226,16 +5226,16 @@ LevelDataLoad:
 		andi.w	#$FF,d0
 		cmpi.w	#(id_LZ<<8)+3,(v_zone).w ; is level SBZ3 (LZ4) ?
 		bne.s	@notSBZ3	; if not, branch
-		moveq	#palid_SBZ3,d0	; use SB3 palette
+		moveq	#palid_CWZ3,d0	; use SB3 palette
 
 	@notSBZ3:
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2?
+		cmpi.w	#(id_CWZ<<8)+1,(v_zone).w ; is level SBZ2?
 		beq.s	@isSBZorFZ	; if yes, branch
-		cmpi.w	#(id_SBZ<<8)+2,(v_zone).w ; is level FZ?
+		cmpi.w	#(id_CWZ<<8)+2,(v_zone).w ; is level FZ?
 		bne.s	@normalpal	; if not, branch
 
 	@isSBZorFZ:
-		moveq	#palid_SBZ2,d0	; use SBZ2/FZ palette
+		moveq	#palid_CWZ2,d0	; use SBZ2/FZ palette
 
 	@normalpal:
 		bsr.w	PalLoad1	; load palette (based on d0)
