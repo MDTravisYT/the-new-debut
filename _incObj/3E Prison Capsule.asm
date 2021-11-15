@@ -92,8 +92,8 @@ Pri_Switched:	; Routine 4
 		move.w	#60,obTimeFrame(a0) ; set time between animal spawns
 		clr.b	(f_timecount).w	; stop time counter
 		clr.b	(f_lockscreen).w ; lock screen position
-		move.b	#1,(f_lockctrl).w ; lock controls
-		move.w	#(btnR<<8),(v_jpadhold2).w ; make Sonic run to the right
+	;	move.b	#1,(f_lockctrl).w ; lock controls
+	;	move.w	#(btnR<<8),(v_jpadhold2).w ; make Sonic run to the right
 		clr.b	ob2ndRout(a0)
 		bclr	#3,(v_player+obStatus).w
 		bset	#1,(v_player+obStatus).w
