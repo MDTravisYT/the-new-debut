@@ -9917,9 +9917,9 @@
 00006B00                            MoveScreenHoriz:
 00006B00 3038 D008                  		move.w	(v_player+obX).w,d0
 00006B04 9078 F700                  		sub.w	(v_screenposx).w,d0 ; Sonic's distance from left edge of screen
-00006B08 0440 0080                  		subi.w	#128,d0		; is distance less than 144px?
+00006B08 0440 0090                  		subi.w	#144,d0		; is distance less than 144px?
 00006B0C 6500                       		bcs.s	SH_BehindMid	; if yes, branch
-00006B0E 0440 0030                  		subi.w	#48,d0		; is distance more than 160px?
+00006B0E 0440 0010                  		subi.w	#16,d0		; is distance more than 160px?
 00006B12 6400                       		bcc.s	SH_AheadOfMid	; if yes, branch
 00006B14 4278 F73A                  		clr.w	(v_scrshiftx).w
 00006B18 4E75                       		rts	
