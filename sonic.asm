@@ -9102,11 +9102,8 @@ ObjPos_LZ1:
 		even
 ObjPos_LZ2:	incbin	"objpos\lz2.bin"
 		even
-ObjPos_LZ3:	if Revision=0
-		incbin	"objpos\lz3.bin"
-		else
+ObjPos_LZ3:	
 		incbin	"objpos\lz3 (JP1).bin"
-		endc
 		even
 ObjPos_SBZ3:	incbin	"objpos\sbz3.bin"
 		even
