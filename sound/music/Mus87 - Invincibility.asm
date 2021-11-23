@@ -7,11 +7,11 @@ smpsHeaderStartSong = 1
 	smpsHeaderDAC       Mus87_Invincibility_DAC
 	smpsHeaderFM        Mus87_Invincibility_FM1,	$F4, $11
 	smpsHeaderFM        Mus87_Invincibility_FM2,	$F4, $07
-	smpsHeaderFM        Mus87_Invincibility_FM3,	$E8, $0F
-	smpsHeaderFM        Mus87_Invincibility_FM4,	$E8, $0F
+	smpsHeaderFM        Mus87_Invincibility_FM3,	$F4, $0F
+	smpsHeaderFM        Mus87_Invincibility_FM4,	$F4, $0F
 	smpsHeaderFM        Mus87_Invincibility_FM5,	$F4, $11
-	smpsHeaderPSG       Mus87_Invincibility_PSG1,	$D0, $05, $00, fTone_05
-	smpsHeaderPSG       Mus87_Invincibility_PSG2,	$DC, $05, $00, fTone_05
+	smpsHeaderPSG       Mus87_Invincibility_PSG1,	$F4, $05, $00, fTone_05
+	smpsHeaderPSG       Mus87_Invincibility_PSG2,	$F4, $05, $00, fTone_05
 	smpsHeaderPSG       Mus87_Invincibility_PSG3,	$00, $03, $00, fTone_04
 
 ; FM5 Data
