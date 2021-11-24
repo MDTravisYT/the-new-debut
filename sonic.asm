@@ -8636,6 +8636,8 @@ Nem_Bonus:	incbin	"artnem\Hidden Bonuses.bin" ; hidden bonuses at end of a level
 		even
 Nem_Welcome:	incbin	"artnem\GHZ Sign.bin"
 Map_Welcome:	include	"_maps\GHZ Sign.asm"
+Nem_Warning:	incbin	"artnem\GHZ Warn Sign.bin"
+Map_Warning:	include	"_maps\GHZ Warn Sign.asm"
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - continue screen
 ; ---------------------------------------------------------------------------
