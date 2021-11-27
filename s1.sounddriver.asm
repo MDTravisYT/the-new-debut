@@ -60,7 +60,7 @@ SpeedUpIndex:
 MusicIndex:
 	if IsDemo=1
 ptr_mus81:	dc.l Music81
-ptr_mus82:	dc.l MusicLOCK
+ptr_mus82:	dc.l Music82
 ptr_mus83:	dc.l MusicLOCK
 ptr_mus84:	dc.l MusicLOCK
 ptr_mus85:	dc.l MusicLOCK

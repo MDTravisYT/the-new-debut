@@ -2170,7 +2170,7 @@ Tit_ChkLevSel:
 
 LevelSelect:
 	if	IsDemo = 1
-		jsr	PlayLevelC
+	;	jsr	PlayLevelC
 	endif
 		move.b	#4,(v_vbla_routine).w
 		bsr.w	WaitForVBla
@@ -8677,10 +8677,8 @@ Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
 		even
 Blk256_Lock:	incbin	"map256\lockout.bin"
 		even
-Blk16_LZ:	if IsDemo=1
-		else
+Blk16_LZ:
 		incbin	"map16\LZ.bin"
-		endc
 		even
 Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
 		even

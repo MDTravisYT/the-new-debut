@@ -4,7 +4,7 @@ smpsHeaderStartSong = 1
 	smpsHeaderTempoSFX  $01
 	smpsHeaderChanSFX   $01
 
-	smpsHeaderSFXChannel cFM5, SndA6_Hit_Spikes_FM5,	$F2, $00
+	smpsHeaderSFXChannel cFM5, SndA6_Hit_Spikes_FM5,	$F4, $00
 
 ; FM5 Data
 SndA6_Hit_Spikes_FM5:
@@ -31,4 +31,3 @@ SndA6_Hit_Spikes_Voices:
 	smpsVcDecayLevel    $0A, $01, $00, $0F
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
 	smpsVcTotalLevel    $00, $0F, $20, $29
-
