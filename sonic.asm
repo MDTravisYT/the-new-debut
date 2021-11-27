@@ -2207,7 +2207,7 @@ LevSel_PlaySnd:
 
 LevSel_Ending:
 		move.b	#id_Ending,(v_gamemode).w ; set screen mode to $18 (Ending)
-		move.w	#(id_EndZ<<8),(v_zone).w ; set level to 0600 (Ending)
+		move.w	#(00<<8),(v_zone).w ; set level to 0600 (Ending)
 		rts	
 ; ===========================================================================
 
@@ -3777,6 +3777,7 @@ Map_ContScr:	include	"_maps\Continue Screen.asm"
 ; ---------------------------------------------------------------------------
 
 GM_Ending:
+		move.b	#6,(v_emeralds)
 		sfx	bgm_Stop,0,1,1 ; stop music
 		bsr.w	PaletteFadeOut
 
@@ -3824,10 +3825,10 @@ GM_Ending:
 		move.w	#$8A00+223,(v_hbla_hreg).w ; set palette change position (for water)
 		move.w	(v_hbla_hreg).w,(a6)
 		move.w	#30,(v_air).w
-		move.w	#id_EndZ<<8,(v_zone).w ; set level number to 0600 (extra flowers)
+		move.w	#00<<8,(v_zone).w ; set level number to 0600 (extra flowers)
 		cmpi.b	#6,(v_emeralds).w ; do you have all 6 emeralds?
 		beq.s	End_LoadData	; if yes, branch
-		move.w	#(id_EndZ<<8)+1,(v_zone).w ; set level number to 0601 (no flowers)
+		move.w	#(00<<8)+1,(v_zone).w ; set level number to 0601 (no flowers)
 
 End_LoadData:
 		moveq	#plcid_Ending,d0

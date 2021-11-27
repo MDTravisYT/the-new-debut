@@ -401,7 +401,6 @@ PLC_SSResult:dc.w ((PLC_SpeStResultend-PLC_SSResult-2)/6)-1
 ; Pattern load cues - ending sequence
 ; ---------------------------------------------------------------------------
 PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
-	PLC_Endingend:
 		plcm	Nem_GHZ,0		; GHZ main patterns
 		plcm	Nem_Stalk, $6B00	; flower stalk
 		plcm	Nem_EndFlower, $7400	; flowers
@@ -419,7 +418,7 @@ PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
 		plcm	Nem_Flicky, $B4A0	; flicky
 		plcm	Nem_Squirrel, $B660	; squirrel
 		plcm	Nem_EndStH, $B8A0	; "SONIC THE HEDGEHOG"
-	;PLC_Endingend:
+	PLC_Endingend:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - "TRY AGAIN" and "END" screens
 ; ---------------------------------------------------------------------------

@@ -3,6 +3,7 @@
 ; ---------------------------------------------------------------------------
 
 EndSTH:
+		rts
 		moveq	#0,d0
 		move.b	$24(a0),d0
 		move.w	ESth_Index(pc,d0.w),d1
@@ -34,7 +35,7 @@ ESth_Move:	; Routine 2
 		beq.s	ESth_Delay	; if yes, branch
 		addi.w	#$10,obX(a0)	; move object to the right
 		if Revision=0
-	;	bra.w	DisplaySprite ; Temp comment
+		jsr	DisplaySprite ; Temp comment
 		else
 		rts
 		endc
@@ -55,7 +56,7 @@ ESth_GotoCredits:
 
 	ESth_Wait:
 		if Revision=0
-	;	bra.w	DisplaySprite ; Temp comment
+		jsr	DisplaySprite ; Temp comment
 		else
 		rts
 		endc
