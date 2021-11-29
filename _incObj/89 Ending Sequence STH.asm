@@ -3,7 +3,10 @@
 ; ---------------------------------------------------------------------------
 
 EndSTH:
-		rts
+	;	sfx	$C9,0,0,0 ; fade out music
+	;	jsr	ClearScreen
+	;	jsr	PlayLevelC
+	rts
 		moveq	#0,d0
 		move.b	$24(a0),d0
 		move.w	ESth_Index(pc,d0.w),d1
@@ -34,19 +37,12 @@ ESth_Move:	; Routine 2
 		cmpi.w	#$C0,obX(a0)	; has object reached $C0?
 		beq.s	ESth_Delay	; if yes, branch
 		addi.w	#$10,obX(a0)	; move object to the right
-		if Revision=0
 		jsr	DisplaySprite ; Temp comment
-		else
 		rts
-		endc
 
 ESth_Delay:
 		addq.b	#2,obRoutine(a0)
-		if Revision=0
-		move.w	#120,esth_time(a0) ; set duration for delay (2 seconds)
-		else
-		move.w	#300,esth_time(a0) ; set duration for delay (5 seconds)
-		endc
+		move.w	#2000,esth_time(a0) ; set duration for delay (2 seconds)
 
 ESth_GotoCredits:
 		; Routine 4
@@ -55,8 +51,4 @@ ESth_GotoCredits:
 		move.b	#id_Credits,(v_gamemode).w ; exit to credits
 
 	ESth_Wait:
-		if Revision=0
 		jsr	DisplaySprite ; Temp comment
-		else
-		rts
-		endc
