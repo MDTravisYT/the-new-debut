@@ -1793,7 +1793,11 @@ loc_2528:
 		beq.s	loc_2528
 
 loc_2544:
+	if IsDemo=0
+		move.b	#$20,(v_gamemode).w
+	else
 		move.b	#4,(v_gamemode).w
+	endif
 		rts
 		
 sub_1A3A:
@@ -1837,7 +1841,7 @@ GM_RadNexAff:
     move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
     lea     ART_RAD.l,a0           ; load background art
     jsr     NemDec              ; run NemDec to decompress art for display
-    move.b  #$BF,d0             ; set music ID 
+    move.b  #$AC,d0             ; set music ID 
     jsr     Playsound_Special.w     ; play ID
     lea Pal_RAD.l,a0        ; load this palette
     lea ($FFFFFB80).l,a1        ; set as line 2
@@ -1848,7 +1852,7 @@ RadNexAff_PalLoop:
     move.l  (a0)+,(a1)+         ; ''
     dbf d0,RadNexAff_PalLoop      ; repeat until done
     jsr PaletteFadeIn          ; fade palette in
-    move.w  #4*60,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
+    move.w  #30,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
  
 Rad_MainLoop:
     move.b  #2,($FFFFF62A).w        ; set V-blank routine to run
@@ -1943,8 +1947,8 @@ GM_Title:
 		move.l	d0,(a1)+
 		dbf	d1,Tit_ClrPal	; fill palette with 0 (black)
 
-		moveq	#palid_Ending,d0	; load Sonic's palette
-		bsr.w	PalLoad1
+	;	moveq	#palid_Ending,d0	; load Sonic's palette
+	;	bsr.w	PalLoad1
 	if IsDemo=0
 		move.b	#id_CreditsText,(v_objspace+$80).w ; load "SONIC TEAM PRESENTS" object
 	else
