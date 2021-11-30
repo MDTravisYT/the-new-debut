@@ -129,6 +129,8 @@ EndOfHeader:
 ; ===========================================================================
 ; Crash/Freeze the 68000. Unlike Sonic 2, Sonic 1 uses the 68000 for playing music, so it stops too
 
+	include "ErrorHandler.asm"
+
 ErrorTrap:
 		nop	
 		nop	
@@ -208,6 +210,7 @@ PSGInitLoop:
 
 SkipSetup:
 		bra.s	GameProgram	; begin game
+
 
 ; ===========================================================================
 SetupValues:	dc.w $8000		; VDP register start number
@@ -2803,8 +2806,6 @@ Level_GetBgm:
 		move.b	(a1,d0.w),d0
 		bsr.w	PlaySound	; play music
 		move.b	#id_TitleCard,(v_objspace+$80).w ; load title card object
-        move.w    #$D0,d0
-        jsr    (PlaySound_Special).l ;    thingy to disable sound glitching
 
 Level_TtlCardLoop:
 		move.b	#$C,(v_vbla_routine).w
@@ -9185,7 +9186,6 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 		endc
 		;dcb.b ($10000-(*%$10000))-(EndOfRom-SoundDriver),$FF
     include   "TitleLock.asm"
-	include "ErrorHandler.asm"
 SoundDriver:	include "s1.sounddriver.asm"
 
 ; end of 'ROM'
