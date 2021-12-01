@@ -2021,9 +2021,9 @@ GM_Title:
 		locVRAM	$4000
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
-		locVRAM	$6000
-		lea	(Nem_TitleText).l,a0 ;	load vram blanker
-		bsr.w	NemDec
+		lea	(Kos_TitleText).l,a0 ;	load extra flower patterns
+		lea	(v_256x256).l,a1 ; RAM address to buffer the patterns
+		bsr.w	KosDec
 		sfx	bgm_Title,0,1,1	; play title screen music
 		move.b	#0,(f_debugmode).w ; disable debug mode
 		move.w	#$4B9,(v_demolength).w ; run title screen for $4B9 frames
@@ -8327,19 +8327,74 @@ Nem_TitleFg:	incbin	"artnem\Title Screen Foreground.bin"
 		even
 Nem_TitleSonic:	incbin	"artnem\Title Screen Sonic.bin"
 		even
-Nem_TitleTM:	incbin	"artnem\Title Screen TM.bin"
+Eni_JapNames:	incbin	"tilemaps\Hidden Japanese Credits.bin" ; Japanese credits (mappings)
 		even
-Nem_TitleText:	
+Nem_JapNames:	incbin	"artnem\Hidden Japanese Credits.bin"
+		even
+	Nem_TitleText_Demo:	
 		if IsDemo = 1
 		incbin	"artnem\TitleText\demo.bin"
 		else
 		incbin	"artnem\TitleText\demont.bin"
 		endif
 		even
-Eni_JapNames:	incbin	"tilemaps\Hidden Japanese Credits.bin" ; Japanese credits (mappings)
+	Kos_TitleText:
+		incbin	"artkos\Splash Texts.bin"
 		even
-Nem_JapNames:	incbin	"artnem\Hidden Japanese Credits.bin"
-		even
+;	Nem_TitleText_7Layers:
+;		incbin	"artnem\TitleText\7layers.bin"
+;	Nem_TitleText_1990:
+;		incbin	"artnem\TitleText\1990.bin"
+;	Nem_TitleText_2022:
+;		incbin	"artnem\TitleText\2022.bin"
+;	Nem_TitleText_AlphaCeption:
+;		incbin	"artnem\TitleText\alphaception.bin"
+;	Nem_TitleText_AnotherBeta:
+;		incbin	"artnem\TitleText\anotherbeta.bin"
+;	Nem_TitleText_Beytah:
+;		incbin	"artnem\TitleText\beytah.bin"
+;	Nem_TitleText_Centered:
+;		incbin	"artnem\TitleText\centered.bin"
+;	Nem_TitleText_Deboot:
+;		incbin	"artnem\TitleText\deboot.bin"
+;	Nem_TitleText_Download:
+;		incbin	"artnem\TitleText\download.bin"
+;	Nem_TitleText_Feature:
+;		incbin	"artnem\TitleText\feature.bin"
+;	Nem_TitleText_Feels:
+;		incbin	"artnem\TitleText\feels.bin"
+;	Nem_TitleText_GoodEdit:
+;		incbin	"artnem\TitleText\goodedit.bin"
+;	Nem_TitleText_IsThisTTS:
+;		incbin	"artnem\TitleText\isthistts.bin"
+;	Nem_TitleText_Looney:
+;		incbin	"artnem\TitleText\looney.bin"
+;	Nem_TitleText_Madonna:
+;		incbin	"artnem\TitleText\madonna.bin"
+;	Nem_TitleText_Megamix:
+;		incbin	"artnem\TitleText\megamix.bin"
+;	Nem_TitleText_NotKawarino:
+;		incbin	"artnem\TitleText\notkawarino.bin"
+;	Nem_TitleText_NotOnAndroid:
+;		incbin	"artnem\TitleText\notonandroid.bin"
+;	Nem_TitleText_Pig:
+;		incbin	"artnem\TitleText\pig.bin"
+;	Nem_TitleText_Plumber:
+;		incbin	"artnem\TitleText\plumber.bin"
+;	Nem_TitleText_Real:
+;		incbin	"artnem\TitleText\real.bin"
+;	Nem_TitleText_Releases:
+;		incbin	"artnem\TitleText\releases.bin"
+;	Nem_TitleText_Restarted:
+;		incbin	"artnem\TitleText\restarted.bin"
+;	Nem_TitleText_Run:
+;		incbin	"artnem\TitleText\run.bin"
+;	Nem_TitleText_SorryNothing:
+;		incbin	"artnem\TitleText\sorrynothing.bin"
+;	Nem_TitleText_Stolen:
+;		incbin	"artnem\TitleText\stolen.bin"
+;	Nem_TitleText_YouAreWelcome:
+;		incbin	"artnem\TitleText\youarewelcome.bin"
 
 Map_Sonic:	include	"_maps\Sonic.asm"
 SonicDynPLC:	include	"_maps\Sonic - Dynamic Gfx Script.asm"
