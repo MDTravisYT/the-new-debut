@@ -63,13 +63,17 @@ GameOver:
 		move.w	(v_limitbtm2).w,d0
 		addi.w	#$100,d0
 		cmp.w	obY(a0),d0
-		bcc.w	locret_13900
+		bcc.w	locret_F3AE
 		move.w	#-$38,obVelY(a0)
 		addq.b	#2,obRoutine(a0)
 		clr.b	(f_timecount).w	; stop time counter
 		addq.b	#1,(f_lifecount).w ; update lives counter
 		subq.b	#1,(v_lives).w	; subtract 1 from number of lives
-		bne.s	loc_138D4
+	if IsDemo = 1
+		bne.s	NoDebugDeath
+	else
+		bne.s	DebugDeath
+	endif
 		move.w	#0,$3A(a0)
 		move.b	#id_GameOverCard,(v_objspace+$80).w ; load GAME object
 		move.b	#id_GameOverCard,(v_objspace+$C0).w ; load OVER object
@@ -82,7 +86,7 @@ loc_138C2:
 		jmp	(AddPLC).l	; load game over patterns
 ; ===========================================================================
 
-loc_138D4:
+NoDebugDeath:
 		move.w	#60,$3A(a0)	; set time delay to 1 second
 		tst.b	(f_timeover).w	; is TIME OVER tag set?
 		beq.s	locret_13900	; if not, branch
@@ -92,10 +96,32 @@ loc_138D4:
 		move.b	#2,(v_objspace+$80+obFrame).w
 		move.b	#3,(v_objspace+$C0+obFrame).w
 		bra.s	loc_138C2
-; ===========================================================================
 
-locret_13900:
+	locret_13900:
 		rts	
+
+DebugDeath:
+		move.w	#$3C,$3A(a0)
+		move.b	(v_jpadpress2).w,d0
+		andi.b	#btnABC,d0
+		andi.b	#btnA,d0	; Test if A is pressed
+		bne.s	loc_F3B0	; If not, restart level
+		move.b	#0,	obAnim(a0)
+		subq.b	#4,	obRoutine(a0)
+		move.w	$38(a0),	y_pos(a0)
+		move.w	#$78,	flashtime(a0)
+		move.b  #4,(v_health).w
+		move.b  #1,(f_healthcount).w
+
+	locret_F3AE:
+		rts
+
+	loc_F3B0:
+		move.w	#1,(f_restart).w
+		rts
+		
+; ---------------------------------------------------------------------------
+
 ; End of function GameOver
 
 ; ---------------------------------------------------------------------------

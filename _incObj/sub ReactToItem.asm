@@ -321,8 +321,6 @@ HurtSonic:
 
 
 KillSonic:
-		tst.w	(v_debuguse).w	; is debug mode	active?
-		bne.s	@dontdie	; if yes, branch
 		move.b	#$FF,(v_health).w
 		move.b  #1,(f_healthcount).w
 		move.b	#0,(v_invinc).w	; remove invincibility
@@ -342,10 +340,6 @@ KillSonic:
 
 	@sound:
 		jsr	(PlaySound_Special).l
-
-	@dontdie:
-		moveq	#-1,d0
-		rts	
 ; End of function KillSonic
 
 
