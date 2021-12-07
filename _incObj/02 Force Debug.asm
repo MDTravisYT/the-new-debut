@@ -7,5 +7,4 @@ ForceDebug:
 		rts	
 
 Hacker:
-		move.b	#$24,(v_gamemode).w ; crash
-		rts	
+		move.b  #$28,($FFFFF600).w      ; set the screen mode to Title Screen

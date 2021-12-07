@@ -358,7 +358,9 @@ ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
 
 ptr_GM_OtherSega:	bra.w	GM_RadNexAff		; Sega Screen ($20)
 
-ptr_GM_Hacker:	bra.w	GM_SimpleCreds		; Credits ($24)
+ptr_GM_SimpleCreds:	bra.w	GM_SimpleCreds		; Credits ($24)
+
+ptr_GM_Hack:	bra.w	GM_Hack		; Credits ($28)
 
 		rts	
 ; ===========================================================================
@@ -1746,6 +1748,47 @@ WaitForVBla:
 		include	"_incObj\sub CalcSine.asm"
 		include	"_incObj\sub CalcAngle.asm"
 
+GM_Hack:
+    move.b  #$8F,d0             ; set music ID 
+    jsr     Playsound_Special.w     ; play ID
+    jsr     PaletteFadeOut          ; fade palettes out
+    jsr     ClearScreen.w           ; clear the plane mappings
+    ; load art, mappings and the palette
+    lea     ($FF0000).l,a1          ; load dump location
+    lea     MAPS_HACK.l,a0          ; load compressed mappings address
+    move.w #320,d0                  ; prepare pattern index value to patch to mappings
+    jsr    EniDec.w                 ; decompress and dump
+    move.l #$60000003,d0            ; prepare VRAM write mode address (Plane B E000)
+    moveq  #$28-$01,d1              ; set map box draw width
+    moveq  #$1E-$01,d2              ; set map box draw height
+    bsr.w   TilemapToVRAM         ; flush mappings to VRAM
+    lea    ($FFC00004).l,a6         ; load VDP control port
+    move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
+    lea     ART_HACK.l,a0           ; load background art
+    jsr     NemDec              ; run NemDec to decompress art for display
+    lea Pal_HACK.l,a0        ; load this palette
+    lea ($FFFFFB80).l,a1        ; set as line 2
+    move.w  #$F,d0
+ 
+Hack_PalLoop:
+    move.l  (a0)+,(a1)+         ; copy colours to buffer
+    move.l  (a0)+,(a1)+         ; ''
+    dbf d0,Hack_PalLoop      ; repeat until done
+    jsr PaletteFadeIn          ; fade palette in
+    move.w  #147*60,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
+ 
+Hack_MainLoop:
+    move.b  #2,($FFFFF62A).w        ; set V-blank routine to run
+    jsr WaitForVBla          ; wait for V-blank (decreases "Demo_Time_left")
+    tst.b   ($FFFFF605).w           ; has player 1 pressed start button?
+    bmi.s   Hack_GotoTitle         ; if so, branch
+    tst.w   ($FFFFF614).w           ; has the delay time finished?
+    bne.s   Hack_MainLoop          ; if not, branch
+ 
+Hack_GotoTitle:
+    move.b  #$04,($FFFFF600).w      ; set the screen mode to Title Screen
+    rts                     ; return
+
 GM_Sega:
 		sfx	$E0,0,1,1
 		bsr.w	ClearPLC
@@ -2355,7 +2398,7 @@ LevSelCode_US:	if IsDemo=0
 ; ===========================================================================
 
 PlayLevelC:
-		sfx	$C9,0,0,0 ; fade out music
+
 		jsr	ClearScreen
 	if IsDemo = 1
 	;	RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>*SONIC DEBUT*%<endl>%<endl>%<pal2>*SONIC DEBUT* is not responding%<endl>%<endl>%<pal3>Hang on while Windows reports the %<endl>problem to Microsoft...%<endl>%<endl>NICE TRY LOL%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock
@@ -4086,8 +4129,6 @@ Cred_WaitLoop:
 		cmpi.w	#9,(v_creditsnum).w ; have the credits finished?
 		beq.w	TryAgainEnd	; if yes, branch
 		rts	
-		
-		include	"_inc\Hacker.asm"
 
 ; ---------------------------------------------------------------------------
 ; Ending sequence demo loading subroutine
@@ -8313,12 +8354,21 @@ Eni_OtherSegaLogo:	incbin	"tilemaps\Sega Logo.bin" ; large Sega logo (mappings)
 			even
 	PAL_RAD:	incbin	"palette\Radnex Affiliate.bin"
 			even
+			
 	MAPS_CRED:	incbin	"tilemaps\Credits.bin"
 			even
 	ART_CRED:	incbin	"artnem\Credits.bin"
 			even
 	PAL_CRED:	incbin	"palette\Credits.bin"
 			even
+			
+	MAPS_HACK:	incbin	"tilemaps\Hacker.bin"
+			even
+	ART_HACK:	incbin	"artnem\Hacker.bin"
+			even
+	PAL_HACK:	incbin	"palette\Hacker.bin"
+			even
+			
 Nem_TitleBlank:	incbin	"artnem\Title Screen Blank Top VRAM.bin" ; title screen foreground (mappings)
 		even
 Eni_Title:	incbin	"tilemaps\Title Screen.bin" ; title screen foreground (mappings)
@@ -8748,65 +8798,103 @@ Blk256_LZ:	incbin	"map256\LZ.bin"
 Blk16_MZ:	incbin	"map16\MZ.bin"
 		even
 Nem_MZ:		if IsDemo=1
+		incbin	"artnem\8x8 lockoutNORM.bin"
 		else
 		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
 		endc
 		even
 Blk256_MZ:	if IsDemo=1
+		incbin	"map256\lockoutNORM.bin"
 		else
 		incbin	"map256\MZ.bin"
 		endc
 		even
-Blk16_IMZ:	incbin	"map16\IMZ.bin"
+Blk16_IMZ:	if IsDemo=1
+		incbin	"map16\lockoutNORM.bin"
+		else
+		incbin	"map16\IMZ.bin"
+		endc
 		even
 Nem_IMZ:	if IsDemo=1
+		incbin	"artnem\8x8 lockoutNORM.bin"
 		else
 		incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
 		endc
 		even
 Blk256_IMZ:if IsDemo=1
+		incbin	"map256\lockoutNORM.bin"
 		else
 		incbin	"map256\IMZ.bin"
 		endc
 		even
-Blk16_SLZ:	incbin	"map16\SLZ.bin"
+Blk16_SLZ:	if IsDemo=1
+		incbin	"map16\lockoutNORM.bin"
+		else
+		incbin	"map16\SLZ.bin"
+		endc
 		even
 Nem_SLZ:	if IsDemo=1
+		incbin	"artnem\8x8 lockoutNORM.bin"
 		else
 		incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
 		endc
 		even
-Blk256_SLZ:	incbin	"map256\SLZ.bin"
+Blk256_SLZ:	if IsDemo=1
+		incbin	"map256\lockoutNORM.bin"
+		else
+		incbin	"map256\SLZ.bin"
+		endc
 		even
-Blk16_SYZ:	incbin	"map16\SYZ.bin"
+Blk16_SYZ:	if IsDemo=1
+		incbin	"artnem\8x8 lockoutNORM.bin"
+		else
+		incbin	"map16\SYZ.bin"
+		endc
 		even
 Nem_SYZ:	if IsDemo=1
+		incbin	"artnem\8x8 lockoutNORM.bin"
 		else
 		incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
 		endc
 		even
-Blk256_SYZ:	incbin	"map256\SYZ.bin"
+Blk256_SYZ:	if IsDemo=1
+		incbin	"map256\lockoutNORM.bin"
+		else
+		incbin	"map256\SYZ.bin"
+		endc
 		even
-Blk16_SBZ:	incbin	"map16\SBZ.bin"
+Blk16_SBZ:	if IsDemo=1
+		incbin	"map16\lockoutNORM.bin"
+		else
+		incbin	"map16\SBZ.bin"
+		endc
 		even
 Nem_SBZ:	if IsDemo=1
+		incbin	"artnem\8x8 lockoutNORM.bin"
 		else
 		incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
 		endc
 		even
 Blk256_SBZ:if IsDemo=1
+		incbin	"map256\lockoutNORM.bin"
 		else
 		incbin	"map256\SBZ.bin"
 		endc
 		even
-Blk16_CSZ:	incbin	"map16\CSZ.bin"
+Blk16_CSZ:if IsDemo=1
+		incbin	"map16\lockoutNORM.bin"
+		else	
+		incbin	"map16\CSZ.bin"
+		endc
 		even
 Nem_CSZ:	if IsDemo=1
+		incbin	"artnem\8x8 lockoutNORM.bin"
 		else
 		incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
 		endc
 		even
 Blk256_CSZ:if IsDemo=1
+		incbin	"map256\lockoutNORM.bin"
 		else
 		incbin	"map256\CSZ.bin"
 		endc
@@ -9082,6 +9170,54 @@ Art_BigRing:	incbin	"artunc\Giant Ring.bin"
 ; Sprite locations index
 ; ---------------------------------------------------------------------------
 ObjPos_Index:
+		if	IsDemo = 1
+		; GHZ
+		dc.w ObjPos_GHZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_GHZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_GHZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; LZ
+		dc.w ObjPos_LZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_LZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_LZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; MZ
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; SLZ
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; SYZ
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; SBZ
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		zonewarning ObjPos_Index,$10
+		; Ending
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; Ice Mountain
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		; Cosmic Space
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index	
+		else
 		; GHZ
 		dc.w ObjPos_GHZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_GHZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
@@ -9118,24 +9254,17 @@ ObjPos_Index:
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		
+		; Ice Mountain
 		dc.w ObjPos_IMZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		
+		; Cosmic Space
 		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index		
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index		
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index	
+		endc
 		; --- Put extra object data here. ---
 ObjPosLZPlatform_Index:
 		dc.w ObjPos_LZ1pf1-ObjPos_Index, ObjPos_LZ1pf2-ObjPos_Index
