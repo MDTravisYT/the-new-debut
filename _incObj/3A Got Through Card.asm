@@ -178,7 +178,7 @@ LevelOrder:
 		dc.b 0, 0
 
 		; Labyrinth Zone
-		dc.b id_LZ, 1	; Act 1
+		dc.b id_MZ, 2	; Act 1
 		dc.b id_LZ, 2	; Act 2
 		dc.b 0, 0	; Act 3
 		dc.b id_MZ, 0	; Scrap Brain Zone Act 3

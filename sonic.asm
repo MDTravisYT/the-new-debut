@@ -366,13 +366,7 @@ ptr_GM_Hack:	bra.w	GM_Hack		; Credits ($28)
 ; ===========================================================================
 
 CheckSumError:
-		bsr.w	VDPSetupGame
-		move.l	#$C0000000,(vdp_control_port).l ; set VDP to CRAM write
-		moveq	#$3F,d7
-
-	@fillred:
-		move.w	#cRed,(vdp_data_port).l ; fill palette with red
-		dbf	d7,@fillred	; repeat $3F more times
+		RaiseError "%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<pal0>*SONIC DEBUT*%<endl>%<endl>%<pal1>Checksum Error!%<endl>%<endl>%<pal2>If you're seeing this in error,%<endl>contact MCTravisYT.%<endl>%<endl>Otherwise, don't attempt to modify the%<endl>ROM.%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>%<endl>", TitleLock ; alt for CGS demo	
 
 	@endlessloop:
 		bra.s	@endlessloop
