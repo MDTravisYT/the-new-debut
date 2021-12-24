@@ -2648,7 +2648,7 @@ SoundB2:	include	"sound/sfx/SndB2 - Drown Death.asm"
 		even
 SoundB3:	incbin	"sound/sfx/SndB3 - Flamethrower.bin"
 		even
-SoundB4:	incbin	"sound/sfx/SndB4 - Bumper.bin"
+SoundB4:	include	"sound/sfx/SndB4 - Bumper.asm"
 		even
 SoundB5:	include	"sound/sfx/SndB5 - Ring.asm"
 		even

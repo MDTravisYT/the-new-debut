@@ -1521,13 +1521,23 @@
 00000000 =000000DE                  nA7:	EQU nAb7+1	; $DE
 00000000 =000000DF                  nBb7:	EQU nA7+1	; $DF
 00000000                            
+00000000                            																		
+00000000                            																		
+00000000                            																	  
+00000000                            							
+00000000                            				   
+00000000                            				  
 00000000                            ; ---------------------------------------------------------------------------------------------
 00000000                            ; PSG envelope equates
 00000000 =00000000                  fTone_00:	EQU $00
 00000000 =00000001                  fTone_01:	EQU fTone_00+1
+00000000                            				
 00000000 =00000002                  fTone_02:	EQU fTone_01+1
+00000000                            				
 00000000 =00000003                  fTone_03:	EQU fTone_02+1
+00000000                            				
 00000000 =00000004                  fTone_04:	EQU fTone_03+1
+00000000                            				
 00000000 =00000005                  fTone_05:	EQU fTone_04+1
 00000000 =00000006                  fTone_06:	EQU fTone_05+1
 00000000 =00000007                  fTone_07:	EQU fTone_06+1
@@ -1536,6 +1546,43 @@
 00000000 =0000000A                  fTone_0A:	EQU fTone_09+1
 00000000 =0000000B                  fTone_0B:	EQU fTone_0A+1
 00000000 =0000000C                  fTone_0C:	EQU fTone_0B+1
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            													   
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            										  
+00000000                            				
+00000000                            											
+00000000                            								  
+00000000                            								  
+00000000                            				
+00000000                            				
+00000000                            								  
+00000000                            								  
+00000000                            													   
+00000000                            								  
+00000000                            								  
+00000000                            								  
+00000000                            										  
+00000000                            								  
+00000000                            				
+00000000                            								  
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            											
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            				
+00000000                            				 
 00000000                            ; ---------------------------------------------------------------------------------------------
 00000000                            ; DAC Equates
 00000000 =00000081                  dKick			EQU	$81
@@ -1543,9 +1590,88 @@
 00000000 =00000083                  dTimpani		EQU	$83
 00000000 =00000088                  dHiTimpani		EQU	$88
 00000000 =00000089                  dMidTimpani		EQU	$89
+00000000                            					 
+00000000                            				 
+00000000                            					 
+00000000                            				   
+00000000                            			   
+00000000                            				 
+00000000                            					 
+00000000                            								
+00000000                            				   
+00000000                            					
+00000000                            				 
+00000000                            					 
+00000000                            								   
+00000000                            					
+00000000                            			 
+00000000                            						
+00000000                            									  
+00000000                            					   
+00000000                            						 
+00000000                            								   
+00000000                            					  
+00000000                            				   
+00000000                            					
+00000000                            							   
+00000000                            						   
+00000000                            					 
 00000000 =0000008A                  dLowTimpani		EQU	$8A
 00000000 =0000008B                  dVLowTimpani		EQU	$8B
 00000000                            
+00000000                            							
+00000000                            							 
+00000000                            				  
+00000000                            						
+00000000                            									   
+00000000                            				   
+00000000                            					   
+00000000                            						
+00000000                            									
+00000000                            						  
+00000000                            			   
+00000000                            				   
+00000000                            				  
+00000000                            							  
+00000000                            			
+00000000                            		   
+00000000                            				
+00000000                            				 
+00000000                            					
+00000000                            					 
+00000000                            							  
+00000000                            				   
+00000000                            					  
+00000000                            					  
+00000000                            									
+00000000                            										
+00000000                            											  
+00000000                            					  
+00000000                            						   
+00000000                            								  
+00000000                            					   
+00000000                            					   
+00000000                            					   
+00000000                            										
+00000000                            				  
+00000000                            						
+00000000                            				   
+00000000                            								   
+00000000                            				 
+00000000                            				
+00000000                            					 
+00000000                            									
+00000000                            						  
+00000000                            						   
+00000000                            			   
+00000000                            				
+00000000                            				  
+00000000                            					
+00000000                            					 
+00000000                            					 
+00000000                            					
+00000000                            				 
+00000000                            				  
 00000000                            ; ---------------------------------------------------------------------------------------------
 00000000                            ; Channel IDs for SFX
 00000000 =00000080                  cPSG1				EQU $80
@@ -1601,6 +1727,13 @@
 00000000 =00000025                  fTone_25:	EQU fTone_24+1
 00000000 =00000026                  fTone_26:	EQU fTone_25+1
 00000000                            
+00000000                            					   
+00000000                            			
+00000000                            						 
+00000000                            	   
+00000000                            					  
+00000000                            	  
+00000000                            	  
 00000000                            ; ---------------------------------------------------------------------------------------------
 00000000                            ; PSG conversion to S3/S&K/S3D drivers require a tone shift of 12 semi-tones.
 00000000                            conv0To256  macro val 
@@ -1648,6 +1781,9 @@
 00000000 =00000000                  smpsHeaderStartSong = 0
 00000000                            
 00000000                            smpsHeaderVoiceNull macro
+00000000                            				
+00000000                            																   
+00000000                            	  
 00000000                            	dc.w	$0000
 00000000                            	endm
 00000000                            
@@ -1677,6 +1813,8 @@
 00000000                            ; Header - Set up Tempo
 00000000                            smpsHeaderTempo macro tdiv,tmod
 00000000                            	dc.b	tdiv,tmod
+00000000                            					
+00000000                            			
 00000000                            	endm
 00000000                            
 00000000                            ; Header - Set up DAC Channel
@@ -1689,6 +1827,9 @@
 00000000                            	endc
 00000000                            	if narg>=3
 00000000                            		dc.b	\vol
+00000000                            	  
+00000000                            		   
+00000000                            	   
 00000000                            	else
 00000000                            		dc.b	$00
 00000000                            	endc
@@ -1703,6 +1844,11 @@
 00000000                            ; Header - Set up PSG Channel
 00000000                            smpsHeaderPSG macro loc,pitch,vol,mod,voice
 00000000                            	dc.w	loc-songStart
+00000000                            				   
+00000000                            						   
+00000000                            	 
+00000000                            			
+00000000                            	  
 00000000                            	dc.b	pitch,vol,mod,voice
 00000000                            	endm
 00000000                            
@@ -1724,7 +1870,16 @@
 00000000                            	endc
 00000000                            	dc.b	$80,chanid
 00000000                            	dc.w	loc-songStart
+00000000                            				   
+00000000                            				   
 00000000                            	dc.b	pitch, vol
+00000000                            	 
+00000000                            			
+00000000                            	  
+00000000                            	 
+00000000                            			
+00000000                            	  
+00000000                            		 
 00000000                            	endm
 00000000                            
 00000000                            ; ---------------------------------------------------------------------------------------------
@@ -1744,10 +1899,15 @@
 00000000                            	dc.b	$E1,val
 00000000                            	endm
 00000000                            
+00000000                            					
+00000000                            			  
+00000000                            	 
+00000000                            
 00000000                            ; E2xx - Useless
 00000000                            smpsNop macro val
 00000000                            	dc.b	$E2,val
 00000000                            	endm
+00000000                            
 00000000                            ; Return (used after smpsCall)
 00000000                            smpsReturn macro val
 00000000                            	dc.b	$E3
@@ -1768,26 +1928,39 @@
 00000000                            smpsAlterVol macro val
 00000000                            	dc.b	$E6,val
 00000000                            	endm
+00000000                            			
 00000000                            
 00000000                            sVol  macro val
 00000000                            	$E6,val
 00000000                            	endm
 00000000                            ; E7 - Prevent attack of next note
 00000000 =000000E7                  smpsNoAttack	EQU $E7
+00000000                            					   
+00000000                            					
 00000000                            
 00000000                            ; E8xx - Set note fill to xx
 00000000                            smpsNoteFill macro val
 00000000                            		dc.b	$E8,val
 00000000                            ;	endc
 00000000                            	endm
+00000000                            
+00000000                            						 
 00000000                            smpsAlterPitch 	macro	value
 00000000                            	dc.b $E9,value
 00000000                            	endm
 00000000                            
+00000000                            								 
+00000000                            				   
+00000000                            			  
+00000000                            	 
+00000000                            			  
+00000000                            	  
+00000000                            	 
 00000000                            
 00000000                            ; Set music tempo modifier to xx
 00000000                            smpsSetTempoMod macro mod
 00000000                            	dc.b	$EA,mod
+00000000                            			
 00000000                            	endm
 00000000                            
 00000000                            ; Set music tempo divider to xx
@@ -1804,6 +1977,7 @@
 00000000                            smpsPSGAlterVol macro vol
 00000000                            	dc.b	$EC,vol
 00000000                            	endm
+00000000                            			 
 00000000                            
 00000000                            ; Clears pushing sound flag in S1
 00000000                            smpsClearPush macro	
@@ -1824,10 +1998,20 @@
 00000000                            	endc
 00000000                            	endm
 00000000                            
+00000000                            									  
+00000000                            					   
+00000000                            			   
+00000000                            	 
+00000000                            
 00000000                            ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
 00000000                            smpsModSet macro wait,speed,change,step
 00000000                            	dc.b	$F0
+00000000                            				   
 00000000                            	dc.b	wait,speed,change,step
+00000000                            	 
+00000000                            							 
+00000000                            	  
+00000000                            						
 00000000                            	endm
 00000000                            
 00000000                            ; Turn on Modulation
@@ -1850,6 +2034,11 @@
 00000000                            	dc.b	$F4
 00000000                            	endm
 00000000                            
+00000000                            				
+00000000                            					   
+00000000                            			 
+00000000                            	  
+00000000                            
 00000000                            ; F5xx - PSG voice to xx
 00000000                            smpsPSGvoice macro voice
 00000000                            	dc.b	$F5,voice
@@ -1867,6 +2056,12 @@
 00000000                            	dc.b	index,loops
 00000000                            	dc.w	loc-*-1
 00000000                            	endm
+00000000                            
+00000000                            					   
+00000000                            							
+00000000                            		 
+00000000                            			 
+00000000                            	  
 00000000                            
 00000000                            ; F8xxxx - Call pattern at xxxx, saving return point
 00000000                            smpsCall macro loc
@@ -1963,6 +2158,9 @@
 00000000                            	endm
 00000000                            
 00000000                            smpsResetSpindashRev macro val
+00000000                            							  
+00000000                            																								 
+00000000                            					
 00000000                            	dc.b	$FF,$07
 00000000                            	endm
 00000000                            
@@ -2079,6 +2277,17 @@
 00000000                            	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
 00000000                            	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
 00000000                            	dc.b	vcTL4|vcTLMask4,vcTL3|vcTLMask3,vcTL2|vcTLMask2,vcTL1|vcTLMask1
+00000000                            				  
+00000000                            				 
+00000000                            	 
+00000000                            			 
+00000000                            	  
+00000000                            				  
+00000000                            				 
+00000000                            	 
+00000000                            			 
+00000000                            	  
+00000000                            				 
 00000000                            	endm
 00000000                            
 00000000                            
@@ -24268,24 +24477,24 @@
 00011C44 00                         		even
 00011C44 00                         		even
 00011C44                            Map_Bump:	include	"_maps\Bumper.asm"
-00011C44                            ; ---------------------------------------------------------------------------
-00011C44                            ; Sprite mappings - pinball bumper (SYZ)
-00011C44                            ; ---------------------------------------------------------------------------
-00011C44                            Map_Bump_internal:
-00011C44 0000                       		dc.w @normal-Map_Bump_internal
-00011C46 0000                       		dc.w @bumped1-Map_Bump_internal
-00011C48 0000                       		dc.w @bumped2-Map_Bump_internal
-00011C4A 02                         @normal:	dc.b 2
-00011C4B F007 0000 F0               		dc.b $F0, 7, 0,	0, $F0
-00011C50 F007 0800 00               		dc.b $F0, 7, 8,	0, 0
-00011C55 02                         @bumped1:	dc.b 2
-00011C56 F406 0008 F4               		dc.b $F4, 6, 0,	8, $F4
-00011C5B F402 0808 04               		dc.b $F4, 2, 8,	8, 4
-00011C60 02                         @bumped2:	dc.b 2
-00011C61 F007 000E F0               		dc.b $F0, 7, 0,	$E, $F0
-00011C66 F007 080E 00               		dc.b $F0, 7, 8,	$E, 0
-00011C6C 00                         		even
-00011C6C 00                         		even
+00011C44                            ; ================================================================================
+00011C44                            ; Sprite Mappings - generated by Flex 2 Thu Dec 23 2021 06:43:57 GMT-0500 (Eastern Standard Time)
+00011C44                            ; ================================================================================
+00011C44                            
+00011C44                            DATAEC7DWF3L5PB:
+00011C44 0000 0000                  	dc.w DATAEC7DWF3L5PB_0-DATAEC7DWF3L5PB, DATAEC7DWF3L5PB_1-DATAEC7DWF3L5PB
+00011C48 0000                       	dc.w DATAEC7DWF3L5PB_2-DATAEC7DWF3L5PB
+00011C4A 02                         DATAEC7DWF3L5PB_0: dc.b $2
+00011C4B F007 0000 F0               	dc.b $F0, $7, $0, $0, $F0
+00011C50 F007 0800 00               	dc.b $F0, $7, $8, $0, $0
+00011C55 02                         DATAEC7DWF3L5PB_1: dc.b $2
+00011C56 F406 0008 F4               	dc.b $F4, $6, $0, $8, $F4
+00011C5B F402 0808 04               	dc.b $F4, $2, $8, $8, $4
+00011C60 02                         DATAEC7DWF3L5PB_2: dc.b $2
+00011C61 F007 000E F0               	dc.b $F0, $7, $0, $E, $F0
+00011C66 F007 080E 00               	dc.b $F0, $7, $8, $E, $0
+00011C6C 00                         	even
+00011C6C 00                         	even
 00011C6C                            
 00011C6C                            		include	"_incObj\0D Signpost.asm" ; includes "GotThroughAct" subroutine
 00011C6C                            ; ---------------------------------------------------------------------------
@@ -47352,6 +47561,7 @@
 00020F04                            ; Pattern load cues - ending sequence
 00020F04                            ; ---------------------------------------------------------------------------
 00020F04 0000                       PLC_Ending:	dc.w ((PLC_Endingend-PLC_Ending-2)/6)-1
+00020F06                            	PLC_Endingend:
 00020F06 0000 0000 0000             		plcm	Nem_GHZ,0		; GHZ main patterns
 00020F0C 0000 0000 6B00             		plcm	Nem_Stalk, $6B00	; flower stalk
 00020F12 0000 0000 7400             		plcm	Nem_EndFlower, $7400	; flowers
@@ -47366,7 +47576,6 @@
 00020F48 0000 0000 B4A0             		plcm	Nem_Flicky, $B4A0	; flicky
 00020F4E 0000 0000 B660             		plcm	Nem_Squirrel, $B660	; squirrel
 00020F54 0000 0000 B8A0             		plcm	Nem_EndStH, $B8A0	; "SONIC THE HEDGEHOG"
-00020F5A                            	PLC_Endingend:
 00020F5A                            ; ---------------------------------------------------------------------------
 00020F5A                            ; Pattern load cues - "TRY AGAIN" and "END" screens
 00020F5A                            ; ---------------------------------------------------------------------------
@@ -48455,482 +48664,482 @@
 0003D1FE                            ; Compressed graphics - SYZ stuff
 0003D1FE                            ; ---------------------------------------------------------------------------
 0003D1FE                            Nem_Bumper:	incbin	"artnem\SYZ Bumper.bin"
-0003D368                            		even
-0003D368                            Nem_SyzSpike2:	incbin	"artnem\SYZ Small Spikeball.bin"
-0003D3CA                            		even
-0003D3CA                            Nem_LzSwitch:	incbin	"artnem\Switch.bin"
-0003D4AC                            		even
-0003D4AC                            Nem_SyzSpike1:	incbin	"artnem\SYZ Large Spikeball.bin"
-0003D73A                            		even
-0003D73A                            ; ---------------------------------------------------------------------------
-0003D73A                            ; Compressed graphics - SBZ stuff
-0003D73A                            ; ---------------------------------------------------------------------------
-0003D73A                            Nem_SbzWheel1:	incbin	"artnem\SBZ Running Disc.bin"
-0003D78E                            		even
-0003D78E                            Nem_SbzWheel2:	incbin	"artnem\SBZ Junction Wheel.bin"
-0003DA2A                            		even
-0003DA2A                            Nem_Cutter:	incbin	"artnem\SBZ Pizza Cutter.bin"
-0003DC2E                            		even
-0003DC2E                            Nem_Stomper:	incbin	"artnem\SBZ Stomper.bin"
-0003DDCC                            		even
-0003DDCC                            Nem_SpinPform:	incbin	"artnem\SBZ Spinning Platform.bin"
-0003E0FC                            		even
-0003E0FC                            Nem_TrapDoor:	incbin	"artnem\SBZ Trapdoor.bin"
-0003E2DA                            		even
-0003E2DA                            Nem_SbzFloor:	incbin	"artnem\SBZ Collapsing Floor.bin"
-0003E332                            		even
-0003E332                            Nem_Electric:	incbin	"artnem\SBZ Electrocuter.bin"
-0003E4B2                            		even
-0003E4B2                            Nem_SbzBlock:	incbin	"artnem\SBZ Vanishing Block.bin"
-0003E5B0                            		even
-0003E5B0                            Nem_FlamePipe:	incbin	"artnem\SBZ Flaming Pipe.bin"
-0003E73C                            		even
-0003E73C                            Nem_SbzDoor1:	incbin	"artnem\SBZ Small Vertical Door.bin"
-0003E78C                            		even
-0003E78C                            Nem_SlideFloor:	incbin	"artnem\SBZ Sliding Floor Trap.bin"
-0003E7E4                            		even
-0003E7E4                            Nem_SbzDoor2:	incbin	"artnem\SBZ Large Horizontal Door.bin"
-0003E8E0                            		even
-0003E8E0                            Nem_Girder:	incbin	"artnem\SBZ Crushing Girder.bin"
-0003E9F6                            		even
-0003E9F6                            ; ---------------------------------------------------------------------------
-0003E9F6                            ; Compressed graphics - enemies
-0003E9F6                            ; ---------------------------------------------------------------------------
-0003E9F6                            Nem_BallHog:	incbin	"artnem\Enemy Ball Hog.bin"
-0003EC10                            		even
-0003EC10                            Nem_Crabmeat:	incbin	"artnem\Enemy Crabmeat.bin"
-0003F0FE                            		even
-0003F0FE                            Nem_Buzz:	incbin	"artnem\Enemy Buzz Bomber.bin"
-0003F49A                            		even
-0003F49A                            Nem_UnkExplode:	incbin	"artnem\Unused - Explosion.bin"
-0003F682                            		even
-0003F682                            Nem_Burrobot:	incbin	"artnem\Enemy Burrobot.bin"
-0003FD6C                            		even
-0003FD6C                            Nem_Imp:	incbin	"artnem\Enemy Imp.bin"
-0004022C                            		even
-0004022C                            Nem_Chopper:	incbin	"artnem\Enemy Chopper.bin"
-00040494                            		even
-00040494                            Nem_Jaws:	incbin	"artnem\Enemy Jaws.bin"
-0004071E                            		even
-0004071E                            Nem_Roller:	incbin	"artnem\Enemy Roller.bin"
-00040C42                            		even
-00040C42                            Nem_Motobug:	incbin	"artnem\Enemy Motobug.bin"
-00040EBC                            		even
-00040EBC                            Nem_Newtron:	incbin	"artnem\Enemy Newtron.bin"
-000414DA                            		even
-000414DA                            Nem_Yadrin:	incbin	"artnem\Enemy Yadrin.bin"
-000418C2                            		even
-000418C2                            Nem_Basaran:	incbin	"artnem\Enemy Basaran.bin"
-00041BBE                            		even
-00041BBE                            Nem_Splats:	incbin	"artnem\Enemy Splats.bin"
-00041E06                            		even
-00041E06                            Nem_Bomb:	incbin	"artnem\Enemy Bomb.bin"
-0004209E                            		even
-0004209E                            Nem_Orbinaut:	incbin	"artnem\Enemy Orbinaut.bin"
-0004227C                            		even
-0004227C                            Nem_Cater:	incbin	"artnem\Enemy Caterkiller.bin"
-0004240A                            		even
-0004240A                            ; ---------------------------------------------------------------------------
-0004240A                            ; Compressed graphics - various
-0004240A                            ; ---------------------------------------------------------------------------
-0004240A                            Nem_TitleCard:	incbin	"artnem\Title Cards.bin"
-000429E2                            		even
-000429E2                            Nem_TitleCard_Spec:	incbin	"artnem\Title Cards Special.bin"
-00042FC8                            		even
-00042FC8                            Nem_Hud:	incbin	"artnem\HUD.bin"	; HUD (rings, time, score)
-000430AE                            		even
-000430AE                            Nem_Lives:	incbin	"artnem\HUD - Life Counter Icon.bin"
-0004313A                            		even
-0004313A                            Nem_Ring:	incbin	"artnem\Rings.bin"
-0004322E                            		even
-0004322E                            Nem_Key:	incbin	"artnem\Key.bin"
-00043272                            		even
-00043272                            Nem_Monitors:	incbin	"artnem\Monitors.bin"
-000436F4                            		even
-000436F4                            Nem_Explode:	incbin	"artnem\Explosion.bin"
-00043D5A                            		even
-00043D5A                            Nem_Points:	incbin	"artnem\Points.bin"	; points from destroyed enemy or object
-00043E0A                            		even
-00043E0A                            Nem_GameOver:	incbin	"artnem\Game Over.bin"	; game over / time over
-00043F92                            		even
-00043F92                            Nem_HSpring:	incbin	"artnem\Spring Horizontal.bin"
-00044094                            		even
-00044094                            Nem_VSpring:	incbin	"artnem\Spring Vertical.bin"
-00044170                            		even
-00044170                            Nem_SignPost:	incbin	"artnem\Signpost.bin"	; end of level signpost
-000445B8                            		even
-000445B8                            Nem_Lamp:	incbin	"artnem\Lamppost.bin"
-00044672                            		even
-00044672                            Nem_BigFlash:	incbin	"artnem\Giant Ring Flash.bin"
-000447E6                            		even
-000447E6                            Nem_Bonus:	incbin	"artnem\Hidden Bonuses.bin" ; hidden bonuses at end of a level
-0004483A                            		even
-0004483A                            Nem_Welcome:	incbin	"artnem\GHZ Sign.bin"
-00044CD2                            Map_Welcome:	include	"_maps\GHZ Sign.asm"
-00044CD2                            ; ================================================================================
-00044CD2                            ; Sprite Mappings - generated by Flex 2 Thu Aug 05 2021 03:37:25 GMT-0400 (Eastern Daylight Time)
-00044CD2                            ; ================================================================================
-00044CD2                            
-00044CD2                            DATA3DTJLDAOP5H:
-00044CD2 0000                       	dc.w DATA3DTJLDAOP5H_0-DATA3DTJLDAOP5H
-00044CD4 0D                         DATA3DTJLDAOP5H_0: dc.b $D
-00044CD5 F600 0051 0C               	dc.b $F6, $0, $0, $51, $C
-00044CDA 100D 0000 D4               	dc.b $10, $D, $0, $0, $D4
-00044CDF 100D 0008 F4               	dc.b $10, $D, $0, $8, $F4
-00044CE4 1009 0010 14               	dc.b $10, $9, $0, $10, $14
-00044CE9 000D 6026 D4               	dc.b $0, $D, $60, $26, $D4
-00044CEE 000D 602E F4               	dc.b $0, $D, $60, $2E, $F4
-00044CF3 0009 6036 14               	dc.b $0, $9, $60, $36, $14
-00044CF8 F00D 003C D4               	dc.b $F0, $D, $0, $3C, $D4
-00044CFD F009 0044 F4               	dc.b $F0, $9, $0, $44, $F4
-00044D02 E80C 004A DF               	dc.b $E8, $C, $0, $4A, $DF
-00044D07 E804 004E FF               	dc.b $E8, $4, $0, $4E, $FF
-00044D0C E500 0050 F0               	dc.b $E5, $0, $0, $50, $F0
-00044D11 E00F 6016 0C               	dc.b $E0, $F, $60, $16, $C
-00044D16                            	even
-00044D16                            	even
-00044D16                            Nem_Warning:	incbin	"artnem\GHZ Warn Sign.bin"
-00044DB8                            Map_Warning:	include	"_maps\GHZ Warn Sign.asm"
-00044DB8                            ; ================================================================================
-00044DB8                            ; Sprite Mappings - generated by Flex 2 Wed Nov 24 2021 12:07:37 GMT-0500 (Eastern Standard Time)
-00044DB8                            ; ================================================================================
-00044DB8                            
-00044DB8                            DATA16C11TRNJ3U:
-00044DB8 0000                       	dc.w DATA16C11TRNJ3U_0-DATA16C11TRNJ3U
-00044DBA 02                         DATA16C11TRNJ3U_0: dc.b $2
-00044DBB EC07 0000 F8               	dc.b $EC, $7, $0, $0, $F8
-00044DC0 0C04 0008 F8               	dc.b $C, $4, $0, $8, $F8
-00044DC6 00                         	even
-00044DC6 00                         	even
-00044DC6                            ; ---------------------------------------------------------------------------
-00044DC6                            ; Compressed graphics - continue screen
-00044DC6                            ; ---------------------------------------------------------------------------
-00044DC6                            Nem_ContSonic:	incbin	"artnem\Continue Screen Sonic.bin"
-00045076                            		even
-00045076                            Nem_MiniSonic:	incbin	"artnem\Continue Screen Stuff.bin"
-000452B0                            		even
-000452B0                            ; ---------------------------------------------------------------------------
-000452B0                            ; Compressed graphics - animals
-000452B0                            ; ---------------------------------------------------------------------------
-000452B0                            Nem_Rabbit:	incbin	"artnem\Animal Rabbit.bin"
-00045408                            		even
-00045408                            Nem_Chicken:	incbin	"artnem\Animal Chicken.bin"
-00045564                            		even
-00045564                            Nem_BlackBird:	incbin	"artnem\Animal Blackbird.bin"
-000456E0                            		even
-000456E0                            Nem_Seal:	incbin	"artnem\Animal Seal.bin"
-000457FC                            		even
-000457FC                            Nem_Pig:	incbin	"artnem\Animal Pig.bin"
-00045932                            		even
-00045932                            Nem_Flicky:	incbin	"artnem\Animal Flicky.bin"
-00045A54                            		even
-00045A54                            Nem_Squirrel:	incbin	"artnem\Animal Squirrel.bin"
-00045BB0                            		even
-00045BB0                            ; ---------------------------------------------------------------------------
-00045BB0                            ; Compressed graphics - primary patterns and block mappings
-00045BB0                            ; ---------------------------------------------------------------------------
-00045BB0                            Blk16_GHZ:	incbin	"map16\GHZ.bin"
-00046602                            		even
-00046602                            Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
-00048C90                            		even
-00048C90                            Blk256_GHZ:	incbin	"map256\GHZ.bin"
-0004AFC4                            		even
-0004AFC4                            Blk16_Lock:	incbin	"map16\lockout.bin"
-0004B13C                            		even
-0004B13C                            Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
-0004BB36                            		even
-0004BB36                            Blk256_Lock:	incbin	"map256\lockout.bin"
-0004BCCC                            		even
-0004BCCC                            Blk16_LZ:
-0004BCCC                            		incbin	"map16\LZ.bin"
-0004BFA2                            		even
-0004BFA2                            Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
-0004D1F6                            		even
-0004D1F6                            Blk256_LZ:	incbin	"map256\LZ.bin"
-0004EF78                            		even
-0004EF78                            Blk16_MZ:	incbin	"map16\MZ.bin"
-0004F6EE                            		even
-0004F6EE                            		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
-00051E5E                            		even
-00051E5E                            		incbin	"map256\MZ.bin"
-00053678                            		even
-00053678                            		incbin	"map16\IMZ.bin"
-00053A06                            		even
-00053A06                            		incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
-0005506E                            		even
-0005506E                            		incbin	"map256\IMZ.bin"
-000557C2                            		even
-000557C2                            		incbin	"map16\SLZ.bin"
-00055DD6                            		even
-00055DD6                            		incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
-00059356                            		even
-00059356                            		incbin	"map256\SLZ.bin"
-0005BACA                            		even
-0005BACA                            		incbin	"map16\SYZ.bin"
-0005C2C6                            		even
-0005C2C6                            		incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
-0005F6B4                            		even
-0005F6B4                            		incbin	"map256\SYZ.bin"
-00061C32                            		even
-00061C32                            		incbin	"map16\SBZ.bin"
-0006257E                            		even
-0006257E                            		incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
-00064406                            		even
-00064406                            		incbin	"map256\SBZ.bin"
-00066606                            		even
-00066606                            		incbin	"map16\CSZ.bin"
-00066750                            		even
-00066750                            		incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
-000672E6                            		even
-000672E6                            		incbin	"map256\CSZ.bin"
-00067470                            		even
-00067470                            Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
-000677DE                            		even
-000677DE                            Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
-000687C8                            		even
-000687C8                            Blk256_LockN:	incbin	"map256\lockoutNORM.bin"
-00069E0E                            		even
-00069E0E                            ; ---------------------------------------------------------------------------
-00069E0E                            ; Compressed graphics - bosses and ending sequence
-00069E0E                            ; ---------------------------------------------------------------------------
-00069E0E                            Nem_Eggman:	incbin	"artnem\Boss - Main.bin"
-0006A672                            		even
-0006A672                            Nem_Weapons:	incbin	"artnem\Boss - Weapons.bin"
-0006A95C                            		even
-0006A95C                            Nem_Prison:	incbin	"artnem\Prison Capsule.bin"
-0006B1E0                            		even
-0006B1E0                            Nem_Sbz2Eggman:	incbin	"artnem\Boss - Eggman in SBZ2 & FZ.bin"
-0006B9F8                            		even
-0006B9F8                            Nem_FzBoss:	incbin	"artnem\Boss - Final Zone.bin"
-0006C160                            		even
-0006C160                            Nem_FzEggman:	incbin	"artnem\Boss - Eggman after FZ Fight.bin"
-0006C6E0                            		even
-0006C6E0                            Nem_Exhaust:	incbin	"artnem\Boss - Exhaust Flame.bin"
-0006C800                            		even
-0006C800                            Nem_EndEm:	incbin	"artnem\Ending - Emeralds.bin"
-0006C9FE                            		even
-0006C9FE                            Nem_EndSonic:	incbin	"artnem\Ending - Sonic.bin"
-0006DB46                            		even
-0006DB46                            Nem_TryAgain:	incbin	"artnem\Ending - Try Again.bin"
-0006E48A                            		even
-0006E48A                            		incbin	"artnem\Unused - Eggman Ending.bin"
-0006E860                            		even
-0006E860                            Kos_EndFlowers:	incbin	"artkos\Flowers at Ending.bin" ; ending sequence animated flowers
-0006EDF0                            		even
-0006EDF0                            Nem_EndFlower:	incbin	"artnem\Ending - Flowers.bin"
-0006F078                            		even
-0006F078                            Nem_CreditText:	incbin	"artnem\Ending - Credits.bin"
-0006F676                            		even
-0006F676                            Nem_EndStH:	incbin	"artnem\Ending - StH Logo.bin"
-0006F8FE                            		even
-0006F8FE                            
-0006F8FE                            		dcb.b $104,$FF			; why?
-0006FA02                            ; ---------------------------------------------------------------------------
-0006FA02                            ; Collision data
-0006FA02                            ; ---------------------------------------------------------------------------
-0006FA02                            AngleMap:	incbin	"collide\Angle Map.bin"
-0006FB02                            		even
-0006FB02                            CollArray1:	incbin	"collide\Collision Array (Normal).bin"
-00070B02                            		even
-00070B02                            CollArray2:	incbin	"collide\Collision Array (Rotated).bin"
-00071B02                            		even
-00071B02                            Col_GHZ:	incbin	"collide\GHZ.bin"	; GHZ index
-00071CBE 00                         		even
-00071CBE                            Col_LZ:		incbin	"collide\LZ.bin"	; LZ index
-00071D86                            		even
-00071D86                            Col_MZ:		incbin	"collide\MZ.bin"	; MZ index
-00071F16                            		even
-00071F16                            Col_SLZ:	incbin	"collide\SLZ.bin"	; SLZ index
-0007210A                            		even
-0007210A                            Col_SYZ:	incbin	"collide\SYZ.bin"	; SYZ index
-000722FE                            		even
-000722FE                            Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
-000724B6 00                         		even
-000724B6                            Col_IMZ:	incbin	"collide\IMZ.bin"	; IMZ index
-00072560                            		even
-00072560                            Col_CSZ:	incbin	"collide\CSZ.bin"	; CSZ index
-000725A8 00                         		even
-000725A8                            ; ---------------------------------------------------------------------------
-000725A8                            ; Special Stage layouts
-000725A8                            ; ---------------------------------------------------------------------------
-000725A8                            SS_1:		incbin	"sslayout\1.bin"
-000727A4                            		even
-000727A4                            SS_2:		incbin	"sslayout\2.bin"
-00072BB6                            		even
-00072BB6                            SS_3:		incbin	"sslayout\3.bin"
-00072F12                            		even
-00072F12                            SS_4:		incbin	"sslayout\4.bin"
-000733EC                            		even
-000733EC                            SS_5:		incbin	"sslayout\5.bin"
-000738BE                            		even
-000738BE                            SS_6:		incbin	"sslayout\6.bin"
-00073BCE                            		even
-00073BCE                            ; ---------------------------------------------------------------------------
-00073BCE                            ; Animated uncompressed graphics
-00073BCE                            ; ---------------------------------------------------------------------------
-00073BCE                            Art_GhzWater:	incbin	"artunc\GHZ Waterfall.bin"
-00073DCE                            		even
-00073DCE                            Art_GhzFlower1:	incbin	"artunc\GHZ Flower Large.bin"
-000741CE                            		even
-000741CE                            Art_GhzFlower2:	incbin	"artunc\GHZ Flower Small.bin"
-0007464E                            		even
-0007464E                            Art_MzLava1:	incbin	"artunc\MZ Lava Surface.bin"
-0007494E                            		even
-0007494E                            Art_MzLava2:	incbin	"artunc\MZ Lava.bin"
-00074F4E                            		even
-00074F4E                            Art_MzTorch:	incbin	"artunc\MZ Background Torch.bin"
-0007524E                            		even
-0007524E                            Art_SbzSmoke:	incbin	"artunc\SBZ Background Smoke.bin"
-00075CCE                            		even
-00075CCE                            
-00075CCE                            ; ---------------------------------------------------------------------------
-00075CCE                            ; Level	layout index
-00075CCE                            ; ---------------------------------------------------------------------------
-00075CCE                            Level_Index:
-00075CCE                            		; GHZ
-00075CCE 0000 0000 0000             		dc.w Level_GHZ1-Level_Index, Level_GHZbg-Level_Index, byte_68D70-Level_Index
-00075CD4 0000 0000 0000             		dc.w Level_GHZ2-Level_Index, Level_GHZbg-Level_Index, byte_68E3C-Level_Index
-00075CDA 0000 0000 0000             		dc.w Level_GHZ3-Level_Index, Level_GHZbg-Level_Index, byte_68F84-Level_Index
-00075CE0 0000 0000 0000             		dc.w byte_68F88-Level_Index, byte_68F88-Level_Index, byte_68F88-Level_Index
-00075CE6                            		; LZ
-00075CE6 0000 0000 0000             		dc.w Level_LZ1-Level_Index, Level_LZbg-Level_Index, byte_69190-Level_Index
-00075CEC 0000 0000 0000             		dc.w Level_LZ2-Level_Index, Level_LZbg-Level_Index, byte_6922E-Level_Index
-00075CF2 0000 0000 0000             		dc.w Level_LZ3-Level_Index, Level_LZbg-Level_Index, byte_6934C-Level_Index
-00075CF8 0000 0000 0000             		dc.w Level_SBZ3-Level_Index, Level_LZbg-Level_Index, byte_6940A-Level_Index
-00075CFE                            		; MZ
-00075CFE 0000 0000 0000             		dc.w Level_MZ1-Level_Index, Level_MZ1bg-Level_Index, Level_MZ1-Level_Index
-00075D04 0000 0000 0000             		dc.w Level_MZ2-Level_Index, Level_MZ2bg-Level_Index, byte_6965C-Level_Index
-00075D0A 0000 0000 0000             		dc.w Level_MZ3-Level_Index, Level_MZ3bg-Level_Index, byte_697E6-Level_Index
-00075D10 0000 0000 0000             		dc.w byte_697EA-Level_Index, byte_697EA-Level_Index, byte_697EA-Level_Index
-00075D16                            		; SLZ
-00075D16 0000 0000 0000             		dc.w Level_SLZ1-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-00075D1C 0000 0000 0000             		dc.w Level_SLZ2-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-00075D22 0000 0000 0000             		dc.w Level_SLZ3-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-00075D28 0000 0000 0000             		dc.w byte_69B84-Level_Index, byte_69B84-Level_Index, byte_69B84-Level_Index
-00075D2E                            		; SYZ
-00075D2E 0000 0000 0000             		dc.w Level_SYZ1-Level_Index, Level_SYZbg-Level_Index, byte_69C7E-Level_Index
-00075D34 0000 0000 0000             		dc.w Level_SYZ2-Level_Index, Level_SYZbg-Level_Index, byte_69D86-Level_Index
-00075D3A 0000 0000 0000             		dc.w Level_SYZ3-Level_Index, Level_SYZbg-Level_Index, byte_69EE4-Level_Index
-00075D40 0000 0000 0000             		dc.w byte_69EE8-Level_Index, byte_69EE8-Level_Index, byte_69EE8-Level_Index
-00075D46                            		; SBZ
-00075D46 0000 0000 0000             		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
-00075D4C 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-00075D52 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-00075D58 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-00075D5E                            		; Ending
-00075D5E 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00075D64 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
-00075D6A 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00075D70 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00075D76                            		; IMZ
-00075D76 0000 0000 0000             		dc.w Level_IMZ1-Level_Index, Level_IMZbg-Level_Index, byte_6A2FC-Level_Index
-00075D7C 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-00075D82 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-00075D88 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-00075D8E                            		; CSZ
-00075D8E 0000 0000 0000             		dc.w Level_CSZ1-Level_Index, Level_CSZbg-Level_Index, byte_6A2FC-Level_Index
-00075D94 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-00075D9A 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-00075DA0 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-00075DA6                            		
-00075DA6 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00075DAC 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
-00075DB2 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00075DB8 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00075DBE                            		
-00075DBE                            
-00075DBE                            Level_GHZ1:	incbin	"levels\ghz1.bin"
-00075EB0                            		even
-00075EB0 0000 0000                  byte_68D70:	dc.b 0,	0, 0, 0
-00075EB4                            Level_GHZ2:	incbin	"levels\ghz2.bin"
-00075F82                            		even
-00075F82 0000 0000                  byte_68E3C:	dc.b 0,	0, 0, 0
-00075F86                            Level_GHZ3:	incbin	"levels\ghz3.bin"
-000760A8                            		even
-000760A8                            Level_GHZbg:	incbin	"levels\ghzbg.bin"
-000760CA                            		even
-000760CA 0000 0000                  byte_68F84:	dc.b 0,	0, 0, 0
-000760CE 0000 0000                  byte_68F88:	dc.b 0,	0, 0, 0
-000760D2                            
-000760D2                            Level_LZ1:	incbin	"levels\lz1.bin"
-000761D4                            		even
-000761D4                            Level_LZbg:	incbin	"levels\lzbg.bin"
-000762D6                            		even
-000762D6 0000 0000                  byte_69190:	dc.b 0,	0, 0, 0
-000762DA                            Level_LZ2:	incbin	"levels\lz2.bin"
-0007635C                            		even
-0007635C 0000 0000                  byte_6922E:	dc.b 0,	0, 0, 0
-00076360                            Level_LZ3:	incbin	"levels\lz3.bin"
-00076462                            		even
-00076462 0000 0000                  byte_6934C:	dc.b 0,	0, 0, 0
-00076466                            Level_SBZ3:	incbin	"levels\sbz3.bin"
-00076520                            		even
-00076520 0000 0000                  byte_6940A:	dc.b 0,	0, 0, 0
-00076524                            
-00076524                            Level_MZ1:	incbin	"levels\mz1.bin"
-000765BC                            		even
-000765BC                            Level_MZ1bg:	incbin	"levels\mz1bg.bin"
-0007667E                            		even
-0007667E                            Level_MZ2:	incbin	"levels\mz2.bin"
-00076752                            		even
-00076752                            Level_MZ2bg:	incbin	"levels\mz2bg.bin"
-00076814                            		even
-00076814 0000 0000                  byte_6965C:	dc.b 0,	0, 0, 0
-00076818                            Level_MZ3:	incbin	"levels\mz3.bin"
-000768FA                            		even
-000768FA                            Level_MZ3bg:	incbin	"levels\mz3bg.bin"
-000769DC                            		even
-000769DC 0000 0000                  byte_697E6:	dc.b 0,	0, 0, 0
-000769E0 0000 0000                  byte_697EA:	dc.b 0,	0, 0, 0
-000769E4                            
-000769E4                            Level_IMZ1:	incbin	"levels\imz1.bin"
-00076A32 00                         		even
-00076A32                            Level_IMZbg:	incbin	"levels\imzbg.bin"
-00076A36                            		even
-00076A36                            Level_SLZ1:	incbin	"levels\slz1.bin"
-00076B78                            		even
-00076B78                            Level_SLZbg:	incbin	"levels\slzbg.bin"
-00076BF2                            		even
-00076BF2                            Level_SLZ2:	incbin	"levels\slz2.bin"
-00076D34                            		even
-00076D34                            Level_SLZ3:	incbin	"levels\slz3.bin"
-00076E36                            		even
-00076E36 0000 0000                  byte_69B84:	dc.b 0,	0, 0, 0
-00076E3A                            
-00076E3A                            Level_SYZ1:	incbin	"levels\syz1.bin"
-00076EF6 00                         		even
-00076EF6                            		incbin	"levels\syzbg.bin"
-00076F30                            		even
-00076F30 0000 0000                  byte_69C7E:	dc.b 0,	0, 0, 0
-00076F34                            Level_SYZ2:	incbin	"levels\syz2.bin"
-00077038                            		even
-00077038 0000 0000                  byte_69D86:	dc.b 0,	0, 0, 0
-0007703C                            Level_SYZ3:	incbin	"levels\syz3.bin"
-00077196 00                         		even
-00077196 0000 0000                  byte_69EE4:	dc.b 0,	0, 0, 0
-0007719A 0000 0000                  byte_69EE8:	dc.b 0,	0, 0, 0
-0007719E                            
-0007719E                            Level_SBZ1:	incbin	"levels\sbz1.bin"
-000773A0                            		even
-000773A0                            Level_SBZ1bg:	incbin	"levels\sbz1bg.bin"
-000773AC                            		even
-000773AC                            Level_SBZ2:	incbin	"levels\sbz2.bin"
-000775AE                            		even
-000775AE                            Level_SBZ2bg:	incbin	"levels\sbz2bg.bin"
-00077718                            		even
-00077718 0000 0000                  byte_6A2F8:	dc.b 0,	0, 0, 0
-0007771C 0000 0000                  byte_6A2FC:	dc.b 0,	0, 0, 0
-00077720                            Level_End:	incbin	"levels\ending.bin"
-0007776E 00                         		even
-0007776E                            byte_6A320:	incbin	"levels\endingbg.bin"
-000777BB                            Level_CSZ1:	incbin	"levels\csz1.bin"
-00077808                            		even
-00077808                            Level_CSZbg:	incbin	"levels\cszbg.bin"
-0007780E                            		even
-0007780E                            
-0007780E                            Art_BigRing:	incbin	"artunc\Giant Ring.bin"
-0007844E                            		even
-0007844E                            
+0003D34E                            		even
+0003D34E                            Nem_SyzSpike2:	incbin	"artnem\SYZ Small Spikeball.bin"
+0003D3B0                            		even
+0003D3B0                            Nem_LzSwitch:	incbin	"artnem\Switch.bin"
+0003D492                            		even
+0003D492                            Nem_SyzSpike1:	incbin	"artnem\SYZ Large Spikeball.bin"
+0003D720                            		even
+0003D720                            ; ---------------------------------------------------------------------------
+0003D720                            ; Compressed graphics - SBZ stuff
+0003D720                            ; ---------------------------------------------------------------------------
+0003D720                            Nem_SbzWheel1:	incbin	"artnem\SBZ Running Disc.bin"
+0003D774                            		even
+0003D774                            Nem_SbzWheel2:	incbin	"artnem\SBZ Junction Wheel.bin"
+0003DA10                            		even
+0003DA10                            Nem_Cutter:	incbin	"artnem\SBZ Pizza Cutter.bin"
+0003DC14                            		even
+0003DC14                            Nem_Stomper:	incbin	"artnem\SBZ Stomper.bin"
+0003DDB2                            		even
+0003DDB2                            Nem_SpinPform:	incbin	"artnem\SBZ Spinning Platform.bin"
+0003E0E2                            		even
+0003E0E2                            Nem_TrapDoor:	incbin	"artnem\SBZ Trapdoor.bin"
+0003E2C0                            		even
+0003E2C0                            Nem_SbzFloor:	incbin	"artnem\SBZ Collapsing Floor.bin"
+0003E318                            		even
+0003E318                            Nem_Electric:	incbin	"artnem\SBZ Electrocuter.bin"
+0003E498                            		even
+0003E498                            Nem_SbzBlock:	incbin	"artnem\SBZ Vanishing Block.bin"
+0003E596                            		even
+0003E596                            Nem_FlamePipe:	incbin	"artnem\SBZ Flaming Pipe.bin"
+0003E722                            		even
+0003E722                            Nem_SbzDoor1:	incbin	"artnem\SBZ Small Vertical Door.bin"
+0003E772                            		even
+0003E772                            Nem_SlideFloor:	incbin	"artnem\SBZ Sliding Floor Trap.bin"
+0003E7CA                            		even
+0003E7CA                            Nem_SbzDoor2:	incbin	"artnem\SBZ Large Horizontal Door.bin"
+0003E8C6                            		even
+0003E8C6                            Nem_Girder:	incbin	"artnem\SBZ Crushing Girder.bin"
+0003E9DC                            		even
+0003E9DC                            ; ---------------------------------------------------------------------------
+0003E9DC                            ; Compressed graphics - enemies
+0003E9DC                            ; ---------------------------------------------------------------------------
+0003E9DC                            Nem_BallHog:	incbin	"artnem\Enemy Ball Hog.bin"
+0003EBF6                            		even
+0003EBF6                            Nem_Crabmeat:	incbin	"artnem\Enemy Crabmeat.bin"
+0003F0E4                            		even
+0003F0E4                            Nem_Buzz:	incbin	"artnem\Enemy Buzz Bomber.bin"
+0003F480                            		even
+0003F480                            Nem_UnkExplode:	incbin	"artnem\Unused - Explosion.bin"
+0003F668                            		even
+0003F668                            Nem_Burrobot:	incbin	"artnem\Enemy Burrobot.bin"
+0003FD52                            		even
+0003FD52                            Nem_Imp:	incbin	"artnem\Enemy Imp.bin"
+00040212                            		even
+00040212                            Nem_Chopper:	incbin	"artnem\Enemy Chopper.bin"
+0004047A                            		even
+0004047A                            Nem_Jaws:	incbin	"artnem\Enemy Jaws.bin"
+00040704                            		even
+00040704                            Nem_Roller:	incbin	"artnem\Enemy Roller.bin"
+00040C28                            		even
+00040C28                            Nem_Motobug:	incbin	"artnem\Enemy Motobug.bin"
+00040EA2                            		even
+00040EA2                            Nem_Newtron:	incbin	"artnem\Enemy Newtron.bin"
+000414C0                            		even
+000414C0                            Nem_Yadrin:	incbin	"artnem\Enemy Yadrin.bin"
+000418A8                            		even
+000418A8                            Nem_Basaran:	incbin	"artnem\Enemy Basaran.bin"
+00041BA4                            		even
+00041BA4                            Nem_Splats:	incbin	"artnem\Enemy Splats.bin"
+00041DEC                            		even
+00041DEC                            Nem_Bomb:	incbin	"artnem\Enemy Bomb.bin"
+00042084                            		even
+00042084                            Nem_Orbinaut:	incbin	"artnem\Enemy Orbinaut.bin"
+00042262                            		even
+00042262                            Nem_Cater:	incbin	"artnem\Enemy Caterkiller.bin"
+000423F0                            		even
+000423F0                            ; ---------------------------------------------------------------------------
+000423F0                            ; Compressed graphics - various
+000423F0                            ; ---------------------------------------------------------------------------
+000423F0                            Nem_TitleCard:	incbin	"artnem\Title Cards.bin"
+000429C8                            		even
+000429C8                            Nem_TitleCard_Spec:	incbin	"artnem\Title Cards Special.bin"
+00042FAE                            		even
+00042FAE                            Nem_Hud:	incbin	"artnem\HUD.bin"	; HUD (rings, time, score)
+00043094                            		even
+00043094                            Nem_Lives:	incbin	"artnem\HUD - Life Counter Icon.bin"
+00043120                            		even
+00043120                            Nem_Ring:	incbin	"artnem\Rings.bin"
+00043214                            		even
+00043214                            Nem_Key:	incbin	"artnem\Key.bin"
+00043258                            		even
+00043258                            Nem_Monitors:	incbin	"artnem\Monitors.bin"
+000436DA                            		even
+000436DA                            Nem_Explode:	incbin	"artnem\Explosion.bin"
+00043D40                            		even
+00043D40                            Nem_Points:	incbin	"artnem\Points.bin"	; points from destroyed enemy or object
+00043DF0                            		even
+00043DF0                            Nem_GameOver:	incbin	"artnem\Game Over.bin"	; game over / time over
+00043F78                            		even
+00043F78                            Nem_HSpring:	incbin	"artnem\Spring Horizontal.bin"
+0004407A                            		even
+0004407A                            Nem_VSpring:	incbin	"artnem\Spring Vertical.bin"
+00044156                            		even
+00044156                            Nem_SignPost:	incbin	"artnem\Signpost.bin"	; end of level signpost
+0004459E                            		even
+0004459E                            Nem_Lamp:	incbin	"artnem\Lamppost.bin"
+00044658                            		even
+00044658                            Nem_BigFlash:	incbin	"artnem\Giant Ring Flash.bin"
+000447CC                            		even
+000447CC                            Nem_Bonus:	incbin	"artnem\Hidden Bonuses.bin" ; hidden bonuses at end of a level
+00044820                            		even
+00044820                            Nem_Welcome:	incbin	"artnem\GHZ Sign.bin"
+00044CB8                            Map_Welcome:	include	"_maps\GHZ Sign.asm"
+00044CB8                            ; ================================================================================
+00044CB8                            ; Sprite Mappings - generated by Flex 2 Thu Aug 05 2021 03:37:25 GMT-0400 (Eastern Daylight Time)
+00044CB8                            ; ================================================================================
+00044CB8                            
+00044CB8                            DATA3DTJLDAOP5H:
+00044CB8 0000                       	dc.w DATA3DTJLDAOP5H_0-DATA3DTJLDAOP5H
+00044CBA 0D                         DATA3DTJLDAOP5H_0: dc.b $D
+00044CBB F600 0051 0C               	dc.b $F6, $0, $0, $51, $C
+00044CC0 100D 0000 D4               	dc.b $10, $D, $0, $0, $D4
+00044CC5 100D 0008 F4               	dc.b $10, $D, $0, $8, $F4
+00044CCA 1009 0010 14               	dc.b $10, $9, $0, $10, $14
+00044CCF 000D 6026 D4               	dc.b $0, $D, $60, $26, $D4
+00044CD4 000D 602E F4               	dc.b $0, $D, $60, $2E, $F4
+00044CD9 0009 6036 14               	dc.b $0, $9, $60, $36, $14
+00044CDE F00D 003C D4               	dc.b $F0, $D, $0, $3C, $D4
+00044CE3 F009 0044 F4               	dc.b $F0, $9, $0, $44, $F4
+00044CE8 E80C 004A DF               	dc.b $E8, $C, $0, $4A, $DF
+00044CED E804 004E FF               	dc.b $E8, $4, $0, $4E, $FF
+00044CF2 E500 0050 F0               	dc.b $E5, $0, $0, $50, $F0
+00044CF7 E00F 6016 0C               	dc.b $E0, $F, $60, $16, $C
+00044CFC                            	even
+00044CFC                            	even
+00044CFC                            Nem_Warning:	incbin	"artnem\GHZ Warn Sign.bin"
+00044D9E                            Map_Warning:	include	"_maps\GHZ Warn Sign.asm"
+00044D9E                            ; ================================================================================
+00044D9E                            ; Sprite Mappings - generated by Flex 2 Wed Nov 24 2021 12:07:37 GMT-0500 (Eastern Standard Time)
+00044D9E                            ; ================================================================================
+00044D9E                            
+00044D9E                            DATA16C11TRNJ3U:
+00044D9E 0000                       	dc.w DATA16C11TRNJ3U_0-DATA16C11TRNJ3U
+00044DA0 02                         DATA16C11TRNJ3U_0: dc.b $2
+00044DA1 EC07 0000 F8               	dc.b $EC, $7, $0, $0, $F8
+00044DA6 0C04 0008 F8               	dc.b $C, $4, $0, $8, $F8
+00044DAC 00                         	even
+00044DAC 00                         	even
+00044DAC                            ; ---------------------------------------------------------------------------
+00044DAC                            ; Compressed graphics - continue screen
+00044DAC                            ; ---------------------------------------------------------------------------
+00044DAC                            Nem_ContSonic:	incbin	"artnem\Continue Screen Sonic.bin"
+0004505C                            		even
+0004505C                            Nem_MiniSonic:	incbin	"artnem\Continue Screen Stuff.bin"
+00045296                            		even
+00045296                            ; ---------------------------------------------------------------------------
+00045296                            ; Compressed graphics - animals
+00045296                            ; ---------------------------------------------------------------------------
+00045296                            Nem_Rabbit:	incbin	"artnem\Animal Rabbit.bin"
+000453EE                            		even
+000453EE                            Nem_Chicken:	incbin	"artnem\Animal Chicken.bin"
+0004554A                            		even
+0004554A                            Nem_BlackBird:	incbin	"artnem\Animal Blackbird.bin"
+000456C6                            		even
+000456C6                            Nem_Seal:	incbin	"artnem\Animal Seal.bin"
+000457E2                            		even
+000457E2                            Nem_Pig:	incbin	"artnem\Animal Pig.bin"
+00045918                            		even
+00045918                            Nem_Flicky:	incbin	"artnem\Animal Flicky.bin"
+00045A3A                            		even
+00045A3A                            Nem_Squirrel:	incbin	"artnem\Animal Squirrel.bin"
+00045B96                            		even
+00045B96                            ; ---------------------------------------------------------------------------
+00045B96                            ; Compressed graphics - primary patterns and block mappings
+00045B96                            ; ---------------------------------------------------------------------------
+00045B96                            Blk16_GHZ:	incbin	"map16\GHZ.bin"
+000465E8                            		even
+000465E8                            Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
+00048C76                            		even
+00048C76                            Blk256_GHZ:	incbin	"map256\GHZ.bin"
+0004AFA8                            		even
+0004AFA8                            Blk16_Lock:	incbin	"map16\lockout.bin"
+0004B120                            		even
+0004B120                            Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
+0004BB1A                            		even
+0004BB1A                            Blk256_Lock:	incbin	"map256\lockout.bin"
+0004BCB0                            		even
+0004BCB0                            Blk16_LZ:
+0004BCB0                            		incbin	"map16\LZ.bin"
+0004BF86                            		even
+0004BF86                            Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
+0004D1DA                            		even
+0004D1DA                            Blk256_LZ:	incbin	"map256\LZ.bin"
+0004EF5C                            		even
+0004EF5C                            Blk16_MZ:	incbin	"map16\MZ.bin"
+0004F6D2                            		even
+0004F6D2                            		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
+00051E42                            		even
+00051E42                            		incbin	"map256\MZ.bin"
+0005365C                            		even
+0005365C                            		incbin	"map16\IMZ.bin"
+000539EA                            		even
+000539EA                            		incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
+00055052                            		even
+00055052                            		incbin	"map256\IMZ.bin"
+000557A6                            		even
+000557A6                            		incbin	"map16\SLZ.bin"
+00055DBA                            		even
+00055DBA                            		incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
+0005933A                            		even
+0005933A                            		incbin	"map256\SLZ.bin"
+0005BAAE                            		even
+0005BAAE                            		incbin	"map16\SYZ.bin"
+0005C2AA                            		even
+0005C2AA                            		incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
+0005F698                            		even
+0005F698                            		incbin	"map256\SYZ.bin"
+00061C16                            		even
+00061C16                            		incbin	"map16\SBZ.bin"
+00062562                            		even
+00062562                            		incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
+000643EA                            		even
+000643EA                            		incbin	"map256\SBZ.bin"
+000665EA                            		even
+000665EA                            		incbin	"map16\CSZ.bin"
+00066734                            		even
+00066734                            		incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
+000672CA                            		even
+000672CA                            		incbin	"map256\CSZ.bin"
+00067454                            		even
+00067454                            Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
+000677C2                            		even
+000677C2                            Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
+000687AC                            		even
+000687AC                            Blk256_LockN:	incbin	"map256\lockoutNORM.bin"
+00069DF2                            		even
+00069DF2                            ; ---------------------------------------------------------------------------
+00069DF2                            ; Compressed graphics - bosses and ending sequence
+00069DF2                            ; ---------------------------------------------------------------------------
+00069DF2                            Nem_Eggman:	incbin	"artnem\Boss - Main.bin"
+0006A656                            		even
+0006A656                            Nem_Weapons:	incbin	"artnem\Boss - Weapons.bin"
+0006A940                            		even
+0006A940                            Nem_Prison:	incbin	"artnem\Prison Capsule.bin"
+0006B1C4                            		even
+0006B1C4                            Nem_Sbz2Eggman:	incbin	"artnem\Boss - Eggman in SBZ2 & FZ.bin"
+0006B9DC                            		even
+0006B9DC                            Nem_FzBoss:	incbin	"artnem\Boss - Final Zone.bin"
+0006C144                            		even
+0006C144                            Nem_FzEggman:	incbin	"artnem\Boss - Eggman after FZ Fight.bin"
+0006C6C4                            		even
+0006C6C4                            Nem_Exhaust:	incbin	"artnem\Boss - Exhaust Flame.bin"
+0006C7E4                            		even
+0006C7E4                            Nem_EndEm:	incbin	"artnem\Ending - Emeralds.bin"
+0006C9E2                            		even
+0006C9E2                            Nem_EndSonic:	incbin	"artnem\Ending - Sonic.bin"
+0006DB2A                            		even
+0006DB2A                            Nem_TryAgain:	incbin	"artnem\Ending - Try Again.bin"
+0006E46E                            		even
+0006E46E                            		incbin	"artnem\Unused - Eggman Ending.bin"
+0006E844                            		even
+0006E844                            Kos_EndFlowers:	incbin	"artkos\Flowers at Ending.bin" ; ending sequence animated flowers
+0006EDD4                            		even
+0006EDD4                            Nem_EndFlower:	incbin	"artnem\Ending - Flowers.bin"
+0006F05C                            		even
+0006F05C                            Nem_CreditText:	incbin	"artnem\Ending - Credits.bin"
+0006F65A                            		even
+0006F65A                            Nem_EndStH:	incbin	"artnem\Ending - StH Logo.bin"
+0006F8E2                            		even
+0006F8E2                            
+0006F8E2                            		dcb.b $104,$FF			; why?
+0006F9E6                            ; ---------------------------------------------------------------------------
+0006F9E6                            ; Collision data
+0006F9E6                            ; ---------------------------------------------------------------------------
+0006F9E6                            AngleMap:	incbin	"collide\Angle Map.bin"
+0006FAE6                            		even
+0006FAE6                            CollArray1:	incbin	"collide\Collision Array (Normal).bin"
+00070AE6                            		even
+00070AE6                            CollArray2:	incbin	"collide\Collision Array (Rotated).bin"
+00071AE6                            		even
+00071AE6                            Col_GHZ:	incbin	"collide\GHZ.bin"	; GHZ index
+00071CA2 00                         		even
+00071CA2                            Col_LZ:		incbin	"collide\LZ.bin"	; LZ index
+00071D6A                            		even
+00071D6A                            Col_MZ:		incbin	"collide\MZ.bin"	; MZ index
+00071EFA                            		even
+00071EFA                            Col_SLZ:	incbin	"collide\SLZ.bin"	; SLZ index
+000720EE                            		even
+000720EE                            Col_SYZ:	incbin	"collide\SYZ.bin"	; SYZ index
+000722E2                            		even
+000722E2                            Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
+0007249A 00                         		even
+0007249A                            Col_IMZ:	incbin	"collide\IMZ.bin"	; IMZ index
+00072544                            		even
+00072544                            Col_CSZ:	incbin	"collide\CSZ.bin"	; CSZ index
+0007258C 00                         		even
+0007258C                            ; ---------------------------------------------------------------------------
+0007258C                            ; Special Stage layouts
+0007258C                            ; ---------------------------------------------------------------------------
+0007258C                            SS_1:		incbin	"sslayout\1.bin"
+00072788                            		even
+00072788                            SS_2:		incbin	"sslayout\2.bin"
+00072B9A                            		even
+00072B9A                            SS_3:		incbin	"sslayout\3.bin"
+00072EF6                            		even
+00072EF6                            SS_4:		incbin	"sslayout\4.bin"
+000733D0                            		even
+000733D0                            SS_5:		incbin	"sslayout\5.bin"
+000738A2                            		even
+000738A2                            SS_6:		incbin	"sslayout\6.bin"
+00073BB2                            		even
+00073BB2                            ; ---------------------------------------------------------------------------
+00073BB2                            ; Animated uncompressed graphics
+00073BB2                            ; ---------------------------------------------------------------------------
+00073BB2                            Art_GhzWater:	incbin	"artunc\GHZ Waterfall.bin"
+00073DB2                            		even
+00073DB2                            Art_GhzFlower1:	incbin	"artunc\GHZ Flower Large.bin"
+000741B2                            		even
+000741B2                            Art_GhzFlower2:	incbin	"artunc\GHZ Flower Small.bin"
+00074632                            		even
+00074632                            Art_MzLava1:	incbin	"artunc\MZ Lava Surface.bin"
+00074932                            		even
+00074932                            Art_MzLava2:	incbin	"artunc\MZ Lava.bin"
+00074F32                            		even
+00074F32                            Art_MzTorch:	incbin	"artunc\MZ Background Torch.bin"
+00075232                            		even
+00075232                            Art_SbzSmoke:	incbin	"artunc\SBZ Background Smoke.bin"
+00075CB2                            		even
+00075CB2                            
+00075CB2                            ; ---------------------------------------------------------------------------
+00075CB2                            ; Level	layout index
+00075CB2                            ; ---------------------------------------------------------------------------
+00075CB2                            Level_Index:
+00075CB2                            		; GHZ
+00075CB2 0000 0000 0000             		dc.w Level_GHZ1-Level_Index, Level_GHZbg-Level_Index, byte_68D70-Level_Index
+00075CB8 0000 0000 0000             		dc.w Level_GHZ2-Level_Index, Level_GHZbg-Level_Index, byte_68E3C-Level_Index
+00075CBE 0000 0000 0000             		dc.w Level_GHZ3-Level_Index, Level_GHZbg-Level_Index, byte_68F84-Level_Index
+00075CC4 0000 0000 0000             		dc.w byte_68F88-Level_Index, byte_68F88-Level_Index, byte_68F88-Level_Index
+00075CCA                            		; LZ
+00075CCA 0000 0000 0000             		dc.w Level_LZ1-Level_Index, Level_LZbg-Level_Index, byte_69190-Level_Index
+00075CD0 0000 0000 0000             		dc.w Level_LZ2-Level_Index, Level_LZbg-Level_Index, byte_6922E-Level_Index
+00075CD6 0000 0000 0000             		dc.w Level_LZ3-Level_Index, Level_LZbg-Level_Index, byte_6934C-Level_Index
+00075CDC 0000 0000 0000             		dc.w Level_SBZ3-Level_Index, Level_LZbg-Level_Index, byte_6940A-Level_Index
+00075CE2                            		; MZ
+00075CE2 0000 0000 0000             		dc.w Level_MZ1-Level_Index, Level_MZ1bg-Level_Index, Level_MZ1-Level_Index
+00075CE8 0000 0000 0000             		dc.w Level_MZ2-Level_Index, Level_MZ2bg-Level_Index, byte_6965C-Level_Index
+00075CEE 0000 0000 0000             		dc.w Level_MZ3-Level_Index, Level_MZ3bg-Level_Index, byte_697E6-Level_Index
+00075CF4 0000 0000 0000             		dc.w byte_697EA-Level_Index, byte_697EA-Level_Index, byte_697EA-Level_Index
+00075CFA                            		; SLZ
+00075CFA 0000 0000 0000             		dc.w Level_SLZ1-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
+00075D00 0000 0000 0000             		dc.w Level_SLZ2-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
+00075D06 0000 0000 0000             		dc.w Level_SLZ3-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
+00075D0C 0000 0000 0000             		dc.w byte_69B84-Level_Index, byte_69B84-Level_Index, byte_69B84-Level_Index
+00075D12                            		; SYZ
+00075D12 0000 0000 0000             		dc.w Level_SYZ1-Level_Index, Level_SYZbg-Level_Index, byte_69C7E-Level_Index
+00075D18 0000 0000 0000             		dc.w Level_SYZ2-Level_Index, Level_SYZbg-Level_Index, byte_69D86-Level_Index
+00075D1E 0000 0000 0000             		dc.w Level_SYZ3-Level_Index, Level_SYZbg-Level_Index, byte_69EE4-Level_Index
+00075D24 0000 0000 0000             		dc.w byte_69EE8-Level_Index, byte_69EE8-Level_Index, byte_69EE8-Level_Index
+00075D2A                            		; SBZ
+00075D2A 0000 0000 0000             		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
+00075D30 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+00075D36 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+00075D3C 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+00075D42                            		; Ending
+00075D42 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+00075D48 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
+00075D4E 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+00075D54 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+00075D5A                            		; IMZ
+00075D5A 0000 0000 0000             		dc.w Level_IMZ1-Level_Index, Level_IMZbg-Level_Index, byte_6A2FC-Level_Index
+00075D60 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+00075D66 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+00075D6C 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+00075D72                            		; CSZ
+00075D72 0000 0000 0000             		dc.w Level_CSZ1-Level_Index, Level_CSZbg-Level_Index, byte_6A2FC-Level_Index
+00075D78 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+00075D7E 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+00075D84 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+00075D8A                            		
+00075D8A 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+00075D90 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
+00075D96 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+00075D9C 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+00075DA2                            		
+00075DA2                            
+00075DA2                            Level_GHZ1:	incbin	"levels\ghz1.bin"
+00075E94                            		even
+00075E94 0000 0000                  byte_68D70:	dc.b 0,	0, 0, 0
+00075E98                            Level_GHZ2:	incbin	"levels\ghz2.bin"
+00075F66                            		even
+00075F66 0000 0000                  byte_68E3C:	dc.b 0,	0, 0, 0
+00075F6A                            Level_GHZ3:	incbin	"levels\ghz3.bin"
+0007608C                            		even
+0007608C                            Level_GHZbg:	incbin	"levels\ghzbg.bin"
+000760AE                            		even
+000760AE 0000 0000                  byte_68F84:	dc.b 0,	0, 0, 0
+000760B2 0000 0000                  byte_68F88:	dc.b 0,	0, 0, 0
+000760B6                            
+000760B6                            Level_LZ1:	incbin	"levels\lz1.bin"
+000761B8                            		even
+000761B8                            Level_LZbg:	incbin	"levels\lzbg.bin"
+000762BA                            		even
+000762BA 0000 0000                  byte_69190:	dc.b 0,	0, 0, 0
+000762BE                            Level_LZ2:	incbin	"levels\lz2.bin"
+00076340                            		even
+00076340 0000 0000                  byte_6922E:	dc.b 0,	0, 0, 0
+00076344                            Level_LZ3:	incbin	"levels\lz3.bin"
+00076446                            		even
+00076446 0000 0000                  byte_6934C:	dc.b 0,	0, 0, 0
+0007644A                            Level_SBZ3:	incbin	"levels\sbz3.bin"
+00076504                            		even
+00076504 0000 0000                  byte_6940A:	dc.b 0,	0, 0, 0
+00076508                            
+00076508                            Level_MZ1:	incbin	"levels\mz1.bin"
+000765A0                            		even
+000765A0                            Level_MZ1bg:	incbin	"levels\mz1bg.bin"
+00076662                            		even
+00076662                            Level_MZ2:	incbin	"levels\mz2.bin"
+00076736                            		even
+00076736                            Level_MZ2bg:	incbin	"levels\mz2bg.bin"
+000767F8                            		even
+000767F8 0000 0000                  byte_6965C:	dc.b 0,	0, 0, 0
+000767FC                            Level_MZ3:	incbin	"levels\mz3.bin"
+000768DE                            		even
+000768DE                            Level_MZ3bg:	incbin	"levels\mz3bg.bin"
+000769C0                            		even
+000769C0 0000 0000                  byte_697E6:	dc.b 0,	0, 0, 0
+000769C4 0000 0000                  byte_697EA:	dc.b 0,	0, 0, 0
+000769C8                            
+000769C8                            Level_IMZ1:	incbin	"levels\imz1.bin"
+00076A16 00                         		even
+00076A16                            Level_IMZbg:	incbin	"levels\imzbg.bin"
+00076A1A                            		even
+00076A1A                            Level_SLZ1:	incbin	"levels\slz1.bin"
+00076B5C                            		even
+00076B5C                            Level_SLZbg:	incbin	"levels\slzbg.bin"
+00076BD6                            		even
+00076BD6                            Level_SLZ2:	incbin	"levels\slz2.bin"
+00076D18                            		even
+00076D18                            Level_SLZ3:	incbin	"levels\slz3.bin"
+00076E1A                            		even
+00076E1A 0000 0000                  byte_69B84:	dc.b 0,	0, 0, 0
+00076E1E                            
+00076E1E                            Level_SYZ1:	incbin	"levels\syz1.bin"
+00076EDA 00                         		even
+00076EDA                            		incbin	"levels\syzbg.bin"
+00076F14                            		even
+00076F14 0000 0000                  byte_69C7E:	dc.b 0,	0, 0, 0
+00076F18                            Level_SYZ2:	incbin	"levels\syz2.bin"
+0007701C                            		even
+0007701C 0000 0000                  byte_69D86:	dc.b 0,	0, 0, 0
+00077020                            Level_SYZ3:	incbin	"levels\syz3.bin"
+0007717A 00                         		even
+0007717A 0000 0000                  byte_69EE4:	dc.b 0,	0, 0, 0
+0007717E 0000 0000                  byte_69EE8:	dc.b 0,	0, 0, 0
+00077182                            
+00077182                            Level_SBZ1:	incbin	"levels\sbz1.bin"
+00077384                            		even
+00077384                            Level_SBZ1bg:	incbin	"levels\sbz1bg.bin"
+00077390                            		even
+00077390                            Level_SBZ2:	incbin	"levels\sbz2.bin"
+00077592                            		even
+00077592                            Level_SBZ2bg:	incbin	"levels\sbz2bg.bin"
+000776FC                            		even
+000776FC 0000 0000                  byte_6A2F8:	dc.b 0,	0, 0, 0
+00077700 0000 0000                  byte_6A2FC:	dc.b 0,	0, 0, 0
+00077704                            Level_End:	incbin	"levels\ending.bin"
+00077752 00                         		even
+00077752                            byte_6A320:	incbin	"levels\endingbg.bin"
+0007779F                            Level_CSZ1:	incbin	"levels\csz1.bin"
+000777EC                            		even
+000777EC                            Level_CSZbg:	incbin	"levels\cszbg.bin"
+000777F2                            		even
+000777F2                            
+000777F2                            Art_BigRing:	incbin	"artunc\Giant Ring.bin"
+00078432                            		even
+00078432                            
 00078500                            
 00078500                            ; ---------------------------------------------------------------------------
 00078500                            ; Sprite locations index
@@ -55535,8 +55744,71 @@
 0008ACC6 00                         		even
 0008ACC6                            SoundB3:	incbin	"sound/sfx/SndB3 - Flamethrower.bin"
 0008AD10                            		even
-0008AD10                            SoundB4:	incbin	"sound/sfx/SndB4 - Bumper.bin"
-0008AD6C                            		even
+0008AD10                            SoundB4:	include	"sound/sfx/SndB4 - Bumper.asm"
+0008AD10                            Bomper_Header:
+0008AD10 =00000001                  smpsHeaderStartSong = 1
+0008AD10 0000                       	smpsHeaderVoice     Bomper_Voices
+0008AD12 01                         	smpsHeaderTempoSFX  $01
+0008AD13 03                         	smpsHeaderChanSFX   $03
+0008AD14                            
+0008AD26                            
+0008AD26                            ; FM5 Data
+0008AD26                            Bomper_FM5:
+0008AD28 F600 00                    	smpsJump            Bomper_Jump00
+0008AD2B                            
+0008AD2B                            ; FM3 Data
+0008AD2B                            Bomper_FM3:
+0008AD2D F600 00                    	smpsJump            Bomper_Jump00
+0008AD30                            
+0008AD30                            ; FM4 Data
+0008AD30                            Bomper_FM4:
+0008AD32 E107                       	smpsAlterNote       $07
+0008AD34 8001                       	dc.b	nRst, $01
+0008AD36                            
+0008AD36                            Bomper_Jump00:
+0008AD36 BA20                       	dc.b	nA4, $20
+0008AD38 F2                         	smpsStop
+0008AD39                            
+0008AD39                            
+0008AD39                            Bomper_Voices:
+0008AD39                            ;	Voice $00
+0008AD39                            ;	$3C
+0008AD39                            ;	$05, $01, $0A, $01, 	$56, $5C, $5C, $5C, 	$0E, $11, $11, $11
+0008AD39                            ;	$09, $0A, $06, $0A, 	$4F, $3F, $3F, $3F, 	$1F, $80, $2B, $80
+0008AD39                            	smpsVcAlgorithm     $04
+0008AD39                            	smpsVcFeedback      $07
+0008AD39                            	smpsVcUnusedBits    $00
+0008AD39                            	smpsVcDetune        $00, $00, $00, $00
+0008AD39                            	smpsVcCoarseFreq    $01, $0A, $01, $05
+0008AD39                            	smpsVcRateScale     $01, $01, $01, $01
+0008AD39                            	smpsVcAttackRate    $1C, $1C, $1C, $16
+0008AD39                            	smpsVcAmpMod        $00, $00, $00, $00
+0008AD39                            	smpsVcDecayRate1    $11, $11, $11, $0E
+0008AD39                            	smpsVcDecayRate2    $0A, $06, $0A, $09
+0008AD39                            	smpsVcDecayLevel    $03, $03, $03, $04
+0008AD39                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+0008AD39 3C05 010A 0156 5C5C 5C0E+  	smpsVcTotalLevel    $00, $2B, $00, $1F
+0008AD52                            
+0008AD52                            ;	Voice $01
+0008AD52                            ;	$05
+0008AD52                            ;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$12, $0C, $0C, $0C
+0008AD52                            ;	$12, $08, $08, $08, 	$1F, $5F, $5F, $5F, 	$07, $80, $80, $80
+0008AD52                            	smpsVcAlgorithm     $05
+0008AD52                            	smpsVcFeedback      $00
+0008AD52                            	smpsVcUnusedBits    $00
+0008AD52                            	smpsVcDetune        $00, $00, $00, $00
+0008AD52                            	smpsVcCoarseFreq    $00, $00, $00, $00
+0008AD52                            	smpsVcRateScale     $00, $00, $00, $00
+0008AD52                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+0008AD52                            	smpsVcAmpMod        $00, $00, $00, $00
+0008AD52                            	smpsVcDecayRate1    $0C, $0C, $0C, $12
+0008AD52                            	smpsVcDecayRate2    $08, $08, $08, $12
+0008AD52                            	smpsVcDecayLevel    $05, $05, $05, $01
+0008AD52                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+0008AD52 0500 0000 001F 1F1F 1F12+  	smpsVcTotalLevel    $00, $00, $00, $07
+0008AD6B                            
+0008AD6B                            
+0008AD6C 00                         		even
 0008AD6C                            SoundB5:	include	"sound/sfx/SndB5 - Ring.asm"
 0008AD6C                            SndB5_Ring_Header:
 0008AD6C =00000001                  smpsHeaderStartSong = 1

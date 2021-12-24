@@ -132,13 +132,23 @@ nAb7:	EQU nG7+1	; $DD
 nA7:	EQU nAb7+1	; $DE
 nBb7:	EQU nA7+1	; $DF
 
+																		
+																		
+																	  
+							
+				   
+				  
 ; ---------------------------------------------------------------------------------------------
 ; PSG envelope equates
 fTone_00:	EQU $00
 fTone_01:	EQU fTone_00+1
+				
 fTone_02:	EQU fTone_01+1
+				
 fTone_03:	EQU fTone_02+1
+				
 fTone_04:	EQU fTone_03+1
+				
 fTone_05:	EQU fTone_04+1
 fTone_06:	EQU fTone_05+1
 fTone_07:	EQU fTone_06+1
@@ -147,6 +157,43 @@ fTone_09:	EQU fTone_08+1
 fTone_0A:	EQU fTone_09+1
 fTone_0B:	EQU fTone_0A+1
 fTone_0C:	EQU fTone_0B+1
+				
+				
+				
+													   
+				
+				
+				
+										  
+				
+											
+								  
+								  
+				
+				
+								  
+								  
+													   
+								  
+								  
+								  
+										  
+								  
+				
+								  
+				
+				
+				
+				
+											
+				
+				
+				
+				
+				
+				
+				
+				 
 ; ---------------------------------------------------------------------------------------------
 ; DAC Equates
 dKick			EQU	$81
@@ -154,9 +201,88 @@ dSnare			EQU	$82
 dTimpani		EQU	$83
 dHiTimpani		EQU	$88
 dMidTimpani		EQU	$89
+					 
+				 
+					 
+				   
+			   
+				 
+					 
+								
+				   
+					
+				 
+					 
+								   
+					
+			 
+						
+									  
+					   
+						 
+								   
+					  
+				   
+					
+							   
+						   
+					 
 dLowTimpani		EQU	$8A
 dVLowTimpani		EQU	$8B
 
+							
+							 
+				  
+						
+									   
+				   
+					   
+						
+									
+						  
+			   
+				   
+				  
+							  
+			
+		   
+				
+				 
+					
+					 
+							  
+				   
+					  
+					  
+									
+										
+											  
+					  
+						   
+								  
+					   
+					   
+					   
+										
+				  
+						
+				   
+								   
+				 
+				
+					 
+									
+						  
+						   
+			   
+				
+				  
+					
+					 
+					 
+					
+				 
+				  
 ; ---------------------------------------------------------------------------------------------
 ; Channel IDs for SFX
 cPSG1				EQU $80
@@ -212,6 +338,13 @@ fTone_24:	EQU fTone_23+1
 fTone_25:	EQU fTone_24+1
 fTone_26:	EQU fTone_25+1
 
+					   
+			
+						 
+	   
+					  
+	  
+	  
 ; ---------------------------------------------------------------------------------------------
 ; PSG conversion to S3/S&K/S3D drivers require a tone shift of 12 semi-tones.
 conv0To256  macro val 
@@ -259,6 +392,9 @@ convertMainTempoMod	macro tmod
 smpsHeaderStartSong = 0
 
 smpsHeaderVoiceNull macro
+				
+																   
+	  
 	dc.w	$0000
 	endm
 
@@ -288,6 +424,8 @@ smpsHeaderChan macro fm,psg
 ; Header - Set up Tempo
 smpsHeaderTempo macro tdiv,tmod
 	dc.b	tdiv,tmod
+					
+			
 	endm
 
 ; Header - Set up DAC Channel
@@ -300,6 +438,9 @@ smpsHeaderDAC macro loc,pitch,vol
 	endc
 	if narg>=3
 		dc.b	\vol
+	  
+		   
+	   
 	else
 		dc.b	$00
 	endc
@@ -314,6 +455,11 @@ smpsHeaderFM macro loc,pitch,vol
 ; Header - Set up PSG Channel
 smpsHeaderPSG macro loc,pitch,vol,mod,voice
 	dc.w	loc-songStart
+				   
+						   
+	 
+			
+	  
 	dc.b	pitch,vol,mod,voice
 	endm
 
@@ -335,7 +481,16 @@ smpsHeaderSFXChannel macro chanid,loc,pitch,vol
 	endc
 	dc.b	$80,chanid
 	dc.w	loc-songStart
+				   
+				   
 	dc.b	pitch, vol
+	 
+			
+	  
+	 
+			
+	  
+		 
 	endm
 
 ; ---------------------------------------------------------------------------------------------
@@ -355,10 +510,15 @@ smpsAlterNote macro val
 	dc.b	$E1,val
 	endm
 
+					
+			  
+	 
+
 ; E2xx - Useless
 smpsNop macro val
 	dc.b	$E2,val
 	endm
+
 ; Return (used after smpsCall)
 smpsReturn macro val
 	dc.b	$E3
@@ -379,26 +539,39 @@ smpsChanTempoDiv macro val
 smpsAlterVol macro val
 	dc.b	$E6,val
 	endm
+			
 
 sVol  macro val
 	$E6,val
 	endm
 ; E7 - Prevent attack of next note
 smpsNoAttack	EQU $E7
+					   
+					
 
 ; E8xx - Set note fill to xx
 smpsNoteFill macro val
 		dc.b	$E8,val
 ;	endc
 	endm
+
+						 
 smpsAlterPitch 	macro	value
 	dc.b $E9,value
 	endm
 
+								 
+				   
+			  
+	 
+			  
+	  
+	 
 
 ; Set music tempo modifier to xx
 smpsSetTempoMod macro mod
 	dc.b	$EA,mod
+			
 	endm
 
 ; Set music tempo divider to xx
@@ -415,6 +588,7 @@ smpsSetVol macro val
 smpsPSGAlterVol macro vol
 	dc.b	$EC,vol
 	endm
+			 
 
 ; Clears pushing sound flag in S1
 smpsClearPush macro	
@@ -435,10 +609,20 @@ smpsSetvoice macro voice,songID
 	endc
 	endm
 
+									  
+					   
+			   
+	 
+
 ; F0wwxxyyzz - Modulation - ww: wait time - xx: modulation speed - yy: change per step - zz: number of steps
 smpsModSet macro wait,speed,change,step
 	dc.b	$F0
+				   
 	dc.b	wait,speed,change,step
+	 
+							 
+	  
+						
 	endm
 
 ; Turn on Modulation
@@ -461,6 +645,11 @@ smpsModOff macro
 	dc.b	$F4
 	endm
 
+				
+					   
+			 
+	  
+
 ; F5xx - PSG voice to xx
 smpsPSGvoice macro voice
 	dc.b	$F5,voice
@@ -478,6 +667,12 @@ smpsLoop macro index,loops,loc
 	dc.b	index,loops
 	dc.w	loc-*-1
 	endm
+
+					   
+							
+		 
+			 
+	  
 
 ; F8xxxx - Call pattern at xxxx, saving return point
 smpsCall macro loc
@@ -574,6 +769,9 @@ smpsFMFlutter macro tone,mask
 	endm
 
 smpsResetSpindashRev macro val
+							  
+																								 
+					
 	dc.b	$FF,$07
 	endm
 
@@ -690,5 +888,17 @@ vcTLMask1 set $80
 	dc.b	vcD2R4,vcD2R3,vcD2R2,vcD2R1
 	dc.b	(vcDL4<<4)+vcRR4,(vcDL3<<4)+vcRR3,(vcDL2<<4)+vcRR2,(vcDL1<<4)+vcRR1
 	dc.b	vcTL4|vcTLMask4,vcTL3|vcTLMask3,vcTL2|vcTLMask2,vcTL1|vcTLMask1
+				  
+				 
+	 
+			 
+	  
+
+				  
+				 
+	 
+			 
+	  
+				 
 	endm
 

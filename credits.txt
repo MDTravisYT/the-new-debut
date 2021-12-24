@@ -1,63 +1,40 @@
-MCTravisYT
-	Hack Director
-
-BladeOfChaos
-	Sonic touchups
-	Title Screen Sonic
-	GHZ Palmtree
-	Imp
+LEAD:
+	MCTravisYT
 	
-ManiacShard
-	GHZ Bush edits
--	Ice Mountain Tileset
--	Cosmic Space Tileset
-
-Gastón A. Guzman
-	Title Screen
+PROGRAMMERS:
+	Inferno
+	MCTravisYT
 	
-Joey the Rabbit
-	Sonic's jump sprite (touched up by MCTravisYT and BladeOfChaos)
+ART:
+	MCTravisYT
+	BladeOfChaos
+	ManiacShard
+	Gastón A. Guzman
+	Joshyflip
+	StarDrop
+	PepsiJuan666
 	
-PepsiJuan666
-	Game title
--	Original Ice Mountain design
--	Cosmo Fighter
-
-CaioST
-	GHZ Bush (initially)
-	GHZ Big Rock
-	GHZ Mountains
+MUSIC:
+	MCTravisYT
+	JayKuriN
+	THiN CRUST
 	
-Miles "Tails" Power
-	Imp sprites (initially, edited by BladeOfChaos)
+BETA TESTING:
+	BladeOfChaos
+	Cosmic Eternity
+	KGL
+	ManiacShard
+	Original Chris
+	sonic c32ttb1
+	TwoTailedNeppy
+	JayKuriN
+	dweeby
+	EmmaNerd
+	MrLordSith
+	dualsh0x
+	Inferno
+	ogm
 	
-Joshyflip
-	GHZ Cloud
-	
-JayKuriN
--	Ice Mountain music
-
-Inferno
-	Air roll code
-	Health system code
-	
--- Real thing starts here: --
-SONIC DEBUT CREDITS
-
-Creator:
-  MCTravisYT
-
-Arts: 
-  BladeOfChaos
-  ManiacShard
-  PepsiJuan666
-  Gastón A. Guzman (Title Screen)
-  Joshyflip (GHZ Cloud)
-
-Music:
-  JayKuriN
-  MCTravisYT
-  EmmaNerd (Prelude MIDI)
-  cardevero (Prelude)
-  THiN CRUST (Prelude)
-  
+SPECIAL THANKS:
+	CaioST
+	Miles Tails Power
