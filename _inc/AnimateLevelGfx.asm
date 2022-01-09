@@ -115,47 +115,44 @@ AniArt_GHZ_Smallflower:
 AniArt_MZ:
 
 AniArt_MZ_Lava:
+		subq.b	#1,(v_lani0_time).w
+		bpl.s	AniArt_MZ_Magma
 
-@size:		equ 8	; number of tiles per frame
-
-		subq.b	#1,(v_lani0_time).w ; decrement timer
-		bpl.s	AniArt_MZ_Magma	; branch if not 0
-
-		move.b	#$13,(v_lani0_time).w ; time to display each frame
-		lea	(Art_MzLava1).l,a1 ; load lava surface patterns
+		move.b	#$13,(v_lani0_time).w
+		lea	(Art_MzLava1).l,a1
 		moveq	#0,d0
 		move.b	(v_lani0_frame).w,d0
-		addq.b	#1,d0		; increment frame counter
-		cmpi.b	#3,d0		; there are 3 frames
-		bne.s	@frame01or2	; branch if frame 0, 1 or 2
+		addq.b	#1,d0
+		cmpi.b	#3,d0
+		bne.s	@frame01or2
 		moveq	#0,d0
 
-	@frame01or2:
+        @frame01or2:
 		move.b	d0,(v_lani0_frame).w
-		mulu.w	#@size*$20,d0
-		adda.w	d0,a1		; jump to appropriate tile
-		locVRAM	$5C40
-		move.w	#@size-1,d1
+		mulu.w	#$100,d0
+		adda.w	d0,a1
+		move.l	#$5C400001,($C00004).l
+		move.w	#7,d1
 		bsr.w	LoadTiles
 
 AniArt_MZ_Magma:
-		subq.b	#1,(v_lani1_time).w ; decrement timer
-		bpl.s	AniArt_MZ_Torch	; branch if not 0
-		
-		move.b	#1,(v_lani1_time).w ; time between each gfx change
+		subq.b	#1,(v_lani1_time).w
+		bpl.s	AniArt_MZ_UFOs
+
+		move.b	#1,(v_lani1_time).w
 		moveq	#0,d0
-		move.b	(v_lani0_frame).w,d0 ; get surface lava frame number
-		lea	(Art_MzLava2).l,a4 ; load magma gfx
-		ror.w	#7,d0		; multiply frame num by $200
-		adda.w	d0,a4		; jump to appropriate tile
-		locVRAM	$5A40
+		move.b	(v_lani0_frame).w,d0
+		lea	(Art_MzLava2).l,a4
+		ror.w	#7,d0
+		adda.w	d0,a4
+		move.l	#$5A400001,($C00004).l
 		moveq	#0,d3
 		move.b	(v_lani1_frame).w,d3
-		addq.b	#1,(v_lani1_frame).w ; increment frame counter (unused)
-		move.b	(v_oscillate+$A).w,d3 ; get oscillating value
+		addq.b	#1,(v_lani1_frame).w
+		move.b	(v_oscillate+$A).w,d3
 		move.w	#3,d2
 
-	@loop:
+        @loop:
 		move.w	d3,d0
 		add.w	d0,d0
 		andi.w	#$1E,d0
@@ -167,26 +164,37 @@ AniArt_MZ_Magma:
 		jsr	(a3)
 		addq.w	#4,d3
 		dbf	d2,@loop
-		rts	
+		rts
 ; ===========================================================================
 
-AniArt_MZ_Torch:
+AniArt_MZ_UFOs:
+		subq.b	#1,(v_lani2_time).w
+		bpl.w	@end
+		move.b	#7,(v_lani2_time).w
+		lea	(Art_MzUFOs).l,a1
+		moveq	#0,d0
+		move.b	(v_lani2_frame).w,d0
+		addq.b	#1,d0
+		cmpi.b	#6,d0
+		bne.s	@AniArt_MZ_Torch
+		moveq	#0,d0
 
-@size:		equ 6	; number of tiles per frame
-
-		subq.b	#1,(v_lani2_time).w ; decrement timer
-		bpl.w	@end		; branch if not 0
-		
-		move.b	#7,(v_lani2_time).w ; time to display each frame
-		lea	(Art_MzTorch).l,a1 ; load torch	patterns
+@AniArt_MZ_Torch:
+		move.b	d0,(v_lani2_frame).w
+		mulu.w	#$100,d0
+		adda.w	d0,a1
+		move.l	#$5D400001,($C00004).l
+		move.w	#7,d1
+		bsr.w	LoadTiles
+		lea	(Art_MzTorch).l,a1
 		moveq	#0,d0
 		move.b	(v_lani3_frame).w,d0
-		addq.b	#1,(v_lani3_frame).w ; increment frame counter
-		andi.b	#3,(v_lani3_frame).w ; there are 3 frames
-		mulu.w	#@size*$20,d0
-		adda.w	d0,a1		; jump to appropriate tile
-		locVRAM	$5E40
-		move.w	#@size-1,d1
+		addq.b	#1,(v_lani3_frame).w
+		andi.b	#3,(v_lani3_frame).w
+		mulu.w	#$C0,d0
+		adda.w	d0,a1
+		move.l	#$5E400001,($C00004).l
+		move.w	#5,d1
 		bra.w	LoadTiles
 
 @end:

@@ -9027,6 +9027,8 @@ Art_MzLava1:	incbin	"artunc\MZ Lava Surface.bin"
 		even
 Art_MzLava2:	incbin	"artunc\MZ Lava.bin"
 		even
+Art_MzUFOs:	incbin	"artunc\MZ UFOs.bin"
+		even
 Art_MzTorch:	incbin	"artunc\MZ Background Torch.bin"
 		even
 Art_SbzSmoke:	incbin	"artunc\SBZ Background Smoke.bin"
