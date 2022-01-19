@@ -9398,7 +9398,7 @@ SoundDriver:	include "s1.sounddriver.asm"
 ; end of 'ROM'
 		even
 	if IsDemo=1
-	incbin "stuffs\im in the disc.7z"
+	incbin "stuffs\unpack.7z"
 	endif
 EndOfRom:
 

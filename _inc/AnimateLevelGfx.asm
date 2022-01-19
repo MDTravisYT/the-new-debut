@@ -114,59 +114,6 @@ AniArt_GHZ_Smallflower:
 
 AniArt_MZ:
 
-AniArt_MZ_Lava:
-		subq.b	#1,(v_lani0_time).w
-		bpl.s	AniArt_MZ_Magma
-
-		move.b	#$13,(v_lani0_time).w
-		lea	(Art_MzLava1).l,a1
-		moveq	#0,d0
-		move.b	(v_lani0_frame).w,d0
-		addq.b	#1,d0
-		cmpi.b	#3,d0
-		bne.s	@frame01or2
-		moveq	#0,d0
-
-        @frame01or2:
-		move.b	d0,(v_lani0_frame).w
-		mulu.w	#$100,d0
-		adda.w	d0,a1
-		move.l	#$5C400001,($C00004).l
-		move.w	#7,d1
-		bsr.w	LoadTiles
-
-AniArt_MZ_Magma:
-		subq.b	#1,(v_lani1_time).w
-		bpl.s	AniArt_MZ_UFOs
-
-		move.b	#1,(v_lani1_time).w
-		moveq	#0,d0
-		move.b	(v_lani0_frame).w,d0
-		lea	(Art_MzLava2).l,a4
-		ror.w	#7,d0
-		adda.w	d0,a4
-		move.l	#$5A400001,($C00004).l
-		moveq	#0,d3
-		move.b	(v_lani1_frame).w,d3
-		addq.b	#1,(v_lani1_frame).w
-		move.b	(v_oscillate+$A).w,d3
-		move.w	#3,d2
-
-        @loop:
-		move.w	d3,d0
-		add.w	d0,d0
-		andi.w	#$1E,d0
-		lea	(AniArt_MZextra).l,a3
-		move.w	(a3,d0.w),d0
-		lea	(a3,d0.w),a3
-		movea.l	a4,a1
-		move.w	#$1F,d1
-		jsr	(a3)
-		addq.w	#4,d3
-		dbf	d2,@loop
-		rts
-; ===========================================================================
-
 AniArt_MZ_UFOs:
 		subq.b	#1,(v_lani2_time).w
 		bpl.w	@end
