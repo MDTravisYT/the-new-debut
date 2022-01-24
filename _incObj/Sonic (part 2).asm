@@ -72,7 +72,7 @@ GameOver:
 	if IsDemo = 1
 		bne.s	NoDebugDeath
 	else
-		bne.s	DebugDeath
+		bne.s	NoDebugDeath
 	endif
 		move.w	#0,$3A(a0)
 		move.b	#id_GameOverCard,(v_objspace+$80).w ; load GAME object

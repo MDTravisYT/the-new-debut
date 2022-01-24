@@ -319,7 +319,6 @@ HurtSonic:
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
-
 KillSonic:
 		move.b	#$FF,(v_health).w
 		move.b  #1,(f_healthcount).w
@@ -331,16 +330,46 @@ KillSonic:
 		move.w	#0,obVelX(a0)
 		move.w	#0,obInertia(a0)
 		move.w	obY(a0),$38(a0)
+		
+		lea FireObjects(pc),a3
+		moveq #FireObjects_end-FireObjects-1,d0
+	
+@loop:	
+		move.b (a3)+,d1
+		cmp.b  (a2),d1
+		beq.s  @burnt
+		dbf    d0,@loop
+		
 		move.b	#id_Death,obAnim(a0)
+		bra.w   @deathanimset
+		
+@burnt:
+		move.b	#id_Burnt,obAnim(a0)
+		
+@deathanimset:
 		bset	#7,obGfx(a0)
 		move.w	#sfx_Death,d0	; play normal death sound
+		cmpi.b  #id_Burnt,obAnim(a0)
+		bne.s   @skip
+		
+		move.w	#$C8,d0
+	@skip:
 		cmpi.b	#id_Spikes,(a2)	; check	if you were killed by spikes
 		bne.s	@sound
 		move.w	#sfx_HitSpikes,d0 ; play spikes death sound
 
 	@sound:
 		jsr	(PlaySound_Special).l
+
+	@dontdie:
+		moveq	#-1,d0
+		rts	
 ; End of function KillSonic
+
+FireObjects:
+		dc.b $14, $35, $4D, $4E, $54, $6D, $74
+FireObjects_end:
+		even
 
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
