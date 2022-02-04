@@ -55977,7 +55977,7 @@
 00089481                            
 00089481                            ; FM4 Data
 00089481                            SndC5_Cash_Register_FM4:
-00089483 8012 C615                  	dc.b	nRst, $12, nA5, $15
+00089483 8012 C635                  	dc.b	nRst, $12, nA5, $35
 00089487 F2                         	smpsStop
 00089488                            
 00089488                            ; PSG3 Data

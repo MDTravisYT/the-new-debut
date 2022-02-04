@@ -17,7 +17,7 @@ SndC5_Cash_Register_FM5:
 ; FM4 Data
 SndC5_Cash_Register_FM4:
 	smpsSetvoice        $01
-	dc.b	nRst, $12, nA5, $15
+	dc.b	nRst, $12, nA5, $35
 	smpsStop
 
 ; PSG3 Data
