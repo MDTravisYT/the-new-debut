@@ -9,7 +9,7 @@ smpsHeaderStartSong = 1
 ; FM5 Data
 Sound6D_Error_FM5:
 	smpsSetvoice        $00
-	dc.b	nB4, $18
+	dc.b		nC5,	$01,	nCs5,	nD5,	nEb5,	nE5,	nF5,	nFs5,	nG5,	nAb5,	nA5,	nBb5,	nB5,	nC6,	$1B
 	smpsStop
 
 Sound6D_Error_Voices:
@@ -17,16 +17,16 @@ Sound6D_Error_Voices:
 ;	$38
 ;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$00, $00, $00, $00
 ;	$00, $00, $00, $00, 	$0F, $0F, $0F, $0F, 	$1F, $17, $0C, $00
-	smpsVcAlgorithm     $00
-	smpsVcFeedback      $07
+	smpsVcAlgorithm     $04
+	smpsVcFeedback      $00
 	smpsVcUnusedBits    $00
-	smpsVcDetune        $00, $00, $00, $00
-	smpsVcCoarseFreq    $00, $00, $00, $00
+	smpsVcDetune        $02, $07, $07, $03
+	smpsVcCoarseFreq    $02, $07, $02, $07
 	smpsVcRateScale     $00, $00, $00, $00
 	smpsVcAttackRate    $1F, $1F, $1F, $1F
 	smpsVcAmpMod        $00, $00, $00, $00
-	smpsVcDecayRate1    $00, $00, $00, $00
-	smpsVcDecayRate2    $00, $00, $00, $00
-	smpsVcDecayLevel    $00, $00, $00, $00
+	smpsVcDecayRate1    $0D, $07, $0A, $07
+	smpsVcDecayRate2    $0B, $00, $0B, $00
+	smpsVcDecayLevel    $00, $01, $00, $01
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $00, $0C, $17, $1F
+	smpsVcTotalLevel    $00, $23, $00, $23
