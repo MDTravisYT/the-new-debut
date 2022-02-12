@@ -8795,131 +8795,70 @@ Nem_Flicky:	incbin	"artnem\Animal Flicky.bin"
 Nem_Squirrel:	incbin	"artnem\Animal Squirrel.bin"
 		even
 ; ---------------------------------------------------------------------------
-; Compressed graphics - primary patterns and block mappings
+; Level Blocks
 ; ---------------------------------------------------------------------------
-Blk16_GHZ:	incbin	"map16\GHZ.bin"
-		even
-Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
-		even
-Blk256_GHZ:	incbin	"map256\GHZ.bin"
-		even
 Blk16_Lock:	incbin	"map16\lockout.bin"
 		even
-Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
+Blk16_GHZ:	incbin	"map16\GHZ.bin"
 		even
-Blk256_Lock:	incbin	"map256\lockout.bin"
-		even
-Blk16_LZ:
-		incbin	"map16\LZ.bin"
-		even
-Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
-		even
-Blk256_LZ:	incbin	"map256\LZ.bin"
+Blk16_LZ:	incbin	"map16\LZ.bin"
 		even
 Blk16_MZ:	incbin	"map16\MZ.bin"
 		even
-Nem_MZ:		if IsDemo=1
-		incbin	"artnem\8x8 lockoutNORM.bin"
-		else
-		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
-		endc
+Blk16_IMZ:	incbin	"map16\IMZ.bin"
 		even
-Blk256_MZ:	if IsDemo=1
-		incbin	"map256\lockoutNORM.bin"
-		else
-		incbin	"map256\MZ.bin"
-		endc
+Blk16_SLZ:	incbin	"map16\SLZ.bin"
 		even
-Blk16_IMZ:	if IsDemo=1
-		incbin	"map16\lockoutNORM.bin"
-		else
-		incbin	"map16\IMZ.bin"
-		endc
+Blk16_SYZ:	incbin	"map16\SYZ.bin"
 		even
-Nem_IMZ:	if IsDemo=1
-		incbin	"artnem\8x8 lockoutNORM.bin"
-		else
-		incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
-		endc
+Blk16_SBZ:	incbin	"map16\SBZ.bin"
 		even
-Blk256_IMZ:if IsDemo=1
-		incbin	"map256\lockoutNORM.bin"
-		else
-		incbin	"map256\IMZ.bin"
-		endc
+Blk16_CSZ:	incbin	"map16\CSZ.bin"
+		even	
+; ---------------------------------------------------------------------------
+; Level Tiles
+; ---------------------------------------------------------------------------
+Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
 		even
-Blk16_SLZ:	if IsDemo=1
-		incbin	"map16\lockoutNORM.bin"
-		else
-		incbin	"map16\SLZ.bin"
-		endc
+Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
 		even
-Nem_SLZ:	if IsDemo=1
-		incbin	"artnem\8x8 lockoutNORM.bin"
-		else
-		incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
-		endc
+Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
 		even
-Blk256_SLZ:	if IsDemo=1
-		incbin	"map256\lockoutNORM.bin"
-		else
-		incbin	"map256\SLZ.bin"
-		endc
+Nem_MZ:		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
 		even
-Blk16_SYZ:	if IsDemo=1
-		incbin	"artnem\8x8 lockoutNORM.bin"
-		else
-		incbin	"map16\SYZ.bin"
-		endc
+Nem_IMZ:	incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
 		even
-Nem_SYZ:	if IsDemo=1
-		incbin	"artnem\8x8 lockoutNORM.bin"
-		else
-		incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
-		endc
+Nem_SLZ:	incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
 		even
-Blk256_SYZ:	if IsDemo=1
-		incbin	"map256\lockoutNORM.bin"
-		else
-		incbin	"map256\SYZ.bin"
-		endc
+Nem_SYZ:	incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
 		even
-Blk16_SBZ:	if IsDemo=1
-		incbin	"map16\lockoutNORM.bin"
-		else
-		incbin	"map16\SBZ.bin"
-		endc
+Nem_SBZ:	incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
 		even
-Nem_SBZ:	if IsDemo=1
-		incbin	"artnem\8x8 lockoutNORM.bin"
-		else
-		incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
-		endc
+Nem_CSZ:	incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
 		even
-Blk256_SBZ:if IsDemo=1
-		incbin	"map256\lockoutNORM.bin"
-		else
-		incbin	"map256\SBZ.bin"
-		endc
+; ---------------------------------------------------------------------------
+; Level Chunks
+; ---------------------------------------------------------------------------
+Blk256_Lock:incbin	"map256\lockout.bin"
 		even
-Blk16_CSZ:if IsDemo=1
-		incbin	"map16\lockoutNORM.bin"
-		else	
-		incbin	"map16\CSZ.bin"
-		endc
+Blk256_GHZ:	incbin	"map256\GHZ.bin"
 		even
-Nem_CSZ:	if IsDemo=1
-		incbin	"artnem\8x8 lockoutNORM.bin"
-		else
-		incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
-		endc
+Blk256_LZ:	incbin	"map256\LZ.bin"
 		even
-Blk256_CSZ:if IsDemo=1
-		incbin	"map256\lockoutNORM.bin"
-		else
-		incbin	"map256\CSZ.bin"
-		endc
+Blk256_MZ:	incbin	"map256\MZ.bin"
 		even
+Blk256_IMZ:	incbin	"map256\IMZ.bin"
+		even
+Blk256_SLZ:	incbin	"map256\SLZ.bin"
+		even
+Blk256_SYZ:	incbin	"map256\SYZ.bin"
+		even
+Blk256_SBZ:	incbin	"map256\SBZ.bin"
+		even
+Blk256_CSZ:incbin	"map256\CSZ.bin"
+		even
+		
+		
 Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
 		even
 Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns

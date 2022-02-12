@@ -48810,312 +48810,319 @@
 00045884                            Nem_Squirrel:	incbin	"artnem\Animal Squirrel.bin"
 000459E0                            		even
 000459E0                            ; ---------------------------------------------------------------------------
-000459E0                            ; Compressed graphics - primary patterns and block mappings
+000459E0                            ; Level Blocks
 000459E0                            ; ---------------------------------------------------------------------------
-000459E0                            Blk16_GHZ:	incbin	"map16\GHZ.bin"
-00046434                            		even
-00046434                            Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
-00048AC2                            		even
-00048AC2                            Blk256_GHZ:	incbin	"map256\GHZ.bin"
-0004ADFA                            		even
-0004ADFA                            Blk16_Lock:	incbin	"map16\lockout.bin"
-0004AF72                            		even
-0004AF72                            Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
-0004B96C                            		even
-0004B96C                            Blk256_Lock:	incbin	"map256\lockout.bin"
-0004BB02                            		even
-0004BB02                            Blk16_LZ:
-0004BB02                            		incbin	"map16\LZ.bin"
-0004BDD8                            		even
-0004BDD8                            Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
-0004D02C                            		even
-0004D02C                            Blk256_LZ:	incbin	"map256\LZ.bin"
-0004EDAE                            		even
-0004EDAE                            Blk16_MZ:	incbin	"map16\MZ.bin"
-0004F548                            		even
-0004F548                            		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
-00051E5C                            		even
-00051E5C                            		incbin	"map256\MZ.bin"
-00053694                            		even
-00053694                            		incbin	"map16\IMZ.bin"
-0005369E                            		even
-0005369E                            		incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
-000536AE                            		even
-000536AE                            		incbin	"map256\IMZ.bin"
-000536B4                            		even
-000536B4                            		incbin	"map16\SLZ.bin"
-00053CC8                            		even
-00053CC8                            		incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
-00057248                            		even
-00057248                            		incbin	"map256\SLZ.bin"
-000599BC                            		even
-000599BC                            		incbin	"map16\SYZ.bin"
-0005A1B8                            		even
-0005A1B8                            		incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
-0005D5A6                            		even
-0005D5A6                            		incbin	"map256\SYZ.bin"
-0005FB24                            		even
-0005FB24                            		incbin	"map16\SBZ.bin"
-00060470                            		even
-00060470                            		incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
-000622F8                            		even
-000622F8                            		incbin	"map256\SBZ.bin"
-000644F8                            		even
-000644F8                            		incbin	"map16\CSZ.bin"
-00064642                            		even
-00064642                            		incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
-000651D8                            		even
-000651D8                            		incbin	"map256\CSZ.bin"
-00065362                            		even
-00065362                            Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
-000656D0                            		even
-000656D0                            Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
-000666BA                            		even
-000666BA                            Blk256_LockN:	incbin	"map256\lockoutNORM.bin"
-00067D00                            		even
-00067D00                            ; ---------------------------------------------------------------------------
-00067D00                            ; Compressed graphics - bosses and ending sequence
-00067D00                            ; ---------------------------------------------------------------------------
-00067D00                            Nem_Eggman:	incbin	"artnem\Boss - Main.bin"
-00068564                            		even
-00068564                            Nem_Weapons:	incbin	"artnem\Boss - Weapons.bin"
-0006884E                            		even
-0006884E                            Nem_Prison:	incbin	"artnem\Prison Capsule.bin"
-000690D2                            		even
-000690D2                            Nem_Sbz2Eggman:	incbin	"artnem\Boss - Eggman in SBZ2 & FZ.bin"
-000698EA                            		even
-000698EA                            Nem_FzBoss:	incbin	"artnem\Boss - Final Zone.bin"
-0006A052                            		even
-0006A052                            Nem_FzEggman:	incbin	"artnem\Boss - Eggman after FZ Fight.bin"
-0006A5D2                            		even
-0006A5D2                            Nem_Exhaust:	incbin	"artnem\Boss - Exhaust Flame.bin"
-0006A6F2                            		even
-0006A6F2                            Nem_EndEm:	incbin	"artnem\Ending - Emeralds.bin"
-0006A8F0                            		even
-0006A8F0                            Nem_EndSonic:	incbin	"artnem\Ending - Sonic.bin"
-0006BA38                            		even
-0006BA38                            Nem_TryAgain:	incbin	"artnem\Ending - Try Again.bin"
-0006C37C                            		even
-0006C37C                            		incbin	"artnem\Unused - Eggman Ending.bin"
-0006C752                            		even
-0006C752                            Kos_EndFlowers:	incbin	"artkos\Flowers at Ending.bin" ; ending sequence animated flowers
-0006CCE2                            		even
-0006CCE2                            Nem_EndFlower:	incbin	"artnem\Ending - Flowers.bin"
-0006CF6A                            		even
-0006CF6A                            Nem_CreditText:	incbin	"artnem\Ending - Credits.bin"
-0006D568                            		even
-0006D568                            Nem_EndStH:	incbin	"artnem\Ending - StH Logo.bin"
-0006D7F0                            		even
-0006D7F0                            
-0006D7F0                            		dcb.b $104,$FF			; why?
-0006D8F4                            ; ---------------------------------------------------------------------------
-0006D8F4                            ; Collision data
-0006D8F4                            ; ---------------------------------------------------------------------------
-0006D8F4                            AngleMap:	incbin	"collide\Angle Map.bin"
-0006D9F4                            		even
-0006D9F4                            CollArray1:	incbin	"collide\Collision Array (Normal).bin"
-0006E9F4                            		even
-0006E9F4                            CollArray2:	incbin	"collide\Collision Array (Rotated).bin"
-0006F9F4                            		even
-0006F9F4                            Col_GHZ:	incbin	"collide\GHZ.bin"	; GHZ index
-0006FBB0                            		even
-0006FBB0                            Col_LZ:		incbin	"collide\LZ.bin"	; LZ index
-0006FC78                            		even
-0006FC78                            Col_MZ:		incbin	"collide\MZ.bin"	; MZ index
-0006FE08                            		even
-0006FE08                            Col_SLZ:	incbin	"collide\SLZ.bin"	; SLZ index
-0006FFFC                            		even
-0006FFFC                            Col_SYZ:	incbin	"collide\SYZ.bin"	; SYZ index
-000701F0                            		even
-000701F0                            Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
-000703A8 00                         		even
-000703A8                            Col_IMZ:	incbin	"collide\IMZ.bin"	; IMZ index
-000703AA 00                         		even
-000703AA                            Col_CSZ:	incbin	"collide\CSZ.bin"	; CSZ index
-000703F2 00                         		even
-000703F2                            ; ---------------------------------------------------------------------------
-000703F2                            ; Special Stage layouts
-000703F2                            ; ---------------------------------------------------------------------------
-000703F2                            SS_1:		incbin	"sslayout\1.bin"
-000705EE                            		even
-000705EE                            SS_2:		incbin	"sslayout\2.bin"
-00070A00                            		even
-00070A00                            SS_3:		incbin	"sslayout\3.bin"
-00070D5C                            		even
-00070D5C                            SS_4:		incbin	"sslayout\4.bin"
-00071236                            		even
-00071236                            SS_5:		incbin	"sslayout\5.bin"
-00071708                            		even
-00071708                            SS_6:		incbin	"sslayout\6.bin"
-00071A18                            		even
-00071A18                            ; ---------------------------------------------------------------------------
-00071A18                            ; Animated uncompressed graphics
-00071A18                            ; ---------------------------------------------------------------------------
-00071A18                            Art_GhzWater:	incbin	"artunc\GHZ Waterfall.bin"
-00071C18                            		even
-00071C18                            Art_GhzFlower1:	incbin	"artunc\GHZ Flower Large.bin"
-00072018                            		even
-00072018                            Art_GhzFlower2:	incbin	"artunc\GHZ Flower Small.bin"
-00072498                            		even
-00072498                            Art_MzLava1:	incbin	"artunc\MZ Lava Surface.bin"
-00072798                            		even
-00072798                            Art_MzLava2:	incbin	"artunc\MZ Lava.bin"
-00072D98                            		even
-00072D98                            Art_MzUFOs:	incbin	"artunc\MZ UFOs.bin"
-00073398                            		even
-00073398                            Art_MzTorch:	incbin	"artunc\MZ Background Torch.bin"
-00073698                            		even
-00073698                            Art_SbzSmoke:	incbin	"artunc\SBZ Background Smoke.bin"
-00074118                            		even
-00074118                            
-00074118                            ; ---------------------------------------------------------------------------
-00074118                            ; Level	layout index
-00074118                            ; ---------------------------------------------------------------------------
-00074118                            Level_Index:
-00074118                            		; GHZ
-00074118 0000 0000 0000             		dc.w Level_GHZ1-Level_Index, Level_GHZbg-Level_Index, byte_68D70-Level_Index
-0007411E 0000 0000 0000             		dc.w Level_GHZ2-Level_Index, Level_GHZbg-Level_Index, byte_68E3C-Level_Index
-00074124 0000 0000 0000             		dc.w Level_GHZ3-Level_Index, Level_GHZbg-Level_Index, byte_68F84-Level_Index
-0007412A 0000 0000 0000             		dc.w byte_68F88-Level_Index, byte_68F88-Level_Index, byte_68F88-Level_Index
-00074130                            		; LZ
-00074130 0000 0000 0000             		dc.w Level_LZ1-Level_Index, Level_LZbg-Level_Index, byte_69190-Level_Index
-00074136 0000 0000 0000             		dc.w Level_LZ2-Level_Index, Level_LZbg-Level_Index, byte_6922E-Level_Index
-0007413C 0000 0000 0000             		dc.w Level_LZ3-Level_Index, Level_LZbg-Level_Index, byte_6934C-Level_Index
-00074142 0000 0000 0000             		dc.w Level_SBZ3-Level_Index, Level_LZbg-Level_Index, byte_6940A-Level_Index
-00074148                            		; MZ
-00074148 0000 0000 0000             		dc.w Level_MZ1-Level_Index, Level_MZ1bg-Level_Index, Level_MZ1-Level_Index
-0007414E 0000 0000 0000             		dc.w Level_MZ2-Level_Index, Level_MZ2bg-Level_Index, byte_6965C-Level_Index
-00074154 0000 0000 0000             		dc.w Level_MZ3-Level_Index, Level_MZ3bg-Level_Index, byte_697E6-Level_Index
-0007415A 0000 0000 0000             		dc.w byte_697EA-Level_Index, byte_697EA-Level_Index, byte_697EA-Level_Index
-00074160                            		; SLZ
-00074160 0000 0000 0000             		dc.w Level_SLZ1-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-00074166 0000 0000 0000             		dc.w Level_SLZ2-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-0007416C 0000 0000 0000             		dc.w Level_SLZ3-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-00074172 0000 0000 0000             		dc.w byte_69B84-Level_Index, byte_69B84-Level_Index, byte_69B84-Level_Index
-00074178                            		; SYZ
-00074178 0000 0000 0000             		dc.w Level_SYZ1-Level_Index, Level_SYZbg-Level_Index, byte_69C7E-Level_Index
-0007417E 0000 0000 0000             		dc.w Level_SYZ2-Level_Index, Level_SYZbg-Level_Index, byte_69D86-Level_Index
-00074184 0000 0000 0000             		dc.w Level_SYZ3-Level_Index, Level_SYZbg-Level_Index, byte_69EE4-Level_Index
-0007418A 0000 0000 0000             		dc.w byte_69EE8-Level_Index, byte_69EE8-Level_Index, byte_69EE8-Level_Index
-00074190                            		; SBZ
-00074190 0000 0000 0000             		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
-00074196 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-0007419C 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-000741A2 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-000741A8                            		; Ending
-000741A8 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-000741AE 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
-000741B4 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-000741BA 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-000741C0                            		; IMZ
-000741C0 0000 0000 0000             		dc.w Level_IMZ1-Level_Index, Level_IMZbg-Level_Index, byte_6A2FC-Level_Index
-000741C6 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-000741CC 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-000741D2 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-000741D8                            		; CSZ
-000741D8 0000 0000 0000             		dc.w Level_CSZ1-Level_Index, Level_CSZbg-Level_Index, byte_6A2FC-Level_Index
-000741DE 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-000741E4 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-000741EA 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-000741F0                            		
-000741F0 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-000741F6 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
-000741FC 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00074202 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-00074208                            		
-00074208                            
-00074208                            Level_GHZ1:	incbin	"levels\ghz1.bin"
-000742FA                            		even
-000742FA 0000 0000                  byte_68D70:	dc.b 0,	0, 0, 0
-000742FE                            Level_GHZ2:	incbin	"levels\ghz2.bin"
-000743CC                            		even
-000743CC 0000 0000                  byte_68E3C:	dc.b 0,	0, 0, 0
-000743D0                            Level_GHZ3:	incbin	"levels\ghz3.bin"
-000744F2                            		even
-000744F2                            Level_GHZbg:	incbin	"levels\ghzbg.bin"
-00074514                            		even
-00074514 0000 0000                  byte_68F84:	dc.b 0,	0, 0, 0
-00074518 0000 0000                  byte_68F88:	dc.b 0,	0, 0, 0
-0007451C                            
-0007451C                            Level_LZ1:	incbin	"levels\lz1.bin"
-0007461E                            		even
-0007461E                            Level_LZbg:	incbin	"levels\lzbg.bin"
-00074720                            		even
-00074720 0000 0000                  byte_69190:	dc.b 0,	0, 0, 0
-00074724                            Level_LZ2:	incbin	"levels\lz2.bin"
-000747A6                            		even
-000747A6 0000 0000                  byte_6922E:	dc.b 0,	0, 0, 0
-000747AA                            Level_LZ3:	incbin	"levels\lz3.bin"
-000748AC                            		even
-000748AC 0000 0000                  byte_6934C:	dc.b 0,	0, 0, 0
-000748B0                            Level_SBZ3:	incbin	"levels\sbz3.bin"
-0007496A                            		even
-0007496A 0000 0000                  byte_6940A:	dc.b 0,	0, 0, 0
-0007496E                            
-0007496E                            Level_MZ1:	incbin	"levels\mz1.bin"
-00074A06                            		even
-00074A06                            Level_MZ1bg:	incbin	"levels\mz1bg.bin"
-00074AC8                            		even
-00074AC8                            Level_MZ2:	incbin	"levels\mz2.bin"
-00074B9C                            		even
-00074B9C                            Level_MZ2bg:	incbin	"levels\mz2bg.bin"
-00074C5E                            		even
-00074C5E 0000 0000                  byte_6965C:	dc.b 0,	0, 0, 0
-00074C62                            Level_MZ3:	incbin	"levels\mz3.bin"
-00074D44                            		even
-00074D44                            Level_MZ3bg:	incbin	"levels\mz3bg.bin"
-00074E26                            		even
-00074E26 0000 0000                  byte_697E6:	dc.b 0,	0, 0, 0
-00074E2A 0000 0000                  byte_697EA:	dc.b 0,	0, 0, 0
-00074E2E                            
-00074E2E                            Level_IMZ1:	incbin	"levels\imz1.bin"
-00074E7C 00                         		even
-00074E7C                            Level_IMZbg:	incbin	"levels\imzbg.bin"
-00074E80                            		even
-00074E80                            Level_SLZ1:	incbin	"levels\slz1.bin"
-00074FC2                            		even
-00074FC2                            Level_SLZbg:	incbin	"levels\slzbg.bin"
-0007503C                            		even
-0007503C                            Level_SLZ2:	incbin	"levels\slz2.bin"
-0007517E                            		even
-0007517E                            Level_SLZ3:	incbin	"levels\slz3.bin"
-00075280                            		even
-00075280 0000 0000                  byte_69B84:	dc.b 0,	0, 0, 0
-00075284                            
-00075284                            Level_SYZ1:	incbin	"levels\syz1.bin"
-00075340 00                         		even
-00075340                            		incbin	"levels\syzbg.bin"
-0007537A                            		even
-0007537A 0000 0000                  byte_69C7E:	dc.b 0,	0, 0, 0
-0007537E                            Level_SYZ2:	incbin	"levels\syz2.bin"
-00075482                            		even
-00075482 0000 0000                  byte_69D86:	dc.b 0,	0, 0, 0
-00075486                            Level_SYZ3:	incbin	"levels\syz3.bin"
-000755E0 00                         		even
-000755E0 0000 0000                  byte_69EE4:	dc.b 0,	0, 0, 0
-000755E4 0000 0000                  byte_69EE8:	dc.b 0,	0, 0, 0
-000755E8                            
-000755E8                            Level_SBZ1:	incbin	"levels\sbz1.bin"
-000757EA                            		even
-000757EA                            Level_SBZ1bg:	incbin	"levels\sbz1bg.bin"
-000757F6                            		even
-000757F6                            Level_SBZ2:	incbin	"levels\sbz2.bin"
-000759F8                            		even
-000759F8                            Level_SBZ2bg:	incbin	"levels\sbz2bg.bin"
-00075B62                            		even
-00075B62 0000 0000                  byte_6A2F8:	dc.b 0,	0, 0, 0
-00075B66 0000 0000                  byte_6A2FC:	dc.b 0,	0, 0, 0
-00075B6A                            Level_End:	incbin	"levels\ending.bin"
-00075BB8 00                         		even
-00075BB8                            byte_6A320:	incbin	"levels\endingbg.bin"
-00075C05                            Level_CSZ1:	incbin	"levels\csz1.bin"
-00075C52                            		even
-00075C52                            Level_CSZbg:	incbin	"levels\cszbg.bin"
-00075C58                            		even
-00075C58                            
-00075C58                            Art_BigRing:	incbin	"artunc\Giant Ring.bin"
-00076898                            		even
-00076898                            
+000459E0                            Blk16_Lock:	incbin	"map16\lockout.bin"
+00045B58                            		even
+00045B58                            Blk16_GHZ:	incbin	"map16\GHZ.bin"
+000465AC                            		even
+000465AC                            Blk16_LZ:	incbin	"map16\LZ.bin"
+00046882                            		even
+00046882                            Blk16_MZ:	incbin	"map16\MZ.bin"
+0004701C                            		even
+0004701C                            Blk16_IMZ:	incbin	"map16\IMZ.bin"
+00047026                            		even
+00047026                            Blk16_SLZ:	incbin	"map16\SLZ.bin"
+0004763A                            		even
+0004763A                            Blk16_SYZ:	incbin	"map16\SYZ.bin"
+00047E36                            		even
+00047E36                            Blk16_SBZ:	incbin	"map16\SBZ.bin"
+00048782                            		even
+00048782                            Blk16_CSZ:	incbin	"map16\CSZ.bin"
+000488CC                            		even	
+000488CC                            ; ---------------------------------------------------------------------------
+000488CC                            ; Level Tiles
+000488CC                            ; ---------------------------------------------------------------------------
+000488CC                            Nem_Lock:	incbin	"artnem\8x8 lockout.bin"	; GHZ primary patterns
+000492C6                            		even
+000492C6                            Nem_GHZ:	incbin	"artnem\8x8 - GHZ.nem"	; GHZ primary patterns
+0004B954                            		even
+0004B954                            Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
+0004CBA8                            		even
+0004CBA8                            Nem_MZ:		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
+0004F4BC                            		even
+0004F4BC                            Nem_IMZ:	incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
+0004F4CC                            		even
+0004F4CC                            Nem_SLZ:	incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
+00052A4C                            		even
+00052A4C                            Nem_SYZ:	incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
+00055E3A                            		even
+00055E3A                            Nem_SBZ:	incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
+00057CC2                            		even
+00057CC2                            Nem_CSZ:	incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
+00058858                            		even
+00058858                            ; ---------------------------------------------------------------------------
+00058858                            ; Level Chunks
+00058858                            ; ---------------------------------------------------------------------------
+00058858                            Blk256_Lock:incbin	"map256\lockout.bin"
+000589EE                            		even
+000589EE                            Blk256_GHZ:	incbin	"map256\GHZ.bin"
+0005AD1E                            		even
+0005AD1E                            Blk256_LZ:	incbin	"map256\LZ.bin"
+0005CAA0                            		even
+0005CAA0                            Blk256_MZ:	incbin	"map256\MZ.bin"
+0005E2D8                            		even
+0005E2D8                            Blk256_IMZ:	incbin	"map256\IMZ.bin"
+0005E2DE                            		even
+0005E2DE                            Blk256_SLZ:	incbin	"map256\SLZ.bin"
+00060A52                            		even
+00060A52                            Blk256_SYZ:	incbin	"map256\SYZ.bin"
+00062FD0                            		even
+00062FD0                            Blk256_SBZ:	incbin	"map256\SBZ.bin"
+000651D0                            		even
+000651D0                            Blk256_CSZ:incbin	"map256\CSZ.bin"
+0006535A                            		even
+0006535A                            		
+0006535A                            		
+0006535A                            Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
+000656C8                            		even
+000656C8                            Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
+000666B2                            		even
+000666B2                            Blk256_LockN:	incbin	"map256\lockoutNORM.bin"
+00067CF8                            		even
+00067CF8                            ; ---------------------------------------------------------------------------
+00067CF8                            ; Compressed graphics - bosses and ending sequence
+00067CF8                            ; ---------------------------------------------------------------------------
+00067CF8                            Nem_Eggman:	incbin	"artnem\Boss - Main.bin"
+0006855C                            		even
+0006855C                            Nem_Weapons:	incbin	"artnem\Boss - Weapons.bin"
+00068846                            		even
+00068846                            Nem_Prison:	incbin	"artnem\Prison Capsule.bin"
+000690CA                            		even
+000690CA                            Nem_Sbz2Eggman:	incbin	"artnem\Boss - Eggman in SBZ2 & FZ.bin"
+000698E2                            		even
+000698E2                            Nem_FzBoss:	incbin	"artnem\Boss - Final Zone.bin"
+0006A04A                            		even
+0006A04A                            Nem_FzEggman:	incbin	"artnem\Boss - Eggman after FZ Fight.bin"
+0006A5CA                            		even
+0006A5CA                            Nem_Exhaust:	incbin	"artnem\Boss - Exhaust Flame.bin"
+0006A6EA                            		even
+0006A6EA                            Nem_EndEm:	incbin	"artnem\Ending - Emeralds.bin"
+0006A8E8                            		even
+0006A8E8                            Nem_EndSonic:	incbin	"artnem\Ending - Sonic.bin"
+0006BA30                            		even
+0006BA30                            Nem_TryAgain:	incbin	"artnem\Ending - Try Again.bin"
+0006C374                            		even
+0006C374                            		incbin	"artnem\Unused - Eggman Ending.bin"
+0006C74A                            		even
+0006C74A                            Kos_EndFlowers:	incbin	"artkos\Flowers at Ending.bin" ; ending sequence animated flowers
+0006CCDA                            		even
+0006CCDA                            Nem_EndFlower:	incbin	"artnem\Ending - Flowers.bin"
+0006CF62                            		even
+0006CF62                            Nem_CreditText:	incbin	"artnem\Ending - Credits.bin"
+0006D560                            		even
+0006D560                            Nem_EndStH:	incbin	"artnem\Ending - StH Logo.bin"
+0006D7E8                            		even
+0006D7E8                            
+0006D7E8                            		dcb.b $104,$FF			; why?
+0006D8EC                            ; ---------------------------------------------------------------------------
+0006D8EC                            ; Collision data
+0006D8EC                            ; ---------------------------------------------------------------------------
+0006D8EC                            AngleMap:	incbin	"collide\Angle Map.bin"
+0006D9EC                            		even
+0006D9EC                            CollArray1:	incbin	"collide\Collision Array (Normal).bin"
+0006E9EC                            		even
+0006E9EC                            CollArray2:	incbin	"collide\Collision Array (Rotated).bin"
+0006F9EC                            		even
+0006F9EC                            Col_GHZ:	incbin	"collide\GHZ.bin"	; GHZ index
+0006FBA8                            		even
+0006FBA8                            Col_LZ:		incbin	"collide\LZ.bin"	; LZ index
+0006FC70                            		even
+0006FC70                            Col_MZ:		incbin	"collide\MZ.bin"	; MZ index
+0006FE00                            		even
+0006FE00                            Col_SLZ:	incbin	"collide\SLZ.bin"	; SLZ index
+0006FFF4                            		even
+0006FFF4                            Col_SYZ:	incbin	"collide\SYZ.bin"	; SYZ index
+000701E8                            		even
+000701E8                            Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
+000703A0 00                         		even
+000703A0                            Col_IMZ:	incbin	"collide\IMZ.bin"	; IMZ index
+000703A2 00                         		even
+000703A2                            Col_CSZ:	incbin	"collide\CSZ.bin"	; CSZ index
+000703EA 00                         		even
+000703EA                            ; ---------------------------------------------------------------------------
+000703EA                            ; Special Stage layouts
+000703EA                            ; ---------------------------------------------------------------------------
+000703EA                            SS_1:		incbin	"sslayout\1.bin"
+000705E6                            		even
+000705E6                            SS_2:		incbin	"sslayout\2.bin"
+000709F8                            		even
+000709F8                            SS_3:		incbin	"sslayout\3.bin"
+00070D54                            		even
+00070D54                            SS_4:		incbin	"sslayout\4.bin"
+0007122E                            		even
+0007122E                            SS_5:		incbin	"sslayout\5.bin"
+00071700                            		even
+00071700                            SS_6:		incbin	"sslayout\6.bin"
+00071A10                            		even
+00071A10                            ; ---------------------------------------------------------------------------
+00071A10                            ; Animated uncompressed graphics
+00071A10                            ; ---------------------------------------------------------------------------
+00071A10                            Art_GhzWater:	incbin	"artunc\GHZ Waterfall.bin"
+00071C10                            		even
+00071C10                            Art_GhzFlower1:	incbin	"artunc\GHZ Flower Large.bin"
+00072010                            		even
+00072010                            Art_GhzFlower2:	incbin	"artunc\GHZ Flower Small.bin"
+00072490                            		even
+00072490                            Art_MzLava1:	incbin	"artunc\MZ Lava Surface.bin"
+00072790                            		even
+00072790                            Art_MzLava2:	incbin	"artunc\MZ Lava.bin"
+00072D90                            		even
+00072D90                            Art_MzUFOs:	incbin	"artunc\MZ UFOs.bin"
+00073390                            		even
+00073390                            Art_MzTorch:	incbin	"artunc\MZ Background Torch.bin"
+00073690                            		even
+00073690                            Art_SbzSmoke:	incbin	"artunc\SBZ Background Smoke.bin"
+00074110                            		even
+00074110                            
+00074110                            ; ---------------------------------------------------------------------------
+00074110                            ; Level	layout index
+00074110                            ; ---------------------------------------------------------------------------
+00074110                            Level_Index:
+00074110                            		; GHZ
+00074110 0000 0000 0000             		dc.w Level_GHZ1-Level_Index, Level_GHZbg-Level_Index, byte_68D70-Level_Index
+00074116 0000 0000 0000             		dc.w Level_GHZ2-Level_Index, Level_GHZbg-Level_Index, byte_68E3C-Level_Index
+0007411C 0000 0000 0000             		dc.w Level_GHZ3-Level_Index, Level_GHZbg-Level_Index, byte_68F84-Level_Index
+00074122 0000 0000 0000             		dc.w byte_68F88-Level_Index, byte_68F88-Level_Index, byte_68F88-Level_Index
+00074128                            		; LZ
+00074128 0000 0000 0000             		dc.w Level_LZ1-Level_Index, Level_LZbg-Level_Index, byte_69190-Level_Index
+0007412E 0000 0000 0000             		dc.w Level_LZ2-Level_Index, Level_LZbg-Level_Index, byte_6922E-Level_Index
+00074134 0000 0000 0000             		dc.w Level_LZ3-Level_Index, Level_LZbg-Level_Index, byte_6934C-Level_Index
+0007413A 0000 0000 0000             		dc.w Level_SBZ3-Level_Index, Level_LZbg-Level_Index, byte_6940A-Level_Index
+00074140                            		; MZ
+00074140 0000 0000 0000             		dc.w Level_MZ1-Level_Index, Level_MZ1bg-Level_Index, Level_MZ1-Level_Index
+00074146 0000 0000 0000             		dc.w Level_MZ2-Level_Index, Level_MZ2bg-Level_Index, byte_6965C-Level_Index
+0007414C 0000 0000 0000             		dc.w Level_MZ3-Level_Index, Level_MZ3bg-Level_Index, byte_697E6-Level_Index
+00074152 0000 0000 0000             		dc.w byte_697EA-Level_Index, byte_697EA-Level_Index, byte_697EA-Level_Index
+00074158                            		; SLZ
+00074158 0000 0000 0000             		dc.w Level_SLZ1-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
+0007415E 0000 0000 0000             		dc.w Level_SLZ2-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
+00074164 0000 0000 0000             		dc.w Level_SLZ3-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
+0007416A 0000 0000 0000             		dc.w byte_69B84-Level_Index, byte_69B84-Level_Index, byte_69B84-Level_Index
+00074170                            		; SYZ
+00074170 0000 0000 0000             		dc.w Level_SYZ1-Level_Index, Level_SYZbg-Level_Index, byte_69C7E-Level_Index
+00074176 0000 0000 0000             		dc.w Level_SYZ2-Level_Index, Level_SYZbg-Level_Index, byte_69D86-Level_Index
+0007417C 0000 0000 0000             		dc.w Level_SYZ3-Level_Index, Level_SYZbg-Level_Index, byte_69EE4-Level_Index
+00074182 0000 0000 0000             		dc.w byte_69EE8-Level_Index, byte_69EE8-Level_Index, byte_69EE8-Level_Index
+00074188                            		; SBZ
+00074188 0000 0000 0000             		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
+0007418E 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+00074194 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+0007419A 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+000741A0                            		; Ending
+000741A0 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+000741A6 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
+000741AC 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+000741B2 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+000741B8                            		; IMZ
+000741B8 0000 0000 0000             		dc.w Level_IMZ1-Level_Index, Level_IMZbg-Level_Index, byte_6A2FC-Level_Index
+000741BE 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+000741C4 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+000741CA 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+000741D0                            		; CSZ
+000741D0 0000 0000 0000             		dc.w Level_CSZ1-Level_Index, Level_CSZbg-Level_Index, byte_6A2FC-Level_Index
+000741D6 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
+000741DC 0000 0000 0000             		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
+000741E2 0000 0000 0000             		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
+000741E8                            		
+000741E8 0000 0000 0000             		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+000741EE 0000 0000 0000             		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
+000741F4 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+000741FA 0000 0000 0000             		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+00074200                            		
+00074200                            
+00074200                            Level_GHZ1:	incbin	"levels\ghz1.bin"
+000742F2                            		even
+000742F2 0000 0000                  byte_68D70:	dc.b 0,	0, 0, 0
+000742F6                            Level_GHZ2:	incbin	"levels\ghz2.bin"
+000743C4                            		even
+000743C4 0000 0000                  byte_68E3C:	dc.b 0,	0, 0, 0
+000743C8                            Level_GHZ3:	incbin	"levels\ghz3.bin"
+000744EA                            		even
+000744EA                            Level_GHZbg:	incbin	"levels\ghzbg.bin"
+0007450C                            		even
+0007450C 0000 0000                  byte_68F84:	dc.b 0,	0, 0, 0
+00074510 0000 0000                  byte_68F88:	dc.b 0,	0, 0, 0
+00074514                            
+00074514                            Level_LZ1:	incbin	"levels\lz1.bin"
+00074616                            		even
+00074616                            Level_LZbg:	incbin	"levels\lzbg.bin"
+00074718                            		even
+00074718 0000 0000                  byte_69190:	dc.b 0,	0, 0, 0
+0007471C                            Level_LZ2:	incbin	"levels\lz2.bin"
+0007479E                            		even
+0007479E 0000 0000                  byte_6922E:	dc.b 0,	0, 0, 0
+000747A2                            Level_LZ3:	incbin	"levels\lz3.bin"
+000748A4                            		even
+000748A4 0000 0000                  byte_6934C:	dc.b 0,	0, 0, 0
+000748A8                            Level_SBZ3:	incbin	"levels\sbz3.bin"
+00074962                            		even
+00074962 0000 0000                  byte_6940A:	dc.b 0,	0, 0, 0
+00074966                            
+00074966                            Level_MZ1:	incbin	"levels\mz1.bin"
+000749FE                            		even
+000749FE                            Level_MZ1bg:	incbin	"levels\mz1bg.bin"
+00074AC0                            		even
+00074AC0                            Level_MZ2:	incbin	"levels\mz2.bin"
+00074B94                            		even
+00074B94                            Level_MZ2bg:	incbin	"levels\mz2bg.bin"
+00074C56                            		even
+00074C56 0000 0000                  byte_6965C:	dc.b 0,	0, 0, 0
+00074C5A                            Level_MZ3:	incbin	"levels\mz3.bin"
+00074D3C                            		even
+00074D3C                            Level_MZ3bg:	incbin	"levels\mz3bg.bin"
+00074E1E                            		even
+00074E1E 0000 0000                  byte_697E6:	dc.b 0,	0, 0, 0
+00074E22 0000 0000                  byte_697EA:	dc.b 0,	0, 0, 0
+00074E26                            
+00074E26                            Level_IMZ1:	incbin	"levels\imz1.bin"
+00074E74 00                         		even
+00074E74                            Level_IMZbg:	incbin	"levels\imzbg.bin"
+00074E78                            		even
+00074E78                            Level_SLZ1:	incbin	"levels\slz1.bin"
+00074FBA                            		even
+00074FBA                            Level_SLZbg:	incbin	"levels\slzbg.bin"
+00075034                            		even
+00075034                            Level_SLZ2:	incbin	"levels\slz2.bin"
+00075176                            		even
+00075176                            Level_SLZ3:	incbin	"levels\slz3.bin"
+00075278                            		even
+00075278 0000 0000                  byte_69B84:	dc.b 0,	0, 0, 0
+0007527C                            
+0007527C                            Level_SYZ1:	incbin	"levels\syz1.bin"
+00075338 00                         		even
+00075338                            		incbin	"levels\syzbg.bin"
+00075372                            		even
+00075372 0000 0000                  byte_69C7E:	dc.b 0,	0, 0, 0
+00075376                            Level_SYZ2:	incbin	"levels\syz2.bin"
+0007547A                            		even
+0007547A 0000 0000                  byte_69D86:	dc.b 0,	0, 0, 0
+0007547E                            Level_SYZ3:	incbin	"levels\syz3.bin"
+000755D8 00                         		even
+000755D8 0000 0000                  byte_69EE4:	dc.b 0,	0, 0, 0
+000755DC 0000 0000                  byte_69EE8:	dc.b 0,	0, 0, 0
+000755E0                            
+000755E0                            Level_SBZ1:	incbin	"levels\sbz1.bin"
+000757E2                            		even
+000757E2                            Level_SBZ1bg:	incbin	"levels\sbz1bg.bin"
+000757EE                            		even
+000757EE                            Level_SBZ2:	incbin	"levels\sbz2.bin"
+000759F0                            		even
+000759F0                            Level_SBZ2bg:	incbin	"levels\sbz2bg.bin"
+00075B5A                            		even
+00075B5A 0000 0000                  byte_6A2F8:	dc.b 0,	0, 0, 0
+00075B5E 0000 0000                  byte_6A2FC:	dc.b 0,	0, 0, 0
+00075B62                            Level_End:	incbin	"levels\ending.bin"
+00075BB0 00                         		even
+00075BB0                            byte_6A320:	incbin	"levels\endingbg.bin"
+00075BFD                            Level_CSZ1:	incbin	"levels\csz1.bin"
+00075C4A                            		even
+00075C4A                            Level_CSZbg:	incbin	"levels\cszbg.bin"
+00075C50                            		even
+00075C50                            
+00075C50                            Art_BigRing:	incbin	"artunc\Giant Ring.bin"
+00076890                            		even
+00076890                            
 00076900                            
 00076900                            ; ---------------------------------------------------------------------------
 00076900                            ; Sprite locations index
