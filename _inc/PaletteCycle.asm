@@ -24,7 +24,7 @@ PCycle_Index:	dc.w PCycle_GHZ-PCycle_Index
 		dc.w PalCycle_SLZ-PCycle_Index
 		dc.w PalCycle_SYZ-PCycle_Index
 		dc.w PalCycle_SBZ-PCycle_Index
-		dc.w PCycle_GHZ-PCycle_Index	; Ending
+		dc.w PCycle_MZ-PCycle_Index	; Ending
 		dc.w PCycle_MZ-PCycle_Index
 		dc.w PCycle_MZ-PCycle_Index
 		dc.w PCycle_MZ-PCycle_Index

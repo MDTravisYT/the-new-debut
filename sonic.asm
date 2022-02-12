@@ -1722,6 +1722,7 @@ Pal_SSResult:	incbin	"palette\Special Stage Results.bin"
 Pal_Continue:	incbin	"palette\Special Stage Continue Bonus.bin"
 Pal_Ending:	incbin	"palette\Ending.bin"
 Pal_CSZ:	incbin	"palette\Cosmic Space Zone.bin"
+Pal_FUN:	incbin	"palette\Fun Zone.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	wait for VBlank routines to complete

@@ -34,6 +34,7 @@ ptr_Pal_SSResult:	palp	Pal_SSResult,v_pal_dry,$40		; $11 (17) - special stage re
 ptr_Pal_Continue:	palp	Pal_Continue,v_pal_dry,$20		; $12 (18) - special stage results continue
 ptr_Pal_Ending:		palp	Pal_Ending,v_pal_dry,$40		; $13 (19) - ending sequence
 ptr_Pal_CSZ:		palp	Pal_CSZ,v_pal_dry+$20,$30		; 8 - SYZ
+ptr_Pal_FUN:		palp	Pal_FUN,v_pal_dry+$20,$30		; 8 - SYZ
 			even
 
 
@@ -59,3 +60,4 @@ palid_SSResult:		equ (ptr_Pal_SSResult-PalPointers)/8
 palid_Continue:		equ (ptr_Pal_Continue-PalPointers)/8
 palid_Ending:		equ (ptr_Pal_Ending-PalPointers)/8
 palid_CSZ:		equ (ptr_Pal_CSZ-PalPointers)/8
+palid_FUN:		equ (ptr_Pal_FUN-PalPointers)/8
