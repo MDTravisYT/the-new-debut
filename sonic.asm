@@ -3149,7 +3149,7 @@ ColPointers:	dc.l Col_GHZ
 		dc.l Col_SYZ
 		dc.l Col_SBZ
 		zonewarning ColPointers,4
-		dc.l Col_GHZ ; Pointer for Ending is missing by default.
+		dc.l Col_FUN ; Pointer for Ending is missing by default.
 		dc.l Col_IMZ
 		dc.l Col_CSZ
 		dc.l Col_GHZ ; Pointer for Ending is missing by default.
@@ -8932,6 +8932,8 @@ Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
 Col_IMZ:	incbin	"collide\IMZ.bin"	; IMZ index
 		even
 Col_CSZ:	incbin	"collide\CSZ.bin"	; CSZ index
+		even
+Col_FUN:	incbin	"collide\FUN.bin"	; FUN index
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
