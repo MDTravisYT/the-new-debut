@@ -2536,7 +2536,7 @@ Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
 Music90:	incbin	"sound/music/prelude.bin"
 		even
-Music91:	include	"sound/music/Key Collected.asm"
+Music91:	incbin	"sound/music/ESCAPE.bin"
 		even
 Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
 		even
