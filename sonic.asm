@@ -2004,9 +2004,9 @@ GM_Title:
 		locVRAM	$4000
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
-	;	locVRAM	$A200
-	;	lea	(Nem_TitleTM).l,a0 ; load "TM" patterns
-	;	bsr.w	NemDec
+		locVRAM	$2000
+		lea	(Nem_TitleBlank).l,a0 ; load "TM" patterns
+		bsr.w	NemDec
 		lea	(vdp_data_port).l,a6
 		locVRAM	$A8E0,4(a6)
 		lea	(Art_Text).l,a5	; load level select font
@@ -2032,6 +2032,7 @@ GM_Title:
 		lea	(v_lvllayout+$40).w,a4
 		move.w	#$6000,d2
 		bsr.w	DrawChunks
+		
 		lea	($FF0000).l,a1
 		lea	(Eni_Title).l,a0 ; load	title screen mappings
 		move.w	#0,d0
@@ -2043,9 +2044,6 @@ GM_Title:
 		lea	(Nem_JapNames).l,a0 ; load Japanese credits
 		bsr.w	NemDec
 		locVRAM	$14C0
-		lea	(Nem_CreditText).l,a0 ;	load alphabet
-		bsr.w	NemDec
-		lea	($FF0000).l,a1
 		lea	(Eni_JapNames).l,a0 ; load mappings for	Japanese credits
 		move.w	#0,d0
 		bsr.w	EniDec
