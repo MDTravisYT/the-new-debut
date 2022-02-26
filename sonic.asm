@@ -2038,7 +2038,7 @@ GM_Title:
 		move.w	#0,d0
 		bsr.w	EniDec
 
-		copyTilemap	$FF0000,$C208,$21,$47
+		copyTilemap	$FF0000,$1208,$21,$47
 
 		locVRAM	0
 		lea	(Nem_JapNames).l,a0 ; load Japanese credits
