@@ -2001,9 +2001,6 @@ GM_Title:
 		locVRAM	$6700
 		lea	(Nem_TitleSonic).l,a0 ;	load Sonic title screen	patterns
 		bsr.w	NemDec
-		locVRAM	$4000
-		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
-		bsr.w	NemDec
 		locVRAM	$2000
 		lea	(Nem_TitleBlank).l,a0 ; load "TM" patterns
 		bsr.w	NemDec
@@ -2033,13 +2030,25 @@ GM_Title:
 		move.w	#$6000,d2
 		bsr.w	DrawChunks
 		
+	TitMap_ChkRegion:
+		tst.b	(v_megadrive).w
+		bpl.s	TitMap_JP
+		
 		lea	($FF0000).l,a1
 		lea	(Eni_Title).l,a0 ; load	title screen mappings
 		move.w	#0,d0
 		bsr.w	EniDec
-
-		copyTilemap	$FF0000,$1208,$21,$47
-
+		bra.s	TitMap_Cont
+		
+	TitMap_JP:
+		lea	($FF0000).l,a1
+		lea	(Eni_TitleJP).l,a0 ; load	title screen mappings
+		move.w	#0,d0
+		bsr.w	EniDec
+		
+	TitMap_Cont:
+		copyTilemap	$FF0000,$C208,$21,$47
+		
 		locVRAM	0
 		lea	(Nem_JapNames).l,a0 ; load Japanese credits
 		bsr.w	NemDec
@@ -2054,9 +2063,22 @@ GM_Title:
 		bsr.w	NemDec
 		moveq	#palid_Title,d0	; load title screen palette
 		bsr.w	PalLoad1
+		
+	TitFG_ChkRegion:
+		tst.b	(v_megadrive).w
+		bpl.s	TitFG_JP
+		
 		locVRAM	$4000
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
+		bra.s	TitFG_Cont
+		
+	TitFG_JP:
+		locVRAM	$4000
+		lea	(Nem_TitleFgJP).l,a0 ; load title	screen patterns
+		bsr.w	NemDec
+		
+	TitFG_Cont:
 		lea	(Kos_TitleText).l,a0 ;	load extra flower patterns
 		lea	(v_256x256).l,a1 ; RAM address to buffer the patterns
 		bsr.w	KosDec
@@ -8393,7 +8415,11 @@ Nem_TitleBlank:	incbin	"artnem\Title Screen Blank Top VRAM.bin" ; title screen f
 		even
 Eni_Title:	incbin	"tilemaps\Title Screen.bin" ; title screen foreground (mappings)
 		even
+Eni_TitleJP:	incbin	"tilemaps\Title Screen (JP).bin" ; title screen foreground (mappings)
+		even
 Nem_TitleFg:	incbin	"artnem\Title Screen Foreground.bin"
+		even
+Nem_TitleFgJP:	incbin	"artnem\Title Screen Foreground (JP).bin"
 		even
 Nem_TitleSonic:	incbin	"artnem\Title Screen Sonic.bin"
 		even
