@@ -19,7 +19,7 @@ PSB_Main:	; Routine 0
 		move.w	#$D0,obX(a0)
 		move.w	#$130,obScreenY(a0)
 		move.l	#Map_PSB,obMap(a0)
-		move.w	#$200,obGfx(a0)
+		move.w	#$100,obGfx(a0)
 		cmpi.b	#2,obFrame(a0)	; is object "PRESS START"?
 		bcs.s	PSB_PrsStart	; if yes, branch
 

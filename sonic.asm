@@ -1963,7 +1963,7 @@ GM_Title:
 		bsr.w	SoundDriverLoad
 		lea	(vdp_control_port).l,a6
 		move.w	#$8004,(a6)	; 8-colour mode
-		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
+		move.w	#$8200+($0000>>10),(a6) ; set foreground nametable address
 		move.w	#$8400+(vram_bg>>13),(a6) ; set background nametable address
 		move.w	#$9011,(a6)	; 64-cell hscroll size
 		move.w	#$9200,(a6)	; window vertical position
@@ -1998,14 +1998,14 @@ GM_Title:
 		jsr	(BuildSprites).l
 		bsr.w	PaletteFadeIn
 		disable_ints
-		locVRAM	$6700
+		locVRAM	$4700
 		lea	(Nem_TitleSonic).l,a0 ;	load Sonic title screen	patterns
 		bsr.w	NemDec
-		locVRAM	$2000
+		locVRAM	$0
 		lea	(Nem_TitleBlank).l,a0 ; load "TM" patterns
 		bsr.w	NemDec
 		lea	(vdp_data_port).l,a6
-		locVRAM	$A8E0,4(a6)
+		locVRAM	$88E0,4(a6)
 		lea	(Art_Text).l,a5	; load level select font
 		move.w	#$28F,d1
 
@@ -2047,9 +2047,9 @@ GM_Title:
 		bsr.w	EniDec
 		
 	TitMap_Cont:
-		copyTilemap	$FF0000,$C208,$21,$47
+		copyTilemap	$FF0000,$0208,$21,$47
 		
-		locVRAM	0
+		locVRAM	$C000
 		lea	(Nem_JapNames).l,a0 ; load Japanese credits
 		bsr.w	NemDec
 		locVRAM	$14C0
@@ -2068,13 +2068,13 @@ GM_Title:
 		tst.b	(v_megadrive).w
 		bpl.s	TitFG_JP
 		
-		locVRAM	$4000
+		locVRAM	$2000
 		lea	(Nem_TitleFg).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
 		bra.s	TitFG_Cont
 		
 	TitFG_JP:
-		locVRAM	$4000
+		locVRAM	$2000
 		lea	(Nem_TitleFgJP).l,a0 ; load title	screen patterns
 		bsr.w	NemDec
 		
@@ -2580,7 +2580,7 @@ LevSelTextLoad:
 		lea	(LevelMenuText).l,a1
 		lea	(vdp_data_port).l,a6
 		move.l	#$608C0003,d4	; text position on screen
-		move.w	#$E547,d3	; VRAM setting (4th palette, $680th tile)
+		move.w	#$E447,d3	; VRAM setting (4th palette, $680th tile)
 		moveq	#$1A,d1		; number of lines of text
 
 	LevSel_DrawAll:
@@ -2602,13 +2602,13 @@ LevSelTextLoad:
 		add.w	d1,d1
 		add.w	d0,d1
 		adda.w	d1,a1
-		move.w	#$C547,d3	; VRAM setting (3rd palette, $680th tile)
+		move.w	#$C447,d3	; VRAM setting (3rd palette, $680th tile)
 		move.l	d4,4(a6)
 		bsr.w	LevSel_ChgLine	; recolour selected line
-		move.w	#$E547,d3
+		move.w	#$E447,d3
 		cmpi.w	#$1A,(v_levselitem).w
 		bne.s	LevSel_DrawSnd
-		move.w	#$C680,d3
+		move.w	#$C447,d3
 
 LevSel_DrawSnd:
         move.l  #$6DB00003, ($C00004)		; sound test position on screen

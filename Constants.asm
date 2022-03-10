@@ -64,6 +64,7 @@ TrackGoSubStack:	equ TrackSz	; All tracks (multiple bytes. This constant won't g
 TrackSz:	equ $30
 
 ; VRAM data
+vram_win:	equ $A000	; window namespace
 vram_fg:	equ $C000	; foreground namespace
 vram_bg:	equ $E000	; background namespace
 vram_sonic:	equ $F000	; Sonic graphics
