@@ -17464,7 +17464,7 @@
 0000D474 217C 0000 0000 0004        		move.l	#Map_TSon,obMap(a0)
 0000D47C 317C 2338 0002             		move.w	#$2338,obGfx(a0)
 0000D482 117C 0001 0018             		move.b	#1,obPriority(a0)
-0000D488 117C 001D 001F             		move.b	#29,obDelayAni(a0) ; set time delay to 0.5 seconds
+0000D488 117C 0020 001F             		move.b	#32,obDelayAni(a0) ; set time delay to 0.5 seconds
 0000D48E 43F9 0000 0000             		lea	(Ani_TSon).l,a1
 0000D494 6100 0000                  		bsr.w	AnimateSprite
 0000D498                            
