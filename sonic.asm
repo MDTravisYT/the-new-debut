@@ -2034,15 +2034,19 @@ GM_Title:
 		tst.b	(v_megadrive).w
 		bpl.s	TitMap_JP
 		
+		lea	($FF0000).l,a1
 		lea	(Eni_Title).l,a0 ; load	title screen mappings
+		move.w	#0,d0
+		bsr.w	EniDec
 		bra.s	TitMap_Cont
 		
 	TitMap_JP:
+		lea	($FF0000).l,a1
 		lea	(Eni_TitleJP).l,a0 ; load	title screen mappings
-		
-	TitMap_Cont:
 		move.w	#0,d0
 		bsr.w	EniDec
+		
+	TitMap_Cont:
 		copyTilemap	$FF0000,$0208,$21,$47
 		
 		locVRAM	$C000
