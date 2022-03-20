@@ -6,7 +6,7 @@ ptr_Obj02:		dc.l ForceDebug
 ptr_Obj03:		dc.l Hacker
 ptr_Obj04:		dc.l Key
 ptr_Obj05:		dc.l NullObject
-ptr_Obj06:		dc.l NullObject
+ptr_Obj06:		dc.l TestDisplay
 ptr_Obj07:		dc.l Imp
 ptr_Splash:		dc.l Splash		; $08
 ptr_SonicSpecial:	dc.l SonicSpecial

@@ -1823,6 +1823,7 @@ loc_24BC:
 		ori.b	#$40,d0
 		move.w	d0,($C00004).l
 		sfx	$90,0,1,1
+		move.b    #$6,(v_objspace+$1C0).w ; load HUD object 2 <----- object
 
 loc_2528:
 		move.b	#2,(v_vbla_routine).w
@@ -1831,6 +1832,9 @@ loc_2528:
 		tst.w	(v_demolength).w
 		beq.s	loc_2544
 		andi.b	#$80,(v_jpadpress1).w
+        jsr    (ExecuteObjects).l
+        jsr    (BuildSprites).l
+		bsr.w	DeformLayers
 		beq.s	loc_2528
 
 loc_2544:
@@ -5617,7 +5621,7 @@ MvSonic2:
 locret_7B62:
 		rts	
 ; End of function MvSonicOnPtfm2
-
+TestObj:	include	"_incObj/TestDisplayObj.asm"
 		include	"_incObj\15 Swinging Platforms (part 2).asm"
 Map_Swing_GHZ:	include	"_maps\Swinging Platforms (GHZ).asm"
 Map_Swing_SLZ:	include	"_maps\Swinging Platforms (SLZ).asm"
@@ -6732,6 +6736,32 @@ Map_Bub:	include	"_maps\Bubbles.asm"
 		include	"_incObj\65 Waterfalls.asm"
 		include	"_anim\Waterfalls.asm"
 Map_WFall	include	"_maps\Waterfalls.asm"
+Map02:
+	dc.w DATAPWLQJJHYTNS_0-Map02, DATAPWLQJJHYTNS_1-Map02
+	dc.w DATAPWLQJJHYTNS_2-Map02, DATAPWLQJJHYTNS_3-Map02
+DATAPWLQJJHYTNS_0: dc.b $1
+	dc.b $F0, $F, $80, $0, $F0
+DATAPWLQJJHYTNS_1: dc.b $1
+	dc.b $F0, $F, $80, $10, $F0
+DATAPWLQJJHYTNS_2: dc.b $8
+	dc.b $80, $F, $80, $10, $F0
+	dc.b $60, $F, $80, $10, $F0
+	dc.b $40, $F, $80, $10, $F0
+	dc.b $20, $F, $80, $10, $F0
+	dc.b $0, $F, $80, $10, $F0
+	dc.b $E0, $F, $80, $10, $F0
+	dc.b $C0, $F, $80, $10, $F0
+	dc.b $A0, $F, $80, $10, $F0
+DATAPWLQJJHYTNS_3: dc.b $8
+	dc.b $80, $F, $80, $0, $F0
+	dc.b $60, $F, $80, $0, $F0
+	dc.b $40, $F, $80, $0, $F0
+	dc.b $20, $F, $80, $0, $F0
+	dc.b $0, $F, $80, $0, $F0
+	dc.b $E0, $F, $80, $0, $F0
+	dc.b $C0, $F, $80, $0, $F0
+	dc.b $A0, $F, $80, $0, $F0
+	even
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
