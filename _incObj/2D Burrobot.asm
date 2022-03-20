@@ -19,7 +19,7 @@ Burro_Main:	; Routine 0
 		move.b	#$13,obHeight(a0)
 		move.b	#8,obWidth(a0)
 		move.l	#Map_Burro,obMap(a0)
-		move.w	#$4A6,obGfx(a0)
+		move.w	#$24A6,obGfx(a0)
 		ori.b	#4,obRender(a0)
 		move.b	#4,obPriority(a0)
 		move.b	#5,obColType(a0)

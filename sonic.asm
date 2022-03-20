@@ -1851,7 +1851,6 @@ loc_24BC:
 loc_2528:
         jsr    (ExecuteObjects).l
         jsr    (BuildSprites).l
-		jsr		DeformLayers
 		move.w	#$200,(v_screenposy).w ; move Sonic to the right
 		move.w	#$200,(obY).w ; move Sonic to the right
 		move.b	#2,(v_vbla_routine).w

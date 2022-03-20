@@ -27,12 +27,12 @@ loc_4D04:
 		bsr.w	DisplaySprite
 		subq.b	#1,$1E(a0)
 		bpl.s	locret_4D26
-		move.b	#$14,$1E(a0)
+		move.b	#$4,$1E(a0)
 		move.b	$1A(a0),d0
 		addq.b	#1,d0
-		cmpi.b	#3,d0
+		cmpi.b	#$28,d0
 		bcs.s	loc_4D22
-		moveq	#0,d0
+		moveq	#$28,d0
 
 loc_4D22:
 		move.b	d0,$1A(a0)
