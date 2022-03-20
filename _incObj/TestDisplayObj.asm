@@ -15,7 +15,7 @@ off_4CCC:	dc.w loc_4CD4-off_4CCC, loc_4D04-off_4CCC, loc_4D28-off_4CCC, loc_4D28
 loc_4CD4:
 		addq.b	#2,$24(a0)
 		move.w	#$84,$C(a0)	;	Y
-		move.w	#$DE,$8(a0)	;	X
+		move.w	#$D7,$8(a0)	;	X
 		move.l	#Map02,4(a0)
 		move.w	#$2100,2(a0)
 		move.b	#4,1(a0)

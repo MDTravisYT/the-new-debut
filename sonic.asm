@@ -1801,39 +1801,57 @@ GM_Sega:
 
 loc_24BC:
 		bsr.w	ClearScreen
-		move.l	#$40000000,($C00004).l
-		lea	(Nem_OtherSegaLogo).l,a0
+		
+		move.l	#$40000000,($C00004).l		;Beginning of VRAM
+		lea		(Nem_OtherSegaLogo).l,a0
 		bsr.w	NemDec
+		
 		locVRAM	$2000
-		lea	(Nem_SegaSonic).l,a0 ;	load Sonic title screen	patterns
+		lea		(Nem_SegaSonic).l,a0 		;load Sonic's tiles
 		bsr.w	NemDec
-		lea	((v_256x256)&$FFFFFF).l,a1
-		lea	(Eni_OtherSegaLogo).l,a0
+		
+		lea		($FF0000).l,a1	;Where to decompress the tilemap
+		lea		(Eni_OtherSegaLogo).l,a0	;Tilemap to decompress
 		move.w	#0,d0
 		bsr.w	EniDec
-		copyTilemap $FF0000,(vram_bg+$404),((320/8)-1),((320/8)-1) ;not found
-		move.l	#$461C0003,d0
-		moveq	#$B,d1
-		moveq	#3,d2
+		
+		copyTilemap $FF0000,(vram_fg+$404),((320/8)-1),((320/8)-1) ;not found
+		move.l	#$40000003,d0				;Position in Plane A
+		moveq	#$B,d1						;Width (I think)
+		moveq	#3,d2						;Height (I think)
 		bsr.w	TilemapToVRAM
+		
+		lea		($FF1000).l,a1	;Where to decompress the tilemap
+		lea		(Eni_SegaLogo).l,a0	;Tilemap to decompress
+		move.w	#0,d0
+		bsr.w	EniDec
+		
+		copyTilemap $FF1000,(vram_bg+$404),((320/8)-1),((320/8)-1) ;not found
+		move.l	#$60000003,d0				;Position in Plane B
+		moveq	#$B,d1						;Width (I think)
+		moveq	#3,d2						;Height (I think)
+		bsr.w	TilemapToVRAM
+		
 		moveq	#0,d0
 		bsr.w	PalLoad1
-        moveq    #palid_Temp,d0
-        bsr.w    PalLoad2    ; load Sega logo palette
+		moveq	#palid_Temp,d0
+		bsr.w	PalLoad2    ; load Sega logo palette
+		
 		move.w	#$80,(v_pcyc_num).w
 		move.w	#0,($FFFFF662).w
 		move.w	#0,($FFFFF660).w
 		move.w	#11*30,(v_demolength).w
 		move.w	(v_vdp_buffer1).w,d0
-		move.w  #$EEE,v_pal_dry+$02
+		move.w	#$EEE,v_pal_dry+$02
 		ori.b	#$40,d0
 		move.w	d0,($C00004).l
-		sfx	$90,0,1,1
+		sfx		$90,0,1,1
 		move.b    #$6,(v_objspace+$1C0).w ; load HUD object 2 <----- object
 
 loc_2528:
         jsr    (ExecuteObjects).l
         jsr    (BuildSprites).l
+		jsr		DeformLayers
 		move.b	#2,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		bsr.w	sub_1A3A
