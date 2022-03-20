@@ -17,7 +17,7 @@ loc_4CD4:
 		move.w	#$84,$C(a0)	;	Y
 		move.w	#$DE,$8(a0)	;	X
 		move.l	#Map02,4(a0)
-		move.w	#$100,2(a0)
+		move.w	#$2100,2(a0)
 		move.b	#4,1(a0)
 		move.b	#1,$21(a0)
 		move.b	#2,$1A(a0)

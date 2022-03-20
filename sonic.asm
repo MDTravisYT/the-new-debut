@@ -1723,6 +1723,7 @@ Pal_Continue:	incbin	"palette\Special Stage Continue Bonus.bin"
 Pal_Ending:	incbin	"palette\Ending.bin"
 Pal_CSZ:	incbin	"palette\Cosmic Space Zone.bin"
 Pal_FUN:	incbin	"palette\Fun Zone.bin"
+Pal_Temp:	incbin	"palette\blank hacky workaround.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	wait for VBlank routines to complete
@@ -1817,6 +1818,8 @@ loc_24BC:
 		bsr.w	TilemapToVRAM
 		moveq	#0,d0
 		bsr.w	PalLoad1
+        moveq    #palid_Temp,d0
+        bsr.w    PalLoad2    ; load Sega logo palette
 		move.w	#$80,(v_pcyc_num).w
 		move.w	#0,($FFFFF662).w
 		move.w	#0,($FFFFF660).w
