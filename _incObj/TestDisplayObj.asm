@@ -14,10 +14,10 @@ off_4CCC:	dc.w loc_4CD4-off_4CCC, loc_4D04-off_4CCC, loc_4D28-off_4CCC, loc_4D28
 
 loc_4CD4:
 		addq.b	#2,$24(a0)
-		move.w	#$40,$C(a0)
-		move.w	#$40,$8(a0)
+		move.w	#$84,$C(a0)	;	Y
+		move.w	#$DE,$8(a0)	;	X
 		move.l	#Map02,4(a0)
-		move.w	#$0,2(a0)
+		move.w	#$100,2(a0)
 		move.b	#4,1(a0)
 		move.b	#1,$21(a0)
 		move.b	#2,$1A(a0)
@@ -30,9 +30,9 @@ loc_4D04:
 		move.b	#$14,$1E(a0)
 		move.b	$1A(a0),d0
 		addq.b	#1,d0
-		cmpi.b	#4,d0
+		cmpi.b	#3,d0
 		bcs.s	loc_4D22
-		moveq	#2,d0
+		moveq	#0,d0
 
 loc_4D22:
 		move.b	d0,$1A(a0)
