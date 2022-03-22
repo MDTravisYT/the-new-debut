@@ -1799,7 +1799,7 @@ GM_Sega:
 		andi.b	#$BF,d0
 		move.w	d0,($C00004).l
 
-loc_24BC:
+Sega_Main:
 		bsr.w	ClearScreen
 		
 		move.l	#$40000000,($C00004).l		;Beginning of VRAM
@@ -1848,20 +1848,20 @@ loc_24BC:
 		sfx		$90,0,1,1
 		move.b    #$6,(v_objspace+$1C0).w ; load HUD object 2 <----- object
 
-loc_2528:
+Sega_Loop:
         jsr    (ExecuteObjects).l
         jsr    (BuildSprites).l
 		move.w	#$200,(v_screenposy).w ; move Sonic to the right
 		move.w	#$200,(obY).w ; move Sonic to the right
 		move.b	#2,(v_vbla_routine).w
 		bsr.w	WaitForVBla
-		bsr.w	sub_1A3A
+		bsr.w	Sega_CyclePal
 		tst.w	(v_demolength).w
-		beq.s	loc_2544
+		beq.s	Sega_GotoTitle
 		andi.b	#$80,(v_jpadpress1).w
-		beq.s	loc_2528
+		beq.s	Sega_Loop
 
-loc_2544:
+Sega_GotoTitle:
 	if IsDemo=0
 		move.b	#$20,(v_gamemode).w
 	else
@@ -1869,7 +1869,7 @@ loc_2544:
 	endif
 		rts
 		
-sub_1A3A:
+Sega_CyclePal:
 		subq.w	#1,($FFFFF634).w
 		bpl.s	locret_1A68
 		move.w	#3,($FFFFF634).w
