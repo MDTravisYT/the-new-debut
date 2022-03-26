@@ -25,6 +25,7 @@ dbug:	macro map,object,subtype,frame,vram
 ;		mappings	object		subtype	frame	VRAM setting
 	dbug 	Map_Ring,	id_Rings,	0,	0,	$27B2
 	dbug	Map_Monitor,	id_Monitor,	0,	0,	$680
+	dbug 	Map_Imp,	$07,	        0,	1,	$4A6
 	dbug	Map_Hog,	id_BallHog,	0,	0,	$400
 	dbug	Map_Buzz,	id_BuzzBomber,	0,	0,	$444
 	dbug	Map_Chop,	id_Chopper,	0,	0,	$47B
