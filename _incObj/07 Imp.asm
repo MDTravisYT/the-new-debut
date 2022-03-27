@@ -116,8 +116,8 @@ Imp_Jump:	; Routine $6 (ID_Imp_Jump)
 
 		move.b	#ID_Imp_Action,obRoutine(a0)    	     ; Go back to Imp_Action after this routine
 		move.b  #Bigjaw_JumpTime,Bigjaw_JumpTimer(a0)        ; Set timer
-		tst.w   ObVelY(a0)                                   ; Is object velocity negative?
-		bmi.s   @skip                                        ; If so, skip playing the landing sound (prevents it from playing over and over)
+	;	tst.w   ObVelY(a0)                                   ; Is object velocity negative?
+	;	bmi.s   @skip                                        ; If so, skip playing the landing sound (prevents it from playing over and over)
 
 	;	sfx     $BB,0,0,0                                    ; Play the landing sound
 @skip:
