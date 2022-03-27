@@ -98,7 +98,7 @@ Imp_ChkSonic:   ; Routine $4 (ID_Imp_ChkSonic)
 		bcc.s	@nojump		        	; if not, do not jump
 		move.b	#3,obAnim(a0)                   ; Set animation to falling
 		move.w	#-$600,obVelY(a0)               ; Make Bigjaw jump high
-	;	sfx     $A6,0,0,0
+		sfx     $A6,0,0,0
                 move.b	#ID_Imp_Jump,obRoutine(a0)      ; Set Bigjaw to jump after this routine has executed
         @nojump:
                 subi.b  #1,Bigjaw_JumpTimer(a0)         ; Subtract 1 from the jump timer
@@ -116,10 +116,10 @@ Imp_Jump:	; Routine $6 (ID_Imp_Jump)
 
 		move.b	#ID_Imp_Action,obRoutine(a0)    	     ; Go back to Imp_Action after this routine
 		move.b  #Bigjaw_JumpTime,Bigjaw_JumpTimer(a0)        ; Set timer
-	;	tst.w   ObVelY(a0)                                   ; Is object velocity negative?
-	;	bmi.s   @skip                                        ; If so, skip playing the landing sound (prevents it from playing over and over)
+		tst.w   ObVelY(a0)                                   ; Is object velocity negative?
+		bmi.s   @skip                                        ; If so, skip playing the landing sound (prevents it from playing over and over)
 
-	;	sfx     $BB,0,0,0                                    ; Play the landing sound
+		sfx     $BB,0,0,0                                    ; Play the landing sound
 @skip:
                 move.w	(v_limitbtm2).w,d0
 		addi.w	#$E0,d0
