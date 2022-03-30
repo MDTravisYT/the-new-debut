@@ -3,4 +3,4 @@ SN 68k version 2.53
 
 
 Assembly completed.
-0 error(s) from 72214 lines in 9.69 seconds
+0 error(s) from 72213 lines in 8.77 seconds
