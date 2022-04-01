@@ -20,15 +20,15 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal
 	lhead	plcid_GHZ,	Nem_GHZ,	plcid_GHZ2,	Blk16_GHZ,	Blk256_GHZ,	bgm_GHZ,	palid_GHZ	; Green Hill
 	lhead	plcid_LZ,	Nem_LZ,		plcid_LZ2,	Blk16_LZ,	Blk256_LZ,	bgm_LZ,		palid_LZ	; Labyrinth
 	lhead	plcid_MZ,	Nem_MZ,		plcid_MZ2,	Blk16_MZ,	Blk256_MZ,	bgm_MZ,		palid_MZ	; Marble
-	lhead	plcid_SLZ,	Nem_SLZ,	plcid_SLZ2,	Blk16_SLZ,	Blk256_SLZ,	bgm_SLZ,	palid_SLZ	; Star Light
-	lhead	plcid_SZ,	Nem_SYZ,	plcid_SZ2,	Blk16_SYZ,	Blk256_SYZ,	bgm_SYZ,	palid_SZ	; Spring Yard
-	lhead	plcid_CWZ,	Nem_SBZ,	plcid_CWZ2,	Blk16_SBZ,	Blk256_SBZ,	bgm_SBZ,	palid_CWZ2	; Scrap Brain
+	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SLZ,	palid_GHZ	; Star Light
+	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SYZ,	palid_GHZ	; Spring Yard
+	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Scrap Brain
 ;	zonewarning LevelHeaders,$10
-	lhead	plcid_lock,	Nem_lockN,	plcid_lock,		Blk16_lockN,	Blk256_lockN,	bgm_GHZ,	palid_FUN	; Ending
-	lhead	plcid_IMZ,	Nem_GHZ,	plcid_IMZ2,		Blk16_IMZ,	Blk256_IMZ,	bgm_SBZ,	palid_IMZ	; Ice Mountain
-	lhead	plcid_CSZ,	Nem_CSZ,	plcid_CSZ2,	Blk16_CSZ,	Blk256_CSZ,	bgm_SBZ,	palid_CSZ	; Cosmic Space
-	lhead	plcid_lock,	Nem_lock,	plcid_lock,		Blk16_lock,	Blk256_lock,	bgm_GHZ,	palid_IMZ	; LOCK2
-	lhead	plcid_lock,	Nem_lock,	plcid_lock,		Blk16_lock,	Blk256_lock,	bgm_GHZ,	palid_IMZ	; LOCK2
+	lhead	plcid_lock,	Nem_lockN,	plcid_lock,	Blk16_lockN,Blk256_lockN,	bgm_GHZ,	palid_FUN	; Ending
+	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Ice Mountain
+	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Cosmic Space
+	lhead	plcid_lock,	Nem_lock,	plcid_lock,	Blk16_lock,	Blk256_lock,	bgm_GHZ,	palid_GHZ	; LOCK2
+	lhead	plcid_lock,	Nem_lock,	plcid_lock,	Blk16_lock,	Blk256_lock,	bgm_GHZ,	palid_GHZ	; LOCK2
 	even
 
 ;	* music and level gfx are actually set elsewhere, so these values are useless

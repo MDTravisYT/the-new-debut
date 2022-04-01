@@ -2363,7 +2363,7 @@ PlayLevel:
 ; Level	select - level pointers
 ; ---------------------------------------------------------------------------
 LevSel_Ptrs:	
-	if IsDemo=0
+	if IsDemo=1
 		dc.b id_GHZ, 0
 		dc.b id_GHZ, 1
 		dc.b id_GHZ, 2
@@ -2399,9 +2399,9 @@ LevSel_Ptrs:
 		dc.b id_LZ, 0
 		dc.b id_LZ, 1
 		dc.b id_LZ, 2
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
+		dc.b id_MZ, 0
+		dc.b id_MZ, 1
+		dc.b id_MZ, 2
 		dc.b $06, 0
 		dc.b $06, 0
 		dc.b $06, 0
@@ -2729,25 +2729,25 @@ LevelMenuText:	if IsDemo=0
 	dc.b    _L,_A,_B,_Y,_R,_I,_N,_T,_H,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_1  
 	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_2  
 	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_3 
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    _T,_H,_E,__,_B,_L,_A,_N,_K,__,_S,_L,_O,_T,__,__,__,__,__,__,__,__,__,__
+	dc.b    _M,_A,_R,_B,_L,_E,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_1  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
+	dc.b    _F,_U,_N,__,_S,_T,_A,_G,_E,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_X
 	dc.b    _B,_O,_N,_U,_S,__,_S,_T,_A,_G,_E,__,__,__,__,__,__,__,__,__,__,__,__,__
 	dc.b    _S,_O,_U,_N,_D,__,_S,_E,_L,_E,_C,_T,__,__,__,__,__,__,__,__,__,__,__,__
 	dc.b    $00 ; alinhamento
@@ -8399,7 +8399,11 @@ Art_LivesNums:	incbin	"artunc\Lives Counter Numbers.bin" ; 8x8 pixel numbers on 
 
 		include	"_incObj\DebugMode.asm"
 		include	"_inc\DebugList.asm"
+		if IsDemo=0
 		include	"_inc\LevelHeaders.asm"
+		else
+		include	"_inc\LevelHeaders Demo.asm"
+		endif
 		include	"_inc\Pattern Load Cues.asm"
 
 		align	$200,$FF
@@ -8921,6 +8925,10 @@ Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
 		even
 Blk256_LockN:	incbin	"map256\lockoutNORM.bin"
 		even
+		
+Null_Level:
+	dc.b	0,	0,	0,	0
+		even
 ; ---------------------------------------------------------------------------
 ; Compressed graphics - bosses and ending sequence
 ; ---------------------------------------------------------------------------
@@ -9202,9 +9210,9 @@ ObjPos_Index:
 		dc.w ObjPos_LZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		; MZ
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_MZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_Null-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_Null-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		; SLZ
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
@@ -9223,7 +9231,7 @@ ObjPos_Index:
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		zonewarning ObjPos_Index,$10
 		; Ending
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_EndN-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
@@ -9378,6 +9386,8 @@ ObjPos_SBZ1pf5:	incbin	"objpos\sbz1pf5.bin"
 ObjPos_SBZ1pf6:	incbin	"objpos\sbz1pf6.bin"
 		even
 ObjPos_End:	incbin	"objpos\ending.bin"
+		even
+ObjPos_EndN:	incbin	"objpos\endingN.bin"
 		even
 ObjPos_IMZ1:	incbin	"objpos\imz1.bin"
 		even
