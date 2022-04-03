@@ -2232,8 +2232,9 @@ Tit_ChkLevSel:
 		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
 		beq.w	PlayLevelC	; if not, play level
 		endc
-
+	if IsDemo=0
 		move.b	#1,(f_debugcheat).w ; enable debug mode
+	endc
 		sfx	sfx_Ring,0,1,1	; play ring sound when code is entered
 		moveq	#palid_LevelSel,d0
 		bsr.w	PalLoad2	; load level select palette
@@ -2402,21 +2403,21 @@ LevSel_Ptrs:
 		dc.b id_MZ, 0
 		dc.b id_MZ, 1
 		dc.b id_MZ, 2
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
-		dc.b $06, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
+		dc.b $0A, 0
 		dc.b $06, 0
 		dc.b $09, 0
 		dc.w $8000
@@ -8865,6 +8866,13 @@ Blk16_LZ:	incbin	"map16\LZ.bin"
 		even
 Blk16_MZ:	incbin	"map16\MZ.bin"
 		even
+	if	IsDemo	=	1
+Blk16_IMZ:	
+Blk16_SLZ:	
+Blk16_SYZ:	
+Blk16_SBZ:	
+Blk16_CSZ:	
+	else
 Blk16_IMZ:	incbin	"map16\IMZ.bin"
 		even
 Blk16_SLZ:	incbin	"map16\SLZ.bin"
@@ -8874,6 +8882,7 @@ Blk16_SYZ:	incbin	"map16\SYZ.bin"
 Blk16_SBZ:	incbin	"map16\SBZ.bin"
 		even
 Blk16_CSZ:	incbin	"map16\CSZ.bin"
+	endc
 		even	
 ; ---------------------------------------------------------------------------
 ; Level Tiles
@@ -8886,6 +8895,13 @@ Nem_LZ:		incbin	"artnem\8x8 - LZ.bin"	; LZ primary patterns
 		even
 Nem_MZ:		incbin	"artnem\8x8 - MZ.bin"	; MZ primary patterns
 		even
+	if	IsDemo	=	1
+Nem_IMZ:	
+Nem_SLZ:	
+Nem_SYZ:	
+Nem_SBZ:	
+Nem_CSZ:	
+	else
 Nem_IMZ:	incbin	"artnem\8x8 - IMZ.bin"	; IMZ primary patterns
 		even
 Nem_SLZ:	incbin	"artnem\8x8 - SLZ.bin"	; SLZ primary patterns
@@ -8895,7 +8911,8 @@ Nem_SYZ:	incbin	"artnem\8x8 - SYZ.bin"	; SYZ primary patterns
 Nem_SBZ:	incbin	"artnem\8x8 - SBZ.bin"	; SBZ primary patterns
 		even
 Nem_CSZ:	incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
-		even
+	endc
+		even	
 ; ---------------------------------------------------------------------------
 ; Level Chunks
 ; ---------------------------------------------------------------------------
@@ -8907,6 +8924,13 @@ Blk256_LZ:	incbin	"map256\LZ.bin"
 		even
 Blk256_MZ:	incbin	"map256\MZ.bin"
 		even
+	if	IsDemo	=	1
+Blk256_IMZ:	
+Blk256_SLZ:	
+Blk256_SYZ:	
+Blk256_SBZ:	
+Blk256_CSZ:
+	else
 Blk256_IMZ:	incbin	"map256\IMZ.bin"
 		even
 Blk256_SLZ:	incbin	"map256\SLZ.bin"
@@ -8916,7 +8940,8 @@ Blk256_SYZ:	incbin	"map256\SYZ.bin"
 Blk256_SBZ:	incbin	"map256\SBZ.bin"
 		even
 Blk256_CSZ:incbin	"map256\CSZ.bin"
-		even
+	endc
+		even	
 		
 		
 Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
