@@ -6904,7 +6904,14 @@ Sonic_MdNormal:
 		rts	
 ; ===========================================================================
 
-Sonic_MdJump:
+Sonic_MdJump:	; Spring, walking off a platform...
+		cmpi.b	#id_Spring,obAnim(a0)
+		bne.s	@cont
+		tst.b	obVelY(a0)
+		blt.s	@cont
+		move.b	#id_Fall,obAnim(a0)
+	@cont:
+		clr.b	obSpindash(a0)
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_JumpDirection
 		bsr.w	Sonic_LevelBound
@@ -6916,7 +6923,7 @@ Sonic_MdJump:
 loc_12E5C:
 		bsr.w	Sonic_JumpAngle
 		bsr.w	Sonic_Floor
-		rts	
+		rts
 ; ===========================================================================
 
 Sonic_AirRoll:
@@ -6938,18 +6945,27 @@ AirRoll_Return:
         rts
 
 Sonic_MdRoll:
+		tst.b	obPinball(a0)
+		bne.s	@cont
 		bsr.w	Sonic_Jump
+	@cont:
 		bsr.w	Sonic_RollRepel
 		bsr.w	Sonic_RollSpeed
 		bsr.w	Sonic_LevelBound
 		jsr	(SpeedToPos).l
-		bsr.w	Sonic_AnglePos
+		jsr		Sonic_AnglePos
 		bsr.w	Sonic_SlopeRepel
-		rts	
+		rts
 ; ===========================================================================
 
-Sonic_MdJump2:
-		bsr.w   Sonic_AirRoll
+Sonic_MdJump2:	; Actually jumping.
+		cmpi.b	#id_Spring,obAnim(a0)
+		bne.s	@cont
+		tst.b	obVelY(a0)
+		blt.s	@cont
+		move.b	#id_Fall,obAnim(a0)
+	@cont:
+		clr.b	obSpindash(a0)
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_JumpDirection
 		bsr.w	Sonic_LevelBound
@@ -6961,7 +6977,10 @@ Sonic_MdJump2:
 loc_12EA6:
 		bsr.w	Sonic_JumpAngle
 		bsr.w	Sonic_Floor
-		rts	
+		bsr.w	Sonic_ReleaseDropDash
+		rts
+		
+obPinball:	equ obSpindash
 
 		include	"_incObj\Sonic Move.asm"
 		include	"_incObj\Sonic Dash.asm"

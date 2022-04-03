@@ -16,16 +16,16 @@ Sonic_Jump:
 		cmpi.w	#6,d1
 		blt.w	locret_1348E
 		move.w	#$680,d2
-		tst.b	(v_super).w
-		beq.s	@notsuper
+	;	tst.b	(v_super).w
+	;	beq.s	@notsuper
 		move.w	#$800,d2	; set higher jump speed if super
 	@notsuper:
 		btst	#6,obStatus(a0)	; Test if underwater
 		beq.s	@notunderwater
 		move.w	#$380,d2	; set lower jump speed if under
 	@notunderwater:
-		cmpi.b	#id_Knuckles,(v_character).w
-		bne.s	loc_1341C
+	;	cmpi.b	#id_Knuckles,(v_character).w
+	;	bne.s	loc_1341C
 		sub.w	#$80,d2
 
 loc_1341C:
@@ -45,8 +45,8 @@ loc_1341C:
 		move.b	#1,$3C(a0)
 		clr.b	$38(a0)
 		clr.w	$3E(a0)	;clear horiz control lock
-		cmpi.b  #id_Metal,(v_character).w
-		bne.s   @normalsnd
+	;	cmpi.b  #id_Metal,(v_character).w
+	;	bne.s   @normalsnd
 		sfx	sfx_Jump,0,0,0
 		bra.s   @jscnt
     @normalsnd:
@@ -60,8 +60,8 @@ loc_1341C:
 		move.b	#id_Roll,obAnim(a0) ; use "jumping" animation
 		bset	#2,obStatus(a0)
 		addq.w	#5,obY(a0)
-		cmpi.b	#id_Tails,(v_character).w
-		bne.s	locret_1348E
+	;	cmpi.b	#id_Tails,(v_character).w
+	;	bne.s	locret_1348E
 		subq.w	#4,obY(a0)	; Mimics Tails's thing because he's fucking short and dumb
 
 locret_1348E:

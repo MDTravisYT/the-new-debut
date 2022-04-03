@@ -13,8 +13,8 @@ Sonic_ReleaseDropDash:	; d0 is dash, d1 is max, d2 is x vel, d3 is inertia, and.
 		addq.w	#5,y_pos(a0)	; add the difference between Sonic's rolling and standing heights
 		move.w	obVelX(a0),d2
 		move.w	obInertia(a0),d3
-		tst.b	(v_super).w	;  if ( v0->SuperMode == 2 )
-		beq.s	@notsuper
+	;	tst.b	(v_super).w	;  if ( v0->SuperMode == 2 )
+	;	beq.s	@notsuper
 		move.w	#$C00,d0	; dash and max to $C00 and $D00 respectively
 		move.w	#$D00,d1
 		bra.s	@donesetspd
@@ -67,17 +67,17 @@ Sonic_ReleaseDropDash:	; d0 is dash, d1 is max, d2 is x vel, d3 is inertia, and.
 	@cont3:
 		move.w  d3,obInertia(a0)
 		bset	#2,status(a0)
-		tst.b	(v_super).w
-		beq.s	@notsuper2
-		move.b	#6,(v_dust+anim).w
-		move.w	#$10,(v_Ground_Y_screen_shake).w ; Screen shake not yet implemented (only for super)
+	;	tst.b	(v_super).w
+	;	beq.s	@notsuper2
+	;	move.b	#6,(v_dust+anim).w
+	;	move.w	#$10,(v_Ground_Y_screen_shake).w ; Screen shake not yet implemented (only for super)
 		sfx     sfx_Roll,0,0,0 ; play peelout release sound
 		bra.s	@cont4
 	@notsuper2:
-		move.b	#5,(v_dust+anim).w
+	;	move.b	#5,(v_dust+anim).w
 		sfx     sfx_Roll,0,0,0 ; play dash sound
 	@cont4:
-		move.w	#$1000,(v_cameralag).w
+	;	move.w	#$1000,(v_cameralag).w
 		bsr.s	Reset_Player_Position_Array
 	@done:
 		rts

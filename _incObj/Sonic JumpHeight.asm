@@ -17,11 +17,9 @@ Sonic_JumpHeight:
 		cmp.w	obVelY(a0),d1
 		ble.s	@lockcheck
 		move.b	(v_jpadhold2).w,d0
-		cmpi.b	#id_Amy,(v_character).w
-		bne.s	@notamy
-		cmp.b 	#1,(v_highJump).w	; check if bit 2 of the Air Attack flag is set
-		beq.s	@lockcheck
-		andi.b	#btnBC,d0
+
+
+		andi.b	#btnABC,d0
 		bra.s	@cont2
 	@notamy:
 		andi.b	#btnABC,d0	; is A, B or C pressed?
@@ -32,12 +30,11 @@ Sonic_JumpHeight:
 	@lockcheck:
 		tst.b	(f_lockctrl).w	; are controls locked?
 		bne.w	locret_134C2	; i don't want you using those moves while they are...
-		tst.b	(v_springshoes).w
-		bne.w	locret_134C2
+
 
 Character_DoubleJumpMoves: ; Sets the moves depending on the character
 		moveq	#0,d0
-		move.b	(v_character).w,d0
+
 		add.w	d0,d0
 		add.w	d0,d0
 		movea.l	@playerLUT(pc,d0.w),a1
@@ -52,8 +49,7 @@ Character_DoubleJumpMoves: ; Sets the moves depending on the character
 
 
 Sonic_DropDashAndShieldMoves: ; Sonic's Abilities
-		tst.b	(v_super).w
-		bne.s	@skipshield
+
 		cmpi.b	#1,(v_shield).w	; Normal shield?
 		bgt.s	@skipdrop
 
@@ -72,8 +68,7 @@ Sonic_DropDashAndShieldMoves: ; Sonic's Abilities
 		andi.b	#btnABC,d0
 		beq.s	Sonic_DDASMreturn			; if not, branch
 ;		bclr	#4,obStatus(a0) ; not necessary but keeping it here just in case
-		tst.b	(v_super).w	; check Super-state
-		beq.s	Sonic_FireShield		; if not in a super-state, branch
+
 		move.b	#1,obDoubleJump(a0)
 		bra.w	Sonic_DropDash
 
@@ -84,7 +79,7 @@ Sonic_DDASMreturn:
 Sonic_FireShield:
         cmpi.b	#2,(v_shield).w     
 		bne.s	Sonic_LightningShield
-		move.b	#1,(v_oshield+obAnim).w
+
 		move.b	#1,obDoubleJump(a0)
 		move.w	#$800,d0
 		btst	#0,status(a0)		; is Sonic facing left?
@@ -93,16 +88,16 @@ Sonic_FireShield:
 
 loc_11958:
 		move.w	d0,x_vel(a0)		; apply velocity...
-		move.w	d0,inertia(a0)	; ...both ground and air
+		move.w	d0,obinertia(a0)	; ...both ground and air
 		move.w	#0,y_vel(a0)		; kill y-velocity
-		move.w	#$2000,(v_cameralag).w
+
 		jsr	Reset_Player_Position_Array
 	;	sfx		sfx_FireAttack		
 ; ---------------------------------------------------------------------------
 Sonic_LightningShield:
 		cmpi.b  #4,(v_shield).w 	; does Sonic have a Lightning Shield?
 		bne.s	Sonic_BubbleShield			; if not, branch
-		move.b	#1,(v_oshield+obAnim).w
+
 		move.b	#1,obDoubleJump(a0)
 		move.w	#-$580,y_vel(a0)	; bounce Sonic up, creating the double jump effect
 		clr.b	obJumping(a0)
@@ -112,7 +107,7 @@ Sonic_LightningShield:
 Sonic_BubbleShield:
         cmpi.b	#8,(v_shield).w  
 		bne.w	Sonic_GoldShield
-		move.b	#1,(v_oshield+obAnim).w
+
 		move.b	#1,obDoubleJump(a0)
 		move.w	#0,x_vel(a0)		; halt horizontal speed...
 		move.w	#0,obinertia(a0)	; ...both ground and air
@@ -140,7 +135,7 @@ Check_Homein: ; Original code by MainMemory, Modified by AngelKOR64
 ; ---------------------------------------------------------------------------
 
 Sonic_Homing:
-		moveq	#(v_objspace_End-(v_lvlobjspace))/(v_objspace-1),d1	; run the first $80 objects in levels
+
 		lea	(v_lvlobjspace).w,a1 ; a1=object
 		movea	#0,a2
 ; ---------------------------------------------------------------------------
@@ -238,8 +233,7 @@ return_homing:
 Sonic_ChkGoSuper:
 		tst.b	(f_timecount).w
 		beq.w	Sonic_DropDash
-		tst.b	(v_super).w
-		bne.w	Sonic_DropDash
+
 		cmpi.b	#6,(v_emeralds).w
 		bne.w	Sonic_DropDash
 		cmpi.w	#50,(v_rings).w

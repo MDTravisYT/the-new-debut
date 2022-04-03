@@ -1,6 +1,6 @@
 Sonic_DropDash: ; AngelKOR64: Code converted from my S3K hack to make use of the InstaAndShieldMoves format easier
-		tst.b	(v_super).w
-		bne.s	@cont
+	;	tst.b	(v_super).w
+	;	bne.s	@cont
 		cmpi.b	#1,(v_shield).w
 		bgt.s	DropDash_Return
 	@cont:
@@ -32,7 +32,12 @@ Reset_DropDash:
 		move.b	#0,obDoubleJump(a0) ; Clear the flag
 		move.b	#0,jumping(a0) ; clear the jumping flag
 		move.b  #id_Roll,obAnim(a0) ; Set to rolling animation
-		sfx     sfx_Skid,0,0,0		; play Drop Dash cancel sound
+
 
 DropDash_Return:
 		rts
+		
+obDoubleJump:	equ $2E	; Double jump flag.
+obDoubleJump_property:	equ $2F
+obJumping:	equ	$3C
+jumping =	obJumping

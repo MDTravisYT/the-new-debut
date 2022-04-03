@@ -3,7 +3,8 @@
 ; ---------------------------------------------------------------------------
 
 ; ||||||||||||||| S U B R O U T I N E |||||||||||||||||||||||||||||||||||||||
-
+obSpindash: equ $39
+obSpindashCounter:	equ $3A
 ; loc_1AC3E:
 Sonic_CheckSpindash:
 		tst.b	obSpindash(a0)
@@ -15,8 +16,6 @@ Sonic_CheckSpindash:
 		beq.w	@ret
 		move.b	#id_Spindash,obAnim(a0)
 		sfx 	sfx_Skid,0,0,9
-		cmpi.b	#id_Legacy,(v_character).w
-		bne.s	@normalsnd
 		sfx     sfx_Roll,0,0,0
 		bra.s	@contsnd
 	@normalsnd:
@@ -25,8 +24,6 @@ Sonic_CheckSpindash:
 		addq.l	#4,sp
 		move.b	#1,obSpindash(a0)
 		move.w	#0,obSpindashCounter(a0)
-		move.b	#2,(v_dust+obAnim).w
-		move.b	#0,(v_dust+obTimeFrame).w
 		move.w	#$80,obSpindashCounter(a0)
 
 	@done:
@@ -71,18 +68,13 @@ Sonic_UpdateSpindash:
 		andi.b	#$1F,d0
 		neg.b	d0
 		addi.b	#$20,d0
-		move.b	d0,(v_cameralag).w
 		btst	#0,status(a0)
 		beq.s	@done2
 		neg.w	obInertia(a0)
 	@done2:
 		bset	#2,status(a0)
-		tst.b	(v_super).w
-		beq.s	@notsuper
-		move.b	#6,(v_dust+obAnim).w
-		bra.s	@cont
-	@notsuper:
-		move.b	#5,(v_dust+obAnim).w
+
+
 	@cont:
 		sfx     sfx_Roll,0,0,0 ; play dash sound
 		move.b	obAngle(a0),d0
@@ -146,8 +138,6 @@ Sonic_ChargingSpindash:			; If still charging the dash...
 		andi.b	#btnABC,d0
 		beq.w	Sonic_Spindash_ResetScr
 		move.w	#(id_Spindash<<8),obAnim(a0)
-		cmpi.b	#id_Legacy,(v_character).w
-		bne.s	@normalsnd
 		sfx     sfx_Roll,0,0,0
 		bra.s	@contsnd
 	@normalsnd:

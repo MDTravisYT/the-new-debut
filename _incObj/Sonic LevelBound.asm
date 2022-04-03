@@ -39,7 +39,7 @@ Sonic_LevelBound:
 		move.w (v_limitbtm2).w,d1 
 		cmp.w d0,d1 ; screen still scrolling down? 
 		blt.s @dontkill; if so, don't kill Sonic
-		cmpi.w	#(id_SBZ<<8)+1,(v_zone).w ; is level SBZ2 ?
+		cmpi.w	#(5<<8)+1,(v_zone).w ; is level SBZ2 ?
 		bne.s	@killsonic	; if not, kill Sonic	; MJ: Fix out-of-range branch
 		cmpi.w	#$2000,(v_player+obX).w
 		bcs.s	@killsonic				; MJ: Fix out-of-range branch
