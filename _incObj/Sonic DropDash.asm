@@ -1,9 +1,5 @@
 Sonic_DropDash: ; AngelKOR64: Code converted from my S3K hack to make use of the InstaAndShieldMoves format easier
-	;	tst.b	(v_super).w
-	;	bne.s	@cont
-		cmpi.b	#1,(v_shield).w
-		bgt.s	DropDash_Return
-	@cont:
+
 		move.b    (v_jpadhold2).w,d0
 		andi.b    #btnABC,d0    ; is A, B or C pressed?
 		beq.w	DropDash_Return	; if not, return

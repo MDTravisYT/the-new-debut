@@ -146,7 +146,7 @@ React_Monitor:
 		subi.w	#$10,d0
 		cmp.w	obY(a1),d0
 		bcs.s	@donothing
-	;	neg.w	obVelY(a0)	; reverse Sonic's vertical speed
+		neg.w	obVelY(a0)	; reverse Sonic's vertical speed
 		move.w	#-$180,obVelY(a1)
 		tst.b	ob2ndRout(a1)
 		bne.s	@donothing
@@ -166,14 +166,11 @@ React_Monitor:
 
 React_Enemy:
 		tst.b	(v_invinc).w	; is Sonic invincible?
-		bne.s	donthurtsonic	; if yes, branch
-		cmpi.b	#$20,obAnim(a0) ; is Sonic rolling/jumping?
-		beq.w	donthurtsonic	; if not, branch
-ChkRoll:
+		bne.s	@donthurtsonic	; if yes, branch
 		cmpi.b	#id_Roll,obAnim(a0) ; is Sonic rolling/jumping?
 		bne.w	React_ChkHurt	; if not, branch
 
-donthurtsonic:
+	@donthurtsonic:
 		tst.b	obColProp(a1)
 		beq.s	@breakenemy
 
@@ -263,17 +260,16 @@ React_ChkHurt:
 HurtSonic:
 		tst.b	(v_shield).w	; does Sonic have a shield?
 		bne.s	@hasshield	; if yes, branch
-		tst.w	(v_health).w	; does Sonic have any rings?
+		tst.w	(v_rings).w	; does Sonic have any rings?
 		beq.w	@norings	; if not, branch
 
+		jsr	(FindFreeObj).l
+		bne.s	@hasshield
+		move.b	#id_RingLoss,0(a1) ; load bouncing multi rings object
+		move.w	obX(a0),obX(a1)
+		move.w	obY(a0),obY(a1)
+
 	@hasshield:
-		tst.b   (v_shield).w
-		bne.s   @skipthis
-		
-		subq.b	#1,(v_health).w
-		move.b  #1,(f_healthcount).w
-				
-	@skipthis:
 		move.b	#0,(v_shield).w	; remove shield
 		move.b	#4,obRoutine(a0)
 		bsr.w	Sonic_ResetOnFloor
@@ -319,9 +315,10 @@ HurtSonic:
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
+
 KillSonic:
-		move.b	#$FF,(v_health).w
-		move.b  #1,(f_healthcount).w
+		tst.w	(v_debuguse).w	; is debug mode	active?
+		bne.s	@dontdie	; if yes, branch
 		move.b	#0,(v_invinc).w	; remove invincibility
 		move.b	#6,obRoutine(a0)
 		bsr.w	Sonic_ResetOnFloor
@@ -330,30 +327,9 @@ KillSonic:
 		move.w	#0,obVelX(a0)
 		move.w	#0,obInertia(a0)
 		move.w	obY(a0),$38(a0)
-		
-		lea FireObjects(pc),a3
-		moveq #FireObjects_end-FireObjects-1,d0
-	
-@loop:	
-		move.b (a3)+,d1
-		cmp.b  (a2),d1
-		beq.s  @burnt
-		dbf    d0,@loop
-		
 		move.b	#id_Death,obAnim(a0)
-		bra.w   @deathanimset
-		
-@burnt:
-		move.b	#id_Burnt,obAnim(a0)
-		
-@deathanimset:
 		bset	#7,obGfx(a0)
 		move.w	#sfx_Death,d0	; play normal death sound
-		cmpi.b  #id_Burnt,obAnim(a0)
-		bne.s   @skip
-		
-		move.w	#$C8,d0
-	@skip:
 		cmpi.b	#id_Spikes,(a2)	; check	if you were killed by spikes
 		bne.s	@sound
 		move.w	#sfx_HitSpikes,d0 ; play spikes death sound
@@ -365,11 +341,6 @@ KillSonic:
 		moveq	#-1,d0
 		rts	
 ; End of function KillSonic
-
-FireObjects:
-		dc.b $14, $35, $4D, $4E, $54, $6D, $74
-FireObjects_end:
-		even
 
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||

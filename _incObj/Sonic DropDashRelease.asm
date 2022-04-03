@@ -13,12 +13,7 @@ Sonic_ReleaseDropDash:	; d0 is dash, d1 is max, d2 is x vel, d3 is inertia, and.
 		addq.w	#5,y_pos(a0)	; add the difference between Sonic's rolling and standing heights
 		move.w	obVelX(a0),d2
 		move.w	obInertia(a0),d3
-	;	tst.b	(v_super).w	;  if ( v0->SuperMode == 2 )
-	;	beq.s	@notsuper
-		move.w	#$C00,d0	; dash and max to $C00 and $D00 respectively
-		move.w	#$D00,d1
-		bra.s	@donesetspd
-	@notsuper:
+
 		move.w	#$800,d0	; dash and max to $800 and $C00 respectively
 		move.w	#$C00,d1
 	@donesetspd:

@@ -140,11 +140,11 @@ CollectRing:
 		addq.w	#1,(v_rings).w	; add 1 to rings
 		ori.b	#1,(f_ringcount).w ; update the rings counter
 		move.w	#sfx_Ring,d0	; play ring sound
-		cmpi.w	#50,(v_rings).w ; do you have < 100 rings?
+		cmpi.w	#100,(v_rings).w ; do you have < 100 rings?
 		bcs.s	@playsnd	; if yes, branch
 		bset	#1,(v_lifecount).w ; update lives counter
 		beq.s	@got100
-		cmpi.w	#100,(v_rings).w ; do you have < 200 rings?
+		cmpi.w	#200,(v_rings).w ; do you have < 200 rings?
 		bcs.s	@playsnd	; if yes, branch
 		bset	#2,(v_lifecount).w ; update lives counter
 		bne.s	@playsnd
@@ -164,7 +164,6 @@ CollectRing:
 ; ---------------------------------------------------------------------------
 
 RingLoss:
-		rts
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
 		move.w	RLoss_Index(pc,d0.w),d1
@@ -181,7 +180,7 @@ RLoss_Count:	; Routine 0
 		movea.l	a0,a1
 		moveq	#0,d5
 		move.w	(v_rings).w,d5	; check number of rings you have
-		moveq	#100,d0
+		moveq	#32,d0
 		cmp.w	d0,d5		; do you have 32 or more?
 		bcs.s	@belowmax	; if not, branch
 		move.w	d0,d5		; if yes, set d5 to 32
@@ -227,17 +226,17 @@ RLoss_Count:	; Routine 0
 		move.w	#$288,d4
 
 	@loc_9D62:
-	;	move.w	d2,obVelX(a1)
+		move.w	d2,obVelX(a1)
 		move.w	d3,obVelY(a1)
 		neg.w	d2
 		neg.w	d4
-	;	dbf	d5,@loop	; repeat for number of rings (max 31)
+		dbf	d5,@loop	; repeat for number of rings (max 31)
 
 @resetcounter:
 		move.w	#0,(v_rings).w	; reset number of rings to zero
 		move.b	#$80,(f_ringcount).w ; update ring counter
 		move.b	#0,(v_lifecount).w
-	;	sfx	sfx_RingLoss,0,0,0	; play ring loss sound
+		sfx	sfx_RingLoss,0,0,0	; play ring loss sound
 
 RLoss_Bounce:	; Routine 2
 		move.b	(v_ani3_frame).w,obFrame(a0)
@@ -248,7 +247,7 @@ RLoss_Bounce:	; Routine 2
 		add.b	d7,d0
 		andi.b	#3,d0
 		bne.s	@chkdel
-	;	jsr	(ObjFloorDist).l
+		jsr	(ObjFloorDist).l
 		tst.w	d1
 		bpl.s	@chkdel
 		add.w	d1,obY(a0)

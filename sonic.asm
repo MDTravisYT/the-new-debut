@@ -2989,17 +2989,7 @@ Level_LoadObj:
 		move.w	d0,(v_debuguse).w
 		move.w	d0,(f_restart).w
 		move.w	d0,(v_framecount).w
-		cmpi.b  #4,(v_health).w
-		bgt.s   @skip
-		
-		move.b  #4,(v_health).w
-		move.b  #1,(f_healthcount).w
-	@skip:
-		cmpi.b  #9,(v_health).w
-		blt.s   @skipahead
-		
-		move.b  #9,(v_health).w
-		move.b  #1,(f_healthcount).w
+
 		
 	@skipahead:
 		bsr.w	OscillateNumInit

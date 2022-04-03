@@ -1,7 +1,7 @@
 
 SN 68k version 2.53
 
-D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\_INCOBJ\SONIC DROPDASH.ASM(33) : Warning : Forward reference to redefinable symbol
+D:\DISASSEMBLY\BETASONIC IN SONIC 1\DEBUT AGAIN\THE-NEW-DEBUT\_INCOBJ\SONIC DROPDASH.ASM(29) : Warning : Forward reference to redefinable symbol
 
 Assembly completed.
-0 error(s) from 73767 lines in 0.21 seconds
+0 error(s) from 73949 lines in 0.19 seconds
