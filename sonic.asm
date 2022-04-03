@@ -6889,19 +6889,16 @@ MusicList2:
 ; ---------------------------------------------------------------------------
 
 Sonic_MdNormal:
-	if IsDemo=0
-		bsr.w	Sonic_Dash
-	else
-	endif
+		bsr.w	Sonic_CheckSpindash
 		bsr.w	Sonic_Jump
 		bsr.w	Sonic_SlopeResist
 		bsr.w	Sonic_Move
 		bsr.w	Sonic_Roll
 		bsr.w	Sonic_LevelBound
 		jsr	(SpeedToPos).l
-		bsr.w	Sonic_AnglePos
+		jsr	Sonic_AnglePos
 		bsr.w	Sonic_SlopeRepel
-		rts	
+		rts
 ; ===========================================================================
 
 Sonic_MdJump:	; Spring, walking off a platform...

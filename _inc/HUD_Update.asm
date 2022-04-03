@@ -72,9 +72,9 @@ HUD_Update:
 		bsr.w	Hud_Lives
 
 	@chkbonus:
-		tst.b	(f_healthcount).w ; does the lives counter need updating?
+		tst.b	(v_ani0_frame).w ; does the lives counter need updating?
 		beq.s	@chkbonus2	; if not, branch
-		clr.b	(f_healthcount).w
+		clr.b	(v_ani0_frame).w
 		bsr.w	Hud_Health
 		
 	@chkbonus2:
@@ -127,9 +127,9 @@ HudDebug:
 		bsr.w	Hud_Lives
 
 	@chkbonus:
-		tst.b	(f_healthcount).w ; does the lives counter need updating?
+		tst.b	(v_ani0_frame).w ; does the lives counter need updating?
 		beq.s	@chkbonus2	; if not, branch
-		clr.b	(f_healthcount).w
+		clr.b	(v_ani0_frame).w
 		bsr.w	Hud_Health
 		
 	@chkbonus2:

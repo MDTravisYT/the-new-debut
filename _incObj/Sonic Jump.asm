@@ -18,7 +18,7 @@ Sonic_Jump:
 		move.w	#$680,d2
 	;	tst.b	(v_super).w
 	;	beq.s	@notsuper
-		move.w	#$800,d2	; set higher jump speed if super
+
 	@notsuper:
 		btst	#6,obStatus(a0)	; Test if underwater
 		beq.s	@notunderwater
