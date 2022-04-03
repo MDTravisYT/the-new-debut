@@ -948,8 +948,6 @@ TilemapToVRAM:
 		rts	
 ; End of function TilemapToVRAM
 
-
-
 		include	"_inc\Nemesis Decompression.asm"
 
 
@@ -6765,18 +6763,6 @@ Map_Bub:	include	"_maps\Bubbles.asm"
 Map_WFall	include	"_maps\Waterfalls.asm"
 Map02:	include	"_maps\Sega Sonic.asm"
 
-ResetHeight:
-		cmpi.b	#id_Tails,(v_character).w
-		beq.s	@tailsheight
-	@normalheight:
-		move.b	#$13,(v_player+obHeight).w
-		move.b	#9,(v_player+obWidth).w
-		rts
-	@tailsheight:
-		move.b	#$F,(v_player+obHeight).w
-		move.b	#9,(v_player+obWidth).w
-		rts
-
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
 ; Object 01 - Sonic
@@ -6990,11 +6976,6 @@ locret_13302:
 		include	"_incObj\Sonic LevelBound.asm"
 		include	"_incObj\Sonic Roll.asm"
 		include	"_incObj\Sonic Jump.asm"
-		include "_incObj/Sonic DropDash.asm"
-		include "_incObj/Sonic DropDashRelease.asm"
-		include "_incObj/Sonic Drowns.asm"
-		include "_incObj/Sonic Spindash.asm"
-	;	include "_incObj/Sonic Water (Water Tags).asm"
 		include	"_incObj\Sonic JumpHeight.asm"
 		include	"_incObj\Sonic SlopeResist.asm"
 		include	"_incObj\Sonic RollRepel.asm"
@@ -7010,56 +6991,6 @@ locret_13302:
 
 		include	"_incObj\0A Drowning Countdown.asm"
 
-Duck_Movement:
-		cmpi.b	#$29,obAnim(a0)	; are we still in the hammer animation?
-		beq.w	Duck_Movement_Return		; if yes, branch
-		moveq	#0,d1		; make sure d1 is empty
-		move.b	obAngle(a0),d1	; move angle to d1
-		bpl.s	AnglePositive	; is angle positive? if yes, branch
-		neg.b	d1		; otherwise negate it (e.g. change it from -$10 to $10)
-
-AnglePositive:
-		cmpi.b	#$10,d1		; is angle within -$10 and $10?
-		bgt.s	AngleToGreat	; if not, branch
-		tst.w	obInertia(a0)		; is Amy moving?
-		beq.s	Duck_Movement_Return; if not, branch
-
-		;move.w	#0,obInertia(a0)	; stop Amy moving (interia)
-		;move.w	#$20,obVelX(a0)	; stop Amy moving (X-speed)
-		cmp.b	#8,obAnim(a0)
-		bne.s	lolduck0
-		move.w	obInertia(a0),d0
-		move.w	d0,d1
-		asr.w	#3,d1
-		sub.w	d1,d0
-		move.w	d0,obInertia(a0)
-		rts
-lolduck0:
-		move.w	obInertia(a0),d0
-		move.b	#8,obAnim(a0)	; use "ducking"	animation
-		btst	#0,obStatus(a0)
-		beq	lolduck
-		neg.w	d0
-lolduck:
-		cmp.w	#$10,d0
-		bgt	lolduck3
-		move.w	#$10,d0
-		btst	#0,obStatus(a0)
-		beq	lolduck2
-		neg.w	d0
-lolduck2:
-		move.w	d0,obInertia(a0)
-lolduck3:
-		move.w	obVelX(a0),d0
-		tst.w	d0
-		bpl	Duck_Movement_Return
-		neg.w	d0
-
-AngleToGreat:
-		rts			; return
-
-Duck_Movement_Return:
-		rts
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	play music for LZ/SBZ3 after a countdown

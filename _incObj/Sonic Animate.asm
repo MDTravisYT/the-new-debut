@@ -7,10 +7,6 @@
 
 Sonic_Animate:
 		lea	(Ani_Sonic).l,a1
-		tst.b	(v_super).w
-		beq.s	@doneloadinganim
-		lea	(Ani_SuperSonic).l,a1
-	@doneloadinganim:
 		moveq	#0,d0
 		move.b	obAnim(a0),d0
 		cmp.b	obNextAni(a0),d0 ; is animation set to restart?
@@ -18,7 +14,6 @@ Sonic_Animate:
 		move.b	d0,obNextAni(a0) ; set to "no restart"
 		move.b	#0,obAniFrame(a0) ; reset animation
 		move.b	#0,obTimeFrame(a0) ; reset frame duration
-		bclr	#5,obStatus(a0)
 
 	@do:
 		add.w	d0,d0
@@ -37,15 +32,14 @@ Sonic_Animate:
 		moveq	#0,d1
 		move.b	obAniFrame(a0),d1 ; load current frame number
 		move.b	1(a1,d1.w),d0	; read sprite number from script
-		cmp.b	#$FD,d0		; MJ: is it a flag from FD to FF?
-		bhs	@end_FF		; if animation is complete, branch
+		bmi.s	@end_FF		; if animation is complete, branch
 
 	@next:
 		move.b	d0,obFrame(a0)	; load sprite number
 		addq.b	#1,obAniFrame(a0) ; next frame number
 
 	@delay:
-		rts
+		rts	
 ; ===========================================================================
 
 @end_FF:
@@ -72,25 +66,16 @@ Sonic_Animate:
 		move.b	2(a1,d1.w),obAnim(a0) ; read next byte, run that animation
 
 	@end:
-		rts
+		rts	
 ; ===========================================================================
 
 @walkrunroll:
 		subq.b	#1,obTimeFrame(a0) ; subtract 1 from frame duration
 		bpl.s	@delay		; if time remains, branch
-
 		addq.b	#1,d0		; is animation walking/running?
 		bne.w	@rolljump	; if not, branch
-		moveq	#0,d0		; is animation walking/running?
-		move.b	(v_flipangle).w,d0	; if not, branch
-		bne.w	@tumble
 		moveq	#0,d1
 		move.b	obAngle(a0),d0	; get Sonic's angle
-		bmi.s	@wrrcont
-		beq.s	@wrrcont
-		subq.b	#1,d0
-
-	@wrrcont:
 		move.b	obStatus(a0),d2
 		andi.b	#1,d2		; is Sonic mirrored horizontally?
 		bne.s	@flip		; if yes, branch
@@ -115,16 +100,14 @@ Sonic_Animate:
 		neg.w	d2		; modulus speed
 
 	@nomodspeed:
-		lea	(SonAni_MachSpeed).l,a1
-		cmpi.w	#$A00,d2
-		bcc.s	@running
-
 		lea	(SonAni_Run).l,a1 ; use	running	animation
 		cmpi.w	#$600,d2	; is Sonic at running speed?
 		bcc.s	@running	; if yes, branch
 
 		lea	(SonAni_Walk).l,a1 ; use walking animation
-		add.b	d0,d0
+		move.b	d0,d1
+		lsr.b	#1,d1
+		add.b	d1,d0
 
 	@running:
 		add.b	d0,d0
@@ -139,8 +122,7 @@ Sonic_Animate:
 		move.b	d2,obTimeFrame(a0) ; modify frame duration
 		bsr.w	@loadframe
 		add.b	d3,obFrame(a0)	; modify frame number
-		rts
-
+		rts	
 ; ===========================================================================
 
 @rolljump:
@@ -179,7 +161,7 @@ Sonic_Animate:
 
 	@negspeed:
 		addi.w	#$800,d2
-		bpl.s	@belowmax3
+		bpl.s	@belowmax3	
 		moveq	#0,d2
 
 	@belowmax3:
@@ -191,43 +173,5 @@ Sonic_Animate:
 		andi.b	#$FC,obRender(a0)
 		or.b	d1,obRender(a0)
 		bra.w	@loadframe
-
-; ===========================================================================
-@tumble:
-		move.b	(v_flipangle).w,d0
-		moveq	#0,d1
-		move.b	obStatus(a0),d2
-		andi.b	#1,d2
-		bne.s	@tumble_Left
-
-		andi.b	#$FC,obRender(a0)
-		addi.b	#$B,d0
-		divu.w	#$16,d0
-		addi.b	#frS_Corkscrew1,d0
-		move.b	d0,mapping_frame(a0)
-		move.b	#0,obTimeFrame(a0)
-		rts
-; ===========================================================================
-; loc_1B54E:
-@tumble_Left:
-		andi.b	#$FC,obRender(a0)
-		tst.b	$29(a0)
-		beq.s	loc_1B566
-		ori.b	#1,obRender(a0)
-		addi.b	#$B,d0
-		bra.s	loc_1B572
-; ===========================================================================
-
-loc_1B566:
-		ori.b	#3,obRender(a0)
-		neg.b	d0
-		addi.b	#$8F,d0
-
-loc_1B572:
-		divu.w	#$16,d0
-		addi.b	#frS_Corkscrew1,d0
-		move.b	d0,mapping_frame(a0)
-		move.b	#0,obTimeFrame(a0)
-		rts
 
 ; End of function Sonic_Animate

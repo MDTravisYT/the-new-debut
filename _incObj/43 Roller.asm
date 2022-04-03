@@ -17,7 +17,7 @@ entry_BFBE:
                 move.b  #$E,$16(a0)
                 move.b  #8,$17(a0)
                 bsr.w   ObjectFall
-                jsr   ObjFloorDist
+                bsr.w   ObjFloorDist
                 tst.w   d1
                 bpl.s   locret_C00A
                 add.w   d1,$C(a0)
@@ -75,7 +75,7 @@ locret_C05E:
 
 entry_c060:
                 bsr.w   SpeedToPos
-                jsr   ObjFloorDist
+                bsr.w   ObjFloorDist
                 cmpi.w  #$FFF8,d1
                 blt.s   loc_C07A
                 cmpi.w  #$C,d1
@@ -98,7 +98,7 @@ entry_c08e:
                 bsr.w   ObjectFall
                 tst.w   $12(a0)
                 bmi.s   locret_C0AE
-                jsr   ObjFloorDist
+                bsr.w   ObjFloorDist
                 tst.w   d1
                 bpl.s   locret_C0AE
                 add.w   d1,$C(a0)
