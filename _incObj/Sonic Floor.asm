@@ -6,38 +6,48 @@
 
 
 Sonic_Floor:
+		move.l	(v_colladdr1).w,(v_collindex).w		; MJ: load first collision data location
+		cmpi.b	#$C,(v_top_solid_bit).w			; MJ: is second collision set to be used?
+		beq.s	@first					; MJ: if not, branch
+		move.l	(v_colladdr2).w,(v_collindex).w		; MJ: load second collision data location
+@first:
+		move.b	(v_lrb_solid_bit).w,d5			; MJ: load L/R/B soldity bit
 		move.w	obVelX(a0),d1
 		move.w	obVelY(a0),d2
 		jsr	(CalcAngle).l
-		move.b	d0,($FFFFFFEC).w
 		subi.b	#$20,d0
-		move.b	d0,($FFFFFFED).w
 		andi.b	#$C0,d0
-		move.b	d0,($FFFFFFEE).w
 		cmpi.b	#$40,d0
-		beq.w	loc_13680
+		beq.w	Sonic_HitLeftWall
 		cmpi.b	#$80,d0
-		beq.w	loc_136E2
+		beq.w	Sonic_HitCeilingAndWalls
 		cmpi.b	#$C0,d0
-		beq.w	loc_1373E
-		bsr.w	Sonic_HitWall
+		beq.w	Sonic_HitRightWall
+		jsr		Sonic_HitWall
 		tst.w	d1
 		bpl.s	loc_135F0
 		sub.w	d1,obX(a0)
 		move.w	#0,obVelX(a0)
 
+		btst	#bitL,(v_jpadhold2).w
+;		beq.s	loc_135F0
+	;	bsr.w	WallJump
+
 loc_135F0:
-		bsr.w	sub_14EB4
+		jsr 	sub_14EB4
 		tst.w	d1
 		bpl.s	loc_13602
 		add.w	d1,obX(a0)
 		move.w	#0,obVelX(a0)
 
+		btst	#bitR,(v_jpadhold2).w
+;		beq.s	loc_13602
+;		bsr.w	WallJump
+
 loc_13602:
-		bsr.w	Sonic_HitFloor
-		move.b	d1,($FFFFFFEF).w
+		jsr	Sonic_HitFloor
 		tst.w	d1
-		bpl.s	locret_1367E
+		bpl.w	locret_1367E
 		move.b	obVelY(a0),d2
 		addq.b	#8,d2
 		neg.b	d2
@@ -47,10 +57,17 @@ loc_13602:
 		blt.s	locret_1367E
 
 loc_1361E:
-		add.w	d1,obY(a0)
 		move.b	d3,obAngle(a0)
-		bsr.w	Sonic_ResetOnFloor
-		move.b	#id_Walk,obAnim(a0)
+		add.w	d1,obY(a0)
+		cmpi.b	#id_Amy,(v_character).w
+		bne.s	@shf2
+		tst.b	obDoubleJump_property(a0)
+		beq.s	@part2
+		move.b	#$29,obAnim(a0)
+		bra.s	@shf2
+	@part2:
+		move.b	#0,obAnim(a0)
+	@shf2:
 		move.b	d3,d0
 		addi.b	#$20,d0
 		andi.b	#$40,d0
@@ -66,6 +83,8 @@ loc_1361E:
 loc_1364E:
 		move.w	#0,obVelY(a0)
 		move.w	obVelX(a0),obInertia(a0)
+		jsr	(Sonic_ResetOnFloor).l
+;		move.b	#id_Walk,obAnim(a0)	; some kind of fix? maybe pushing??
 		rts	
 ; ===========================================================================
 
@@ -76,6 +95,7 @@ loc_1365C:
 		move.w	#$FC0,obVelY(a0)
 
 loc_13670:
+		jsr	(Sonic_ResetOnFloor).l
 		move.w	obVelY(a0),obInertia(a0)
 		tst.b	d3
 		bpl.s	locret_1367E
@@ -85,8 +105,8 @@ locret_1367E:
 		rts	
 ; ===========================================================================
 
-loc_13680:
-		bsr.w	Sonic_HitWall
+Sonic_HitLeftWall:
+		jsr		Sonic_HitWall
 		tst.w	d1
 		bpl.s	loc_1369A
 		sub.w	d1,obX(a0)
@@ -96,7 +116,7 @@ loc_13680:
 ; ===========================================================================
 
 loc_1369A:
-		bsr.w	Sonic_DontRunOnWalls
+		jsr	Sonic_DontRunOnWalls
 		tst.w	d1
 		bpl.s	loc_136B4
 		sub.w	d1,obY(a0)
@@ -111,13 +131,22 @@ locret_136B2:
 loc_136B4:
 		tst.w	obVelY(a0)
 		bmi.s	locret_136E0
-		bsr.w	Sonic_HitFloor
+		jsr	Sonic_HitFloor
 		tst.w	d1
 		bpl.s	locret_136E0
 		add.w	d1,obY(a0)
 		move.b	d3,obAngle(a0)
-		bsr.w	Sonic_ResetOnFloor
-		move.b	#id_Walk,obAnim(a0)
+		jsr	(Sonic_ResetOnFloor).l
+		cmpi.b	#id_Amy,(v_character).w
+		bne.s	@end
+	; Amy code
+		tst.b	obDoubleJump_property(a0)
+		beq.s	@part3
+		move.b	#$29,obAnim(a0)	;	faceplant animation
+		bra.s	@end
+	@part3:
+		move.b	#0,obAnim(a0)
+	@end:
 		move.w	#0,obVelY(a0)
 		move.w	obVelX(a0),obInertia(a0)
 
@@ -125,22 +154,29 @@ locret_136E0:
 		rts	
 ; ===========================================================================
 
-loc_136E2:
-		bsr.w	Sonic_HitWall
+Sonic_HitCeilingAndWalls:
+		jsr 	Sonic_HitWall
 		tst.w	d1
 		bpl.s	loc_136F4
 		sub.w	d1,obX(a0)
 		move.w	#0,obVelX(a0)
 
+		btst	#bitL,(v_jpadhold2).w
+	;	beq.s	loc_136F4
+	;	bsr.w	WallJump
+
 loc_136F4:
-		bsr.w	sub_14EB4
+		jsr	sub_14EB4
 		tst.w	d1
 		bpl.s	loc_13706
 		add.w	d1,obX(a0)
 		move.w	#0,obVelX(a0)
 
+		btst	#bitR,(v_jpadhold2).w
+	;	beq.s	loc_13706
+	;	bsr.w	WallJump
 loc_13706:
-		bsr.w	Sonic_DontRunOnWalls
+		jsr	Sonic_DontRunOnWalls
 		tst.w	d1
 		bpl.s	locret_1373C
 		sub.w	d1,obY(a0)
@@ -154,7 +190,7 @@ loc_13706:
 
 loc_13726:
 		move.b	d3,obAngle(a0)
-		bsr.w	Sonic_ResetOnFloor
+		jsr	(Sonic_ResetOnFloor).l
 		move.w	obVelY(a0),obInertia(a0)
 		tst.b	d3
 		bpl.s	locret_1373C
@@ -164,8 +200,8 @@ locret_1373C:
 		rts	
 ; ===========================================================================
 
-loc_1373E:
-		bsr.w	sub_14EB4
+Sonic_HitRightWall:
+		jsr	sub_14EB4
 		tst.w	d1
 		bpl.s	loc_13758
 		add.w	d1,obX(a0)
@@ -175,7 +211,7 @@ loc_1373E:
 ; ===========================================================================
 
 loc_13758:
-		bsr.w	Sonic_DontRunOnWalls
+		jsr	Sonic_DontRunOnWalls
 		tst.w	d1
 		bpl.s	loc_13772
 		sub.w	d1,obY(a0)
@@ -190,13 +226,21 @@ locret_13770:
 loc_13772:
 		tst.w	obVelY(a0)
 		bmi.s	locret_1379E
-		bsr.w	Sonic_HitFloor
+		jsr	Sonic_HitFloor
 		tst.w	d1
 		bpl.s	locret_1379E
 		add.w	d1,obY(a0)
 		move.b	d3,obAngle(a0)
-		bsr.w	Sonic_ResetOnFloor
-		move.b	#id_Walk,obAnim(a0)
+		jsr	(Sonic_ResetOnFloor).l
+		cmpi.b	#id_Amy,(v_character).w
+		bne.s	@cont
+		tst.b	obDoubleJump_property(a0)
+		beq.s	@part4
+		move.b	#$29,obAnim(a0)
+		bra.s	@cont
+	@part4:
+		move.b	#0,obAnim(a0)
+	@cont:
 		move.w	#0,obVelY(a0)
 		move.w	obVelX(a0),obInertia(a0)
 

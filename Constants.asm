@@ -2,6 +2,279 @@
 ; Constants
 ; ---------------------------------------------------------------------------
 
+Z80_Space =	$80C			; The amount of space reserved for Z80 driver. The compressor tool may ask you to increase the size...
+
+; VDP addressses
+vdp_data_port:		equ $C00000
+vdp_control_port:	equ $C00004
+vdp_counter:		equ $C00008
+
+psg_input:		equ $C00011
+
+; Z80 addresses
+z80_ram:		equ $A00000	; start of Z80 RAM
+z80_ram_end:		equ $A02000	; end of non-reserved Z80 RAM
+z80_version:		equ $A10001
+z80_port_1_data:	equ $A10002
+z80_port_1_control:	equ $A10008
+z80_port_2_control:	equ $A1000A
+z80_expansion_control:	equ $A1000C
+z80_bus_request:	equ $A11100
+z80_reset:		equ $A11200
+ym2612_a0:		equ $A04000
+ym2612_d0:		equ $A04001
+ym2612_a1:		equ $A04002
+ym2612_d1:		equ $A04003
+
+security_addr:		equ $A14000
+
+; VRAM data
+vram_fg:	equ $C000	; foreground namespace
+vram_bg:	equ $E000	; background namespace
+vram_sonic:	equ $F000	; Sonic graphics
+vram_sprites:	equ $F800	; sprite table
+vram_hscroll:	equ $FC00	; horizontal scroll table
+
+; Game modes
+id_Sega:	equ ptr_GM_Sega-GameModeArray	; $00
+id_Title:	equ ptr_GM_Title-GameModeArray	; $04
+id_Demo:	equ ptr_GM_Demo-GameModeArray	; $08
+id_Level:	equ ptr_GM_Level-GameModeArray	; $0C
+id_Special:	equ ptr_GM_Special-GameModeArray; $10
+id_Continue:equ ptr_GM_Cont-GameModeArray	; $14
+id_Ending:	equ ptr_GM_Ending-GameModeArray	; $18
+id_Credits:	equ ptr_GM_Credits-GameModeArray; $1C
+id_LevelSelect: equ ptr_GM_LevelSelect-GameModeArray
+
+; Levels
+id_BGZ:		equ 0
+id_LZ:		equ 1
+id_MZ:		equ 2
+id_SLZ:		equ 3
+id_SYZ:		equ 4
+id_SBZ:		equ 5
+id_MHZ:     equ 6
+id_TTZ:		equ 7
+id_EndZ:	equ 8
+id_SS:		equ 9
+
+; Colours
+cBlack:		equ $000		; colour black
+cWhite:		equ $EEE		; colour white
+cBlue:		equ $E00		; colour blue
+cGreen:		equ $0E0		; colour green
+cRed:		equ $00E		; colour red
+cYellow:	equ cGreen+cRed		; colour yellow
+cAqua:		equ cGreen+cBlue	; colour aqua
+cMagenta:	equ cBlue+cRed		; colour magenta
+
+; Joypad input
+; NOTE: if you're super into S2 hacking, "bitX" is the same as "button_X", while "btnX" is the same as "button_X_mask".
+btnStart:	equ %10000000 ; Start button	($80)
+btnA:		equ %01000000 ; A	       ($40)
+btnC:		equ %00100000 ; C	       ($20)
+btnB:		equ %00010000 ; B	       ($10)
+btnR:		equ %00001000 ; Right	   ($08)
+btnL:		equ %00000100 ; Left	    ($04)
+btnDn:		equ %00000010 ; Down	    ($02)
+btnUp:		equ %00000001 ; Up	      ($01)
+btnDir:		equ %00001111 ; Any direction   ($0F)
+btnABC:		equ %01110000 ; A, B or C       ($70)
+btnBC:		equ %00110000 ; B or C	  ($30)
+btnAB:      equ %01010000 ; A or B	  ($50)
+btnAC:      equ %01100000 ; A or C	  ($50)
+bitStart:	equ 7
+bitA:		equ 6
+bitC:		equ 5
+bitB:		equ 4
+bitR:		equ 3
+bitL:		equ 2
+bitDn:		equ 1
+bitUp:		equ 0
+
+;-------------------------------------------------------------------------------
+; ssts that get used all the time    but not always
+;-------------------------------------------------------------------------------
+; Object variables
+obID:		equ 0	; The object's ID. (Hopefully not numeric... that'd cause problems later.)
+obRender:	equ 1	; bitfield for x/y flip, display mode
+obGfx:		equ 2	; palette line & VRAM setting (2 bytes)
+obMap:		equ 4	; mappings address (4 bytes)
+obX:		equ 8	; x-axis position (2-4 bytes)
+obChild_dx:	equ $A
+obChild_dy:	equ $B
+obY:		equ $C	; y-axis position (2-4 bytes)
+obSubY:		equ $E	; Lower word of the y-axis position
+obVelX:		equ $10	; x-axis velocity (2 bytes)
+obVelY:		equ $12	; y-axis velocity (2 bytes)
+obRespawnNo:	equ $14	; respawn list index number (2 bytes)
+obHeight:	equ $16	; height/2
+obWidth:	equ $17	; width/2
+obPriority:	equ $18	; sprite stack priority -- 0 is front
+obFrame:	equ $1A	; current frame displayed
+obAniFrame:	equ $1B	; current frame in animation script
+obAnim:		equ $1C	; current animation
+obNextAni:	equ $1D	; next animation
+obTimeFrame:	equ $1E	; time to next frame
+obDelayAni:	equ $1F	; time to delay animation
+obColType:	equ $20	; collision response type
+obInertia:	equ $20	; potential speed (2 bytes)
+obColProp:	equ $21	; collision extra property
+obStatus:	equ $22	; orientation or mode
+obActWid:	equ $23	; action width
+obRoutine:	equ $24	; routine number
+ob2ndRout:	equ $25	; secondary routine number
+obAngle:	equ $26	; angle
+obSubtype:	equ $28	; object subtype
+obFinalEasingPos: equ $2A
+
+ChildCollsionFlags = $29
+;---------------------------------------------------------------------------
+;   ssts only used in sonic objects
+;---------------------------------------------------------------------------
+; It seems everything between $29 and $3D are free(?) for regular use in objects.
+
+
+obDoubleJump:	equ $2E	; Double jump flag.
+obDoubleJump_property:	equ $2F ; Double jump property, used for timers and counters mostly, like in the drop dash or Tails' flight
+obParentNextAni:	equ $30
+
+; Object variables used by Sonic
+flashtime:	equ $30	; time between flashes after getting hit
+invtime:	equ $31	; time left for invincibility
+shoetime:	equ $32	; time left for speed shoes
+obInteract:     equ $34 ; 2 bytes
+
+obNextTilt:	equ $36
+obTilt:		equ $37
+obStickToConvex: equ $38
+obSpindash: equ $39
+obSpindashCounter:	equ $3A
+obJumping:	equ	$3C
+          ;	equ $3D  unused
+obPinball:	equ obSpindash
+;------------------------------------------------------------------------------
+;  ssts for child objects that dont get used in sonic and tails vars
+;------------------------------------------------------------------------------
+obParent:	equ $3A	; word ; the original
+obParent3:	equ $3C ; word ; what the fuck
+obParent2:	equ $3E	; word ; Why the S3K disassembly calls the last one parent2 is beyond me.
+obPointer:	equ $30	; ; 4 bytes for saved stuff
+; Object variables (Sonic 2 disassembly nomenclature)
+;----------------------------------------------------------------
+;  ssts that are busy with things that they cannot be used in a custom way
+; tho x and y vel can be used in a custom way if you are not using SpeeToPos or object fall
+; idk about inertia  and x_sub build sprites doesnt use it anymore but you can use it in a custom way ig
+;-------------------------------------------------------------
+id:		equ obID
+render_flags:	equ obRender	; bit feild that tells the game what form of sprite building for an object (4 is normal,2 is world cordnate ,6 is subsprites and multy draw)
+art_tile:	equ obGfx	; palette line & VRAM setting (2 bytes)
+mappings:	equ obMap	; mappings address (4 bytes)
+x_pos:		equ obX	; x-axis position (2-4 bytes)
+x_sub:      equ obChild_dx
+y_sub:		equ obChild_dy
+y_pos:		equ obY	; y-axis position (2-4 bytes)
+x_vel:		equ obVelX	; x-axis velocity (2 bytes)
+y_vel:		equ obVelY	; y-axis velocity (2 bytes)
+inertia:	equ obInertia
+y_radius:	equ obHeight	; height/2
+x_radius:	equ obWidth	; width/2
+priority:	equ obPriority	; sprite stack priority -- 0 is front
+width_pixels:	equ obActWid	; action width
+;----------------------------------------------------------------------------
+; SSts that can be used however on whatever when you know what you are doing in the right time
+; example angle is a byte but can be used as a word in EggManRotatingThings
+;-----------------------------------------------------------------------------
+mapping_frame:	equ obFrame	; current frame displayed ; pretty sure from here and byte 1d is unused if no  animation
+anim_frame:	equ obAniFrame	; current frame in animation script ; if an object doesnt animate at all 1b,1c,1d ,1e are unused
+anim:		equ obAnim	; current animation
+next_anim:	equ obNextAni	; next animation
+anim_frame_duration: equ obTimeFrame ; time to next frame
+collision_flags: equ obColType ; collision response type  i dont think you can customize these
+collision_property: equ obColProp ; collision extra property
+status:		equ obStatus	; orientation or mode
+respawn_index:	equ obRespawnNo	; respawn list index number ; if the object doesnt remember state this is unused
+routine:	equ obRoutine	; routine number
+routine_secondary: equ ob2ndRout ; secondary routine number   ; if an object doesnt use 2 routine bytes this is unused
+angle:		equ obAngle	; angle
+subtype:	equ obSubtype	; object subtype  ; if an object doesnt use subtypes in level layout or code this is unsed
+WaitObjectVar:   Equ $2E
+Pointer:   equ  obPointer ; making up for sonic 1 not having object pointers its used randomly 4 bytes
+SavedPointer:    equ $34
+Pointer2:  equ  $3C ; used by 1 routine with tulipon ; and gamemodes im making
+parent:	equ obParent	; word ; the original
+parent3:	equ obParent3 ; word ; what the fuck
+parent2:	equ obParent2	; word ; Why the S3K disassembly calls the last one parent2 is beyond me.
+;-----------------------------------------------------------------------------------------
+; ssts that are mostly used by players
+;-----------------------------------------------------------------------------------------
+double_jump_flag:	equ obDoubleJump
+double_jump_property:	equ obDoubleJump_property
+TailsTails_parent_next_anim: equ obParentNextAni
+next_tilt:  equ obNextTilt
+tilt:       equ obTilt
+stick_to_convex: equ obStickToConvex
+spindash_flag: equ obSpindash
+pinball_mode: equ obPinball
+spindash_counter: equ obSpindashCounter
+jumping =	obJumping
+interact:	equ obInteract
+move_lock:	equ $3E
+
+; various child sprite-related things
+mainspr_mapframe    = $B
+mainspr_width	= $E
+mainspr_childsprites     = $F    ; amount of child sprites
+mainspr_height	= $14
+sub2_x_pos	= $10    ;x_vel
+sub2_y_pos	= $12    ;y_vel
+sub2_mapframe	= $15
+sub3_x_pos	= $16    ;y_radius
+sub3_y_pos	= $18    ;priority
+sub3_mapframe	= $1B    ;anim_frame
+sub4_x_pos	= $1C    ;anim
+sub4_y_pos	= $1E    ;anim_frame_duration
+sub4_mapframe	= $21    ;collision_property
+sub5_x_pos	= $22    ;status
+sub5_y_pos	= $24    ;routine
+sub5_mapframe	= $27
+sub6_x_pos	= $28    ;subtype
+sub6_y_pos	= $2A
+sub6_mapframe	= $2D
+sub7_x_pos	= $2E
+sub7_y_pos	= $30
+sub7_mapframe	= $33
+sub8_x_pos	= $34
+sub8_y_pos	= $36
+sub8_mapframe	= $39
+sub9_x_pos	= $3A
+sub9_y_pos	= $3C
+sub9_mapframe	= $3F
+next_subspr       = $6
+
+; Animation flags
+afEnd:		equ $FF	; return to beginning of animation
+afBack:		equ $FE	; go back (specified number) bytes
+afChange:	equ $FD	; run specified animation
+afRoutine:	equ $FC	; increment routine counter
+afReset:	equ $FB	; reset animation and 2nd object routine counter
+af2ndRoutine:	equ $FA	; increment 2nd routine counter
+
+; Character IDs.
+	rsreset
+id_Sonic:	    rs.b    1
+id_Tails:	    rs.b    1
+id_Knuckles:	rs.b    1
+id_Ray:		    rs.b    1
+id_Metal:	    rs.b    1
+id_Mighty:	    rs.b    1
+id_Amy:	    	rs.b    1
+id_Legacy:	    rs.b    1
+
+id_Mighity 	= 	id_Mighty; ---------------------------------------------------------------------------
+; Constants
+; ---------------------------------------------------------------------------
+
 Size_of_SegaPCM:		equ $6978
 
 ; VDP addressses
@@ -72,14 +345,7 @@ vram_sprites:	equ $F800	; sprite table
 vram_hscroll:	equ $FC00	; horizontal scroll table
 
 ; Game modes
-id_Sega:	equ ptr_GM_Sega-GameModeArray	; $00
-id_Title:	equ ptr_GM_Title-GameModeArray	; $04
-id_Demo:	equ ptr_GM_Demo-GameModeArray	; $08
-id_Level:	equ ptr_GM_Level-GameModeArray	; $0C
-id_Special:	equ ptr_GM_Special-GameModeArray; $10
-id_Continue:	equ ptr_GM_Cont-GameModeArray	; $14
-id_Ending:	equ ptr_GM_Ending-GameModeArray	; $18
-id_Credits:	equ ptr_GM_Credits-GameModeArray; $1C
+
 
 ; Levels
 id_GHZ:		equ 0
@@ -88,7 +354,7 @@ id_MZ:		equ 2
 id_SLZ:		equ 3
 id_SZ:		equ 4
 id_CWZ:		equ 5
-id_EndZ:	equ 6
+;id_EndZ:	equ 6
 id_IMZ:		equ 7
 id_CSZ:		equ 8
 
@@ -131,11 +397,11 @@ obScreenY:	equ $A	; y-axis position for screen-fixed items (2 bytes)
 obY:		equ $C	; y-axis position (2-4 bytes)
 obVelX:		equ $10	; x-axis velocity (2 bytes)
 obVelY:		equ $12	; y-axis velocity (2 bytes)
-obInertia:	equ $14	; potential speed (2 bytes)
+;obInertia:	equ $14	; potential speed (2 bytes)
 obHeight:	equ $16	; height/2
 obWidth:	equ $17	; width/2
 obPriority:	equ $18	; sprite stack priority -- 0 is front
-obActWid:	equ $19	; action width
+;obActWid:	equ $19	; action width
 obFrame:	equ $1A	; current frame displayed
 obAniFrame:	equ $1B	; current frame in animation script
 obAnim:		equ $1C	; current animation
@@ -145,7 +411,7 @@ obDelayAni:	equ $1F	; time to delay animation
 obColType:	equ $20	; collision response type
 obColProp:	equ $21	; collision extra property
 obStatus:	equ $22	; orientation or mode
-obRespawnNo:	equ $23	; respawn list index number
+;obRespawnNo:	equ $23	; respawn list index number
 obRoutine:	equ $24	; routine number
 ob2ndRout:	equ $25	; secondary routine number
 obAngle:	equ $26	; angle
@@ -154,8 +420,8 @@ obSolid:	equ ob2ndRout ; solid status flag
 
 ; Object variables used by Sonic
 flashtime:	equ $30	; time between flashes after getting hit
-invtime:	equ $32	; time left for invincibility
-shoetime:	equ $34	; time left for speed shoes
+;invtime:	equ $32	; time left for invincibility
+;shoetime:	equ $34	; time left for speed shoes
 
 ; Object variables (Sonic 2 disassembly nomenclature)
 render_flags:	equ 1	; bitfield for x/y flip, display mode
@@ -168,23 +434,23 @@ y_vel:		equ $12	; y-axis velocity (2 bytes)
 y_radius:	equ $16	; height/2
 x_radius:	equ $17	; width/2
 priority:	equ $18	; sprite stack priority -- 0 is front
-width_pixels:	equ $19	; action width
+;width_pixels:	equ $19	; action width
 mapping_frame:	equ $1A	; current frame displayed
 anim_frame:	equ $1B	; current frame in animation script
 anim:		equ $1C	; current animation
 next_anim:	equ $1D	; next animation
 anim_frame_duration: equ $1E ; time to next frame
 collision_flags: equ $20 ; collision response type
-collision_property: equ $21 ; collision extra property
+;collision_property: equ $21 ; collision extra property
 status:		equ $22	; orientation or mode
-respawn_index:	equ $23	; respawn list index number
+;respawn_index:	equ $23	; respawn list index number
 routine:	equ $24	; routine number
 routine_secondary: equ $25 ; secondary routine number
 angle:		equ $26	; angle
 subtype:	equ $28	; object subtype
 
 ; Animation flags
-afEnd:		equ $FF	; return to beginning of animation
+;afEnd:		equ $FF	; return to beginning of animation
 afBack:		equ $FE	; go back (specified number) bytes
 afChange:	equ $FD	; run specified animation
 afRoutine:	equ $FC	; increment routine counter

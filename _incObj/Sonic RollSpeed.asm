@@ -8,13 +8,12 @@
 Sonic_RollSpeed:
 		move.w	(v_sonspeedmax).w,d6
 		asl.w	#1,d6
-		move.w	(v_sonspeedacc).w,d5
-		asr.w	#1,d5
-		move.w	(v_sonspeeddec).w,d4
-		asr.w	#2,d4
+		moveq	#6,d5	; natural roll deceleration = 1/2 normal acceleration
+		move.w	(v_sonspeeddec).w,d4	; It was either this or outright
+		asr.w	#2,d4	; moving $20 to d4. This seems more versatile.
 		tst.b	(f_jumponly).w
-		bne.w	loc_131CC
-		tst.w	$3E(a0)
+		bne.w	Sonic_Roll_ResetScreen
+		tst.w	move_lock(a0)
 		bne.s	@notright
 		btst	#bitL,(v_jpadhold2).w ; is left being pressed?
 		beq.s	@notleft	; if not, branch
@@ -27,35 +26,55 @@ Sonic_RollSpeed:
 
 	@notright:
 		move.w	obInertia(a0),d0
-		beq.s	loc_131AA
-		bmi.s	loc_1319E
+		beq.s	Sonic_CheckRollStop
+		bmi.s	Sonic_ApplyRollSpeedLeft
 		sub.w	d5,d0
-		bcc.s	loc_13198
+		bcc.s	@cont
 		move.w	#0,d0
-
-loc_13198:
+	@cont:
 		move.w	d0,obInertia(a0)
-		bra.s	loc_131AA
+		bra.s	Sonic_CheckRollStop
 ; ===========================================================================
 
-loc_1319E:
+Sonic_ApplyRollSpeedLeft:
 		add.w	d5,d0
-		bcc.s	loc_131A6
+		bcc.s	@cont
 		move.w	#0,d0
-
-loc_131A6:
+	@cont:
 		move.w	d0,obInertia(a0)
 
-loc_131AA:
+Sonic_CheckRollStop:
 		tst.w	obInertia(a0)	; is Sonic moving?
-		bne.s	loc_131CC	; if yes, branch
+		bne.s	Sonic_Roll_ResetScreen	; if yes, branch
+		tst.b	obPinball(a0)
+		bne.s	Sonic_KeepRolling
 		bclr	#2,obStatus(a0)
-		move.b	#$13,obHeight(a0)
-		move.b	#9,obWidth(a0)
-		move.b	#id_Wait,obAnim(a0) ; use "standing" animation
+		jsr		ResetHeight
 		subq.w	#5,obY(a0)
+		cmpi.b	#id_Tails,(v_character).w
+		bne.s	@tallbois
+		addq.w	#4,obY(a0)
+	@tallbois:
+		bra.s	Sonic_Roll_ResetScreen
+; ---------------------------------------------------------------------------
+; magically gives Sonic* an extra push if he's going to stop rolling where it's not allowed
+; (such	as in an S-curve in BGZ* or a stopper chamber in ??? if we even have them)
 
-loc_131CC:
+Sonic_KeepRolling:
+		move.w	#$400,obInertia(a0)
+		btst	#0,obStatus(a0)
+		beq.s	Sonic_Roll_ResetScreen
+		neg.w	obInertia(a0)
+
+Sonic_Roll_ResetScreen:
+		cmp.w	#$60,(v_lookshift).w
+		beq.s	@setrollspeed
+		bcc.s	@cont
+		addq.w	#4,(v_lookshift).w
+	@cont:
+		subq.w	#2,(v_lookshift).w
+
+	@setrollspeed:
 		move.b	obAngle(a0),d0
 		jsr	(CalcSine).l
 		muls.w	obInertia(a0),d0
@@ -64,17 +83,15 @@ loc_131CC:
 		muls.w	obInertia(a0),d1
 		asr.l	#8,d1
 		cmpi.w	#$1000,d1
-		ble.s	loc_131F0
+		ble.s	@cont2
 		move.w	#$1000,d1
-
-loc_131F0:
+	@cont2:
 		cmpi.w	#-$1000,d1
-		bge.s	loc_131FA
+		bge.s	@cont3
 		move.w	#-$1000,d1
-
-loc_131FA:
+	@cont3:
 		move.w	d1,obVelX(a0)
-		bra.w	loc_1300C
+		jmp		Sonic_CheckWallsOnGround
 ; End of function Sonic_RollSpeed
 
 
@@ -83,23 +100,21 @@ loc_131FA:
 
 Sonic_RollLeft:
 		move.w	obInertia(a0),d0
-		beq.s	loc_1320A
-		bpl.s	loc_13218
-
-loc_1320A:
+		beq.s	@cont
+		bpl.s	Sonic_BrakeRollingRight
+	@cont:
 		bset	#0,obStatus(a0)
 		move.b	#id_Roll,obAnim(a0) ; use "rolling" animation
-		rts	
+		rts
 ; ===========================================================================
 
-loc_13218:
+Sonic_BrakeRollingRight:
 		sub.w	d4,d0
-		bcc.s	loc_13220
-		move.w	#-$80,d0
-
-loc_13220:
+		bcc.s	@cont
+		move.w	#0,d0
+	@cont:
 		move.w	d0,obInertia(a0)
-		rts	
+		rts
 ; End of function Sonic_RollLeft
 
 
@@ -108,18 +123,17 @@ loc_13220:
 
 Sonic_RollRight:
 		move.w	obInertia(a0),d0
-		bmi.s	loc_1323A
+		bmi.s	Sonic_BrakeRollingLeft
 		bclr	#0,obStatus(a0)
 		move.b	#id_Roll,obAnim(a0) ; use "rolling" animation
-		rts	
+		rts
 ; ===========================================================================
 
-loc_1323A:
+Sonic_BrakeRollingLeft:
 		add.w	d4,d0
-		bcc.s	loc_13242
-		move.w	#$80,d0
-
-loc_13242:
+		bcc.s	@cont
+		move.w	#0,d0
+	@cont:
 		move.w	d0,obInertia(a0)
-		rts	
+		rts
 ; End of function Sonic_RollRight

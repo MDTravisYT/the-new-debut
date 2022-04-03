@@ -4,19 +4,26 @@
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
+
 Sonic_AnglePos:
+		move.l	(v_colladdr1).w,(v_collindex).w		; MJ: load first collision data location
+		cmpi.b	#$C,(v_top_solid_bit).w			; MJ: is second collision set to be used?
+		beq.s	@first					; MJ: if not, branch
+		move.l	(v_colladdr2).w,(v_collindex).w		; MJ: load second collision data location
+@first:
+		move.b	(v_top_solid_bit).w,d5			; MJ: load L/R/B soldity bit
 		btst	#3,obStatus(a0)
 		beq.s	loc_14602
 		moveq	#0,d0
-		move.b	d0,($FFFFF768).w
-		move.b	d0,($FFFFF76A).w
+		move.b	d0,(v_anglebuffer).w
+		move.b	d0,(v_anglebuffer+2).w
 		rts	
 ; ===========================================================================
 
 loc_14602:
 		moveq	#3,d0
-		move.b	d0,($FFFFF768).w
-		move.b	d0,($FFFFF76A).w
+		move.b	d0,(v_anglebuffer).w
+		move.b	d0,(v_anglebuffer+2).w
 		move.b	obAngle(a0),d0
 		addi.b	#$20,d0
 		bpl.s	loc_14624
@@ -54,11 +61,10 @@ loc_14630:
 		move.b	obWidth(a0),d0
 		ext.w	d0
 		add.w	d0,d3
-		lea	($FFFFF768).w,a4
+		lea	(v_anglebuffer).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$D,d5
-		bsr.w	FindFloor
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -70,11 +76,10 @@ loc_14630:
 		ext.w	d0
 		neg.w	d0
 		add.w	d0,d3
-		lea	($FFFFF76A).w,a4
+		lea	(v_anglebuffer+2).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$D,d5
-		bsr.w	FindFloor
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	(sp)+,d0
 		bsr.w	Sonic_Angle
 		tst.w	d1
@@ -89,7 +94,16 @@ locret_146BE:
 ; ===========================================================================
 
 loc_146C0:
-		cmpi.w	#$E,d1
+		move.b	obVelX(a0),d0
+		bpl.s	@next1
+		neg.b	d0
+	@next1:
+		addq.b	#4,d0
+		cmpi.b	#$E,d0
+		bcs.s	@next2
+		move.b	#$E,d0
+	@next2:
+		cmp.b	d0,d1
 		bgt.s	loc_146CC
 
 loc_146C6:
@@ -161,15 +175,25 @@ locret_1470A:
 
 
 Sonic_Angle:
-		move.b	($FFFFF76A).w,d2
+		move.b	(v_anglebuffer+2).w,d2
 		cmp.w	d0,d1
 		ble.s	loc_1475E
-		move.b	($FFFFF768).w,d2
+		move.b	(v_anglebuffer).w,d2
 		move.w	d0,d1
 
 loc_1475E:
 		btst	#0,d2
 		bne.s	loc_1476A
+		tst.b	$38(a0)
+		bne.s	@onwheel
+		move.b	d2,d0
+		sub.b	obAngle(a0),d0
+		bpl.s	@next
+		neg.b	d0
+	@next:
+		cmpi.b	#$20,d0
+		bcc.s	loc_1476A
+	@onwheel:		
 		move.b	d2,obAngle(a0)
 		rts	
 ; ===========================================================================
@@ -200,11 +224,10 @@ Sonic_WalkVertR:
 		move.b	obHeight(a0),d0
 		ext.w	d0
 		add.w	d0,d3
-		lea	($FFFFF768).w,a4
+		lea	(v_anglebuffer).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$D,d5
-		bsr.w	FindWall
+		bsr.w	FindWall	; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -215,11 +238,10 @@ Sonic_WalkVertR:
 		move.b	obHeight(a0),d0
 		ext.w	d0
 		add.w	d0,d3
-		lea	($FFFFF76A).w,a4
+		lea	(v_anglebuffer+2).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$D,d5
-		bsr.w	FindWall
+		bsr.w	FindWall	; MJ: check solidity
 		move.w	(sp)+,d0
 		bsr.w	Sonic_Angle
 		tst.w	d1
@@ -234,7 +256,16 @@ locret_147F0:
 ; ===========================================================================
 
 loc_147F2:
-		cmpi.w	#$E,d1
+		move.b	obVelY(a0),d0
+		bpl.s	@next1
+		neg.b	d0
+	@next1:
+		addq.b	#4,d0
+		cmpi.b	#$E,d0
+		bcs.s	@next2
+		move.b	#$E,d0
+	@next2:
+		cmp.b	d0,d1
 		bgt.s	loc_147FE
 
 loc_147F8:
@@ -269,11 +300,10 @@ Sonic_WalkCeiling:
 		move.b	obWidth(a0),d0
 		ext.w	d0
 		add.w	d0,d3
-		lea	($FFFFF768).w,a4
+		lea	(v_anglebuffer).w,a4
 		movea.w	#-$10,a3
-		move.w	#$1000,d6
-		moveq	#$D,d5
-		bsr.w	FindFloor
+		move.w	#$800,d6	; MJ: $1000/2
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -285,11 +315,10 @@ Sonic_WalkCeiling:
 		move.b	obWidth(a0),d0
 		ext.w	d0
 		sub.w	d0,d3
-		lea	($FFFFF76A).w,a4
+		lea	(v_anglebuffer+2).w,a4
 		movea.w	#-$10,a3
-		move.w	#$1000,d6
-		moveq	#$D,d5
-		bsr.w	FindFloor
+		move.w	#$800,d6	; MJ: $1000/2
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	(sp)+,d0
 		bsr.w	Sonic_Angle
 		tst.w	d1
@@ -304,7 +333,16 @@ locret_14892:
 ; ===========================================================================
 
 loc_14894:
-		cmpi.w	#$E,d1
+		move.b	obVelX(a0),d0
+		bpl.s	@next1
+		neg.b	d0
+	@next1:	
+		addq.b	#4,d0
+		cmpi.b	#$E,d0
+		bcs.s	@next2
+		move.b	#$E,d0
+	@next2:
+		cmp.b	d0,d1
 		bgt.s	loc_148A0
 
 loc_1489A:
@@ -329,21 +367,20 @@ loc_148A0:
 
 
 Sonic_WalkVertL:
-		move.w	obY(a0),d2
-		move.w	obX(a0),d3
-		moveq	#0,d0
-		move.b	obWidth(a0),d0
-		ext.w	d0
-		sub.w	d0,d2
-		move.b	obHeight(a0),d0
-		ext.w	d0
-		sub.w	d0,d3
+		move.w	obY(a0),d2		; MJ: Load Y position
+		move.w	obX(a0),d3		; MJ: Load X position
+		moveq	#0,d0			; MJ: clear d0
+		move.b	obWidth(a0),d0		; MJ: load height
+		ext.w	d0			; MJ: set left byte pos or neg
+		sub.w	d0,d2			; MJ: subtract from Y position
+		move.b	obHeight(a0),d0		; MJ: load width
+		ext.w	d0			; MJ: set left byte pos or neg
+		sub.w	d0,d3			; MJ: subtract from X position
 		eori.w	#$F,d3
-		lea	($FFFFF768).w,a4
+		lea	(v_anglebuffer).w,a4	; MJ: load address of the angle value set
 		movea.w	#-$10,a3
-		move.w	#$800,d6
-		moveq	#$D,d5
-		bsr.w	FindWall
+		move.w	#$400,d6		; MJ: $800/2
+		bsr.w	FindWall		; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -355,11 +392,10 @@ Sonic_WalkVertL:
 		ext.w	d0
 		sub.w	d0,d3
 		eori.w	#$F,d3
-		lea	($FFFFF76A).w,a4
+		lea	(v_anglebuffer+2).w,a4
 		movea.w	#-$10,a3
-		move.w	#$800,d6
-		moveq	#$D,d5
-		bsr.w	FindWall
+		move.w	#$400,d6	; MJ: $800/2
+		bsr.w	FindWall	; MJ: check solidity
 		move.w	(sp)+,d0
 		bsr.w	Sonic_Angle
 		tst.w	d1
@@ -374,7 +410,16 @@ locret_14934:
 ; ===========================================================================
 
 loc_14936:
-		cmpi.w	#$E,d1
+		move.b	obVelY(a0),d0
+		bpl.s	@next1
+		neg.b	d0
+	@next1:
+		addq.b	#4,d0
+		cmpi.b	#$E,d0
+		bcs.s	@next2
+		move.b	#$E,d0
+	@next2:
+		cmp.b	d0,d1
 		bgt.s	loc_14942
 
 loc_1493C:

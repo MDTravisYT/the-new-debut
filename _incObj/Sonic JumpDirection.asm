@@ -6,66 +6,71 @@
 
 
 Sonic_JumpDirection:
+		btst	#7,obStatus(a0)
+		bne.w	locret_132D2
 		move.w	(v_sonspeedmax).w,d6
 		move.w	(v_sonspeedacc).w,d5
 		asl.w	#1,d5
-		btst	#4,obStatus(a0)
-		bne.s	Obj01_ResetScr2
 		move.w	obVelX(a0),d0
 		btst	#bitL,(v_jpadhold2).w ; is left being pressed?
-		beq.s	loc_13278	; if not, branch
+		beq.s	@cont	; if not, branch
 		bset	#0,obStatus(a0)
 		sub.w	d5,d0
 		move.w	d6,d1
 		neg.w	d1
 		cmp.w	d1,d0
-		bgt.s	loc_13278
+		bgt.s	@cont
+		add.w	d5,d0		; Speed Cap
+		cmp.w	d1,d0		; Speed Cap
+		ble.s	@cont	; Speed Cap
 		move.w	d1,d0
 
-loc_13278:
+	@cont:
 		btst	#bitR,(v_jpadhold2).w ; is right being pressed?
-		beq.s	Obj01_JumpMove	; if not, branch
+		beq.s	Sonic_JumpMove	; if not, branch
 		bclr	#0,obStatus(a0)
 		add.w	d5,d0
 		cmp.w	d6,d0
-		blt.s	Obj01_JumpMove
+		blt.s	Sonic_JumpMove
+		sub.w	d5,d0		; Speed Cap
+		cmp.w	d6,d0		; Speed Cap
+		bge.s	Sonic_JumpMove	; Speed Cap
 		move.w	d6,d0
 
-Obj01_JumpMove:
+Sonic_JumpMove:
 		move.w	d0,obVelX(a0)	; change Sonic's horizontal speed
 
-Obj01_ResetScr2:
+Sonic_Jump_ResetScreen:
 		cmpi.w	#$60,(v_lookshift).w ; is the screen in its default position?
-		beq.s	loc_132A4	; if yes, branch
-		bcc.s	loc_132A0
+		beq.s	Sonic_JumpPeakDecelerate	; if yes, branch
+		bcc.s	@cont
 		addq.w	#4,(v_lookshift).w
-
-loc_132A0:
+	@cont:
 		subq.w	#2,(v_lookshift).w
 
-loc_132A4:
+Sonic_JumpPeakDecelerate:
 		cmpi.w	#-$400,obVelY(a0) ; is Sonic moving faster than -$400 upwards?
 		bcs.s	locret_132D2	; if yes, branch
 		move.w	obVelX(a0),d0
 		move.w	d0,d1
 		asr.w	#5,d1
 		beq.s	locret_132D2
-		bmi.s	loc_132C6
+		bmi.s	Sonic_JumpPeakDecelerateLeft
 		sub.w	d1,d0
-		bcc.s	loc_132C0
+		bcc.s	@cont
 		move.w	#0,d0
 
-loc_132C0:
+	@cont:
 		move.w	d0,obVelX(a0)
 		rts	
 ; ===========================================================================
 
-loc_132C6:
+Sonic_JumpPeakDecelerateLeft:
 		sub.w	d1,d0
-		bcs.s	loc_132CE
+		bcs.s	@cont
 		move.w	#0,d0
 
-loc_132CE:
+	@cont:
 		move.w	d0,obVelX(a0)
 
 locret_132D2:

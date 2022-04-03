@@ -11,7 +11,7 @@ Sonic_JumpAngle:
 		bpl.s	loc_13598	; if higher than 0, branch
 
 		addq.b	#2,d0		; increase angle
-		bcc.s	loc_13596
+		bcc.s	loc_1359E
 		moveq	#0,d0
 
 loc_13596:
