@@ -12,13 +12,21 @@ Sonic_Jump:
 		moveq	#0,d0
 		move.b	obAngle(a0),d0
 		addi.b	#$80,d0
-		bsr.w	sub_14D48
+		jsr		sub_14D48
 		cmpi.w	#6,d1
 		blt.w	locret_1348E
-		move.w	#$638,d2	; jump height
-		btst	#6,obStatus(a0)
-		beq.s	loc_1341C
-		move.w	#$338,d2	; jump height (underwater)
+		move.w	#$680,d2
+		tst.b	(v_super).w
+		beq.s	@notsuper
+		move.w	#$800,d2	; set higher jump speed if super
+	@notsuper:
+		btst	#6,obStatus(a0)	; Test if underwater
+		beq.s	@notunderwater
+		move.w	#$380,d2	; set lower jump speed if under
+	@notunderwater:
+		cmpi.b	#id_Knuckles,(v_character).w
+		bne.s	loc_1341C
+		sub.w	#$80,d2
 
 loc_1341C:
 		moveq	#0,d0
@@ -36,30 +44,31 @@ loc_1341C:
 		addq.l	#4,sp
 		move.b	#1,$3C(a0)
 		clr.b	$38(a0)
-		sfx	sfx_Jump,0,0,0	; play jumping sound
-		move.b	#$13,obHeight(a0)
-		move.b	#9,obWidth(a0)
+		clr.w	$3E(a0)	;clear horiz control lock
+		cmpi.b  #id_Metal,(v_character).w
+		bne.s   @normalsnd
+		sfx	sfx_Jump,0,0,0
+		bra.s   @jscnt
+    @normalsnd:
+		sfx	sfx_Jump,0,0,0		; play jumping sound
+    @jscnt:
+		jsr	(ResetHeight).l
 		btst	#2,obStatus(a0)
-		bne.s	loc_13490
+		bne.s	Sonic_RollJump
 		move.b	#$E,obHeight(a0)
-	;	move.b	#7,obWidth(a0)
-		move.b	#id_Jump,obAnim(a0) ; use "jumping" animation
+		move.b	#7,obWidth(a0)
+		move.b	#id_Roll,obAnim(a0) ; use "jumping" animation
 		bset	#2,obStatus(a0)
 		addq.w	#5,obY(a0)
-Result_Check:
-        tst.b   ($FFFFF5C0).w ; Has the victory animation flag been set?
-        beq.s   NormalJump ; If not, branch
-		move.b	#id_Leap2,obAnim(a0) ; use "jumping" animation
-        bra.s   cont ; Continue
-NormalJump:
-		move.b	#id_Jump,obAnim(a0) ; use "jumping" animation
-cont:
-		
+		cmpi.b	#id_Tails,(v_character).w
+		bne.s	locret_1348E
+		subq.w	#4,obY(a0)	; Mimics Tails's thing because he's fucking short and dumb
+
 locret_1348E:
-		rts	
+		rts
 ; ===========================================================================
 
-loc_13490:
-		move.b	#id_Roll,obAnim(a0) ; roll lock stupids!
-		rts	
+Sonic_RollJump:
+		bset	#4,obStatus(a0)
+		rts
 ; End of function Sonic_Jump
