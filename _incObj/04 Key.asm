@@ -85,21 +85,16 @@ CollectKey:
 		addq.b	#1,(v_emeralds).w
 		move.b	obSubtype(a0),(v_emldlist).w
 		sfx		$C9,0,0,0
-		rts
-		move.w	d0,(v_jpadhold2).w ; stop Sonic moving
-		move.b	#1,(f_lockctrl).w ; lock controls
-
-		;addq.b	#1,(v_emeralds).w
-		;move.w	#bgm_Key,d0 ; play extra life music
-
-	;@playsnd:
-		lea 	(v_player),a1
-		clr.b	obInertia(a1)
-		move.w	#-$F00,obVelY(a1)
+	;	rts
+		lea	(v_player).w,a1
 		clr.w	obVelX(a1)
-		;clr.w	obVelY(a1)
-		move.b	#id_Leap2,obAnim(a1)
-		;move.w	#-$F00,obVelY(a1)
+		clr.w	obVelY(a1)
+		clr.w	obInertia(a1)	; stop Sonic
+		move.b	#id_Leap2,obAnim(a1) ; use bubble-collecting animation
+		move.b	#$13,obHeight(a1)
+		move.b	#9,obWidth(a1)
+
+		move.w	#-$F00,obInertia(a1)
 		;move.b	#id_Leap2,obAnim(a1)
 		rts
 		;jmp	(PlaySound_Special).l
