@@ -350,11 +350,11 @@ ptr_GM_Level:	bra.w	GM_Level	; Normal Level ($0C)
 
 ptr_GM_Special:	bra.w	GM_Special	; Special Stage	($10)
 
-ptr_GM_Cont:	bra.w	GM_Continue	; Continue Screen ($14)
+ptr_GM_Cont:	bra.w	GM_Sega	; Continue Screen ($14)
 
-ptr_GM_Ending:	bra.w	GM_Ending	; End of game sequence ($18)
+ptr_GM_Ending:	bra.w	GM_Sega	; End of game sequence ($18)
 
-ptr_GM_Credits:	bra.w	GM_Credits	; Credits ($1C)
+ptr_GM_Credits:	bra.w	GM_Sega	; Credits ($1C)
 
 ptr_GM_OtherSega:	bra.w	GM_RadNexAff		; Sega Screen ($20)
 
@@ -1744,6 +1744,10 @@ WaitForVBla:
 		include	"_incObj\sub CalcSine.asm"
 		include	"_incObj\sub CalcAngle.asm"
 
+; ---------------------------------------------------------------------------
+; Anti-Hack Screen
+; ---------------------------------------------------------------------------
+
 GM_Hack:
     move.b  #$8F,d0             ; set music ID 
     jsr     Playsound_Special.w     ; play ID
@@ -1762,7 +1766,11 @@ GM_Hack:
     move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
     lea     ART_HACK.l,a0           ; load background art
     jsr     NemDec              ; run NemDec to decompress art for display
-    lea Pal_HACK.l,a0        ; load this palette
+	locVRAM	$A000
+	lea	(Nem_ContSonic).l,a0 ; load Sonic patterns
+	bsr.w	NemDec
+	
+    lea Pal_Sonic.l,a0        ; load this palette
     lea ($FFFFFB80).l,a1        ; set as line 2
     move.w  #$F,d0
  
@@ -1774,6 +1782,15 @@ Hack_PalLoop:
     move.w  #147*60,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
  
 Hack_MainLoop:
+	move.b	#$0,(v_objspace+$40).w ; load Sonic object
+	move.b	#$0,(v_objspace+$80).w ; load Sonic object
+	move.b	#$0,(v_objspace+$C0).w ; load Sonic object
+	move.b	#$0,(v_objspace+$100).w ; load Sonic object
+	move.b	#$0,(v_objspace+$140).w ; load Sonic object
+	move.b	#$0,(v_objspace+$80C).w ; load Sonic object
+	move.b	#id_ContSonic,(v_objspace+$1C0).w ; load Sonic object
+    jsr    (ExecuteObjects).l
+    jsr    (BuildSprites).l
     move.b  #2,($FFFFF62A).w        ; set V-blank routine to run
     jsr WaitForVBla          ; wait for V-blank (decreases "Demo_Time_left")
     tst.b   ($FFFFF605).w           ; has player 1 pressed start button?
@@ -1784,6 +1801,10 @@ Hack_MainLoop:
 Hack_GotoTitle:
     move.b  #$04,($FFFFF600).w      ; set the screen mode to Title Screen
     rts                     ; return
+
+; ---------------------------------------------------------------------------
+; Sega Screen
+; ---------------------------------------------------------------------------
 
 GM_Sega:
 		sfx	$E0,0,1,1
@@ -1893,6 +1914,10 @@ word_1A6A:	incbin "palette/Sega.pal"
 		even
 ; ===========================================================================
 
+; ---------------------------------------------------------------------------
+; Splash
+; ---------------------------------------------------------------------------
+
 GM_RadNexAff:
 	sfx	bgm_Stop,0,1,1 ; stop music
     jsr     PaletteFadeOut          ; fade palettes out
@@ -1934,6 +1959,10 @@ Rad_MainLoop:
 Rad_GotoTitle:
     move.b  #$04,($FFFFF600).w      ; set the screen mode to Title Screen
     rts                     ; return
+	
+; ---------------------------------------------------------------------------
+; Simple Credits
+; ---------------------------------------------------------------------------
 	
 GM_SimpleCreds:
     move.b  #$90,d0             ; set music ID 
