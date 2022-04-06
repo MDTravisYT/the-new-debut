@@ -17,7 +17,7 @@ CSon_Index:	dc.w CSon_Main-CSon_Index
 
 CSon_Main:	; Routine 0
 		addq.b	#2,obRoutine(a0)
-		move.w	#$120,obX(a0)
+		move.w	#$A0,obX(a0)
 		move.w	#$C0,obY(a0)
 		move.l	#Map_Sonic,obMap(a0)
 		move.w	#$780,obGfx(a0)
@@ -27,7 +27,7 @@ CSon_Main:	; Routine 0
 		move.w	#$400,obVelY(a0) ; make Sonic fall from above
 
 CSon_ChkLand:	; Routine 2
-		cmpi.w	#$13C,obY(a0)	; has Sonic landed yet?
+		cmpi.w	#$178,obY(a0)	; has Sonic landed yet?
 		bne.s	CSon_ShowFall	; if not, branch
 
 		addq.b	#2,obRoutine(a0)
