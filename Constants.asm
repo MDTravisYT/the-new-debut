@@ -77,9 +77,9 @@ id_Title:	equ ptr_GM_Title-GameModeArray	; $04
 id_Demo:	equ ptr_GM_Demo-GameModeArray	; $08
 id_Level:	equ ptr_GM_Level-GameModeArray	; $0C
 id_Special:	equ ptr_GM_Special-GameModeArray; $10
-id_Continue:	equ ptr_GM_Cont-GameModeArray	; $14
-id_Ending:	equ ptr_GM_Ending-GameModeArray	; $18
-id_Credits:	equ ptr_GM_Credits-GameModeArray; $1C
+id_SplshGM:	equ	ptr_GM_OtherSega-GameModeArray
+id_Credits:	equ	ptr_GM_SimpleCreds-GameModeArray
+id_Hacker:	equ	ptr_GM_Hack-GameModeArray
 
 ; Levels
 id_GHZ:		equ 0

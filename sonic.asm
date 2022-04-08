@@ -350,17 +350,11 @@ ptr_GM_Level:	bra.w	GM_Level	; Normal Level ($0C)
 
 ptr_GM_Special:	bra.w	GM_Special	; Special Stage	($10)
 
-ptr_GM_Cont:	bra.w	GM_Sega	; Continue Screen ($14)
+ptr_GM_OtherSega:	bra.w	GM_RadNexAff		; Sega Screen ($14)
 
-ptr_GM_Ending:	bra.w	GM_Sega	; End of game sequence ($18)
+ptr_GM_SimpleCreds:	bra.w	GM_SimpleCreds		; Credits ($18)
 
-ptr_GM_Credits:	bra.w	GM_Sega	; Credits ($1C)
-
-ptr_GM_OtherSega:	bra.w	GM_RadNexAff		; Sega Screen ($20)
-
-ptr_GM_SimpleCreds:	bra.w	GM_SimpleCreds		; Credits ($24)
-
-ptr_GM_Hack:	bra.w	GM_Hack		; Credits ($28)
+ptr_GM_Hack:	bra.w	GM_Hack		; Credits ($1C)
 
 		rts	
 ; ===========================================================================
@@ -1884,9 +1878,9 @@ Sega_Loop:
 
 Sega_GotoTitle:
 	if IsDemo=0
-		move.b	#$20,(v_gamemode).w
+		move.b	#id_SplshGM,(v_gamemode).w
 	else
-		move.b	#4,(v_gamemode).w
+		move.b	#id_Title,(v_gamemode).w
 	endif
 		rts
 		
@@ -2329,7 +2323,7 @@ LevSel_PlaySnd:
 ; ===========================================================================
 
 LevSel_Ending:
-		move.b	#id_Ending,(v_gamemode).w ; set screen mode to $18 (Ending)
+		move.b	#id_Credits,(v_gamemode).w ; set screen mode to $18 (Ending)
 		move.w	#(00<<8),(v_zone).w ; set level to 0600 (Ending)
 		rts	
 ; ===========================================================================

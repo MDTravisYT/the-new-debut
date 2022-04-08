@@ -65,7 +65,7 @@ Over_Wait:	; Routine 4
 Over_ChgMode:
 		tst.b	(f_timeover).w	; is time over flag set?
 		bne.s	Over_ResetLvl	; if yes, branch
-		move.b	#id_Continue,(v_gamemode).w ; set mode to $14 (continue screen)
+		move.b	#id_Sega,(v_gamemode).w ; set mode to $14 (continue screen)
 		tst.b	(v_continues).w	; do you have any continues?
 		bne.s	Over_Display	; if yes, branch
 		move.b	#id_Sega,(v_gamemode).w ; set mode to 0 (Sega screen)
