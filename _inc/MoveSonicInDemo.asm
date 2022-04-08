@@ -53,7 +53,7 @@ MDemo_On:
 		movea.l	(a1,d0.w),a1	; fetch address for demo data
 		tst.w	(f_demo).w	; is this an ending sequence demo?
 		bpl.s	@notcredits	; if not, branch
-		lea	(DemoEndDataPtr).l,a1
+	;	lea	(DemoEndDataPtr).l,a1
 		move.w	(v_creditsnum).w,d0
 		subq.w	#1,d0
 		lsl.w	#2,d0
@@ -95,15 +95,6 @@ DemoDataPtr:	dc.l Demo_GHZ		; demos run after the title screen
 		dc.l Demo_MZ
 		dc.l Demo_SS
 		dc.l Demo_SS
-
-DemoEndDataPtr:	dc.l Demo_EndGHZ1	; demos run during the credits
-		dc.l Demo_EndMZ
-		dc.l Demo_EndSYZ
-		dc.l Demo_EndLZ
-		dc.l Demo_EndSLZ
-		dc.l Demo_EndSBZ1
-		dc.l Demo_EndSBZ2
-		dc.l Demo_EndGHZ2
 
 		dc.b 0,	$8B, 8,	$37, 0,	$42, 8,	$5C, 0,	$6A, 8,	$5F, 0,	$2F, 8,	$2C
 		dc.b 0,	$21, 8,	3, $28,	$30, 8,	8, 0, $2E, 8, $15, 0, $F, 8, $46
