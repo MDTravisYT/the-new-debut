@@ -1,0 +1,25 @@
+Operating system: Microsoft Windows NT 6.2.9200.0
+Opening INI file "D:\Disassembly\BetaSonic in Sonic 1\debut again\the-new-debut\SonLVL INI Files\SonLVL.ini"...
+Game type is S1.
+Loading Labyrinth Zone Act 1...
+Loading palette file "../palette/Sonic.bin"...
+Source: 0 Destination: 0 Length: 16
+Loading 8x8 tiles from file "../artnem/8x8 - LZ.bin", using compression Nemesis...
+Loading palette file "../palette/Labyrinth Zone.bin"...
+Source: 0 Destination: 16 Length: 48
+Loading palette file "../palette/Labyrinth Zone Underwater.bin"...
+Source: 0 Destination: 0 Length: 64
+System.AggregateException: One or more errors occurred. ---> System.FormatException: Level must contain Mappings file!
+   at SonicRetro.SonLVL.SonPLN.MainForm.LoadLevelLayout() in E:\Programs\SonLVL\SonPLN\MainForm.cs:line 394
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.FastWaitAll(Task[] tasks)
+   at System.Threading.Tasks.Parallel.Invoke(ParallelOptions parallelOptions, Action[] actions)
+   at System.Threading.Tasks.Parallel.Invoke(Action[] actions)
+   at SonicRetro.SonLVL.SonPLN.MainForm.backgroundLevelLoader_DoWork(Object sender, DoWorkEventArgs e) in E:\Programs\SonLVL\SonPLN\MainForm.cs:line 321
+---> (Inner Exception #0) System.FormatException: Level must contain Mappings file!
+   at SonicRetro.SonLVL.SonPLN.MainForm.LoadLevelLayout() in E:\Programs\SonLVL\SonPLN\MainForm.cs:line 394
+   at System.Threading.Tasks.Task.InnerInvoke()
+   at System.Threading.Tasks.Task.Execute()<---
+
