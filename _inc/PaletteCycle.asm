@@ -134,7 +134,26 @@ PCycLZ_Seq:	dc.b 1,	0, 0, 1, 0, 0, 1, 0
 ; ===========================================================================
 
 PCycle_MZ:
-		rts	
+        subq.w    #1,(v_pcyc_time).w       ; Subtract 1 from frame timer
+        bpl.s    .return                  ; If timer is not up, return
+
+        move.w    #10,(v_pcyc_time).w      ; Reset timer
+        move.w    (v_pcyc_num).w,d0        ; Store PalCycle counter in d0
+        addq.w    #1,(v_pcyc_num).w        ; Then add 1 to the original address
+        cmpi.w #5,d0                     ; Are we at the end of the cycle?
+        blt.s  .skip                     ; If not, skip
+
+        clr.w   (v_pcyc_num).w           ; Clear the PalCycle counter
+.skip:
+        mulu.w  #6*2,d0                  ; Set to jump into the next PalCycle frame
+        lea    (Pal_MZCyc).l,a0     ; Load palette data address into a0
+        adda.w    d0,a0                    ; Move to next frame
+        lea    ((v_pal_dry+$64)).w,a1   ; Set address to write in palette RAM at a1
+        move.l    (a0)+,(a1)+              ; Write current PalCycle frame
+        move.l    (a0)+,(a1)+
+        move.l    (a0)+,(a1)+
+.return:
+        rts
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 

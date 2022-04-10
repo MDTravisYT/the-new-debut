@@ -1187,6 +1187,7 @@ QuickPLC:
 
 Pal_TitleCyc:	incbin	"palette\Cycle - Title Screen Water.bin"
 Pal_GHZCyc:	incbin	"palette\Cycle - GHZ.bin"
+Pal_MZCyc:	incbin	"palette\Cycle - MZ.bin"
 Pal_LZCyc1:	incbin	"palette\Cycle - LZ Waterfall.bin"
 Pal_LZCyc2:	incbin	"palette\Cycle - LZ Conveyor Belt.bin"
 Pal_LZCyc3:	incbin	"palette\Cycle - LZ Conveyor Belt Underwater.bin"
