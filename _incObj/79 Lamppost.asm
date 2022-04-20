@@ -140,7 +140,7 @@ Lamp_StoreInfo:
 	;	move.b	(v_lastlamp).w,($FFFFFE31).w
 		move.w	obX(a0),($FFFFFE32).w		; x-position
 		move.w	obY(a0),($FFFFFE34).w		; y-position
-		move.w	(v_rings).w,($FFFFFE36).w 	; rings
+		move.w	(v_coins).w,($FFFFFE36).w 	; rings
 		move.b	(v_lifecount).w,($FFFFFE54).w 	; lives
 		move.l	(v_time).w,($FFFFFE38).w 	; time
 		move.b	(v_dle_routine).w,($FFFFFE3C).w ; routine counter for dynamic level mod
@@ -169,9 +169,9 @@ Lamp_LoadInfo:
 		move.b	($FFFFFE31).w,(v_lastlamp).w
 		move.w	($FFFFFE32).w,(v_player+obX).w
 		move.w	($FFFFFE34).w,(v_player+obY).w
-		move.w	($FFFFFE36).w,(v_rings).w
+		move.w	($FFFFFE36).w,(v_coins).w
 		move.b	($FFFFFE54).w,(v_lifecount).w
-		clr.w	(v_rings).w
+		clr.w	(v_coins).w
 		clr.b	(v_lifecount).w
 		move.l	($FFFFFE38).w,(v_time).w
 		move.b	#59,(v_timecent).w

@@ -22,7 +22,7 @@ CSI_Main:	; Routine 0
 		move.b	#$3C,obActWid(a0)
 		move.w	#$120,obX(a0)
 		move.w	#$C0,obScreenY(a0)
-		move.w	#0,(v_rings).w	; clear rings
+		move.w	#0,(v_coins).w	; clear rings
 
 CSI_Display:	; Routine 2
 		jmp	(DisplaySprite).l

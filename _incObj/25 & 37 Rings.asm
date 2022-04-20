@@ -137,14 +137,14 @@ Ring_Delete:	; Routine 8
 
 
 CollectRing:
-		addq.w	#1,(v_rings).w	; add 1 to rings
-		ori.b	#1,(f_ringcount).w ; update the rings counter
+		addq.w	#1,(v_coins).w	; add 1 to rings
+		ori.b	#1,(f_coincount).w ; update the rings counter
 		move.w	#sfx_Ring,d0	; play ring sound
-		cmpi.w	#50,(v_rings).w ; do you have < 100 rings?
+		cmpi.w	#50,(v_coins).w ; do you have < 100 rings?
 		bcs.s	@playsnd	; if yes, branch
 		bset	#1,(v_lifecount).w ; update lives counter
 		beq.s	@got100
-		cmpi.w	#100,(v_rings).w ; do you have < 200 rings?
+		cmpi.w	#100,(v_coins).w ; do you have < 200 rings?
 		bcs.s	@playsnd	; if yes, branch
 		bset	#2,(v_lifecount).w ; update lives counter
 		bne.s	@playsnd
@@ -180,7 +180,7 @@ RLoss_Index:	dc.w RLoss_Count-RLoss_Index
 RLoss_Count:	; Routine 0
 		movea.l	a0,a1
 		moveq	#0,d5
-		move.w	(v_rings).w,d5	; check number of rings you have
+		move.w	(v_coins).w,d5	; check number of rings you have
 		moveq	#100,d0
 		cmp.w	d0,d5		; do you have 32 or more?
 		bcs.s	@belowmax	; if not, branch
@@ -234,8 +234,8 @@ RLoss_Count:	; Routine 0
 	;	dbf	d5,@loop	; repeat for number of rings (max 31)
 
 @resetcounter:
-		move.w	#0,(v_rings).w	; reset number of rings to zero
-		move.b	#$80,(f_ringcount).w ; update ring counter
+		move.w	#0,(v_coins).w	; reset number of rings to zero
+		move.b	#$80,(f_coincount).w ; update ring counter
 		move.b	#0,(v_lifecount).w
 	;	sfx	sfx_RingLoss,0,0,0	; play ring loss sound
 

@@ -51,7 +51,7 @@ f_1up_playing:		equ $027	; flag indicating 1-up song is playing
 v_tempo_mod:		equ $028	; music - tempo modifier
 v_speeduptempo:		equ $029	; music - tempo modifier with speed shoes
 f_speedup:		equ $02A	; flag indicating whether speed shoes tempo is on ($80) or off ($00)
-v_ring_speaker:		equ $02B	; which speaker the "ring" sound is played in (00 = right; 01 = left)
+v_coin_speaker:		equ $02B	; which speaker the "coin" sound is played in (00 = right; 01 = left)
 f_push_playing:		equ $02C	; if set, prevents further push sounds from playing
 
 v_music_track_ram:	equ $040	; Start of music RAM
@@ -235,8 +235,8 @@ f_lockctrl:	equ $FFFFF7CC	; flag set to lock controls during ending sequence
 f_bigring:	equ $FFFFF7CD	; flag set when Sonic collects the giant ring
 v_itembonus:	equ $FFFFF7D0	; item bonus from broken enemies, blocks etc. (2 bytes)
 v_timebonus:	equ $FFFFF7D2	; time bonus at the end of an act (2 bytes)
-v_ringbonus:	equ $FFFFF7D4	; ring bonus at the end of an act (2 bytes)
-f_endactbonus:	equ $FFFFF7D6	; time/ring bonus update flag at the end of an act
+v_coinbonus:	equ $FFFFF7D4	; coin bonus at the end of an act (2 bytes)
+f_endactbonus:	equ $FFFFF7D6	; time/coin bonus update flag at the end of an act
 v_sonicend:	equ $FFFFF7D7	; routine counter for Sonic in the ending sequence
 v_lz_deform:	equ	$FFFFF7D8	; LZ deformtaion offset, in units of $80 (2 bytes)
 f_switch:	equ $FFFFF7E0	; flags set when Sonic stands on a switch ($10 bytes)
@@ -258,7 +258,7 @@ f_restart:	equ $FFFFFE02	; restart level flag (2 bytes)
 v_framecount:	equ $FFFFFE04	; frame counter (adds 1 every frame) (2 bytes)
 v_framebyte:	equ v_framecount+1; low byte for frame counter
 v_debugitem:	equ $FFFFFE06	; debug item currently selected (NOT the object number of the item)
-v_debuguse:	equ $FFFFFE08	; debug mode use & routine counter (when Sonic is a ring/item) (2 bytes)
+v_debuguse:	equ $FFFFFE08	; debug mode use & routine counter (when Sonic is a coin/item) (2 bytes)
 v_debugxspeed:	equ $FFFFFE0A	; debug mode - horizontal speed
 v_debugyspeed:	equ $FFFFFE0B	; debug mode - vertical speed
 v_vbla_count:	equ $FFFFFE0C	; vertical interrupt counter (adds 1 every VBlank) (4 bytes)
@@ -274,11 +274,11 @@ v_continues:	equ $FFFFFE18	; number of continues
 f_timeover:	equ $FFFFFE1A	; time over flag
 v_lifecount:	equ $FFFFFE1B	; lives counter value (for actual number, see "v_lives")
 f_lifecount:	equ $FFFFFE1C	; lives counter update flag
-f_ringcount:	equ $FFFFFE1D	; ring counter update flag
+f_coincount:	equ $FFFFFE1D	; coin counter update flag
 f_timecount:	equ $FFFFFE1E	; time counter update flag
 f_scorecount:	equ $FFFFFE1F	; score counter update flag
-v_rings:		equ $FFFFFE20	; rings (2 bytes)
-v_ringbyte:	equ v_rings+1	; low byte for rings
+v_coins:		equ $FFFFFE20	; coins (2 bytes)
+v_coinbyte:	equ v_rings+1	; low byte for coins
 v_time:		equ $FFFFFE22	; time (4 bytes)
 v_timemin:	equ $FFFFFE23	; time - minutes
 v_timesec:	equ $FFFFFE24	; time - seconds
@@ -290,7 +290,7 @@ v_shoes:		equ $FFFFFE2E	; speed shoes status (00 = no; 01 = yes)
 v_lastlamp:	equ $FFFFFE30	; number of the last lamppost you hit
 v_lamp_xpos:	equ v_lastlamp+2	; x-axis for Sonic to respawn at lamppost (2 bytes)
 v_lamp_ypos:	equ v_lastlamp+4	; y-axis for Sonic to respawn at lamppost (2 bytes)
-v_lamp_rings:	equ v_lastlamp+6	; rings stored at lamppost (2 bytes)
+v_lamp_coins:	equ v_lastlamp+6	; coins stored at lamppost (2 bytes)
 v_lamp_time:	equ v_lastlamp+8	; time stored at lamppost (2 bytes)
 v_lamp_dle:	equ v_lastlamp+$C	; dynamic level event routine counter at lamppost
 v_lamp_limitbtm:	equ v_lastlamp+$E	; level bottom boundary at lamppost (2 bytes)

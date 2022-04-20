@@ -108,10 +108,10 @@ Got_TimeBonus:	; Routine 6
 		subi.w	#10,(v_timebonus).w ; subtract 10 from time bonus
 
 Got_RingBonus:
-		tst.w	(v_ringbonus).w	; is ring bonus	= zero?
+		tst.w	(v_coinbonus).w	; is ring bonus	= zero?
 		beq.s	Got_ChkBonus	; if yes, branch
 		addi.w	#10,d0		; add 10 to score
-		subi.w	#10,(v_ringbonus).w ; subtract 10 from ring bonus
+		subi.w	#10,(v_coinbonus).w ; subtract 10 from ring bonus
 
 Got_ChkBonus:
 		tst.w	d0		; is there any bonus?

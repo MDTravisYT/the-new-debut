@@ -33,7 +33,7 @@ SSR_Main:
 		movea.l	a0,a1
 		lea	(SSR_Config).l,a2
 		moveq	#3,d1
-		cmpi.w	#50,(v_rings).w	; do you have 50 or more rings?
+		cmpi.w	#50,(v_coins).w	; do you have 50 or more rings?
 		bcs.s	SSR_Loop	; if no, branch
 		addq.w	#1,d1		; if yes, add 1	to d1 (number of sprites)
 
@@ -105,9 +105,9 @@ SSR_Display:
 SSR_RingBonus:	; Routine 6
 		bsr.w	DisplaySprite
 		move.b	#1,(f_endactbonus).w ; set ring bonus update flag
-		tst.w	(v_ringbonus).w	; is ring bonus	= zero?
+		tst.w	(v_coinbonus).w	; is ring bonus	= zero?
 		beq.s	loc_C8C4	; if yes, branch
-		subi.w	#10,(v_ringbonus).w ; subtract 10 from ring bonus
+		subi.w	#10,(v_coinbonus).w ; subtract 10 from ring bonus
 		moveq	#10,d0		; add 10 to score
 		jsr	(AddPoints).l
 		move.b	(v_vbla_byte).w,d0
@@ -120,7 +120,7 @@ loc_C8C4:
 		sfx	sfx_Cash,0,0,0	; play "ker-ching" sound
 		addq.b	#2,obRoutine(a0)
 		move.w	#180,obTimeFrame(a0) ; set time delay to 3 seconds
-		cmpi.w	#50,(v_rings).w	; do you have at least 50 rings?
+		cmpi.w	#50,(v_coins).w	; do you have at least 50 rings?
 		bcs.s	locret_C8EA	; if not, branch
 		move.w	#60,obTimeFrame(a0) ; set time delay to 1 second
 		addq.b	#4,obRoutine(a0) ; goto "SSR_Continue" routine

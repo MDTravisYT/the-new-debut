@@ -7,11 +7,11 @@
 
 ; ===========================================================================
 
-    include "Debugger.asm"
+    include "_inc/Debugger.asm"
 	include	"Constants.asm"
 	include	"Variables.asm"
 	include	"Macros.asm"
-	include "_smps2asm_inc.asm"
+	include "_inc/_smps2asm_inc.asm"
 
 ; ===========================================================================
 
@@ -129,7 +129,7 @@ EndOfHeader:
 ; ===========================================================================
 ; Crash/Freeze the 68000. Unlike Sonic 2, Sonic 1 uses the 68000 for playing music, so it stops too
 
-	include "ErrorHandler.asm"
+	include "_inc/ErrorHandler.asm"
 
 ErrorTrap:
 		nop	
@@ -2213,15 +2213,15 @@ Tit_EnterCheat:
 		move.w	(v_title_ccount).w,d1
 		lsr.w	#1,d1
 		andi.w	#3,d1
-		beq.s	Tit_PlayRing
+		beq.s	Tit_PlaySound
 		tst.b	(v_megadrive).w
-		bpl.s	Tit_PlayRing
+		bpl.s	Tit_PlaySound
 		moveq	#1,d1
 		move.b	d1,1(a0,d1.w)	; cheat depends on how many times C is pressed
 
-	Tit_PlayRing:
+	Tit_PlaySound:
 		move.b	#1,(a0,d1.w)	; activate cheat
-		sfx	sfx_Ring,0,1,1	; play ring sound when code is entered
+		sfx		$AB,0,1,1	; play sound when code is entered
 		bra.s	Tit_CountC
 ; ===========================================================================
 
@@ -2259,7 +2259,7 @@ Tit_ChkLevSel:
 	if IsDemo=0
 		move.b	#1,(f_debugcheat).w ; enable debug mode
 	endc
-		sfx	sfx_Ring,0,1,1	; play ring sound when code is entered
+		sfx	$AB,0,1,1	; play ring sound when code is entered
 		moveq	#palid_LevelSel,d0
 		bsr.w	PalLoad2	; load level select palette
 		lea	(v_hscrolltablebuffer).w,a1
@@ -2346,7 +2346,7 @@ LevSel_Level_SS:
 		clr.w	(v_zone).w	; clear	level
 		move.b	#3,(v_lives).w	; set lives to 3
 		moveq	#0,d0
-		move.w	d0,(v_rings).w	; clear rings
+		move.w	d0,(v_coins).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
 		move.l	d0,(v_score).w	; clear score
 		if Revision=0
@@ -2368,7 +2368,7 @@ PlayLevel:
 		move.b	#id_Level,(v_gamemode).w ; set screen mode to $0C (level)
 		move.b	#3,(v_lives).w	; set lives to 3
 		moveq	#0,d0
-		move.w	d0,(v_rings).w	; clear rings
+		move.w	d0,(v_coins).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
 		move.l	d0,(v_score).w	; clear score
 		move.b	d0,(v_lastspecial).w ; clear special stage number
@@ -2532,7 +2532,7 @@ loc_3422:
 Demo_Level:
 		move.b	#3,(v_lives).w	; set lives to 3
 		moveq	#0,d0
-		move.w	d0,(v_rings).w	; clear rings
+		move.w	d0,(v_coins).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
 		move.l	d0,(v_score).w	; clear score
 		if Revision=0
@@ -2998,7 +2998,7 @@ Level_LoadObj:
 		moveq	#0,d0
 		tst.b	(v_lastlamp).w	; are you starting from	a lamppost?
 		bne.s	Level_SkipClr	; if yes, branch
-		move.w	d0,(v_rings).w	; clear rings
+		move.w	d0,(v_coins).w	; clear rings
 		move.l	d0,(v_time).w	; clear time
 		move.b	d0,(v_lifecount).w ; clear lives counter
 
@@ -3026,7 +3026,7 @@ Level_LoadObj:
 	@skipahead:
 		bsr.w	OscillateNumInit
 		move.b	#1,(f_scorecount).w ; update score counter
-		move.b	#1,(f_ringcount).w ; update rings counter
+		move.b	#1,(f_coincount).w ; update rings counter
 		move.b	#1,(f_timecount).w ; update time counter
 		move.w	#0,(v_btnpushtime1).w
 		lea	(DemoDataPtr).l,a1 ; load demo data
@@ -3395,7 +3395,7 @@ GM_Special:
 		movea.l	(a1,d0.w),a1
 		move.b	1(a1),(v_btnpushtime2).w
 		subq.b	#1,(v_btnpushtime2).w
-		clr.w	(v_rings).w
+		clr.w	(v_coins).w
 		clr.b	(v_lifecount).w
 		move.w	#0,(v_debuguse).w
 		move.w	#1800,(v_demolength).w
@@ -3487,9 +3487,9 @@ loc_47D4:
 		bsr.w	AddPLC		; load results screen patterns
 		move.b	#1,(f_scorecount).w ; update score counter
 		move.b	#1,(f_endactbonus).w ; update ring bonus counter
-		move.w	(v_rings).w,d0
+		move.w	(v_coins).w,d0
 		mulu.w	#10,d0		; multiply rings by 10
-		move.w	d0,(v_ringbonus).w ; set rings bonus
+		move.w	d0,(v_coinbonus).w ; set rings bonus
 		sfx	bgm_GotThrough,0,0,0	 ; play end-of-level music
 
 		lea	(v_objspace).w,a1
@@ -8919,8 +8919,11 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 		dcb.b $63C,$FF
 		endc
 		;dcb.b ($10000-(*%$10000))-(EndOfRom-SoundDriver),$FF
-    include   "TitleLock.asm"
-SoundDriver:	include "s1.sounddriver.asm"
+TitleLock:
+
+	rts
+	
+SoundDriver:	include "sound/s1.sounddriver.asm"
 
 ; end of 'ROM'
 		even

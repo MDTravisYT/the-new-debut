@@ -469,7 +469,7 @@ Obj09_ChkCont:
 
 Obj09_GetCont:
 		jsr	(CollectRing).l
-		cmpi.w	#50,(v_rings).w	; check if you have 50 rings
+		cmpi.w	#50,(v_coins).w	; check if you have 50 rings
 		bcs.s	Obj09_NoCont
 		bset	#0,(v_lifecount).w
 		bne.s	Obj09_NoCont

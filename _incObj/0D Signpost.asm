@@ -131,9 +131,9 @@ GotThroughAct:
 	@hastimebonus:
 		add.w	d0,d0
 		move.w	TimeBonuses(pc,d0.w),(v_timebonus).w ; set time bonus
-		move.w	(v_rings).w,d0	; load number of rings
+		move.w	(v_coins).w,d0	; load number of rings
 		mulu.w	#10,d0		; multiply by 10
-		move.w	d0,(v_ringbonus).w ; set ring bonus
+		move.w	d0,(v_coinbonus).w ; set ring bonus
 		sfx	bgm_GotThrough,0,0,0	; play "Sonic got through" music
 
 locret_ECEE:

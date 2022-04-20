@@ -21,16 +21,16 @@ HUD_Update:
 		bsr.w	Hud_Score
 
 	@chkrings:
-		tst.b	(f_ringcount).w	; does the ring	counter	need updating?
+		tst.b	(f_coincount).w	; does the ring	counter	need updating?
 		beq.s	@chktime	; if not, branch
 		bpl.s	@notzero
 		bsr.w	Hud_LoadZero	; reset rings to 0 if Sonic is hit
 
 	@notzero:
-		clr.b	(f_ringcount).w
+		clr.b	(f_coincount).w
 		hudVRAM	$DF40		; set VRAM address
 		moveq	#0,d1
-		move.w	(v_rings).w,d1	; load number of rings
+		move.w	(v_coins).w,d1	; load number of rings
 		bsr.w	Hud_Rings
 
 	@chktime:
@@ -86,7 +86,7 @@ HUD_Update:
 		move.w	(v_timebonus).w,d1 ; load time bonus
 		bsr.w	Hud_TimeRingBonus
 		moveq	#0,d1
-		move.w	(v_ringbonus).w,d1 ; load ring bonus
+		move.w	(v_coinbonus).w,d1 ; load ring bonus
 		bsr.w	Hud_TimeRingBonus
 
 	@finish:
@@ -104,16 +104,16 @@ TimeOver:
 
 HudDebug:
 		bsr.w	HudDb_XY
-		tst.b	(f_ringcount).w	; does the ring	counter	need updating?
+		tst.b	(f_coincount).w	; does the ring	counter	need updating?
 		beq.s	@objcounter	; if not, branch
 		bpl.s	@notzero
 		bsr.w	Hud_LoadZero	; reset rings to 0 if Sonic is hit
 
 	@notzero:
-		clr.b	(f_ringcount).w
+		clr.b	(f_coincount).w
 		hudVRAM	$DF40		; set VRAM address
 		moveq	#0,d1
-		move.w	(v_rings).w,d1	; load number of rings
+		move.w	(v_coins).w,d1	; load number of rings
 		bsr.w	Hud_Rings
 
 	@objcounter:
@@ -141,7 +141,7 @@ HudDebug:
 		move.w	(v_timebonus).w,d1 ; load time bonus
 		bsr.w	Hud_TimeRingBonus
 		moveq	#0,d1
-		move.w	(v_ringbonus).w,d1 ; load ring bonus
+		move.w	(v_coinbonus).w,d1 ; load ring bonus
 		bsr.w	Hud_TimeRingBonus
 
 	@finish:

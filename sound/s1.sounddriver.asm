@@ -949,12 +949,12 @@ Sound_PlaySFX:
 		bne.w	@clear_sndprio		; Exit if it is
 		cmpi.b	#sfx_Ring,d7		; is ring sound	effect played?
 		bne.s	@sfx_notRing		; if not, branch
-		tst.b	v_ring_speaker(a6)	; Is the ring sound playing on right speaker?
+		tst.b	v_coin_speaker(a6)	; Is the ring sound playing on right speaker?
 		bne.s	@gotringspeaker		; Branch if not
 		move.b	#sfx_RingLeft,d7	; play ring sound in left speaker
 ; loc_721EE:
 @gotringspeaker:
-		bchg	#0,v_ring_speaker(a6)	; change speaker
+		bchg	#0,v_coin_speaker(a6)	; change speaker
 ; Sound_notB5:
 @sfx_notRing:
 		cmpi.b	#sfx_Push,d7		; is "pushing" sound played?

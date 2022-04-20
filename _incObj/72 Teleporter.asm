@@ -51,7 +51,7 @@ loc_166E0:
 		bne.s	locret_1675C
 		cmpi.b	#7,obSubtype(a0)
 		bne.s	loc_1670E
-		cmpi.w	#50,(v_rings).w
+		cmpi.w	#50,(v_coins).w
 		bcs.s	locret_1675C
 
 loc_1670E:
