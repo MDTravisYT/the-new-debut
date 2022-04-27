@@ -2506,7 +2506,7 @@ MusicLOCK:	incbin	"sound/music/CHAPTER6.bin"
 		even
 Music81:	include	"sound/music/Mus81 - GHZ.asm"
 		even
-Music82:	incbin	"sound/music/Mus82 - LZ.bin"
+Music82:	include	"sound/music/Mus82 - LZ.asm"
 		even
 Music83:	include	"sound/music/Mus83 - MZ.asm"
 		even
