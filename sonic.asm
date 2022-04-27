@@ -8283,6 +8283,8 @@ Nem_Splats:	incbin	"artnem\Enemy Splats.bin"
 		even
 Nem_Bomb:	incbin	"artnem\Enemy Bomb.bin"
 		even
+Nem_Fin:	incbin	"artnem\Enemy .bin"
+		even
 Nem_Orbinaut:	incbin	"artnem\Enemy Orbinaut.bin"
 		even
 Nem_Cater:	incbin	"artnem\Enemy Caterkiller.bin"

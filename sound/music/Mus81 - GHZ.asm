@@ -403,9 +403,6 @@ Mus81_GHZ_Loop122:
 	dc.b	$08, nE6, nRst, nRst, $34, smpsNoAttack, $34, nRst, $08, nRst, nRst
 	smpsPSGvoice        fTone_05
 	dc.b	nRst, $18, $18, $18, $18, $08, nRst, nRst, nRst
-	smpsPSGvoice        fTone_03
-	smpsPSGAlterVol     $FF
-	smpsPSGvoice        fTone_03
 	smpsJump            Mus81_GHZ_Loop132
 
 ; PSG2 Data
@@ -434,7 +431,6 @@ Mus81_GHZ_Loop102:
 	dc.b	$08, nC6, nE6, nEb6, $34, smpsNoAttack, $34, nC6, $08, nEb6, nD6
 	smpsPSGvoice        fTone_05
 	dc.b	nC5, $18, $18, $18, $18, $08, nRst, nC5, nRst
-	smpsPSGvoice        fTone_03
 	smpsJump            Mus81_GHZ_Loop112
 
 ; PSG3 Data
