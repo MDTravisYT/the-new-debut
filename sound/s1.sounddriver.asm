@@ -2544,7 +2544,7 @@ Music93:	incbin	"sound/music/Mus93 - CSZ.bin" ; https://www.youtube.com/watch?v=
 		even
 Music94:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
-Music95:	incbin	"sound/music/Mus90 - Continue Screen.bin"
+Music95:	include	"sound/music/key collected.asm"
 		even
 Music96:	incbin	"sound/music/LOCKOUTNORM.bin"
 		even

@@ -10,8 +10,8 @@ smpsHeaderStartSong = 1
 	smpsHeaderFM        Mus82_LZ_FM3,	$F4, $18
 	smpsHeaderFM        Mus82_LZ_FM4,	$F4, $18
 	smpsHeaderFM        Mus82_LZ_FM5,	$00, $0D
-	smpsHeaderPSG       Mus82_LZ_PSG1,	$D0, $02, $00, fTone_08
-	smpsHeaderPSG       Mus82_LZ_PSG2,	$D0, $02, $00, fTone_08
+	smpsHeaderPSG       Mus82_LZ_PSG1,	$D0, $02, $00, fTone_07
+	smpsHeaderPSG       Mus82_LZ_PSG2,	$D0, $02, $00, fTone_07
 	smpsHeaderPSG       Mus82_LZ_PSG3,	$00, $02, $00, fTone_04
 
 ; FM1 Data
@@ -104,7 +104,7 @@ Mus82_LZ_FM4:
 
 ; FM5 Data
 Mus82_LZ_FM5:
-	smpsSetvoice        $01
+	smpsSetvoice        $03
 	smpsNoteFill        $08
 	dc.b	nC5, $06, nA4, nF4
 	smpsNoteFill        $00

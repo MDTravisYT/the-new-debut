@@ -19,7 +19,7 @@ ptr_Warp4:	dc.w SonAni_ERROR-Ani_Sonic
 ptr_Stop:	dc.w SonAni_Stop-Ani_Sonic
 ptr_Float1:	dc.w SonAni_ERROR-Ani_Sonic
 ptr_Float2:	dc.w SonAni_Float-Ani_Sonic
-ptr_Spring:	dc.w SonAni_Jump-Ani_Sonic
+ptr_Spring:	dc.w SonAni_Spring-Ani_Sonic
 ptr_Hang:	dc.w SonAni_ERROR-Ani_Sonic
 ptr_Leap1:	dc.w SonAni_Leap1-Ani_Sonic
 ptr_Leap2:	dc.w SonAni_Leap2-Ani_Sonic
@@ -94,6 +94,8 @@ SonAni_Jump:	dc.b 4, $35, $35, $35, $35, afChange, id_Fall
 SonAni_Jump2Roll:	dc.b $2, $39, afChange, id_Roll
 		even
 SonAni_Fall:	dc.b $7, $36, $37, $38, afBack, 1
+		even
+SonAni_Spring:	dc.b $2F, $51, afChange, id_Walk
 		even
 
 id_Walk:	equ (ptr_Walk-Ani_Sonic)/2	; 0
