@@ -1046,19 +1046,18 @@ Sound_PlaySFX:
 		clr.l	(a2)+
 		dbf	d0,@clearsfxtrackram
 
-		move.w	(a1)+,(a5)			; Initial playback control bits (TrackPlaybackControl)
-		move.b	d5,TrackTempoDivider(a5)	; Initial voice control bits
+		move.w	(a1)+,(a5)			; Initial playback control bits & voice control bits (TrackPlaybackControl)
+		move.b	d5,TrackTempoDivider(a5)
 		moveq	#0,d0
 		move.w	(a1)+,d0			; Track data pointer
 		add.l	a3,d0				; Relative pointer
 		move.l	d0,TrackDataPointer(a5)	; Store track pointer
-		move.w	(a1)+,8(a5)
-		tst.b	($FFFFC900).w	; is the Spin Dash sound playing?
-		beq.s	@cont		; if not, branch
-		move.w	d0,-(sp)
-		move.b	($FFFFC902).w,d0
-		add.b	d0,8(a5)
-		move.w	(sp)+,d0
+		move.w	(a1)+,TrackTranspose(a5)	; load FM/PSG channel modifier
+		move.b	#1,TrackDurationTimeout(a5)	; Set duration of first "note"
+		move.b	d6,TrackStackPointer(a5)	; set "gosub" (coord flag F8h) stack init value
+		tst.b	d4				; Is this a PSG channel?
+		bmi.s	@sfxpsginitdone			; Branch if yes
+		move.b	#$C0,TrackAMSFMSPan(a5)	; AMS/FMS/Panning
 		
 @cont:
 		move.b	#1,$E(a5)
