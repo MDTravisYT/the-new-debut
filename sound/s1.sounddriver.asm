@@ -184,9 +184,14 @@ UpdateMusic:
 		jsr	PlaySoundID(pc)
 ; loc_71BC8:
 @nonewsound:
+		tst.b	($FFFFC901).w
+		beq.s	@cont
+		subq.b	#1,($FFFFC901).w
+		
+@cont:
 		lea	v_music_dac_track(a6),a5
-		tst.b	(a5)			; Is DAC track playing? (TrackPlaybackControl)
-		bpl.s	@dacdone		; Branch if not
+		tst.b	(a5)
+		bpl.s	@dacdone
 		jsr	DACUpdateTrack(pc)
 ; loc_71BD4:
 @dacdone:
@@ -947,6 +952,9 @@ Sound_PlaySFX:
 		bne.w	@clear_sndprio		; Exit if it is
 		tst.b	f_fadein_flag(a6)	; Is music being faded in?
 		bne.w	@clear_sndprio		; Exit if it is
+		
+		clr.b	(Spindash_sound_flag).w
+		
 		cmpi.b	#sfx_Ring,d7		; is ring sound	effect played?
 		bne.s	@sfx_notRing		; if not, branch
 		tst.b	v_coin_speaker(a6)	; Is the ring sound playing on right speaker?
@@ -964,8 +972,29 @@ Sound_PlaySFX:
 		move.b	#$80,f_push_playing(a6)	; Mark it as playing
 ; Sound_notA7:
 @sfx_notPush:
+		cmpi.b	#$A9,d7		; is ring sound	effect played?
+		bne.s	@sfx_notDash		; if not, branch
+		move.w	d0,-(sp)
+		move.b	(Spindash_sound_pitch).w,d0	; store extra frequency
+		tst.b	(Spindash_sound_timer).w	; is the Spin Dash timer active?
+		bne.s	@cont1		; if it is, branch
+		move.b	#-1,d0		; otherwise, reset frequency (becomes 0 on next line)
+		
+@cont1:
+		addq.b	#1,d0
+		cmpi.b	#$C,d0		; has the limit been reached?
+		bcc.s	@cont2		; if it has, branch
+		move.b	d0,(Spindash_sound_pitch).w	; otherwise, set new frequency
+		
+@cont2:
+		move.b	#1,(Spindash_sound_flag).w	; set flag
+		move.b	#60,(Spindash_sound_timer).w	; set timer
+		move.w	(sp)+,d0
+		
+@sfx_notDash:
 		movea.l	(Go_SoundIndex).l,a0
 		subi.b	#sfx__First,d7		; Make it 0-based
+
 		lsl.w	#2,d7			; Convert sfx ID into index
 		movea.l	(a0,d7.w),a3		; SFX data pointer
 		movea.l	a3,a1
@@ -1096,6 +1125,7 @@ Sound_PlaySpecial:
 		move.b	(a1)+,d5			; Dividing timing
 		; DANGER! there is a missing 'moveq	#0,d7' here, without which special SFXes whose
 		; index entry is above $3F will cause a crash. This instance was not fixed in Ristar's driver.
+		moveq	#0,d7
 		move.b	(a1)+,d7			; Number of tracks (FM + PSG)
 		subq.b	#1,d7
 		moveq	#TrackSz,d6

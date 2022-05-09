@@ -100,6 +100,10 @@ v_1up_ram_copy:		equ v_spcsfx_track_ram_end
 ; From here on, no longer relative to sound driver RAM
 ; =================================================================================
 
+Spindash_sound_flag:	equ $FFFFF5D0	; byte ; 1 if the Spindash sound was the last sound, 0 if not.
+Spindash_sound_timer:	equ $FFFFF5D1	; byte ; A timer for the Spindash sound.
+Spindash_sound_pitch:	equ $FFFFF5D2	; byte ; The pitch for the sound.
+
 v_gamemode:	equ $FFFFF600	; game mode (00=Sega; 04=Title; 08=Demo; 0C=Level; 10=SS; 14=Cont; 18=End; 1C=Credit; +8C=PreLevel)
 v_jpadhold2:	equ $FFFFF602	; joypad input - held, duplicate
 v_jpadpress2:	equ $FFFFF603	; joypad input - pressed, duplicate
