@@ -1005,6 +1005,7 @@ Sound_PlaySFX:
 		; DANGER! there is a missing 'moveq	#0,d7' here, without which SFXes whose
 		; index entry is above $3F will cause a crash. This is actually the same way that
 		; this bug is fixed in Ristar's driver.
+		moveq	#0,d7
 		move.b	(a1)+,d7	; Number of tracks (FM + PSG)
 		subq.b	#1,d7
 		moveq	#TrackSz,d6
@@ -1036,7 +1037,8 @@ Sound_PlaySFX:
 		move.b	d0,(psg_input).l
 ; loc_7226E:
 @sfxoverridedone:
-		movea.l	SFX_SFXChannelRAM(pc,d3.w),a5
+		lea	SFX_SFXChannelRAM(pc),a5
+		movea.l	(a5,d3.w),a5
 		movea.l	a5,a2
 		moveq	#(TrackSz/4)-1,d0	; $30 bytes
 ; loc_72276:
@@ -1050,8 +1052,16 @@ Sound_PlaySFX:
 		move.w	(a1)+,d0			; Track data pointer
 		add.l	a3,d0				; Relative pointer
 		move.l	d0,TrackDataPointer(a5)	; Store track pointer
-		move.w	(a1)+,TrackTranspose(a5)	; load FM/PSG channel modifier
-		move.b	#1,TrackDurationTimeout(a5)	; Set duration of first "note"
+		move.w	(a1)+,8(a5)
+		tst.b	($FFFFC900).w	; is the Spin Dash sound playing?
+		beq.s	@cont		; if not, branch
+		move.w	d0,-(sp)
+		move.b	($FFFFC902).w,d0
+		add.b	d0,8(a5)
+		move.w	(sp)+,d0
+		
+@cont:
+		move.b	#1,$E(a5)
 		move.b	d6,TrackStackPointer(a5)	; set "gosub" (coord flag F8h) stack init value
 		tst.b	d4				; Is this a PSG channel?
 		bmi.s	@sfxpsginitdone			; Branch if yes
