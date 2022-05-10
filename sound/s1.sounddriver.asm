@@ -2645,7 +2645,7 @@ ptr_sndend
 ; ---------------------------------------------------------------------------
 SpecSoundIndex:
 ptr_sndD0:	dc.l SoundD0
-ptr_sndD1:	dc.l SoundA9
+;ptr_sndD1:	dc.l SoundA9
 ptr_specend
 SoundA0:	incbin	"sound/sfx/SndA0 - Jump.bin"
 		even
