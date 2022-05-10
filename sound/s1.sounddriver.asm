@@ -972,7 +972,7 @@ Sound_PlaySFX:
 		move.b	#$80,f_push_playing(a6)	; Mark it as playing
 ; Sound_notA7:
 @sfx_notPush:
-		cmpi.b	#$A9,d7		; is ring sound	effect played?
+		cmpi.b	#$D1,d7		; is ring sound	effect played? ; TESTING ON ROLL SFX
 		bne.s	@sfx_notDash		; if not, branch
 		move.w	d0,-(sp)
 		move.b	(Spindash_sound_pitch).w,d0	; store extra frequency
@@ -2645,7 +2645,7 @@ ptr_sndend
 ; ---------------------------------------------------------------------------
 SpecSoundIndex:
 ptr_sndD0:	dc.l SoundD0
-;ptr_sndD1:	dc.l SoundD1
+ptr_sndD1:	dc.l SoundA9
 ptr_specend
 SoundA0:	incbin	"sound/sfx/SndA0 - Jump.bin"
 		even
