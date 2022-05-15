@@ -184,9 +184,14 @@ UpdateMusic:
 		jsr	PlaySoundID(pc)
 ; loc_71BC8:
 @nonewsound:
+		tst.b	($FFFFC901).w
+		beq.s	@cont
+		subq.b	#1,($FFFFC901).w
+		
+@cont:
 		lea	v_music_dac_track(a6),a5
-		tst.b	(a5)			; Is DAC track playing? (TrackPlaybackControl)
-		bpl.s	@dacdone		; Branch if not
+		tst.b	(a5)
+		bpl.s	@dacdone
 		jsr	DACUpdateTrack(pc)
 ; loc_71BD4:
 @dacdone:
@@ -947,6 +952,9 @@ Sound_PlaySFX:
 		bne.w	@clear_sndprio		; Exit if it is
 		tst.b	f_fadein_flag(a6)	; Is music being faded in?
 		bne.w	@clear_sndprio		; Exit if it is
+		
+		clr.b	(Spindash_sound_flag).w
+		
 		cmpi.b	#sfx_Ring,d7		; is ring sound	effect played?
 		bne.s	@sfx_notRing		; if not, branch
 		tst.b	v_coin_speaker(a6)	; Is the ring sound playing on right speaker?
@@ -964,8 +972,29 @@ Sound_PlaySFX:
 		move.b	#$80,f_push_playing(a6)	; Mark it as playing
 ; Sound_notA7:
 @sfx_notPush:
+		cmpi.b	#$D1,d7		; is ring sound	effect played? ; TESTING ON ROLL SFX
+		bne.s	@sfx_notDash		; if not, branch
+		move.w	d0,-(sp)
+		move.b	(Spindash_sound_pitch).w,d0	; store extra frequency
+		tst.b	(Spindash_sound_timer).w	; is the Spin Dash timer active?
+		bne.s	@cont1		; if it is, branch
+		move.b	#-1,d0		; otherwise, reset frequency (becomes 0 on next line)
+		
+@cont1:
+		addq.b	#1,d0
+		cmpi.b	#$C,d0		; has the limit been reached?
+		bcc.s	@cont2		; if it has, branch
+		move.b	d0,(Spindash_sound_pitch).w	; otherwise, set new frequency
+		
+@cont2:
+		move.b	#1,(Spindash_sound_flag).w	; set flag
+		move.b	#60,(Spindash_sound_timer).w	; set timer
+		move.w	(sp)+,d0
+		
+@sfx_notDash:
 		movea.l	(Go_SoundIndex).l,a0
 		subi.b	#sfx__First,d7		; Make it 0-based
+
 		lsl.w	#2,d7			; Convert sfx ID into index
 		movea.l	(a0,d7.w),a3		; SFX data pointer
 		movea.l	a3,a1
@@ -976,6 +1005,7 @@ Sound_PlaySFX:
 		; DANGER! there is a missing 'moveq	#0,d7' here, without which SFXes whose
 		; index entry is above $3F will cause a crash. This is actually the same way that
 		; this bug is fixed in Ristar's driver.
+		moveq	#0,d7
 		move.b	(a1)+,d7	; Number of tracks (FM + PSG)
 		subq.b	#1,d7
 		moveq	#TrackSz,d6
@@ -1007,7 +1037,8 @@ Sound_PlaySFX:
 		move.b	d0,(psg_input).l
 ; loc_7226E:
 @sfxoverridedone:
-		movea.l	SFX_SFXChannelRAM(pc,d3.w),a5
+		lea	SFX_SFXChannelRAM(pc),a5
+		movea.l	(a5,d3.w),a5
 		movea.l	a5,a2
 		moveq	#(TrackSz/4)-1,d0	; $30 bytes
 ; loc_72276:
@@ -1015,14 +1046,21 @@ Sound_PlaySFX:
 		clr.l	(a2)+
 		dbf	d0,@clearsfxtrackram
 
-		move.w	(a1)+,(a5)			; Initial playback control bits (TrackPlaybackControl)
-		move.b	d5,TrackTempoDivider(a5)	; Initial voice control bits
+		move.w	(a1)+,(a5)			; Initial playback control bits & voice control bits (TrackPlaybackControl)
+		move.b	d5,TrackTempoDivider(a5)
 		moveq	#0,d0
 		move.w	(a1)+,d0			; Track data pointer
 		add.l	a3,d0				; Relative pointer
 		move.l	d0,TrackDataPointer(a5)	; Store track pointer
 		move.w	(a1)+,TrackTranspose(a5)	; load FM/PSG channel modifier
 		move.b	#1,TrackDurationTimeout(a5)	; Set duration of first "note"
+		move.b	d6,TrackStackPointer(a5)	; set "gosub" (coord flag F8h) stack init value
+		tst.b	d4				; Is this a PSG channel?
+		bmi.s	@sfxpsginitdone			; Branch if yes
+		move.b	#$C0,TrackAMSFMSPan(a5)	; AMS/FMS/Panning
+		
+@cont:
+		move.b	#1,$E(a5)
 		move.b	d6,TrackStackPointer(a5)	; set "gosub" (coord flag F8h) stack init value
 		tst.b	d4				; Is this a PSG channel?
 		bmi.s	@sfxpsginitdone			; Branch if yes
@@ -1096,6 +1134,7 @@ Sound_PlaySpecial:
 		move.b	(a1)+,d5			; Dividing timing
 		; DANGER! there is a missing 'moveq	#0,d7' here, without which special SFXes whose
 		; index entry is above $3F will cause a crash. This instance was not fixed in Ristar's driver.
+		moveq	#0,d7
 		move.b	(a1)+,d7			; Number of tracks (FM + PSG)
 		subq.b	#1,d7
 		moveq	#TrackSz,d6
@@ -2606,7 +2645,7 @@ ptr_sndend
 ; ---------------------------------------------------------------------------
 SpecSoundIndex:
 ptr_sndD0:	dc.l SoundD0
-;ptr_sndD1:	dc.l SoundD1
+;ptr_sndD1:	dc.l SoundA9
 ptr_specend
 SoundA0:	incbin	"sound/sfx/SndA0 - Jump.bin"
 		even
