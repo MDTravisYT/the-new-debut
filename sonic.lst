@@ -48932,74 +48932,74 @@
 000742AC 0000 0000                  		dc.w ObjPos_SBZ1pf1-ObjPos_Index, ObjPos_SBZ1pf2-ObjPos_Index
 000742B0 FFFF 0000 0000             		dc.b $FF, $FF, 0, 0, 0,	0
 000742B6                            ObjPos_GHZ1:	incbin	"objpos\ghz1.bin"
-0007474E                            		even
-0007474E                            ObjPos_GHZ2:	incbin	"objpos\ghz2.bin"
-00074C34                            		even
-00074C34                            		incbin	"objpos\ghz3.bin"
-0007533C                            		even
-0007533C                            ObjPos_LZ1:	
-0007533C                            		incbin	"objpos\lz1 (JP1).bin"
-000756F6                            		even
-000756F6                            ObjPos_LZ2:	incbin	"objpos\lz2.bin"
-00075A56                            		even
-00075A56                            ObjPos_LZ3:	
-00075A56                            		incbin	"objpos\lz3 (JP1).bin"
-00075F9C                            		even
-00075F9C                            ObjPos_SBZ3:	incbin	"objpos\sbz3.bin"
-00076434                            		even
-00076434                            ObjPos_LZ1pf1:	incbin	"objpos\lz1pf1.bin"
-00076466                            		even
-00076466                            ObjPos_LZ1pf2:	incbin	"objpos\lz1pf2.bin"
-00076498                            		even
-00076498                            ObjPos_LZ2pf1:	incbin	"objpos\lz2pf1.bin"
-000764CA                            		even
-000764CA                            ObjPos_LZ2pf2:	incbin	"objpos\lz2pf2.bin"
-000764FC                            		even
-000764FC                            ObjPos_LZ3pf1:	incbin	"objpos\lz3pf1.bin"
-00076546                            		even
-00076546                            ObjPos_LZ3pf2:	incbin	"objpos\lz3pf2.bin"
+00074736                            		even
+00074736                            ObjPos_GHZ2:	incbin	"objpos\ghz2.bin"
+00074C1C                            		even
+00074C1C                            		incbin	"objpos\ghz3.bin"
+00075324                            		even
+00075324                            ObjPos_LZ1:	
+00075324                            		incbin	"objpos\lz1 (JP1).bin"
+000756DE                            		even
+000756DE                            ObjPos_LZ2:	incbin	"objpos\lz2.bin"
+00075A3E                            		even
+00075A3E                            ObjPos_LZ3:	
+00075A3E                            		incbin	"objpos\lz3 (JP1).bin"
+00075F84                            		even
+00075F84                            ObjPos_SBZ3:	incbin	"objpos\sbz3.bin"
+0007641C                            		even
+0007641C                            ObjPos_LZ1pf1:	incbin	"objpos\lz1pf1.bin"
+0007644E                            		even
+0007644E                            ObjPos_LZ1pf2:	incbin	"objpos\lz1pf2.bin"
+00076480                            		even
+00076480                            ObjPos_LZ2pf1:	incbin	"objpos\lz2pf1.bin"
+000764B2                            		even
+000764B2                            ObjPos_LZ2pf2:	incbin	"objpos\lz2pf2.bin"
+000764E4                            		even
+000764E4                            ObjPos_LZ3pf1:	incbin	"objpos\lz3pf1.bin"
+0007652E                            		even
+0007652E                            ObjPos_LZ3pf2:	incbin	"objpos\lz3pf2.bin"
+0007656C                            		even
+0007656C                            		incbin	"objpos\mz1.bin"
 00076584                            		even
-00076584                            		incbin	"objpos\mz1.bin"
-0007659C                            		even
-0007659C                            ObjPos_MZ2:	incbin	"objpos\mz2.bin"
-00076B90                            		even
-00076B90                            ObjPos_MZ3:	incbin	"objpos\mz3.bin"
-000771DE                            		even
-000771DE                            ObjPos_SLZ1:	incbin	"objpos\slz1.bin"
-0007743C                            		even
-0007743C                            ObjPos_SLZ2:	incbin	"objpos\slz2.bin"
-000774FC                            		even
-000774FC                            ObjPos_SLZ3:	incbin	"objpos\slz3.bin"
-0007758C                            		even
-0007758C                            ObjPos_SYZ1:	incbin	"objpos\syz1.bin"
-00077892                            		even
-00077892                            ObjPos_SYZ2:	incbin	"objpos\syz2.bin"
-00077DFC                            		even
-00077DFC                            		incbin	"objpos\syz3.bin"
-00078402                            		even
-00078402                            		incbin	"objpos\sbz1.bin"
-00078762                            		even
-00078762                            ObjPos_SBZ2:	incbin	"objpos\sbz2.bin"
+00076584                            ObjPos_MZ2:	incbin	"objpos\mz2.bin"
+00076B78                            		even
+00076B78                            ObjPos_MZ3:	incbin	"objpos\mz3.bin"
+000771C6                            		even
+000771C6                            ObjPos_SLZ1:	incbin	"objpos\slz1.bin"
+00077424                            		even
+00077424                            ObjPos_SLZ2:	incbin	"objpos\slz2.bin"
+000774E4                            		even
+000774E4                            ObjPos_SLZ3:	incbin	"objpos\slz3.bin"
+00077574                            		even
+00077574                            ObjPos_SYZ1:	incbin	"objpos\syz1.bin"
+0007787A                            		even
+0007787A                            ObjPos_SYZ2:	incbin	"objpos\syz2.bin"
+00077DE4                            		even
+00077DE4                            		incbin	"objpos\syz3.bin"
+000783EA                            		even
+000783EA                            		incbin	"objpos\sbz1.bin"
+0007874A                            		even
+0007874A                            ObjPos_SBZ2:	incbin	"objpos\sbz2.bin"
+000788AC                            		even
+000788AC                            ObjPos_FZ:	incbin	"objpos\fz.bin"
 000788C4                            		even
-000788C4                            ObjPos_FZ:	incbin	"objpos\fz.bin"
-000788DC                            		even
-000788DC                            ObjPos_SBZ1pf1:	incbin	"objpos\sbz1pf1.bin"
-0007890E                            		even
-0007890E                            ObjPos_SBZ1pf2:	incbin	"objpos\sbz1pf2.bin"
-00078940                            		even
-00078940                            ObjPos_SBZ1pf3:	incbin	"objpos\sbz1pf3.bin"
-00078972                            		even
-00078972                            ObjPos_SBZ1pf4:	incbin	"objpos\sbz1pf4.bin"
-000789A4                            		even
-000789A4                            ObjPos_SBZ1pf5:	incbin	"objpos\sbz1pf5.bin"
-000789D6                            		even
-000789D6                            ObjPos_SBZ1pf6:	incbin	"objpos\sbz1pf6.bin"
-00078A0E                            		even
-00078A0E                            ObjPos_End:	incbin	"objpos\ending.bin"
-00078A1A                            		even
-00078A1A                            ObjPos_EndN:	incbin	"objpos\endingN.bin"
-000790B0                            		even
-000790B0                            ObjPos_IMZ1:	incbin	"objpos\imz1.bin"
+000788C4                            ObjPos_SBZ1pf1:	incbin	"objpos\sbz1pf1.bin"
+000788F6                            		even
+000788F6                            ObjPos_SBZ1pf2:	incbin	"objpos\sbz1pf2.bin"
+00078928                            		even
+00078928                            ObjPos_SBZ1pf3:	incbin	"objpos\sbz1pf3.bin"
+0007895A                            		even
+0007895A                            ObjPos_SBZ1pf4:	incbin	"objpos\sbz1pf4.bin"
+0007898C                            		even
+0007898C                            ObjPos_SBZ1pf5:	incbin	"objpos\sbz1pf5.bin"
+000789BE                            		even
+000789BE                            ObjPos_SBZ1pf6:	incbin	"objpos\sbz1pf6.bin"
+000789F6                            		even
+000789F6                            ObjPos_End:	incbin	"objpos\ending.bin"
+00078A02                            		even
+00078A02                            ObjPos_EndN:	incbin	"objpos\endingN.bin"
+00079098                            		even
+00079098                            ObjPos_IMZ1:	incbin	"objpos\imz1.bin"
 000790BC                            		even
 000790BC FFFF 0000 0000             ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 000790C2                            
