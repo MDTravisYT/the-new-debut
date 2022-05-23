@@ -248,7 +248,7 @@ Mus83_MZ_Voices:
 	smpsVcDecayRate2    $01, $02, $02, $03
 	smpsVcDecayLevel    $00, $00, $01, $01
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $01, $26, $18, $1E
+	smpsVcTotalLevel    $00, $26, $18, $1E
 
 ;	Voice $01
 ;	$3A
@@ -334,5 +334,5 @@ Mus83_MZ_Voices:
 	smpsVcDecayRate2    $01, $02, $02, $03
 	smpsVcDecayLevel    $00, $00, $01, $01
 	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-	smpsVcTotalLevel    $01, $26, $18, $1E
+	smpsVcTotalLevel    $00, $26, $18, $1E
 

@@ -10,7 +10,8 @@ smpsHeaderStartSong = 1
 SndCE_Ring_Left_FM4:
 	smpsSetvoice        $00
 	smpsPan             panLeft, $00
-	dc.b	nC5, $1B
+	dc.b nC5, $04, nC6	; comment out the comma before 04 here to get sound intended
+	dc.b $1B
 	smpsStop
 
 SndCE_Ring_Left_Voices:
