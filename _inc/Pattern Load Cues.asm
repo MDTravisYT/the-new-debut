@@ -68,6 +68,7 @@ PLC_Main2:	dc.w ((PLC_Main2end-PLC_Main2-2)/6)-1
 	;	plcm	Nem_Shield, $A820	; shield
 	;	plcm	Nem_Stars, $AB80	; invincibility	stars
 		plcm	Nem_Warp, $A820	; shield
+		plcm	Nem_SyzSparkle, $BC00	; invincible
 	PLC_Main2end:
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - explosion

@@ -8297,6 +8297,8 @@ Nem_Monitors:	incbin	"artnem\Monitors.bin"
 		even
 Nem_Explode:	incbin	"artnem\Explosion.bin"
 		even
+Nem_Explode_Boss:	incbin	"artnem\Boss Explosion.bin"
+		even
 Nem_Points:	incbin	"artnem\Points.bin"	; points from destroyed enemy or object
 		even
 Nem_GameOver:	incbin	"artnem\Game Over.bin"	; game over / time over

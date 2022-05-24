@@ -10,9 +10,9 @@ smpsHeaderStartSong = 1
 	smpsHeaderFM        Mus91_Sonic_Got_Through_FM3,	$00, $0F
 	smpsHeaderFM        Mus91_Sonic_Got_Through_FM4,	$00, $0F
 	smpsHeaderFM        Mus91_Stop,	$00, $0A
-	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG1,	$F4, $02, $00, fTone_08
-	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG2,	$F4, $02, $00, fTone_08
-	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG3,	$00, $00, $00, fTone_04
+	smpsHeaderPSG       prelude_PSG1,	$00, $02, $00, fTone_08
+	smpsHeaderPSG       prelude_PSG2,	$00, $02, $00, fTone_08
+	smpsHeaderPSG       prelude_PSG3,	$00, $00, $00, fTone_04
 
 ; FM1 Data
 Mus91_Sonic_Got_Through_FM1:
@@ -41,16 +41,728 @@ Mus91_Sonic_Got_Through_PSG2:
 	dc.b		nRst, $05, nD3, nD4, $04, nB3, nD4, nB3, nD4, nB3, nD4, nB3, nD4, nB3, nCs4, nA3, nD4, nB3, nE4, nCs4, $04
 	smpsStop
 ; PSG1 Data
-Mus91_Sonic_Got_Through_PSG1:
-	smpsNoteFill        $08
-	dc.b		nRst, $08
-	dc.b		nE4, $04, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nD4, nB3, nE4, nCs4, nFs4, nD4, $04
+; PSG1 Data
+prelude_PSG1:
+	dc.b	nRst, $20
+	smpsPSGAlterVol     $02
+	dc.b	nE3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nE3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nE3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nE3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nE3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nB2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nE3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, $01
+	smpsPSGAlterVol     $FB
+	smpsAlterNote       $01
+	dc.b	nFs3, $03
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nFs3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nFs3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nFs3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nFs3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nFs3, $01
+	smpsPSGAlterVol     $FB
+	smpsAlterNote       $00
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $00
+	dc.b	nD3, nRst, $09
 	smpsStop
+
+; PSG2 Data
+prelude_PSG2:
+	dc.b	nRst, $15
+	smpsPSGAlterVol     $02
+	dc.b	nD2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD2
+	smpsPSGAlterVol     $01
+	dc.b	nD2
+	smpsPSGAlterVol     $01
+	dc.b	nD2
+	smpsPSGAlterVol     $01
+	dc.b	nD2
+	smpsPSGAlterVol     $01
+	dc.b	nD2
+	smpsPSGAlterVol     $01
+	dc.b	nD2, $01
+	smpsPSGAlterVol     $FA
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nB2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nB2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nB2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nB2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nB2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nA2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nA2
+	smpsPSGAlterVol     $01
+	dc.b	nA2
+	smpsPSGAlterVol     $01
+	dc.b	nA2
+	smpsPSGAlterVol     $01
+	dc.b	nA2
+	smpsPSGAlterVol     $01
+	dc.b	nA2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nD3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3
+	smpsPSGAlterVol     $01
+	dc.b	nD3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nB2, $03
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2
+	smpsPSGAlterVol     $01
+	dc.b	nB2, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nE3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3
+	smpsPSGAlterVol     $01
+	dc.b	nE3, $01
+	smpsPSGAlterVol     $FB
+	dc.b	nCs3, $03
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3
+	smpsPSGAlterVol     $01
+	dc.b	nCs3, nRst, $01
+	smpsStop
+
 ; PSG3 Data
-Mus91_Sonic_Got_Through_PSG3:
+prelude_PSG3:
+	dc.b	nRst, $20
 	smpsPSGform         $E7
-	smpsNoteFill        $06
-	dc.b	nRst, $08, nA5, nA4, nA5, nA4, nA5, nA4, nA4, nA4
+	smpsAlterNote       $01
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $01
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $01
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5, nRst, $14
+	smpsPSGAlterVol     $F2
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5, nRst, $14
+	smpsPSGAlterVol     $F2
+	smpsAlterNote       $01
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $01
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $01
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5, nRst, $14
+	smpsPSGAlterVol     $F2
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5, nRst, $14
+	smpsPSGAlterVol     $F2
+	smpsAlterNote       $01
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $01
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $01
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $01
+	dc.b	nA5, nRst, $14
+	smpsPSGAlterVol     $F2
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5, nRst, $14
+	smpsPSGAlterVol     $F2
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5, nRst, $14
+	smpsPSGAlterVol     $F2
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $03
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $02
+	smpsPSGAlterVol     $02
+	smpsAlterNote       $08
+	dc.b	nA5, $01
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5
+	smpsPSGAlterVol     $01
+	smpsAlterNote       $08
+	dc.b	nA5, nRst, $34
 	smpsStop
 ; DAC Data
 Mus91_Sonic_Got_Through_DAC:

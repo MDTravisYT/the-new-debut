@@ -2534,7 +2534,7 @@ Music8E:	include	"sound/music/Mus8E - Sonic Got Through.asm"
 		even
 Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
-Music90:	include	"sound/music/prelude.asm"
+Music90:	incbin	"sound/music/prelude.bin"
 		even
 Music91:	incbin	"sound/music/ESCAPE.bin"
 		even
