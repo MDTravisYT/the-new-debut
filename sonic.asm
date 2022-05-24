@@ -1819,7 +1819,7 @@ Sega_Main:
 		bsr.w	ClearScreen
 		
 		move.l	#$40000000,($C00004).l		;Beginning of VRAM
-		lea		(Nem_OtherSegaLogo).l,a0
+		lea		(Nem_MCTLogo).l,a0
 		bsr.w	NemDec
 		
 		locVRAM	$2000
@@ -1827,23 +1827,12 @@ Sega_Main:
 		bsr.w	NemDec
 		
 		lea		($FF0000).l,a1	;Where to decompress the tilemap
-		lea		(Eni_OtherSegaLogo).l,a0	;Tilemap to decompress
+		lea		(Eni_MCTLogo).l,a0	;Tilemap to decompress
 		move.w	#0,d0
 		bsr.w	EniDec
 		
 		copyTilemap $FF0000,(vram_fg+$404),((320/8)-1),((320/8)-1) ;not found
 		move.l	#$40000003,d0				;Position in Plane A
-		moveq	#$B,d1						;Width (I think)
-		moveq	#3,d2						;Height (I think)
-		bsr.w	TilemapToVRAM
-		
-		lea		($FF1000).l,a1	;Where to decompress the tilemap
-		lea		(Eni_SegaLogo).l,a0	;Tilemap to decompress
-		move.w	#0,d0
-		bsr.w	EniDec
-		
-		copyTilemap $FF1000,(vram_bg+$404),((320/8)-1),((320/8)-1) ;not found
-		move.l	#$60000003,d0				;Position in Plane B
 		moveq	#$B,d1						;Width (I think)
 		moveq	#3,d2						;Height (I think)
 		bsr.w	TilemapToVRAM
@@ -7908,9 +7897,9 @@ Nem_SegaLogo:	incbin	"artnem\Sega Logo 2.bin"	; large Sega logo
 		even
 Eni_SegaLogo:	incbin	"tilemaps\Sega Logo 2.bin" ; large Sega logo (mappings)
 		even
-Nem_OtherSegaLogo:	incbin	"artnem\Sega Logo.bin"	; large Sega logo
+Nem_MCTLogo:	incbin	"artnem\Sega Logo.bin"	; large Sega logo
 		even
-Eni_OtherSegaLogo:	incbin	"tilemaps\Sega Logo.bin" ; large Sega logo (mappings)
+Eni_MCTLogo:	incbin	"tilemaps\Sega Logo.bin" ; large Sega logo (mappings)
 		even
 Nem_SegaSonic:	incbin	"artnem\Sega Sonic.bin"
 		even

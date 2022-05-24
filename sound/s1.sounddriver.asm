@@ -2534,7 +2534,7 @@ Music8E:	include	"sound/music/Mus8E - Sonic Got Through.asm"
 		even
 Music8F:	incbin	"sound/music/Mus8F - Game Over.bin"
 		even
-Music90:	incbin	"sound/music/prelude.bin"
+Music90:	include	"sound/music/prelude.asm"
 		even
 Music91:	incbin	"sound/music/ESCAPE.bin"
 		even
@@ -2544,7 +2544,7 @@ Music93:	incbin	"sound/music/Mus93 - CSZ.bin" ; https://www.youtube.com/watch?v=
 		even
 Music94:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
-Music95:	include	"sound/music/key collected.asm"
+Music95:	incbin	"sound/music/Mus90 - Continue Screen.bin"
 		even
 Music96:	incbin	"sound/music/LOCKOUTNORM.bin"
 		even
