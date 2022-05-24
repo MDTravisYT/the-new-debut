@@ -5,14 +5,14 @@ smpsHeaderStartSong = 1
 	smpsHeaderTempo     $02, $02
 
 	smpsHeaderDAC       Mus91_Sonic_Got_Through_DAC
+	smpsHeaderFM        Mus91_Sonic_Got_Through_FM1,	$00, $0F
+	smpsHeaderFM        Mus91_Sonic_Got_Through_FM2,	$00, $0F
+	smpsHeaderFM        Mus91_Sonic_Got_Through_FM3,	$00, $0F
+	smpsHeaderFM        Mus91_Sonic_Got_Through_FM4,	$00, $0F
 	smpsHeaderFM        Mus91_Stop,	$00, $0A
-	smpsHeaderFM        Mus91_Stop,	$00, $0A
-	smpsHeaderFM        Mus91_Stop,	$00, $0A
-	smpsHeaderFM        Mus91_Stop,	$00, $0A
-	smpsHeaderFM        Mus91_Stop,	$00, $0A
-	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG1,	$F4, $02, $00, fTone_07
-	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG2,	$F2, $02, $00, fTone_07
-	smpsHeaderPSG       Mus91_Stop,	$00, $0A, $00, fTone_04
+	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG1,	$F4, $02, $00, fTone_08
+	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG2,	$F4, $02, $00, fTone_08
+	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG3,	$00, $00, $00, fTone_04
 
 ; FM1 Data
 Mus91_Sonic_Got_Through_FM1:
@@ -37,14 +37,20 @@ Mus91_Sonic_Got_Through_FM4:
 	smpsStop
 ; PSG2 Data
 Mus91_Sonic_Got_Through_PSG2:
-	dc.b		nRst, $05, nE2, $05
-	smpsJump	PreludePSGJump
+	smpsNoteFill        $08
+	dc.b		nRst, $05, nD3, nD4, $04, nB3, nD4, nB3, nD4, nB3, nD4, nB3, nD4, nB3, nCs4, nA3, nD4, nB3, nE4, nCs4, $04
+	smpsStop
 ; PSG1 Data
 Mus91_Sonic_Got_Through_PSG1:
+	smpsNoteFill        $08
 	dc.b		nRst, $08
-	
-PreludePSGJump:
-	dc.b		nE4, $04, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nD4, nB3, nE4, nCs4, nFs4, nD4, $08
+	dc.b		nE4, $04, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nD4, nB3, nE4, nCs4, nFs4, nD4, $04
+	smpsStop
+; PSG3 Data
+Mus91_Sonic_Got_Through_PSG3:
+	smpsPSGform         $E7
+	smpsNoteFill        $06
+	dc.b	nRst, $08, nA5, nA4, nA5, nA4, nA5, nA4, nA4, nA4
 	smpsStop
 ; DAC Data
 Mus91_Sonic_Got_Through_DAC:

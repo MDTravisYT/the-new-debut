@@ -55355,14 +55355,14 @@
 0006F246 0603                       	smpsHeaderChan      $06, $03
 0006F248 0202                       	smpsHeaderTempo     $02, $02
 0006F24A                            
-0006F24E 0000 000A                  	smpsHeaderFM        Mus91_Stop,	$00, $0A
-0006F252 0000 000A                  	smpsHeaderFM        Mus91_Stop,	$00, $0A
-0006F256 0000 000A                  	smpsHeaderFM        Mus91_Stop,	$00, $0A
-0006F25A 0000 000A                  	smpsHeaderFM        Mus91_Stop,	$00, $0A
+0006F24E 0000 000F                  	smpsHeaderFM        Mus91_Sonic_Got_Through_FM1,	$00, $0F
+0006F252 0000 000F                  	smpsHeaderFM        Mus91_Sonic_Got_Through_FM2,	$00, $0F
+0006F256 0000 000F                  	smpsHeaderFM        Mus91_Sonic_Got_Through_FM3,	$00, $0F
+0006F25A 0000 000F                  	smpsHeaderFM        Mus91_Sonic_Got_Through_FM4,	$00, $0F
 0006F25E 0000 000A                  	smpsHeaderFM        Mus91_Stop,	$00, $0A
-0006F262 0000 F402 0007             	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG1,	$F4, $02, $00, fTone_07
-0006F268 0000 F202 0007             	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG2,	$F2, $02, $00, fTone_07
-0006F26E 0000 000A 0004             	smpsHeaderPSG       Mus91_Stop,	$00, $0A, $00, fTone_04
+0006F262 0000 F402 0008             	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG1,	$F4, $02, $00, fTone_08
+0006F268 0000 F402 0008             	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG2,	$F4, $02, $00, fTone_08
+0006F26E 0000 0000 0004             	smpsHeaderPSG       Mus91_Sonic_Got_Through_PSG3,	$00, $00, $00, fTone_04
 0006F274                            
 0006F274                            ; FM1 Data
 0006F274                            Mus91_Sonic_Got_Through_FM1:
@@ -55383,858 +55383,864 @@
 0006F2B9 F2                         	smpsStop
 0006F2BA                            ; PSG2 Data
 0006F2BA                            Mus91_Sonic_Got_Through_PSG2:
-0006F2BA 8005 9D05                  	dc.b		nRst, $05, nE2, $05
-0006F2BE F600 00                    	smpsJump	PreludePSGJump
-0006F2C1                            ; PSG1 Data
-0006F2C1                            Mus91_Sonic_Got_Through_PSG1:
-0006F2C1 8008                       	dc.b		nRst, $08
-0006F2C3                            	
-0006F2C3                            PreludePSGJump:
-0006F2C3 B504 B1B5 B1B5 B1B5 B1B5+  	dc.b		nE4, $04, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nD4, nB3, nE4, nCs4, nFs4, nD4, $08
-0006F2D5 F2                         	smpsStop
-0006F2D6                            ; DAC Data
-0006F2D6                            Mus91_Sonic_Got_Through_DAC:
-0006F2D6 8108 8182 0282 8282 8204+  	dc.b	dKick, $08, dKick, dSnare, $02, dSnare, dSnare, dSnare, dSnare, $04, dSnare, dKick, $08, dKick, dHiTimpani, $04, dVLowTimpani, dHiTimpani, dVLowTimpani, dHiTimpani, dVLowTimpani
-0006F2EB                            
-0006F2EB                            ; PSG1 Data
-0006F2EB                            Mus91_Stop:
-0006F2EB F2                         	smpsStop
-0006F2EC                            
-0006F2EC                            
-0006F2EC                            Mus91_Sonic_Got_Through_Voices:
-0006F2EC                            ;	Voice $00
-0006F2EC                            ;	$3D
-0006F2EC                            ;	$01, $02, $00, $01, 	$1F, $0E, $0E, $0E, 	$07, $1F, $1F, $1F
-0006F2EC                            ;	$00, $00, $00, $00, 	$1F, $0F, $0F, $0F, 	$17, $8D, $8C, $8C
-0006F2EC                            	smpsVcAlgorithm     $02
-0006F2EC                            	smpsVcFeedback      $07
-0006F2EC                            	smpsVcUnusedBits    $00
-0006F2EC                            	smpsVcDetune        $00, $00, $00, $00
-0006F2EC                            	smpsVcCoarseFreq    $01, $01, $07, $01
-0006F2EC                            	smpsVcRateScale     $01, $02, $02, $02
-0006F2EC                            	smpsVcAttackRate    $13, $0D, $0E, $0E
-0006F2EC                            	smpsVcAmpMod        $00, $00, $00, $00
-0006F2EC                            	smpsVcDecayRate1    $03, $0E, $0E, $0E
-0006F2EC                            	smpsVcDecayRate2    $07, $00, $00, $00
-0006F2EC                            	smpsVcDecayLevel    $00, $01, $0F, $01
-0006F2EC                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-0006F2EC 3A01 0701 018E 8E8D 530E+  	smpsVcTotalLevel    $00, $27, $28, $18
-0006F305                            
-0006F305                            
-0006F305                            
-0006F306 00                         		even
-0006F306                            Music91:	incbin	"sound/music/ESCAPE.bin"
-000711AE                            		even
-000711AE                            Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
-000741A2                            		even
-000741A2                            Music93:	incbin	"sound/music/Mus93 - CSZ.bin" ; https://www.youtube.com/watch?v=kH2cWFlPXnk
-00074684                            		even
-00074684                            Music94:	incbin	"sound/music/Mus90 - Continue Screen.bin"
-00074788                            		even
-00074788                            Music95:	incbin	"sound/music/Mus90 - Continue Screen.bin"
-0007488C                            		even
-0007488C                            Music96:	incbin	"sound/music/LOCKOUTNORM.bin"
-00075936                            		even
-00075936                            ; ---------------------------------------------------------------------------
-00075936                            ; Sound	effect pointers
-00075936                            ; ---------------------------------------------------------------------------
-00075936                            SoundIndex:
-00075936 0000 0000                  ptr_sndA0:	dc.l SoundA0
-0007593A 0000 0000                  ptr_sndA1:	dc.l SoundA1
-0007593E 0000 0000                  ptr_sndA2:	dc.l SoundA2
-00075942 0000 0000                  ptr_sndA3:	dc.l SoundA3
-00075946 0000 0000                  ptr_sndA4:	dc.l SoundA4
-0007594A 0000 0000                  ptr_sndA5:	dc.l SoundA5
-0007594E 0000 0000                  ptr_sndA6:	dc.l SoundA6
-00075952 0000 0000                  ptr_sndA7:	dc.l SoundA7
-00075956 0000 0000                  ptr_sndA8:	dc.l SoundA8
-0007595A 0000 0000                  ptr_sndA9:	dc.l SoundA9
-0007595E 0000 0000                  ptr_sndAA:	dc.l SoundAA
-00075962 0000 0000                  ptr_sndAB:	dc.l SoundAB
-00075966 0000 0000                  ptr_sndAC:	dc.l SoundAC
-0007596A 0000 0000                  ptr_sndAD:	dc.l SoundAD
-0007596E 0000 0000                  ptr_sndAE:	dc.l SoundAE
-00075972 0000 0000                  ptr_sndAF:	dc.l SoundAF
-00075976 0000 0000                  ptr_sndB0:	dc.l SoundB0
-0007597A 0000 0000                  ptr_sndB1:	dc.l SoundB1
-0007597E 0000 0000                  ptr_sndB2:	dc.l SoundB2
-00075982 0000 0000                  ptr_sndB3:	dc.l SoundB3
-00075986 0000 0000                  ptr_sndB4:	dc.l SoundB4
-0007598A 0000 0000                  ptr_sndB5:	dc.l SoundB5
-0007598E 0000 0000                  ptr_sndB6:	dc.l SoundB6
-00075992 0000 0000                  ptr_sndB7:	dc.l SoundB7
-00075996 0000 0000                  ptr_sndB8:	dc.l SoundB8
-0007599A 0000 0000                  ptr_sndB9:	dc.l SoundB9
-0007599E 0000 0000                  ptr_sndBA:	dc.l SoundBA
-000759A2 0000 0000                  ptr_sndBB:	dc.l SoundBB
-000759A6 0000 0000                  ptr_sndBC:	dc.l SoundBC
-000759AA 0000 0000                  ptr_sndBD:	dc.l SoundBD
-000759AE 0000 0000                  ptr_sndBE:	dc.l SoundBE
-000759B2 0000 0000                  ptr_sndBF:	dc.l SoundBF
-000759B6 0000 0000                  ptr_sndC0:	dc.l SoundC0
-000759BA 0000 0000                  ptr_sndC1:	dc.l SoundC1
-000759BE 0000 0000                  ptr_sndC2:	dc.l SoundC2
-000759C2 0000 0000                  ptr_sndC3:	dc.l SoundC3
-000759C6 0000 0000                  ptr_sndC4:	dc.l SoundC4
-000759CA 0000 0000                  ptr_sndC5:	dc.l SoundC5
-000759CE 0000 0000                  ptr_sndC6:	dc.l SoundC6
-000759D2 0000 0000                  ptr_sndC7:	dc.l SoundC7
-000759D6 0000 0000                  ptr_sndC8:	dc.l SoundC8
-000759DA 0000 0000                  ptr_sndC9:	dc.l SoundC9
-000759DE 0000 0000                  ptr_sndCA:	dc.l SoundCA
-000759E2 0000 0000                  ptr_sndCB:	dc.l SoundCB
-000759E6 0000 0000                  ptr_sndCC:	dc.l SoundCC
-000759EA 0000 0000                  ptr_sndCD:	dc.l SoundCD
-000759EE 0000 0000                  ptr_sndCE:	dc.l SoundCE
-000759F2 0000 0000                  ptr_sndCF:	dc.l SoundCF
-000759F6                            ptr_sndend
-000759F6                            ; ---------------------------------------------------------------------------
-000759F6                            ; Special sound effect pointers
-000759F6                            ; ---------------------------------------------------------------------------
-000759F6                            SpecSoundIndex:
-000759F6 0000 0000                  ptr_sndD0:	dc.l SoundD0
-000759FA                            ;ptr_sndD1:	dc.l SoundD1
-000759FA                            ptr_specend
-000759FA                            SoundA0:	incbin	"sound/sfx/SndA0 - Jump.bin"
-00075A10                            		even
-00075A10                            SoundA1:	include	"sound/sfx/SndA1 - Lamppost.asm"
-00075A10                            SndA1_Lamppost_Header:
-00075A10 =00000001                  smpsHeaderStartSong = 1
-00075A10 0000                       	smpsHeaderVoice     SndA1_Lamppost_Voices
-00075A12 01                         	smpsHeaderTempoSFX  $01
-00075A13 01                         	smpsHeaderChanSFX   $01
-00075A14                            
-00075A1A                            
-00075A1A                            ; FM5 Data
-00075A1A                            SndA1_Lamppost_FM5:
-00075A1C BD06 BA16                  	dc.b	nC5, $06, nA4, $16
-00075A20 F2                         	smpsStop
-00075A21                            
-00075A21                            SndA1_Lamppost_Voices:
-00075A21                            ;	Voice $00
-00075A21                            ;	$3C
-00075A21                            ;	$05, $01, $0A, $01, 	$56, $5C, $5C, $5C, 	$0E, $11, $11, $11
-00075A21                            ;	$09, $0A, $06, $0A, 	$4F, $3F, $3F, $3F, 	$17, $80, $20, $80
-00075A21                            	smpsVcAlgorithm     $04
-00075A21                            	smpsVcFeedback      $07
-00075A21                            	smpsVcUnusedBits    $00
-00075A21                            	smpsVcDetune        $00, $00, $00, $00
-00075A21                            	smpsVcCoarseFreq    $01, $0A, $01, $05
-00075A21                            	smpsVcRateScale     $01, $01, $01, $01
-00075A21                            	smpsVcAttackRate    $1C, $1C, $1C, $1C
-00075A21                            	smpsVcAmpMod        $00, $00, $00, $00
-00075A21                            	smpsVcDecayRate1    $11, $11, $11, $11
-00075A21                            	smpsVcDecayRate2    $0A, $06, $0A, $06
-00075A21                            	smpsVcDecayLevel    $03, $03, $03, $03
-00075A21                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075A21 3C05 010A 015C 5C5C 5C11+  	smpsVcTotalLevel    $00, $20, $00, $17
-00075A3A                            
-00075A3A                            
-00075A3A                            		even
-00075A3A                            SoundA2:	incbin	"sound/sfx/SndA2.bin"
-00075A6E 00                         		even
-00075A6E                            SoundA3:	include	"sound/sfx/SndA3 - Death.asm"
-00075A6E                            SndA3_Death_Header:
-00075A6E =00000001                  smpsHeaderStartSong = 1
-00075A6E 0000                       	smpsHeaderVoice     SndA3_Death_Voices
-00075A70 01                         	smpsHeaderTempoSFX  $01
-00075A71 01                         	smpsHeaderChanSFX   $01
-00075A72                            
-00075A78                            
-00075A78                            ; FM5 Data
-00075A78                            SndA3_Death_FM5:
-00075A7A B007 E7AD                  	dc.b	nB3, $07, smpsNoAttack, nAb3
-00075A7E                            
-00075A7E                            SndA3_Death_Loop00:
-00075A7E 01                         	dc.b	$01
-00075A7F E601                       	smpsAlterVol        $01
-00075A81 F700 2FFF F9               	smpsLoop            $00, $2F, SndA3_Death_Loop00
-00075A86 F2                         	smpsStop
-00075A87                            
-00075A87                            SndA3_Death_Voices:
-00075A87                            ;	Voice $00
-00075A87                            ;	$30
-00075A87                            ;	$30, $30, $30, $30, 	$9E, $D8, $DC, $DC, 	$0E, $0A, $04, $05
-00075A87                            ;	$08, $08, $08, $08, 	$BF, $BF, $BF, $BF, 	$14, $3C, $14, $80
-00075A87                            	smpsVcAlgorithm     $00
-00075A87                            	smpsVcFeedback      $06
-00075A87                            	smpsVcUnusedBits    $00
-00075A87                            	smpsVcDetune        $03, $03, $03, $03
-00075A87                            	smpsVcCoarseFreq    $00, $00, $00, $00
-00075A87                            	smpsVcRateScale     $03, $03, $03, $02
-00075A87                            	smpsVcAttackRate    $1C, $1C, $18, $1E
-00075A87                            	smpsVcAmpMod        $00, $00, $00, $00
-00075A87                            	smpsVcDecayRate1    $05, $04, $0A, $0E
-00075A87                            	smpsVcDecayRate2    $08, $08, $08, $08
-00075A87                            	smpsVcDecayLevel    $0B, $0B, $0B, $0B
-00075A87                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075A87 3030 3030 309E D8DC DC0E+  	smpsVcTotalLevel    $00, $14, $3C, $14
+0006F2BA E808                       	smpsNoteFill        $08
+0006F2BC 8005 A7B3 04B0 B3B0 B3B0+  	dc.b		nRst, $05, nD3, nD4, $04, nB3, nD4, nB3, nD4, nB3, nD4, nB3, nD4, nB3, nCs4, nA3, nD4, nB3, nE4, nCs4, $04
+0006F2D1 F2                         	smpsStop
+0006F2D2                            ; PSG1 Data
+0006F2D2                            Mus91_Sonic_Got_Through_PSG1:
+0006F2D2 E808                       	smpsNoteFill        $08
+0006F2D4 8008                       	dc.b		nRst, $08
+0006F2D6 B504 B1B5 B1B5 B1B5 B1B5+  	dc.b		nE4, $04, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nE4, nC4, nD4, nB3, nE4, nCs4, nFs4, nD4, $04
+0006F2E8 F2                         	smpsStop
+0006F2E9                            ; PSG3 Data
+0006F2E9                            Mus91_Sonic_Got_Through_PSG3:
+0006F2E9 F3E7                       	smpsPSGform         $E7
+0006F2EB E806                       	smpsNoteFill        $06
+0006F2ED 8008 C6BA C6BA C6BA BABA   	dc.b	nRst, $08, nA5, nA4, nA5, nA4, nA5, nA4, nA4, nA4
+0006F2F7 F2                         	smpsStop
+0006F2F8                            ; DAC Data
+0006F2F8                            Mus91_Sonic_Got_Through_DAC:
+0006F2F8 8108 8182 0282 8282 8204+  	dc.b	dKick, $08, dKick, dSnare, $02, dSnare, dSnare, dSnare, dSnare, $04, dSnare, dKick, $08, dKick, dHiTimpani, $04, dVLowTimpani, dHiTimpani, dVLowTimpani, dHiTimpani, dVLowTimpani
+0006F30D                            
+0006F30D                            ; PSG1 Data
+0006F30D                            Mus91_Stop:
+0006F30D F2                         	smpsStop
+0006F30E                            
+0006F30E                            
+0006F30E                            Mus91_Sonic_Got_Through_Voices:
+0006F30E                            ;	Voice $00
+0006F30E                            ;	$3D
+0006F30E                            ;	$01, $02, $00, $01, 	$1F, $0E, $0E, $0E, 	$07, $1F, $1F, $1F
+0006F30E                            ;	$00, $00, $00, $00, 	$1F, $0F, $0F, $0F, 	$17, $8D, $8C, $8C
+0006F30E                            	smpsVcAlgorithm     $02
+0006F30E                            	smpsVcFeedback      $07
+0006F30E                            	smpsVcUnusedBits    $00
+0006F30E                            	smpsVcDetune        $00, $00, $00, $00
+0006F30E                            	smpsVcCoarseFreq    $01, $01, $07, $01
+0006F30E                            	smpsVcRateScale     $01, $02, $02, $02
+0006F30E                            	smpsVcAttackRate    $13, $0D, $0E, $0E
+0006F30E                            	smpsVcAmpMod        $00, $00, $00, $00
+0006F30E                            	smpsVcDecayRate1    $03, $0E, $0E, $0E
+0006F30E                            	smpsVcDecayRate2    $07, $00, $00, $00
+0006F30E                            	smpsVcDecayLevel    $00, $01, $0F, $01
+0006F30E                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+0006F30E 3A01 0701 018E 8E8D 530E+  	smpsVcTotalLevel    $00, $27, $28, $18
+0006F327                            
+0006F327                            
+0006F327                            
+0006F328 00                         		even
+0006F328                            Music91:	incbin	"sound/music/ESCAPE.bin"
+000711D0                            		even
+000711D0                            Music92:	incbin	"sound/music/Mus92 - IMZ.bin"
+000741C4                            		even
+000741C4                            Music93:	incbin	"sound/music/Mus93 - CSZ.bin" ; https://www.youtube.com/watch?v=kH2cWFlPXnk
+000746A6                            		even
+000746A6                            Music94:	incbin	"sound/music/Mus90 - Continue Screen.bin"
+000747AA                            		even
+000747AA                            Music95:	incbin	"sound/music/Mus90 - Continue Screen.bin"
+000748AE                            		even
+000748AE                            Music96:	incbin	"sound/music/LOCKOUTNORM.bin"
+00075958                            		even
+00075958                            ; ---------------------------------------------------------------------------
+00075958                            ; Sound	effect pointers
+00075958                            ; ---------------------------------------------------------------------------
+00075958                            SoundIndex:
+00075958 0000 0000                  ptr_sndA0:	dc.l SoundA0
+0007595C 0000 0000                  ptr_sndA1:	dc.l SoundA1
+00075960 0000 0000                  ptr_sndA2:	dc.l SoundA2
+00075964 0000 0000                  ptr_sndA3:	dc.l SoundA3
+00075968 0000 0000                  ptr_sndA4:	dc.l SoundA4
+0007596C 0000 0000                  ptr_sndA5:	dc.l SoundA5
+00075970 0000 0000                  ptr_sndA6:	dc.l SoundA6
+00075974 0000 0000                  ptr_sndA7:	dc.l SoundA7
+00075978 0000 0000                  ptr_sndA8:	dc.l SoundA8
+0007597C 0000 0000                  ptr_sndA9:	dc.l SoundA9
+00075980 0000 0000                  ptr_sndAA:	dc.l SoundAA
+00075984 0000 0000                  ptr_sndAB:	dc.l SoundAB
+00075988 0000 0000                  ptr_sndAC:	dc.l SoundAC
+0007598C 0000 0000                  ptr_sndAD:	dc.l SoundAD
+00075990 0000 0000                  ptr_sndAE:	dc.l SoundAE
+00075994 0000 0000                  ptr_sndAF:	dc.l SoundAF
+00075998 0000 0000                  ptr_sndB0:	dc.l SoundB0
+0007599C 0000 0000                  ptr_sndB1:	dc.l SoundB1
+000759A0 0000 0000                  ptr_sndB2:	dc.l SoundB2
+000759A4 0000 0000                  ptr_sndB3:	dc.l SoundB3
+000759A8 0000 0000                  ptr_sndB4:	dc.l SoundB4
+000759AC 0000 0000                  ptr_sndB5:	dc.l SoundB5
+000759B0 0000 0000                  ptr_sndB6:	dc.l SoundB6
+000759B4 0000 0000                  ptr_sndB7:	dc.l SoundB7
+000759B8 0000 0000                  ptr_sndB8:	dc.l SoundB8
+000759BC 0000 0000                  ptr_sndB9:	dc.l SoundB9
+000759C0 0000 0000                  ptr_sndBA:	dc.l SoundBA
+000759C4 0000 0000                  ptr_sndBB:	dc.l SoundBB
+000759C8 0000 0000                  ptr_sndBC:	dc.l SoundBC
+000759CC 0000 0000                  ptr_sndBD:	dc.l SoundBD
+000759D0 0000 0000                  ptr_sndBE:	dc.l SoundBE
+000759D4 0000 0000                  ptr_sndBF:	dc.l SoundBF
+000759D8 0000 0000                  ptr_sndC0:	dc.l SoundC0
+000759DC 0000 0000                  ptr_sndC1:	dc.l SoundC1
+000759E0 0000 0000                  ptr_sndC2:	dc.l SoundC2
+000759E4 0000 0000                  ptr_sndC3:	dc.l SoundC3
+000759E8 0000 0000                  ptr_sndC4:	dc.l SoundC4
+000759EC 0000 0000                  ptr_sndC5:	dc.l SoundC5
+000759F0 0000 0000                  ptr_sndC6:	dc.l SoundC6
+000759F4 0000 0000                  ptr_sndC7:	dc.l SoundC7
+000759F8 0000 0000                  ptr_sndC8:	dc.l SoundC8
+000759FC 0000 0000                  ptr_sndC9:	dc.l SoundC9
+00075A00 0000 0000                  ptr_sndCA:	dc.l SoundCA
+00075A04 0000 0000                  ptr_sndCB:	dc.l SoundCB
+00075A08 0000 0000                  ptr_sndCC:	dc.l SoundCC
+00075A0C 0000 0000                  ptr_sndCD:	dc.l SoundCD
+00075A10 0000 0000                  ptr_sndCE:	dc.l SoundCE
+00075A14 0000 0000                  ptr_sndCF:	dc.l SoundCF
+00075A18                            ptr_sndend
+00075A18                            ; ---------------------------------------------------------------------------
+00075A18                            ; Special sound effect pointers
+00075A18                            ; ---------------------------------------------------------------------------
+00075A18                            SpecSoundIndex:
+00075A18 0000 0000                  ptr_sndD0:	dc.l SoundD0
+00075A1C                            ;ptr_sndD1:	dc.l SoundD1
+00075A1C                            ptr_specend
+00075A1C                            SoundA0:	incbin	"sound/sfx/SndA0 - Jump.bin"
+00075A32                            		even
+00075A32                            SoundA1:	include	"sound/sfx/SndA1 - Lamppost.asm"
+00075A32                            SndA1_Lamppost_Header:
+00075A32 =00000001                  smpsHeaderStartSong = 1
+00075A32 0000                       	smpsHeaderVoice     SndA1_Lamppost_Voices
+00075A34 01                         	smpsHeaderTempoSFX  $01
+00075A35 01                         	smpsHeaderChanSFX   $01
+00075A36                            
+00075A3C                            
+00075A3C                            ; FM5 Data
+00075A3C                            SndA1_Lamppost_FM5:
+00075A3E BD06 BA16                  	dc.b	nC5, $06, nA4, $16
+00075A42 F2                         	smpsStop
+00075A43                            
+00075A43                            SndA1_Lamppost_Voices:
+00075A43                            ;	Voice $00
+00075A43                            ;	$3C
+00075A43                            ;	$05, $01, $0A, $01, 	$56, $5C, $5C, $5C, 	$0E, $11, $11, $11
+00075A43                            ;	$09, $0A, $06, $0A, 	$4F, $3F, $3F, $3F, 	$17, $80, $20, $80
+00075A43                            	smpsVcAlgorithm     $04
+00075A43                            	smpsVcFeedback      $07
+00075A43                            	smpsVcUnusedBits    $00
+00075A43                            	smpsVcDetune        $00, $00, $00, $00
+00075A43                            	smpsVcCoarseFreq    $01, $0A, $01, $05
+00075A43                            	smpsVcRateScale     $01, $01, $01, $01
+00075A43                            	smpsVcAttackRate    $1C, $1C, $1C, $1C
+00075A43                            	smpsVcAmpMod        $00, $00, $00, $00
+00075A43                            	smpsVcDecayRate1    $11, $11, $11, $11
+00075A43                            	smpsVcDecayRate2    $0A, $06, $0A, $06
+00075A43                            	smpsVcDecayLevel    $03, $03, $03, $03
+00075A43                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075A43 3C05 010A 015C 5C5C 5C11+  	smpsVcTotalLevel    $00, $20, $00, $17
+00075A5C                            
+00075A5C                            
+00075A5C                            		even
+00075A5C                            SoundA2:	incbin	"sound/sfx/SndA2.bin"
+00075A90 00                         		even
+00075A90                            SoundA3:	include	"sound/sfx/SndA3 - Death.asm"
+00075A90                            SndA3_Death_Header:
+00075A90 =00000001                  smpsHeaderStartSong = 1
+00075A90 0000                       	smpsHeaderVoice     SndA3_Death_Voices
+00075A92 01                         	smpsHeaderTempoSFX  $01
+00075A93 01                         	smpsHeaderChanSFX   $01
+00075A94                            
+00075A9A                            
+00075A9A                            ; FM5 Data
+00075A9A                            SndA3_Death_FM5:
+00075A9C B007 E7AD                  	dc.b	nB3, $07, smpsNoAttack, nAb3
 00075AA0                            
-00075AA0                            
-00075AA0                            		even
-00075AA0                            SoundA4:	incbin	"sound/sfx/SndA4 - Skid.bin"
-00075AC4                            		even
-00075AC4                            SoundA5:	incbin	"sound/sfx/SndA5.bin"
-00075B00 00                         		even
-00075B00                            SoundA6:	include	"sound/sfx/SndA6 - Hit Spikes.asm"
-00075B00                            SndA6_Hit_Spikes_Header:
-00075B00 =00000001                  smpsHeaderStartSong = 1
-00075B00 0000                       	smpsHeaderVoice     SndA6_Hit_Spikes_Voices
-00075B02 01                         	smpsHeaderTempoSFX  $01
-00075B03 01                         	smpsHeaderChanSFX   $01
-00075B04                            
-00075B0A                            
-00075B0A                            ; FM5 Data
-00075B0A                            SndA6_Hit_Spikes_FM5:
-00075B0C F001 01F0 FF               	smpsModSet          $01, $01, $F0, $FF
-00075B11 CF05 DA25                  	dc.b	nFs6, $05, nF7, $25
-00075B15 F2                         	smpsStop
-00075B16                            
-00075B16                            SndA6_Hit_Spikes_Voices:
-00075B16                            ;	Voice $00
-00075B16                            ;	$3B
-00075B16                            ;	$3C, $39, $30, $31, 	$DF, $1F, $1F, $DF, 	$04, $05, $04, $01
-00075B16                            ;	$04, $04, $04, $02, 	$FF, $0F, $1F, $AF, 	$29, $20, $0F, $80
-00075B16                            	smpsVcAlgorithm     $03
-00075B16                            	smpsVcFeedback      $07
-00075B16                            	smpsVcUnusedBits    $00
-00075B16                            	smpsVcDetune        $03, $03, $03, $03
-00075B16                            	smpsVcCoarseFreq    $01, $00, $09, $0C
-00075B16                            	smpsVcRateScale     $03, $00, $00, $03
-00075B16                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00075B16                            	smpsVcAmpMod        $00, $00, $00, $00
-00075B16                            	smpsVcDecayRate1    $01, $04, $05, $04
-00075B16                            	smpsVcDecayRate2    $02, $04, $04, $04
-00075B16                            	smpsVcDecayLevel    $0A, $01, $00, $0F
-00075B16                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075B16 3B3C 3930 31DF 1F1F DF04+  	smpsVcTotalLevel    $00, $0F, $20, $29
-00075B16 3B3C 3930 31DF 1F1F DF04+  	smpsVcTotalLevel    $00, $0F, $20, $29
-00075B30 00                         		even
-00075B30                            SoundA7:	incbin	"sound/sfx/SndA7 - Push Block.bin"
-00075B60                            		even
-00075B60                            SoundA8:	incbin	"sound/sfx/SndA8 - SS Goal.bin"
-00075B80                            		even
-00075B80                            SoundA9:	incbin	"sound/sfx/SndA9 - SS Item.bin"
-00075BBA                            		even
-00075BBA                            SoundAA:	incbin	"sound/sfx/SndAA - Splash.bin"
-00075BFC                            		even
-00075BFC                            SoundAB:	include	"sound/sfx/heart.asm"
-00075BFC                            SndCE_Ring_Left_Speaker_Header:
-00075BFC =00000001                  smpsHeaderStartSong = 1
-00075BFC 0000                       	smpsHeaderVoice     SndCE_Ring_Left_Speaker_Voices
-00075BFE 01                         	smpsHeaderTempoSFX  $01
-00075BFF 01                         	smpsHeaderChanSFX   $01
-00075C00                            
-00075C06                            
-00075C06                            ; FM4 Data
-00075C06                            SndCE_Ring_Left_Speaker_FM4:
-00075C08 BD04 C404 C91B             	dc.b	nC5, $04, nG5, $04, nC6, $1B
-00075C0E F2                         	smpsStop
-00075C0F                            
-00075C0F                            SndCE_Ring_Left_Speaker_Voices:
-00075C0F                            ;	Voice $00
-00075C0F                            ;	$04
-00075C0F                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
-00075C0F                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
-00075C0F                            	smpsVcAlgorithm     $04
-00075C0F                            	smpsVcFeedback      $00
-00075C0F                            	smpsVcUnusedBits    $00
-00075C0F                            	smpsVcDetune        $02, $07, $07, $03
-00075C0F                            	smpsVcCoarseFreq    $02, $07, $02, $07
-00075C0F                            	smpsVcRateScale     $00, $00, $00, $00
-00075C0F                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00075C0F                            	smpsVcAmpMod        $00, $00, $00, $00
-00075C0F                            	smpsVcDecayRate1    $0D, $07, $0A, $07
-00075C0F                            	smpsVcDecayRate2    $0B, $00, $0B, $00
-00075C0F                            	smpsVcDecayLevel    $00, $01, $00, $01
-00075C0F                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075C0F 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00075C0F 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00075C28                            		even
-00075C28                            SoundAC:	incbin	"sound/sfx/SndAC - Hit Boss.bin"
-00075C5C                            		even
-00075C5C                            SoundAD:	incbin	"sound/sfx/SndAD - Get Bubble.bin"
-00075C92                            		even
-00075C92                            SoundAE:	incbin	"sound/sfx/SndAE - Fireball.bin"
-00075CDC                            		even
-00075CDC                            SoundAF:	incbin	"sound/sfx/SndAF - Shield.bin"
-00075D0A                            		even
-00075D0A                            SoundB0:	incbin	"sound/sfx/SndB0 - Saw.bin"
-00075D3C                            		even
-00075D3C                            SoundB1:	incbin	"sound/sfx/SndB1 - Electric.bin"
-00075D68                            		even
-00075D68                            SoundB2:	include	"sound/sfx/SndB2 - Drown Death.asm"
-00075D68                            SndB2_Header:
-00075D68 =00000001                  smpsHeaderStartSong = 1
-00075D68 0000                       	smpsHeaderVoice     SndB6_Voices
-00075D6A 01                         	smpsHeaderTempoSFX  $01
-00075D6B 02                         	smpsHeaderChanSFX   $02
-00075D6C                            
-00075D78                            
-00075D78                            ; FM1 Data
-00075D78                            SndB6_FM1:
-00075D7A F001 0183 0C               	smpsModSet          $01, $01, $83, $0C
-00075D7F                            
-00075D7F                            SndB6_Loop01:
-00075D7F 8A05 05                    	dc.b	nA0, $05, $05
-00075D84 F700 0AFF F7               	smpsLoop            $00, $0A, SndB6_Loop01
-00075D89 F2                         	smpsStop
-00075D8A                            
-00075D8A                            ; FM2 Data
-00075D8A                            SndB6_FM2:
-00075D8A 8004                       	dc.b	nRst, $04
-00075D8E F001 016F 0E               	smpsModSet          $01, $01, $6F, $0E
-00075D93                            
-00075D93                            SndB6_Loop00:
-00075D93 8D04 05                    	dc.b	nC1, $04, $05
-00075D98 F700 0AFF F7               	smpsLoop            $00, $0A, SndB6_Loop00
-00075D9D F2                         	smpsStop
-00075D9E                            
-00075D9E                            SndB6_Voices:
-00075D9E                            ;	Voice $00
-00075D9E                            ;	$35
-00075D9E                            ;	$14, $1A, $04, $09, 	$0E, $10, $11, $0E, 	$0C, $15, $03, $06
-00075D9E                            ;	$16, $0E, $09, $10, 	$2F, $2F, $4F, $4F, 	$2F, $12, $12, $80
-00075D9E                            	smpsVcAlgorithm     $05
-00075D9E                            	smpsVcFeedback      $06
-00075D9E                            	smpsVcUnusedBits    $00
-00075D9E                            	smpsVcDetune        $00, $00, $01, $01
-00075D9E                            	smpsVcCoarseFreq    $09, $04, $0A, $04
-00075D9E                            	smpsVcRateScale     $00, $00, $00, $00
-00075D9E                            	smpsVcAttackRate    $0E, $11, $10, $0E
-00075D9E                            	smpsVcAmpMod        $00, $00, $00, $00
-00075D9E                            	smpsVcDecayRate1    $06, $03, $15, $0C
-00075D9E                            	smpsVcDecayRate2    $10, $09, $0E, $16
-00075D9E                            	smpsVcDecayLevel    $04, $04, $02, $02
-00075D9E                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075D9E 3514 1A04 090E 1011 0E0C+  	smpsVcTotalLevel    $80, $12, $12, $2F
-00075D9E 3514 1A04 090E 1011 0E0C+  	smpsVcTotalLevel    $80, $12, $12, $2F
-00075DB8 00                         		even
-00075DB8                            SoundB3:	incbin	"sound/sfx/SndB3 - Flamethrower.bin"
-00075E02                            		even
-00075E02                            SoundB4:	include	"sound/sfx/SndB4 - Bumper.asm"
-00075E02                            Bomper_Header:
-00075E02 =00000001                  smpsHeaderStartSong = 1
-00075E02 0000                       	smpsHeaderVoice     Bomper_Voices
-00075E04 01                         	smpsHeaderTempoSFX  $01
-00075E05 03                         	smpsHeaderChanSFX   $03
-00075E06                            
-00075E18                            
-00075E18                            ; FM5 Data
-00075E18                            Bomper_FM5:
-00075E1A F600 00                    	smpsJump            Bomper_Jump00
-00075E1D                            
-00075E1D                            ; FM3 Data
-00075E1D                            Bomper_FM3:
-00075E1F F600 00                    	smpsJump            Bomper_Jump00
-00075E22                            
-00075E22                            ; FM4 Data
-00075E22                            Bomper_FM4:
-00075E24 E107                       	smpsAlterNote       $07
-00075E26 8001                       	dc.b	nRst, $01
+00075AA0                            SndA3_Death_Loop00:
+00075AA0 01                         	dc.b	$01
+00075AA1 E601                       	smpsAlterVol        $01
+00075AA3 F700 2FFF F9               	smpsLoop            $00, $2F, SndA3_Death_Loop00
+00075AA8 F2                         	smpsStop
+00075AA9                            
+00075AA9                            SndA3_Death_Voices:
+00075AA9                            ;	Voice $00
+00075AA9                            ;	$30
+00075AA9                            ;	$30, $30, $30, $30, 	$9E, $D8, $DC, $DC, 	$0E, $0A, $04, $05
+00075AA9                            ;	$08, $08, $08, $08, 	$BF, $BF, $BF, $BF, 	$14, $3C, $14, $80
+00075AA9                            	smpsVcAlgorithm     $00
+00075AA9                            	smpsVcFeedback      $06
+00075AA9                            	smpsVcUnusedBits    $00
+00075AA9                            	smpsVcDetune        $03, $03, $03, $03
+00075AA9                            	smpsVcCoarseFreq    $00, $00, $00, $00
+00075AA9                            	smpsVcRateScale     $03, $03, $03, $02
+00075AA9                            	smpsVcAttackRate    $1C, $1C, $18, $1E
+00075AA9                            	smpsVcAmpMod        $00, $00, $00, $00
+00075AA9                            	smpsVcDecayRate1    $05, $04, $0A, $0E
+00075AA9                            	smpsVcDecayRate2    $08, $08, $08, $08
+00075AA9                            	smpsVcDecayLevel    $0B, $0B, $0B, $0B
+00075AA9                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075AA9 3030 3030 309E D8DC DC0E+  	smpsVcTotalLevel    $00, $14, $3C, $14
+00075AC2                            
+00075AC2                            
+00075AC2                            		even
+00075AC2                            SoundA4:	incbin	"sound/sfx/SndA4 - Skid.bin"
+00075AE6                            		even
+00075AE6                            SoundA5:	incbin	"sound/sfx/SndA5.bin"
+00075B22 00                         		even
+00075B22                            SoundA6:	include	"sound/sfx/SndA6 - Hit Spikes.asm"
+00075B22                            SndA6_Hit_Spikes_Header:
+00075B22 =00000001                  smpsHeaderStartSong = 1
+00075B22 0000                       	smpsHeaderVoice     SndA6_Hit_Spikes_Voices
+00075B24 01                         	smpsHeaderTempoSFX  $01
+00075B25 01                         	smpsHeaderChanSFX   $01
+00075B26                            
+00075B2C                            
+00075B2C                            ; FM5 Data
+00075B2C                            SndA6_Hit_Spikes_FM5:
+00075B2E F001 01F0 FF               	smpsModSet          $01, $01, $F0, $FF
+00075B33 CF05 DA25                  	dc.b	nFs6, $05, nF7, $25
+00075B37 F2                         	smpsStop
+00075B38                            
+00075B38                            SndA6_Hit_Spikes_Voices:
+00075B38                            ;	Voice $00
+00075B38                            ;	$3B
+00075B38                            ;	$3C, $39, $30, $31, 	$DF, $1F, $1F, $DF, 	$04, $05, $04, $01
+00075B38                            ;	$04, $04, $04, $02, 	$FF, $0F, $1F, $AF, 	$29, $20, $0F, $80
+00075B38                            	smpsVcAlgorithm     $03
+00075B38                            	smpsVcFeedback      $07
+00075B38                            	smpsVcUnusedBits    $00
+00075B38                            	smpsVcDetune        $03, $03, $03, $03
+00075B38                            	smpsVcCoarseFreq    $01, $00, $09, $0C
+00075B38                            	smpsVcRateScale     $03, $00, $00, $03
+00075B38                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00075B38                            	smpsVcAmpMod        $00, $00, $00, $00
+00075B38                            	smpsVcDecayRate1    $01, $04, $05, $04
+00075B38                            	smpsVcDecayRate2    $02, $04, $04, $04
+00075B38                            	smpsVcDecayLevel    $0A, $01, $00, $0F
+00075B38                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075B38 3B3C 3930 31DF 1F1F DF04+  	smpsVcTotalLevel    $00, $0F, $20, $29
+00075B38 3B3C 3930 31DF 1F1F DF04+  	smpsVcTotalLevel    $00, $0F, $20, $29
+00075B52 00                         		even
+00075B52                            SoundA7:	incbin	"sound/sfx/SndA7 - Push Block.bin"
+00075B82                            		even
+00075B82                            SoundA8:	incbin	"sound/sfx/SndA8 - SS Goal.bin"
+00075BA2                            		even
+00075BA2                            SoundA9:	incbin	"sound/sfx/SndA9 - SS Item.bin"
+00075BDC                            		even
+00075BDC                            SoundAA:	incbin	"sound/sfx/SndAA - Splash.bin"
+00075C1E                            		even
+00075C1E                            SoundAB:	include	"sound/sfx/heart.asm"
+00075C1E                            SndCE_Ring_Left_Speaker_Header:
+00075C1E =00000001                  smpsHeaderStartSong = 1
+00075C1E 0000                       	smpsHeaderVoice     SndCE_Ring_Left_Speaker_Voices
+00075C20 01                         	smpsHeaderTempoSFX  $01
+00075C21 01                         	smpsHeaderChanSFX   $01
+00075C22                            
+00075C28                            
+00075C28                            ; FM4 Data
+00075C28                            SndCE_Ring_Left_Speaker_FM4:
+00075C2A BD04 C404 C91B             	dc.b	nC5, $04, nG5, $04, nC6, $1B
+00075C30 F2                         	smpsStop
+00075C31                            
+00075C31                            SndCE_Ring_Left_Speaker_Voices:
+00075C31                            ;	Voice $00
+00075C31                            ;	$04
+00075C31                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
+00075C31                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
+00075C31                            	smpsVcAlgorithm     $04
+00075C31                            	smpsVcFeedback      $00
+00075C31                            	smpsVcUnusedBits    $00
+00075C31                            	smpsVcDetune        $02, $07, $07, $03
+00075C31                            	smpsVcCoarseFreq    $02, $07, $02, $07
+00075C31                            	smpsVcRateScale     $00, $00, $00, $00
+00075C31                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00075C31                            	smpsVcAmpMod        $00, $00, $00, $00
+00075C31                            	smpsVcDecayRate1    $0D, $07, $0A, $07
+00075C31                            	smpsVcDecayRate2    $0B, $00, $0B, $00
+00075C31                            	smpsVcDecayLevel    $00, $01, $00, $01
+00075C31                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075C31 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00075C31 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00075C4A                            		even
+00075C4A                            SoundAC:	incbin	"sound/sfx/SndAC - Hit Boss.bin"
+00075C7E                            		even
+00075C7E                            SoundAD:	incbin	"sound/sfx/SndAD - Get Bubble.bin"
+00075CB4                            		even
+00075CB4                            SoundAE:	incbin	"sound/sfx/SndAE - Fireball.bin"
+00075CFE                            		even
+00075CFE                            SoundAF:	incbin	"sound/sfx/SndAF - Shield.bin"
+00075D2C                            		even
+00075D2C                            SoundB0:	incbin	"sound/sfx/SndB0 - Saw.bin"
+00075D5E                            		even
+00075D5E                            SoundB1:	incbin	"sound/sfx/SndB1 - Electric.bin"
+00075D8A                            		even
+00075D8A                            SoundB2:	include	"sound/sfx/SndB2 - Drown Death.asm"
+00075D8A                            SndB2_Header:
+00075D8A =00000001                  smpsHeaderStartSong = 1
+00075D8A 0000                       	smpsHeaderVoice     SndB6_Voices
+00075D8C 01                         	smpsHeaderTempoSFX  $01
+00075D8D 02                         	smpsHeaderChanSFX   $02
+00075D8E                            
+00075D9A                            
+00075D9A                            ; FM1 Data
+00075D9A                            SndB6_FM1:
+00075D9C F001 0183 0C               	smpsModSet          $01, $01, $83, $0C
+00075DA1                            
+00075DA1                            SndB6_Loop01:
+00075DA1 8A05 05                    	dc.b	nA0, $05, $05
+00075DA6 F700 0AFF F7               	smpsLoop            $00, $0A, SndB6_Loop01
+00075DAB F2                         	smpsStop
+00075DAC                            
+00075DAC                            ; FM2 Data
+00075DAC                            SndB6_FM2:
+00075DAC 8004                       	dc.b	nRst, $04
+00075DB0 F001 016F 0E               	smpsModSet          $01, $01, $6F, $0E
+00075DB5                            
+00075DB5                            SndB6_Loop00:
+00075DB5 8D04 05                    	dc.b	nC1, $04, $05
+00075DBA F700 0AFF F7               	smpsLoop            $00, $0A, SndB6_Loop00
+00075DBF F2                         	smpsStop
+00075DC0                            
+00075DC0                            SndB6_Voices:
+00075DC0                            ;	Voice $00
+00075DC0                            ;	$35
+00075DC0                            ;	$14, $1A, $04, $09, 	$0E, $10, $11, $0E, 	$0C, $15, $03, $06
+00075DC0                            ;	$16, $0E, $09, $10, 	$2F, $2F, $4F, $4F, 	$2F, $12, $12, $80
+00075DC0                            	smpsVcAlgorithm     $05
+00075DC0                            	smpsVcFeedback      $06
+00075DC0                            	smpsVcUnusedBits    $00
+00075DC0                            	smpsVcDetune        $00, $00, $01, $01
+00075DC0                            	smpsVcCoarseFreq    $09, $04, $0A, $04
+00075DC0                            	smpsVcRateScale     $00, $00, $00, $00
+00075DC0                            	smpsVcAttackRate    $0E, $11, $10, $0E
+00075DC0                            	smpsVcAmpMod        $00, $00, $00, $00
+00075DC0                            	smpsVcDecayRate1    $06, $03, $15, $0C
+00075DC0                            	smpsVcDecayRate2    $10, $09, $0E, $16
+00075DC0                            	smpsVcDecayLevel    $04, $04, $02, $02
+00075DC0                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075DC0 3514 1A04 090E 1011 0E0C+  	smpsVcTotalLevel    $80, $12, $12, $2F
+00075DC0 3514 1A04 090E 1011 0E0C+  	smpsVcTotalLevel    $80, $12, $12, $2F
+00075DDA 00                         		even
+00075DDA                            SoundB3:	incbin	"sound/sfx/SndB3 - Flamethrower.bin"
+00075E24                            		even
+00075E24                            SoundB4:	include	"sound/sfx/SndB4 - Bumper.asm"
+00075E24                            Bomper_Header:
+00075E24 =00000001                  smpsHeaderStartSong = 1
+00075E24 0000                       	smpsHeaderVoice     Bomper_Voices
+00075E26 01                         	smpsHeaderTempoSFX  $01
+00075E27 03                         	smpsHeaderChanSFX   $03
 00075E28                            
-00075E28                            Bomper_Jump00:
-00075E28 BA20                       	dc.b	nA4, $20
-00075E2A F2                         	smpsStop
-00075E2B                            
-00075E2B                            
-00075E2B                            Bomper_Voices:
-00075E2B                            ;	Voice $00
-00075E2B                            ;	$3C
-00075E2B                            ;	$05, $01, $0A, $01, 	$56, $5C, $5C, $5C, 	$0E, $11, $11, $11
-00075E2B                            ;	$09, $0A, $06, $0A, 	$4F, $3F, $3F, $3F, 	$1F, $80, $2B, $80
-00075E2B                            	smpsVcAlgorithm     $04
-00075E2B                            	smpsVcFeedback      $07
-00075E2B                            	smpsVcUnusedBits    $00
-00075E2B                            	smpsVcDetune        $00, $00, $00, $00
-00075E2B                            	smpsVcCoarseFreq    $01, $0A, $01, $05
-00075E2B                            	smpsVcRateScale     $01, $01, $01, $01
-00075E2B                            	smpsVcAttackRate    $1C, $1C, $1C, $16
-00075E2B                            	smpsVcAmpMod        $00, $00, $00, $00
-00075E2B                            	smpsVcDecayRate1    $11, $11, $11, $0E
-00075E2B                            	smpsVcDecayRate2    $0A, $06, $0A, $09
-00075E2B                            	smpsVcDecayLevel    $03, $03, $03, $04
-00075E2B                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075E2B 3C05 010A 0156 5C5C 5C0E+  	smpsVcTotalLevel    $00, $2B, $00, $1F
+00075E3A                            
+00075E3A                            ; FM5 Data
+00075E3A                            Bomper_FM5:
+00075E3C F600 00                    	smpsJump            Bomper_Jump00
+00075E3F                            
+00075E3F                            ; FM3 Data
+00075E3F                            Bomper_FM3:
+00075E41 F600 00                    	smpsJump            Bomper_Jump00
 00075E44                            
-00075E44                            ;	Voice $01
-00075E44                            ;	$05
-00075E44                            ;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$12, $0C, $0C, $0C
-00075E44                            ;	$12, $08, $08, $08, 	$1F, $5F, $5F, $5F, 	$07, $80, $80, $80
-00075E44                            	smpsVcAlgorithm     $05
-00075E44                            	smpsVcFeedback      $00
-00075E44                            	smpsVcUnusedBits    $00
-00075E44                            	smpsVcDetune        $00, $00, $00, $00
-00075E44                            	smpsVcCoarseFreq    $00, $00, $00, $00
-00075E44                            	smpsVcRateScale     $00, $00, $00, $00
-00075E44                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00075E44                            	smpsVcAmpMod        $00, $00, $00, $00
-00075E44                            	smpsVcDecayRate1    $0C, $0C, $0C, $12
-00075E44                            	smpsVcDecayRate2    $08, $08, $08, $12
-00075E44                            	smpsVcDecayLevel    $05, $05, $05, $01
-00075E44                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075E44 0500 0000 001F 1F1F 1F12+  	smpsVcTotalLevel    $00, $00, $00, $07
-00075E5D                            
-00075E5D                            
-00075E5E 00                         		even
-00075E5E                            SoundB5:	include	"sound/sfx/SndB5 - Ring.asm"
-00075E5E                            SndB5_Ring_Header:
-00075E5E =00000001                  smpsHeaderStartSong = 1
-00075E5E 0000                       	smpsHeaderVoice     SndB5_Ring_Voices
-00075E60 01                         	smpsHeaderTempoSFX  $01
-00075E61 01                         	smpsHeaderChanSFX   $01
-00075E62                            
-00075E68                            
-00075E68                            ; FM5 Data
-00075E68                            SndB5_Ring_FM5:
-00075E6A E040                       	smpsPan             panRight, $00
-00075E6C BD04 C9                    	dc.b nC5, $04, nC6	; comment out the comma before 04 here to get sound intended
-00075E6F 1B                         	dc.b $1B
-00075E70 F2                         	smpsStop
-00075E71                            
-00075E71                            SndB5_Ring_Voices:
-00075E71                            ;	Voice $00
-00075E71                            ;	$04
-00075E71                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
-00075E71                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
-00075E71                            	smpsVcAlgorithm     $04
-00075E71                            	smpsVcFeedback      $00
-00075E71                            	smpsVcUnusedBits    $00
-00075E71                            	smpsVcDetune        $02, $07, $07, $03
-00075E71                            	smpsVcCoarseFreq    $02, $07, $02, $07
-00075E71                            	smpsVcRateScale     $00, $00, $00, $00
-00075E71                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00075E71                            	smpsVcAmpMod        $00, $00, $00, $00
-00075E71                            	smpsVcDecayRate1    $0D, $07, $0A, $07
-00075E71                            	smpsVcDecayRate2    $0B, $00, $0B, $00
-00075E71                            	smpsVcDecayLevel    $00, $01, $00, $01
-00075E71                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00075E71 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00075E71 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00075E8A                            		even
-00075E8A                            SoundB6:	include	"sound/sfx/SndB6 - Spikes Move.asm"
-00075E8A                            SndB6_Spikes_Move_Header:
-00075E8A =00000001                  smpsHeaderStartSong = 1
-00075E8A 0000                       	smpsHeaderVoice     SndB6_Spikes_Move_Voices
-00075E8C 01                         	smpsHeaderTempoSFX  $01
-00075E8D 01                         	smpsHeaderChanSFX   $01
-00075E8E                            
-00075E94                            
-00075E94                            ; PSG3 Data
-00075E94                            SndB6_Spikes_Move_PSG3:
-00075E94 F001 01F0 08               	smpsModSet          $01, $01, $F0, $08
-00075E99 F3E7                       	smpsPSGform         $E7
-00075E9B C107                       	dc.b	nE5, $07
-00075E9D                            
-00075E9D                            SndB6_Spikes_Move_Loop00:
-00075E9D D001                       	dc.b	nG6, $01
-00075E9F EC01                       	smpsPSGAlterVol     $01
-00075EA1 F700 0CFF F8               	smpsLoop            $00, $0C, SndB6_Spikes_Move_Loop00
-00075EA6 F2                         	smpsStop
-00075EA7                            
-00075EA7                            ; Song seems to not use any FM voices
-00075EA7                            SndB6_Spikes_Move_Voices:
-00075EA7                            SndB6_Spikes_Move_Voices:
-00075EA8 00                         		even
-00075EA8                            SoundB7:	incbin	"sound/sfx/SndB7 - Rumbling.bin"
-00075EE4                            		even
-00075EE4                            SoundB8:	incbin	"sound/sfx/Bomb.bin"
-00075F10                            		even
-00075F10                            SoundB9:	incbin	"sound/sfx/SndB9 - Collapse.bin"
-00075F74                            		even
-00075F74                            SoundBA:	incbin	"sound/sfx/SndBA - SS Glass.bin"
-00075F9C                            		even
-00075F9C                            SoundBB:	incbin	"sound/sfx/SndBB - Door.bin"
-00075FC8                            		even
-00075FC8                            SoundBC:	incbin	"sound/sfx/SndBC - Teleport.bin"
-0007600A                            		even
-0007600A                            SoundBD:	incbin	"sound/sfx/SndBD - ChainStomp.bin"
-0007605E                            		even
-0007605E                            SoundBE:	incbin	"sound/sfx/SndBE - Roll.bin"
-00076098                            		even
-00076098                            SoundBF:	include	"sound/sfx/SndBF - Get Continue.asm"
-00076098                            SndBF_Get_Continue_Header:
-00076098 =00000001                  smpsHeaderStartSong = 1
-00076098 0000                       	smpsHeaderVoice     SndBF_Get_Continue_Voices
-0007609A 01                         	smpsHeaderTempoSFX  $01
-0007609B 03                         	smpsHeaderChanSFX   $03
-0007609C                            
-000760AE                            
-000760AE                            ; FM3 Data
-000760AE                            SndBF_Get_Continue_FM3:
-000760B0 C907 CDD0 CBCE D2CD D0D4+  	dc.b	nC6, $07, nE6, nG6, nD6, nF6, nA6, nE6, nG6, nB6, nF6, nA6
-000760BC D5                         	dc.b	nC7
-000760BD                            
-000760BD                            SndBF_Get_Continue_Loop02:
-000760BD D007 D4D7                  	dc.b	nG6, $07, nB6, nD7
-000760C1 E605                       	smpsAlterVol        $05
-000760C3 F700 08FF F6               	smpsLoop            $00, $08, SndBF_Get_Continue_Loop02
-000760C8 F2                         	smpsStop
-000760C9                            
-000760C9                            ; FM4 Data
-000760C9                            SndBF_Get_Continue_FM4:
-000760CB E101                       	smpsAlterNote       $01
-000760CD 8007 CD15 CED0 D2          	dc.b	nRst, $07, nE6, $15, nF6, nG6, nA6
-000760D4                            
-000760D4                            SndBF_Get_Continue_Loop01:
-000760D4 D415                       	dc.b	nB6, $15
-000760D6 E605                       	smpsAlterVol        $05
-000760D8 F700 08FF F8               	smpsLoop            $00, $08, SndBF_Get_Continue_Loop01
-000760DD F2                         	smpsStop
-000760DE                            
-000760DE                            ; FM5 Data
-000760DE                            SndBF_Get_Continue_FM5:
-000760E0 E101                       	smpsAlterNote       $01
-000760E2 C915 CBCD CE               	dc.b	nC6, $15, nD6, nE6, nF6
-000760E7                            
-000760E7                            SndBF_Get_Continue_Loop00:
-000760E7 D015                       	dc.b	nG6, $15
-000760E9 E605                       	smpsAlterVol        $05
-000760EB F700 08FF F8               	smpsLoop            $00, $08, SndBF_Get_Continue_Loop00
-000760F0 F2                         	smpsStop
-000760F1                            
-000760F1                            SndBF_Get_Continue_Voices:
-000760F1                            ;	Voice $00
-000760F1                            ;	$14
-000760F1                            ;	$25, $33, $36, $11, 	$1F, $1F, $1F, $1F, 	$15, $18, $1C, $13
-000760F1                            ;	$0B, $08, $0D, $09, 	$0F, $9F, $8F, $0F, 	$24, $05, $0A, $80
-000760F1                            	smpsVcAlgorithm     $05
-000760F1                            	smpsVcFeedback      $02
-000760F1                            	smpsVcUnusedBits    $00
-000760F1                            	smpsVcDetune        $01, $03, $03, $02
-000760F1                            	smpsVcCoarseFreq    $01, $06, $03, $05
-000760F1                            	smpsVcRateScale     $00, $00, $00, $00
-000760F1                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-000760F1                            	smpsVcAmpMod        $00, $00, $00, $00
-000760F1                            	smpsVcDecayRate1    $13, $1C, $18, $15
-000760F1                            	smpsVcDecayRate2    $09, $0D, $08, $0B
-000760F1                            	smpsVcDecayLevel    $00, $08, $09, $00
-000760F1                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-000760F1 1525 3336 111F 1F1F 1F15+  	smpsVcTotalLevel    $00, $0A, $05, $24
-0007610A                            
-0007610A                            
-0007610A                            		even
-0007610A                            SoundC0:	incbin	"sound/sfx/SndC0 - Basaran Flap.bin"
-00076138                            		even
-00076138                            SoundC1:	incbin	"sound/sfx/SndC1 - Break Item.bin"
-00076166                            		even
-00076166                            SoundC2:	include	"sound/sfx/SndC2 - Drown Warning.asm"
-00076166                            SndC1_Header:
-00076166 =00000001                  smpsHeaderStartSong = 1
-00076166 0000                       	smpsHeaderVoice     SndC1_Voices
-00076168 01                         	smpsHeaderTempoSFX  $01
-00076169 01                         	smpsHeaderChanSFX   $01
-0007616A                            
-00076170                            
-00076170                            ; FM4 Data
-00076170                            SndC1_FM4:
-00076172 D506 40                    	dc.b	nC7, $06, $40
-00076175 F2                         	smpsStop
-00076176                            
-00076176                            SndC1_Voices:
-00076176                            ;	Voice $00
-00076176                            ;	$38
-00076176                            ;	$01, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$09, $09, $09, $0B
-00076176                            ;	$00, $00, $00, $00, 	$FF, $FF, $FF, $FF, 	$5C, $22, $27, $80
-00076176                            	smpsVcAlgorithm     $00
-00076176                            	smpsVcFeedback      $07
-00076176                            	smpsVcUnusedBits    $00
-00076176                            	smpsVcDetune        $00, $00, $00, $00
-00076176                            	smpsVcCoarseFreq    $00, $00, $00, $01
-00076176                            	smpsVcRateScale     $00, $00, $00, $00
-00076176                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00076176                            	smpsVcAmpMod        $00, $00, $00, $00
-00076176                            	smpsVcDecayRate1    $0B, $09, $09, $09
-00076176                            	smpsVcDecayRate2    $00, $00, $00, $00
-00076176                            	smpsVcDecayLevel    $0F, $0F, $0F, $0F
-00076176                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00076176 3801 0000 001F 1F1F 1F09+  	smpsVcTotalLevel    $80, $27, $22, $5C
-00076176 3801 0000 001F 1F1F 1F09+  	smpsVcTotalLevel    $80, $27, $22, $5C
-00076190 00                         		even
-00076190                            SoundC3:	incbin	"sound/sfx/SndC3 - Giant Ring.bin"
-0007620A                            		even
-0007620A                            SoundC4:	incbin	"sound/sfx/SndC4 - Bomb.bin"
-00076232                            		even
-00076232                            SoundC5:	include	"sound/sfx/SndC5 - Cash Register.asm"
-00076232                            SndC5_Cash_Register_Header:
-00076232 =00000001                  smpsHeaderStartSong = 1
-00076232 0000                       	smpsHeaderVoice     SndC5_Cash_Register_Voices
-00076234 01                         	smpsHeaderTempoSFX  $01
-00076235 03                         	smpsHeaderChanSFX   $03
-00076236                            
-00076248                            
-00076248                            ; FM5 Data
-00076248                            SndC5_Cash_Register_FM5:
-0007624A 8A08 8002 8A08             	dc.b	nA0, $08, nRst, $02, nA0, $08
-00076250 F2                         	smpsStop
-00076251                            
-00076251                            ; FM4 Data
-00076251                            SndC5_Cash_Register_FM4:
-00076253 8012 C635                  	dc.b	nRst, $12, nA5, $35
-00076257 F2                         	smpsStop
+00075E44                            ; FM4 Data
+00075E44                            Bomper_FM4:
+00075E46 E107                       	smpsAlterNote       $07
+00075E48 8001                       	dc.b	nRst, $01
+00075E4A                            
+00075E4A                            Bomper_Jump00:
+00075E4A BA20                       	dc.b	nA4, $20
+00075E4C F2                         	smpsStop
+00075E4D                            
+00075E4D                            
+00075E4D                            Bomper_Voices:
+00075E4D                            ;	Voice $00
+00075E4D                            ;	$3C
+00075E4D                            ;	$05, $01, $0A, $01, 	$56, $5C, $5C, $5C, 	$0E, $11, $11, $11
+00075E4D                            ;	$09, $0A, $06, $0A, 	$4F, $3F, $3F, $3F, 	$1F, $80, $2B, $80
+00075E4D                            	smpsVcAlgorithm     $04
+00075E4D                            	smpsVcFeedback      $07
+00075E4D                            	smpsVcUnusedBits    $00
+00075E4D                            	smpsVcDetune        $00, $00, $00, $00
+00075E4D                            	smpsVcCoarseFreq    $01, $0A, $01, $05
+00075E4D                            	smpsVcRateScale     $01, $01, $01, $01
+00075E4D                            	smpsVcAttackRate    $1C, $1C, $1C, $16
+00075E4D                            	smpsVcAmpMod        $00, $00, $00, $00
+00075E4D                            	smpsVcDecayRate1    $11, $11, $11, $0E
+00075E4D                            	smpsVcDecayRate2    $0A, $06, $0A, $09
+00075E4D                            	smpsVcDecayLevel    $03, $03, $03, $04
+00075E4D                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075E4D 3C05 010A 0156 5C5C 5C0E+  	smpsVcTotalLevel    $00, $2B, $00, $1F
+00075E66                            
+00075E66                            ;	Voice $01
+00075E66                            ;	$05
+00075E66                            ;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$12, $0C, $0C, $0C
+00075E66                            ;	$12, $08, $08, $08, 	$1F, $5F, $5F, $5F, 	$07, $80, $80, $80
+00075E66                            	smpsVcAlgorithm     $05
+00075E66                            	smpsVcFeedback      $00
+00075E66                            	smpsVcUnusedBits    $00
+00075E66                            	smpsVcDetune        $00, $00, $00, $00
+00075E66                            	smpsVcCoarseFreq    $00, $00, $00, $00
+00075E66                            	smpsVcRateScale     $00, $00, $00, $00
+00075E66                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00075E66                            	smpsVcAmpMod        $00, $00, $00, $00
+00075E66                            	smpsVcDecayRate1    $0C, $0C, $0C, $12
+00075E66                            	smpsVcDecayRate2    $08, $08, $08, $12
+00075E66                            	smpsVcDecayLevel    $05, $05, $05, $01
+00075E66                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075E66 0500 0000 001F 1F1F 1F12+  	smpsVcTotalLevel    $00, $00, $00, $07
+00075E7F                            
+00075E7F                            
+00075E80 00                         		even
+00075E80                            SoundB5:	include	"sound/sfx/SndB5 - Ring.asm"
+00075E80                            SndB5_Ring_Header:
+00075E80 =00000001                  smpsHeaderStartSong = 1
+00075E80 0000                       	smpsHeaderVoice     SndB5_Ring_Voices
+00075E82 01                         	smpsHeaderTempoSFX  $01
+00075E83 01                         	smpsHeaderChanSFX   $01
+00075E84                            
+00075E8A                            
+00075E8A                            ; FM5 Data
+00075E8A                            SndB5_Ring_FM5:
+00075E8C E040                       	smpsPan             panRight, $00
+00075E8E BD04 C9                    	dc.b nC5, $04, nC6	; comment out the comma before 04 here to get sound intended
+00075E91 1B                         	dc.b $1B
+00075E92 F2                         	smpsStop
+00075E93                            
+00075E93                            SndB5_Ring_Voices:
+00075E93                            ;	Voice $00
+00075E93                            ;	$04
+00075E93                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
+00075E93                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
+00075E93                            	smpsVcAlgorithm     $04
+00075E93                            	smpsVcFeedback      $00
+00075E93                            	smpsVcUnusedBits    $00
+00075E93                            	smpsVcDetune        $02, $07, $07, $03
+00075E93                            	smpsVcCoarseFreq    $02, $07, $02, $07
+00075E93                            	smpsVcRateScale     $00, $00, $00, $00
+00075E93                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00075E93                            	smpsVcAmpMod        $00, $00, $00, $00
+00075E93                            	smpsVcDecayRate1    $0D, $07, $0A, $07
+00075E93                            	smpsVcDecayRate2    $0B, $00, $0B, $00
+00075E93                            	smpsVcDecayLevel    $00, $01, $00, $01
+00075E93                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00075E93 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00075E93 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00075EAC                            		even
+00075EAC                            SoundB6:	include	"sound/sfx/SndB6 - Spikes Move.asm"
+00075EAC                            SndB6_Spikes_Move_Header:
+00075EAC =00000001                  smpsHeaderStartSong = 1
+00075EAC 0000                       	smpsHeaderVoice     SndB6_Spikes_Move_Voices
+00075EAE 01                         	smpsHeaderTempoSFX  $01
+00075EAF 01                         	smpsHeaderChanSFX   $01
+00075EB0                            
+00075EB6                            
+00075EB6                            ; PSG3 Data
+00075EB6                            SndB6_Spikes_Move_PSG3:
+00075EB6 F001 01F0 08               	smpsModSet          $01, $01, $F0, $08
+00075EBB F3E7                       	smpsPSGform         $E7
+00075EBD C107                       	dc.b	nE5, $07
+00075EBF                            
+00075EBF                            SndB6_Spikes_Move_Loop00:
+00075EBF D001                       	dc.b	nG6, $01
+00075EC1 EC01                       	smpsPSGAlterVol     $01
+00075EC3 F700 0CFF F8               	smpsLoop            $00, $0C, SndB6_Spikes_Move_Loop00
+00075EC8 F2                         	smpsStop
+00075EC9                            
+00075EC9                            ; Song seems to not use any FM voices
+00075EC9                            SndB6_Spikes_Move_Voices:
+00075EC9                            SndB6_Spikes_Move_Voices:
+00075ECA 00                         		even
+00075ECA                            SoundB7:	incbin	"sound/sfx/SndB7 - Rumbling.bin"
+00075F06                            		even
+00075F06                            SoundB8:	incbin	"sound/sfx/Bomb.bin"
+00075F32                            		even
+00075F32                            SoundB9:	incbin	"sound/sfx/SndB9 - Collapse.bin"
+00075F96                            		even
+00075F96                            SoundBA:	incbin	"sound/sfx/SndBA - SS Glass.bin"
+00075FBE                            		even
+00075FBE                            SoundBB:	incbin	"sound/sfx/SndBB - Door.bin"
+00075FEA                            		even
+00075FEA                            SoundBC:	incbin	"sound/sfx/SndBC - Teleport.bin"
+0007602C                            		even
+0007602C                            SoundBD:	incbin	"sound/sfx/SndBD - ChainStomp.bin"
+00076080                            		even
+00076080                            SoundBE:	incbin	"sound/sfx/SndBE - Roll.bin"
+000760BA                            		even
+000760BA                            SoundBF:	include	"sound/sfx/SndBF - Get Continue.asm"
+000760BA                            SndBF_Get_Continue_Header:
+000760BA =00000001                  smpsHeaderStartSong = 1
+000760BA 0000                       	smpsHeaderVoice     SndBF_Get_Continue_Voices
+000760BC 01                         	smpsHeaderTempoSFX  $01
+000760BD 03                         	smpsHeaderChanSFX   $03
+000760BE                            
+000760D0                            
+000760D0                            ; FM3 Data
+000760D0                            SndBF_Get_Continue_FM3:
+000760D2 C907 CDD0 CBCE D2CD D0D4+  	dc.b	nC6, $07, nE6, nG6, nD6, nF6, nA6, nE6, nG6, nB6, nF6, nA6
+000760DE D5                         	dc.b	nC7
+000760DF                            
+000760DF                            SndBF_Get_Continue_Loop02:
+000760DF D007 D4D7                  	dc.b	nG6, $07, nB6, nD7
+000760E3 E605                       	smpsAlterVol        $05
+000760E5 F700 08FF F6               	smpsLoop            $00, $08, SndBF_Get_Continue_Loop02
+000760EA F2                         	smpsStop
+000760EB                            
+000760EB                            ; FM4 Data
+000760EB                            SndBF_Get_Continue_FM4:
+000760ED E101                       	smpsAlterNote       $01
+000760EF 8007 CD15 CED0 D2          	dc.b	nRst, $07, nE6, $15, nF6, nG6, nA6
+000760F6                            
+000760F6                            SndBF_Get_Continue_Loop01:
+000760F6 D415                       	dc.b	nB6, $15
+000760F8 E605                       	smpsAlterVol        $05
+000760FA F700 08FF F8               	smpsLoop            $00, $08, SndBF_Get_Continue_Loop01
+000760FF F2                         	smpsStop
+00076100                            
+00076100                            ; FM5 Data
+00076100                            SndBF_Get_Continue_FM5:
+00076102 E101                       	smpsAlterNote       $01
+00076104 C915 CBCD CE               	dc.b	nC6, $15, nD6, nE6, nF6
+00076109                            
+00076109                            SndBF_Get_Continue_Loop00:
+00076109 D015                       	dc.b	nG6, $15
+0007610B E605                       	smpsAlterVol        $05
+0007610D F700 08FF F8               	smpsLoop            $00, $08, SndBF_Get_Continue_Loop00
+00076112 F2                         	smpsStop
+00076113                            
+00076113                            SndBF_Get_Continue_Voices:
+00076113                            ;	Voice $00
+00076113                            ;	$14
+00076113                            ;	$25, $33, $36, $11, 	$1F, $1F, $1F, $1F, 	$15, $18, $1C, $13
+00076113                            ;	$0B, $08, $0D, $09, 	$0F, $9F, $8F, $0F, 	$24, $05, $0A, $80
+00076113                            	smpsVcAlgorithm     $05
+00076113                            	smpsVcFeedback      $02
+00076113                            	smpsVcUnusedBits    $00
+00076113                            	smpsVcDetune        $01, $03, $03, $02
+00076113                            	smpsVcCoarseFreq    $01, $06, $03, $05
+00076113                            	smpsVcRateScale     $00, $00, $00, $00
+00076113                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00076113                            	smpsVcAmpMod        $00, $00, $00, $00
+00076113                            	smpsVcDecayRate1    $13, $1C, $18, $15
+00076113                            	smpsVcDecayRate2    $09, $0D, $08, $0B
+00076113                            	smpsVcDecayLevel    $00, $08, $09, $00
+00076113                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00076113 1525 3336 111F 1F1F 1F15+  	smpsVcTotalLevel    $00, $0A, $05, $24
+0007612C                            
+0007612C                            
+0007612C                            		even
+0007612C                            SoundC0:	incbin	"sound/sfx/SndC0 - Basaran Flap.bin"
+0007615A                            		even
+0007615A                            SoundC1:	incbin	"sound/sfx/SndC1 - Break Item.bin"
+00076188                            		even
+00076188                            SoundC2:	include	"sound/sfx/SndC2 - Drown Warning.asm"
+00076188                            SndC1_Header:
+00076188 =00000001                  smpsHeaderStartSong = 1
+00076188 0000                       	smpsHeaderVoice     SndC1_Voices
+0007618A 01                         	smpsHeaderTempoSFX  $01
+0007618B 01                         	smpsHeaderChanSFX   $01
+0007618C                            
+00076192                            
+00076192                            ; FM4 Data
+00076192                            SndC1_FM4:
+00076194 D506 40                    	dc.b	nC7, $06, $40
+00076197 F2                         	smpsStop
+00076198                            
+00076198                            SndC1_Voices:
+00076198                            ;	Voice $00
+00076198                            ;	$38
+00076198                            ;	$01, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$09, $09, $09, $0B
+00076198                            ;	$00, $00, $00, $00, 	$FF, $FF, $FF, $FF, 	$5C, $22, $27, $80
+00076198                            	smpsVcAlgorithm     $00
+00076198                            	smpsVcFeedback      $07
+00076198                            	smpsVcUnusedBits    $00
+00076198                            	smpsVcDetune        $00, $00, $00, $00
+00076198                            	smpsVcCoarseFreq    $00, $00, $00, $01
+00076198                            	smpsVcRateScale     $00, $00, $00, $00
+00076198                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00076198                            	smpsVcAmpMod        $00, $00, $00, $00
+00076198                            	smpsVcDecayRate1    $0B, $09, $09, $09
+00076198                            	smpsVcDecayRate2    $00, $00, $00, $00
+00076198                            	smpsVcDecayLevel    $0F, $0F, $0F, $0F
+00076198                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00076198 3801 0000 001F 1F1F 1F09+  	smpsVcTotalLevel    $80, $27, $22, $5C
+00076198 3801 0000 001F 1F1F 1F09+  	smpsVcTotalLevel    $80, $27, $22, $5C
+000761B2 00                         		even
+000761B2                            SoundC3:	incbin	"sound/sfx/SndC3 - Giant Ring.bin"
+0007622C                            		even
+0007622C                            SoundC4:	incbin	"sound/sfx/SndC4 - Bomb.bin"
+00076254                            		even
+00076254                            SoundC5:	include	"sound/sfx/SndC5 - Cash Register.asm"
+00076254                            SndC5_Cash_Register_Header:
+00076254 =00000001                  smpsHeaderStartSong = 1
+00076254 0000                       	smpsHeaderVoice     SndC5_Cash_Register_Voices
+00076256 01                         	smpsHeaderTempoSFX  $01
+00076257 03                         	smpsHeaderChanSFX   $03
 00076258                            
-00076258                            ; PSG3 Data
-00076258                            SndC5_Cash_Register_PSG3:
-00076258 F502                       	smpsPSGvoice        fTone_02
-0007625A F3E7                       	smpsPSGform         $E7
-0007625C 8002 C205 C404 C205 C404   	dc.b	nRst, $02, nF5, $05, nG5, $04, nF5, $05, nG5, $04
-00076266 F2                         	smpsStop
-00076267                            
-00076267                            SndC5_Cash_Register_Voices:
-00076267                            ;	Voice $00
-00076267                            ;	$3B
-00076267                            ;	$03, $02, $02, $06, 	$18, $1A, $1A, $96, 	$17, $0E, $0A, $10
-00076267                            ;	$00, $00, $00, $00, 	$FF, $FF, $FF, $FF, 	$00, $28, $39, $80
-00076267                            	smpsVcAlgorithm     $03
-00076267                            	smpsVcFeedback      $07
-00076267                            	smpsVcUnusedBits    $00
-00076267                            	smpsVcDetune        $00, $00, $00, $00
-00076267                            	smpsVcCoarseFreq    $06, $02, $02, $03
-00076267                            	smpsVcRateScale     $02, $00, $00, $00
-00076267                            	smpsVcAttackRate    $16, $1A, $1A, $18
-00076267                            	smpsVcAmpMod        $00, $00, $00, $00
-00076267                            	smpsVcDecayRate1    $10, $0A, $0E, $17
-00076267                            	smpsVcDecayRate2    $00, $00, $00, $00
-00076267                            	smpsVcDecayLevel    $0F, $0F, $0F, $0F
-00076267                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00076267 3B03 0202 0618 1A1A 9617+  	smpsVcTotalLevel    $00, $39, $28, $00
-00076280                            
-00076280                            ;	Voice $01
-00076280                            ;	$04
-00076280                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
-00076280                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
-00076280                            	smpsVcAlgorithm     $04
-00076280                            	smpsVcFeedback      $00
-00076280                            	smpsVcUnusedBits    $00
-00076280                            	smpsVcDetune        $02, $07, $07, $03
-00076280                            	smpsVcCoarseFreq    $02, $07, $02, $07
-00076280                            	smpsVcRateScale     $00, $00, $00, $00
-00076280                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00076280                            	smpsVcAmpMod        $00, $00, $00, $00
-00076280                            	smpsVcDecayRate1    $0D, $07, $0A, $07
-00076280                            	smpsVcDecayRate2    $0B, $00, $0B, $00
-00076280                            	smpsVcDecayLevel    $00, $01, $00, $01
-00076280                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00076280 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00076280 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-0007629A 00                         		even
-0007629A                            SoundC6:	incbin	"sound/sfx/SndC6 - Ring Loss.bin"
-000762DC                            		even
-000762DC                            SoundC7:	include	"sound/sfx/SndC7 - Chain Rising.asm"
-000762DC                            SndC7_Chain_Rising_Header:
-000762DC =00000001                  smpsHeaderStartSong = 1
-000762DC 0000                       	smpsHeaderVoice     SndC7_Chain_Rising_Voices
-000762DE 01                         	smpsHeaderTempoSFX  $01
-000762DF 01                         	smpsHeaderChanSFX   $01
-000762E0                            
-000762E6                            
-000762E6                            ; FM5 Data
-000762E6                            SndC7_Chain_Rising_FM5:
-000762E8 B205 8004 B204 8004        	dc.b	nCs4, $05, nRst, $04, nCs4, $04, nRst, $04
-000762F0 F2                         	smpsStop
-000762F1                            
-000762F1                            SndC7_Chain_Rising_Voices:
-000762F1                            ;	Voice $00
-000762F1                            ;	$28
-000762F1                            ;	$2F, $5F, $37, $2B, 	$1F, $1F, $1F, $1F, 	$15, $15, $15, $13
-000762F1                            ;	$13, $0C, $0D, $10, 	$2F, $2F, $3F, $2F, 	$00, $10, $1F, $80
-000762F1                            	smpsVcAlgorithm     $00
-000762F1                            	smpsVcFeedback      $05
-000762F1                            	smpsVcUnusedBits    $00
-000762F1                            	smpsVcDetune        $02, $03, $05, $02
-000762F1                            	smpsVcCoarseFreq    $0B, $07, $0F, $0F
-000762F1                            	smpsVcRateScale     $00, $00, $00, $00
-000762F1                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-000762F1                            	smpsVcAmpMod        $00, $00, $00, $00
-000762F1                            	smpsVcDecayRate1    $13, $15, $15, $15
-000762F1                            	smpsVcDecayRate2    $10, $0D, $0C, $13
-000762F1                            	smpsVcDecayLevel    $02, $03, $02, $02
-000762F1                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-000762F1 282F 5F37 2B1F 1F1F 1F15+  	smpsVcTotalLevel    $00, $1F, $10, $00
-0007630A                            
-0007630A                            
-0007630A                            		even
-0007630A                            SoundC8:	incbin	"sound/sfx/SndC8 - Burning.bin"
-0007631C                            		even
-0007631C                            SoundC9:	include	"sound/sfx/SndC9 - Error.asm"
-0007631C                            Sound6D_Error_Header:
-0007631C =00000001                  smpsHeaderStartSong = 1
-0007631C 0000                       	smpsHeaderVoice     Sound6D_Error_Voices
-0007631E 01                         	smpsHeaderTempoSFX  $01
-0007631F 01                         	smpsHeaderChanSFX   $01
-00076320                            
-00076326                            
-00076326                            ; FM5 Data
-00076326                            Sound6D_Error_FM5:
-00076328 BD01 BEBF C0C1 C2C3 C4C5+  	dc.b		nC5,	$01,	nCs5,	nD5,	nEb5,	nE5,	nF5,	nFs5,	nG5,	nAb5,	nA5,	nBb5,	nB5,	nC6,	$1B
-00076337 F2                         	smpsStop
-00076338                            
-00076338                            Sound6D_Error_Voices:
-00076338                            ;	Voice $00
-00076338                            ;	$38
-00076338                            ;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$00, $00, $00, $00
-00076338                            ;	$00, $00, $00, $00, 	$0F, $0F, $0F, $0F, 	$1F, $17, $0C, $00
-00076338                            	smpsVcAlgorithm     $04
-00076338                            	smpsVcFeedback      $00
-00076338                            	smpsVcUnusedBits    $00
-00076338                            	smpsVcDetune        $02, $07, $07, $03
-00076338                            	smpsVcCoarseFreq    $02, $07, $02, $07
-00076338                            	smpsVcRateScale     $00, $00, $00, $00
-00076338                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00076338                            	smpsVcAmpMod        $00, $00, $00, $00
-00076338                            	smpsVcDecayRate1    $0D, $07, $0A, $07
-00076338                            	smpsVcDecayRate2    $0B, $00, $0B, $00
-00076338                            	smpsVcDecayLevel    $00, $01, $00, $01
-00076338                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00076338 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00076338 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00076352 00                         		even
-00076352                            SoundCA:	incbin	"sound/sfx/SndCA - Enter SS.bin"
-00076380                            		even
-00076380                            SoundCB:	incbin	"sound/sfx/SndCB - Wall Smash.bin"
-000763CC                            		even
-000763CC                            SoundCC:	include	"sound/sfx/SndCC - Spring.asm"
-000763CC                            SndCC_Spring_Header:
-000763CC =00000001                  smpsHeaderStartSong = 1
-000763CC 0000                       	smpsHeaderVoice     SndCC_Spring_Voices
-000763CE 01                         	smpsHeaderTempoSFX  $01
-000763CF 01                         	smpsHeaderChanSFX   $01
-000763D0                            
-000763D6                            
-000763D6                            ; FM4 Data
-000763D6                            SndCC_Spring_FM4:
-000763D8 8001                       	dc.b	nRst, $01
-000763DA F003 015D 0F               	smpsModSet          $03, $01, $5D, $0F
-000763DF B00C                       	dc.b	nB3, $0C
-000763E1 F4                         	smpsModOff
-000763E2                            
-000763E2                            SndCC_Spring_Loop00:
-000763E2 E7                         	dc.b	smpsNoAttack
-000763E3 E602                       	smpsAlterVol        $02
-000763E5 BD02                       	dc.b	nC5, $02
-000763E7 F700 19FF F7               	smpsLoop            $00, $19, SndCC_Spring_Loop00
-000763EC F2                         	smpsStop
-000763ED                            
-000763ED                            SndCC_Spring_Voices:
-000763ED                            ;	Voice $00
-000763ED                            ;	$20
-000763ED                            ;	$36, $35, $30, $31, 	$DF, $DF, $9F, $9F, 	$07, $06, $09, $06
-000763ED                            ;	$07, $06, $06, $08, 	$2F, $1F, $1F, $FF, 	$16, $30, $13, $80
-000763ED                            	smpsVcAlgorithm     $00
-000763ED                            	smpsVcFeedback      $04
-000763ED                            	smpsVcUnusedBits    $00
-000763ED                            	smpsVcDetune        $03, $03, $03, $03
-000763ED                            	smpsVcCoarseFreq    $01, $00, $04, $05
-000763ED                            	smpsVcRateScale     $02, $02, $03, $03
-000763ED                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-000763ED                            	smpsVcAmpMod        $00, $00, $00, $00
-000763ED                            	smpsVcDecayRate1    $06, $09, $06, $07
-000763ED                            	smpsVcDecayRate2    $08, $06, $06, $07
-000763ED                            	smpsVcDecayLevel    $0F, $01, $01, $02
-000763ED                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-000763ED 2035 3430 31DF DF9F 9F07+  	smpsVcTotalLevel    $00, $13, $30, $16
-00076406                            
-00076406                            
-00076406                            		even
-00076406                            SoundCD:	include	"sound/sfx/SndCD - Switch.asm"
-00076406                            SndCD_Switch_Header:
-00076406 =00000001                  smpsHeaderStartSong = 1
-00076406 0000                       	smpsHeaderVoice     SndCD_Switch_Voices
-00076408 01                         	smpsHeaderTempoSFX  $01
-00076409 01                         	smpsHeaderChanSFX   $01
-0007640A                            
-00076410                            
-00076410                            ; PSG3 Data
-00076410                            SndCD_Switch_PSG3:
-00076410 BC02                       	dc.b	nB4, $02
-00076412 F2                         	smpsStop
-00076413                            
-00076413                            ; Song seems to not use any FM voices
-00076413                            SndCD_Switch_Voices:
-00076413                            SndCD_Switch_Voices:
-00076414 00                         		even
-00076414                            SoundCE:	include	"sound/sfx/SndCE - Ring Left Speaker.asm"
-00076414                            SndCE_Ring_Left_Header:
-00076414 =00000001                  smpsHeaderStartSong = 1
-00076414 0000                       	smpsHeaderVoice     SndCE_Ring_Left_Voices
-00076416 01                         	smpsHeaderTempoSFX  $01
-00076417 01                         	smpsHeaderChanSFX   $01
-00076418                            
-0007641E                            
-0007641E                            ; FM4 Data
-0007641E                            SndCE_Ring_Left_FM4:
-00076420 E080                       	smpsPan             panLeft, $00
-00076422 BD04 C9                    	dc.b nC5, $04, nC6	; comment out the comma before 04 here to get sound intended
-00076425 1B                         	dc.b $1B
-00076426 F2                         	smpsStop
-00076427                            
-00076427                            SndCE_Ring_Left_Voices:
-00076427                            ;	Voice $00
-00076427                            ;	$04
-00076427                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
-00076427                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
-00076427                            	smpsVcAlgorithm     $04
-00076427                            	smpsVcFeedback      $00
-00076427                            	smpsVcUnusedBits    $00
-00076427                            	smpsVcDetune        $02, $07, $07, $03
-00076427                            	smpsVcCoarseFreq    $02, $07, $02, $07
-00076427                            	smpsVcRateScale     $00, $00, $00, $00
-00076427                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-00076427                            	smpsVcAmpMod        $00, $00, $00, $00
-00076427                            	smpsVcDecayRate1    $0D, $07, $0A, $07
-00076427                            	smpsVcDecayRate2    $0B, $00, $0B, $00
-00076427                            	smpsVcDecayLevel    $00, $01, $00, $01
-00076427                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-00076427 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00076427 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
-00076440                            		even
-00076440                            SoundCF:	include	"sound/sfx/SndCF - Signpost.asm"
-00076440                            SndCF_Signpost_Header:
-00076440 =00000003                  smpsHeaderStartSong = 3
-00076440 0000                       	smpsHeaderVoice     SndCF_Signpost_Voices
-00076442 01                         	smpsHeaderTempoSFX  $01
-00076443 01                         	smpsHeaderChanSFX   $01
-00076444                            
-00076450                            
-00076450                            ; FM4 Data
-00076450                            SndCF_Signpost_FM5:
-00076450 8004                       	dc.b	nRst, $04
-00076452                            
-00076452                            ; FM6 Data
-00076452                            SndCF_Signpost_FM6:
-00076454                            
-00076454                            SndCF_Signpost_Loop00:
-00076454 B405                       	dc.b	nEb4, $05
-00076458 F700 08FF F8               	smpsLoop            $00, $08, SndCF_Signpost_Loop00
-0007645D F2                         	smpsStop
-0007645E                            
-0007645E                            SndCF_Signpost_Voices:
-0007645E                            ;	Voice $00
-0007645E                            ;	$F4
-0007645E                            ;	$06, $04, $0F, $0E, 	$1F, $1F, $1F, $1F, 	$00, $00, $0B, $0B
-0007645E                            ;	$00, $00, $05, $08, 	$0F, $0F, $FF, $FF, 	$0C, $85, $00, $80
-0007645E                            	smpsVcAlgorithm     $04
-0007645E                            	smpsVcFeedback      $06
-0007645E                            	smpsVcUnusedBits    $03
-0007645E                            	smpsVcDetune        $00, $00, $00, $00
-0007645E                            	smpsVcCoarseFreq    $0E, $0F, $04, $06
-0007645E                            	smpsVcRateScale     $00, $00, $00, $00
-0007645E                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
-0007645E                            	smpsVcAmpMod        $00, $00, $00, $00
-0007645E                            	smpsVcDecayRate1    $0B, $0B, $00, $00
-0007645E                            	smpsVcDecayRate2    $08, $05, $00, $00
-0007645E                            	smpsVcDecayLevel    $0F, $0F, $00, $00
-0007645E                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
-0007645E F406 040F 0E1F 1F1F 1F00+  	smpsVcTotalLevel    $80, $00, $85, $0C
-0007645E F406 040F 0E1F 1F1F 1F00+  	smpsVcTotalLevel    $80, $00, $85, $0C
-00076478 00                         		even
-00076478                            SoundD0:	incbin	"sound/sfx/SndD0 - Waterfall.bin"
-000764B2                            		even
-000764B2                            ;SoundD1:	dc.b	0,	0
-000764B2                            ;		even
-000764B2                            
-000764B2                            		; Don't let Sega sample cross $8000-byte boundary
-000764B2                            		; (DAC driver doesn't switch banks automatically)
+0007626A                            
+0007626A                            ; FM5 Data
+0007626A                            SndC5_Cash_Register_FM5:
+0007626C 8A08 8002 8A08             	dc.b	nA0, $08, nRst, $02, nA0, $08
+00076272 F2                         	smpsStop
+00076273                            
+00076273                            ; FM4 Data
+00076273                            SndC5_Cash_Register_FM4:
+00076275 8012 C635                  	dc.b	nRst, $12, nA5, $35
+00076279 F2                         	smpsStop
+0007627A                            
+0007627A                            ; PSG3 Data
+0007627A                            SndC5_Cash_Register_PSG3:
+0007627A F502                       	smpsPSGvoice        fTone_02
+0007627C F3E7                       	smpsPSGform         $E7
+0007627E 8002 C205 C404 C205 C404   	dc.b	nRst, $02, nF5, $05, nG5, $04, nF5, $05, nG5, $04
+00076288 F2                         	smpsStop
+00076289                            
+00076289                            SndC5_Cash_Register_Voices:
+00076289                            ;	Voice $00
+00076289                            ;	$3B
+00076289                            ;	$03, $02, $02, $06, 	$18, $1A, $1A, $96, 	$17, $0E, $0A, $10
+00076289                            ;	$00, $00, $00, $00, 	$FF, $FF, $FF, $FF, 	$00, $28, $39, $80
+00076289                            	smpsVcAlgorithm     $03
+00076289                            	smpsVcFeedback      $07
+00076289                            	smpsVcUnusedBits    $00
+00076289                            	smpsVcDetune        $00, $00, $00, $00
+00076289                            	smpsVcCoarseFreq    $06, $02, $02, $03
+00076289                            	smpsVcRateScale     $02, $00, $00, $00
+00076289                            	smpsVcAttackRate    $16, $1A, $1A, $18
+00076289                            	smpsVcAmpMod        $00, $00, $00, $00
+00076289                            	smpsVcDecayRate1    $10, $0A, $0E, $17
+00076289                            	smpsVcDecayRate2    $00, $00, $00, $00
+00076289                            	smpsVcDecayLevel    $0F, $0F, $0F, $0F
+00076289                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00076289 3B03 0202 0618 1A1A 9617+  	smpsVcTotalLevel    $00, $39, $28, $00
+000762A2                            
+000762A2                            ;	Voice $01
+000762A2                            ;	$04
+000762A2                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
+000762A2                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
+000762A2                            	smpsVcAlgorithm     $04
+000762A2                            	smpsVcFeedback      $00
+000762A2                            	smpsVcUnusedBits    $00
+000762A2                            	smpsVcDetune        $02, $07, $07, $03
+000762A2                            	smpsVcCoarseFreq    $02, $07, $02, $07
+000762A2                            	smpsVcRateScale     $00, $00, $00, $00
+000762A2                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+000762A2                            	smpsVcAmpMod        $00, $00, $00, $00
+000762A2                            	smpsVcDecayRate1    $0D, $07, $0A, $07
+000762A2                            	smpsVcDecayRate2    $0B, $00, $0B, $00
+000762A2                            	smpsVcDecayLevel    $00, $01, $00, $01
+000762A2                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+000762A2 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+000762A2 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+000762BC 00                         		even
+000762BC                            SoundC6:	incbin	"sound/sfx/SndC6 - Ring Loss.bin"
+000762FE                            		even
+000762FE                            SoundC7:	include	"sound/sfx/SndC7 - Chain Rising.asm"
+000762FE                            SndC7_Chain_Rising_Header:
+000762FE =00000001                  smpsHeaderStartSong = 1
+000762FE 0000                       	smpsHeaderVoice     SndC7_Chain_Rising_Voices
+00076300 01                         	smpsHeaderTempoSFX  $01
+00076301 01                         	smpsHeaderChanSFX   $01
+00076302                            
+00076308                            
+00076308                            ; FM5 Data
+00076308                            SndC7_Chain_Rising_FM5:
+0007630A B205 8004 B204 8004        	dc.b	nCs4, $05, nRst, $04, nCs4, $04, nRst, $04
+00076312 F2                         	smpsStop
+00076313                            
+00076313                            SndC7_Chain_Rising_Voices:
+00076313                            ;	Voice $00
+00076313                            ;	$28
+00076313                            ;	$2F, $5F, $37, $2B, 	$1F, $1F, $1F, $1F, 	$15, $15, $15, $13
+00076313                            ;	$13, $0C, $0D, $10, 	$2F, $2F, $3F, $2F, 	$00, $10, $1F, $80
+00076313                            	smpsVcAlgorithm     $00
+00076313                            	smpsVcFeedback      $05
+00076313                            	smpsVcUnusedBits    $00
+00076313                            	smpsVcDetune        $02, $03, $05, $02
+00076313                            	smpsVcCoarseFreq    $0B, $07, $0F, $0F
+00076313                            	smpsVcRateScale     $00, $00, $00, $00
+00076313                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00076313                            	smpsVcAmpMod        $00, $00, $00, $00
+00076313                            	smpsVcDecayRate1    $13, $15, $15, $15
+00076313                            	smpsVcDecayRate2    $10, $0D, $0C, $13
+00076313                            	smpsVcDecayLevel    $02, $03, $02, $02
+00076313                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00076313 282F 5F37 2B1F 1F1F 1F15+  	smpsVcTotalLevel    $00, $1F, $10, $00
+0007632C                            
+0007632C                            
+0007632C                            		even
+0007632C                            SoundC8:	incbin	"sound/sfx/SndC8 - Burning.bin"
+0007633E                            		even
+0007633E                            SoundC9:	include	"sound/sfx/SndC9 - Error.asm"
+0007633E                            Sound6D_Error_Header:
+0007633E =00000001                  smpsHeaderStartSong = 1
+0007633E 0000                       	smpsHeaderVoice     Sound6D_Error_Voices
+00076340 01                         	smpsHeaderTempoSFX  $01
+00076341 01                         	smpsHeaderChanSFX   $01
+00076342                            
+00076348                            
+00076348                            ; FM5 Data
+00076348                            Sound6D_Error_FM5:
+0007634A BD01 BEBF C0C1 C2C3 C4C5+  	dc.b		nC5,	$01,	nCs5,	nD5,	nEb5,	nE5,	nF5,	nFs5,	nG5,	nAb5,	nA5,	nBb5,	nB5,	nC6,	$1B
+00076359 F2                         	smpsStop
+0007635A                            
+0007635A                            Sound6D_Error_Voices:
+0007635A                            ;	Voice $00
+0007635A                            ;	$38
+0007635A                            ;	$00, $00, $00, $00, 	$1F, $1F, $1F, $1F, 	$00, $00, $00, $00
+0007635A                            ;	$00, $00, $00, $00, 	$0F, $0F, $0F, $0F, 	$1F, $17, $0C, $00
+0007635A                            	smpsVcAlgorithm     $04
+0007635A                            	smpsVcFeedback      $00
+0007635A                            	smpsVcUnusedBits    $00
+0007635A                            	smpsVcDetune        $02, $07, $07, $03
+0007635A                            	smpsVcCoarseFreq    $02, $07, $02, $07
+0007635A                            	smpsVcRateScale     $00, $00, $00, $00
+0007635A                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+0007635A                            	smpsVcAmpMod        $00, $00, $00, $00
+0007635A                            	smpsVcDecayRate1    $0D, $07, $0A, $07
+0007635A                            	smpsVcDecayRate2    $0B, $00, $0B, $00
+0007635A                            	smpsVcDecayLevel    $00, $01, $00, $01
+0007635A                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+0007635A 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+0007635A 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00076374 00                         		even
+00076374                            SoundCA:	incbin	"sound/sfx/SndCA - Enter SS.bin"
+000763A2                            		even
+000763A2                            SoundCB:	incbin	"sound/sfx/SndCB - Wall Smash.bin"
+000763EE                            		even
+000763EE                            SoundCC:	include	"sound/sfx/SndCC - Spring.asm"
+000763EE                            SndCC_Spring_Header:
+000763EE =00000001                  smpsHeaderStartSong = 1
+000763EE 0000                       	smpsHeaderVoice     SndCC_Spring_Voices
+000763F0 01                         	smpsHeaderTempoSFX  $01
+000763F1 01                         	smpsHeaderChanSFX   $01
+000763F2                            
+000763F8                            
+000763F8                            ; FM4 Data
+000763F8                            SndCC_Spring_FM4:
+000763FA 8001                       	dc.b	nRst, $01
+000763FC F003 015D 0F               	smpsModSet          $03, $01, $5D, $0F
+00076401 B00C                       	dc.b	nB3, $0C
+00076403 F4                         	smpsModOff
+00076404                            
+00076404                            SndCC_Spring_Loop00:
+00076404 E7                         	dc.b	smpsNoAttack
+00076405 E602                       	smpsAlterVol        $02
+00076407 BD02                       	dc.b	nC5, $02
+00076409 F700 19FF F7               	smpsLoop            $00, $19, SndCC_Spring_Loop00
+0007640E F2                         	smpsStop
+0007640F                            
+0007640F                            SndCC_Spring_Voices:
+0007640F                            ;	Voice $00
+0007640F                            ;	$20
+0007640F                            ;	$36, $35, $30, $31, 	$DF, $DF, $9F, $9F, 	$07, $06, $09, $06
+0007640F                            ;	$07, $06, $06, $08, 	$2F, $1F, $1F, $FF, 	$16, $30, $13, $80
+0007640F                            	smpsVcAlgorithm     $00
+0007640F                            	smpsVcFeedback      $04
+0007640F                            	smpsVcUnusedBits    $00
+0007640F                            	smpsVcDetune        $03, $03, $03, $03
+0007640F                            	smpsVcCoarseFreq    $01, $00, $04, $05
+0007640F                            	smpsVcRateScale     $02, $02, $03, $03
+0007640F                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+0007640F                            	smpsVcAmpMod        $00, $00, $00, $00
+0007640F                            	smpsVcDecayRate1    $06, $09, $06, $07
+0007640F                            	smpsVcDecayRate2    $08, $06, $06, $07
+0007640F                            	smpsVcDecayLevel    $0F, $01, $01, $02
+0007640F                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+0007640F 2035 3430 31DF DF9F 9F07+  	smpsVcTotalLevel    $00, $13, $30, $16
+00076428                            
+00076428                            
+00076428                            		even
+00076428                            SoundCD:	include	"sound/sfx/SndCD - Switch.asm"
+00076428                            SndCD_Switch_Header:
+00076428 =00000001                  smpsHeaderStartSong = 1
+00076428 0000                       	smpsHeaderVoice     SndCD_Switch_Voices
+0007642A 01                         	smpsHeaderTempoSFX  $01
+0007642B 01                         	smpsHeaderChanSFX   $01
+0007642C                            
+00076432                            
+00076432                            ; PSG3 Data
+00076432                            SndCD_Switch_PSG3:
+00076432 BC02                       	dc.b	nB4, $02
+00076434 F2                         	smpsStop
+00076435                            
+00076435                            ; Song seems to not use any FM voices
+00076435                            SndCD_Switch_Voices:
+00076435                            SndCD_Switch_Voices:
+00076436 00                         		even
+00076436                            SoundCE:	include	"sound/sfx/SndCE - Ring Left Speaker.asm"
+00076436                            SndCE_Ring_Left_Header:
+00076436 =00000001                  smpsHeaderStartSong = 1
+00076436 0000                       	smpsHeaderVoice     SndCE_Ring_Left_Voices
+00076438 01                         	smpsHeaderTempoSFX  $01
+00076439 01                         	smpsHeaderChanSFX   $01
+0007643A                            
+00076440                            
+00076440                            ; FM4 Data
+00076440                            SndCE_Ring_Left_FM4:
+00076442 E080                       	smpsPan             panLeft, $00
+00076444 BD04 C9                    	dc.b nC5, $04, nC6	; comment out the comma before 04 here to get sound intended
+00076447 1B                         	dc.b $1B
+00076448 F2                         	smpsStop
+00076449                            
+00076449                            SndCE_Ring_Left_Voices:
+00076449                            ;	Voice $00
+00076449                            ;	$04
+00076449                            ;	$37, $72, $77, $49, 	$1F, $1F, $1F, $1F, 	$07, $0A, $07, $0D
+00076449                            ;	$00, $0B, $00, $0B, 	$1F, $0F, $1F, $0F, 	$23, $80, $23, $80
+00076449                            	smpsVcAlgorithm     $04
+00076449                            	smpsVcFeedback      $00
+00076449                            	smpsVcUnusedBits    $00
+00076449                            	smpsVcDetune        $02, $07, $07, $03
+00076449                            	smpsVcCoarseFreq    $02, $07, $02, $07
+00076449                            	smpsVcRateScale     $00, $00, $00, $00
+00076449                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00076449                            	smpsVcAmpMod        $00, $00, $00, $00
+00076449                            	smpsVcDecayRate1    $0D, $07, $0A, $07
+00076449                            	smpsVcDecayRate2    $0B, $00, $0B, $00
+00076449                            	smpsVcDecayLevel    $00, $01, $00, $01
+00076449                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00076449 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00076449 0437 7277 221F 1F1F 1F07+  	smpsVcTotalLevel    $00, $23, $00, $23
+00076462                            		even
+00076462                            SoundCF:	include	"sound/sfx/SndCF - Signpost.asm"
+00076462                            SndCF_Signpost_Header:
+00076462 =00000003                  smpsHeaderStartSong = 3
+00076462 0000                       	smpsHeaderVoice     SndCF_Signpost_Voices
+00076464 01                         	smpsHeaderTempoSFX  $01
+00076465 01                         	smpsHeaderChanSFX   $01
+00076466                            
+00076472                            
+00076472                            ; FM4 Data
+00076472                            SndCF_Signpost_FM5:
+00076472 8004                       	dc.b	nRst, $04
+00076474                            
+00076474                            ; FM6 Data
+00076474                            SndCF_Signpost_FM6:
+00076476                            
+00076476                            SndCF_Signpost_Loop00:
+00076476 B405                       	dc.b	nEb4, $05
+0007647A F700 08FF F8               	smpsLoop            $00, $08, SndCF_Signpost_Loop00
+0007647F F2                         	smpsStop
+00076480                            
+00076480                            SndCF_Signpost_Voices:
+00076480                            ;	Voice $00
+00076480                            ;	$F4
+00076480                            ;	$06, $04, $0F, $0E, 	$1F, $1F, $1F, $1F, 	$00, $00, $0B, $0B
+00076480                            ;	$00, $00, $05, $08, 	$0F, $0F, $FF, $FF, 	$0C, $85, $00, $80
+00076480                            	smpsVcAlgorithm     $04
+00076480                            	smpsVcFeedback      $06
+00076480                            	smpsVcUnusedBits    $03
+00076480                            	smpsVcDetune        $00, $00, $00, $00
+00076480                            	smpsVcCoarseFreq    $0E, $0F, $04, $06
+00076480                            	smpsVcRateScale     $00, $00, $00, $00
+00076480                            	smpsVcAttackRate    $1F, $1F, $1F, $1F
+00076480                            	smpsVcAmpMod        $00, $00, $00, $00
+00076480                            	smpsVcDecayRate1    $0B, $0B, $00, $00
+00076480                            	smpsVcDecayRate2    $08, $05, $00, $00
+00076480                            	smpsVcDecayLevel    $0F, $0F, $00, $00
+00076480                            	smpsVcReleaseRate   $0F, $0F, $0F, $0F
+00076480 F406 040F 0E1F 1F1F 1F00+  	smpsVcTotalLevel    $80, $00, $85, $0C
+00076480 F406 040F 0E1F 1F1F 1F00+  	smpsVcTotalLevel    $80, $00, $85, $0C
+0007649A 00                         		even
+0007649A                            SoundD0:	incbin	"sound/sfx/SndD0 - Waterfall.bin"
+000764D4                            		even
+000764D4                            ;SoundD1:	dc.b	0,	0
+000764D4                            ;		even
+000764D4                            
+000764D4                            		; Don't let Sega sample cross $8000-byte boundary
+000764D4                            		; (DAC driver doesn't switch banks automatically)
 00078000                            SegaPCM:	;incbin	"sound/dac/sega.pcm"
 00078000                            SegaPCM_End
 00078000                            		even
