@@ -1837,6 +1837,17 @@ Sega_Main:
 		moveq	#3,d2						;Height (I think)
 		bsr.w	TilemapToVRAM
 		
+		lea		($FF1000).l,a1	;Where to decompress the tilemap
+		lea		(Eni_SegaLogo).l,a0	;Tilemap to decompress
+		move.w	#0,d0
+		bsr.w	EniDec
+		
+		copyTilemap $FF1000,(vram_bg+$404),((320/8)-1),((320/8)-1) ;not found
+		move.l	#$60000003,d0				;Position in Plane B
+		moveq	#$B,d1						;Width (I think)
+		moveq	#3,d2						;Height (I think)
+		bsr.w	TilemapToVRAM
+		
 		moveq	#0,d0
 		bsr.w	PalLoad1
 		moveq	#palid_Temp,d0
