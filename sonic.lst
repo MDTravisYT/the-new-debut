@@ -5482,7 +5482,7 @@
 000052D0 0000 0040                  		ori.b	#$40,d0
 000052D4 33C0 00C0 0004             		move.w	d0,($C00004).l
 000052E2 11FC 0006 D1C0             		move.b	#$6,(v_objspace+$1C0).w	; load HUD object 2 <----- object
-000052E8 31FC 0006 A400             		move.w	#$6, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
+000052E8 31FC 0008 A400             		move.w	#$8, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
 000052EE                            
 000052EE                            Sega_Loop:
 000052EE 11FC 0002 F62A             		move.b	#2,(v_vbla_routine).w
@@ -5491,7 +5491,7 @@
 000052FE 4EB9 0000 0000                     jsr		(BuildSprites).l
 00005304 6100 0000                  		bsr.w	Sega_CyclePal
 00005308                            		
-00005308 0C38 0024 D1DA             		cmp.b	#$24, (v_objspace+$1C0+$1A).w		;Is the object on frame $24?
+00005308 0C38 0026 D1DA             		cmp.b	#$26, (v_objspace+$1C0+$1A).w		;Is the object on frame $24?
 0000530E 6600                       		bne.s	@SkipScroll							;If not, don't do anything
 00005310 41F8 A400                  		lea		(v_lvllayout).w, a0
 00005314 3010                       		move.w	(a0), d0					;Get slide amount and check for 0 (below)

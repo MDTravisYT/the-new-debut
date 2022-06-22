@@ -1863,7 +1863,7 @@ Sega_Main:
 		move.w	d0,($C00004).l
 		sfx		$90,0,1,1
 		move.b	#$6,(v_objspace+$1C0).w	; load HUD object 2 <----- object
-		move.w	#$6, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
+		move.w	#$8, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
 
 Sega_Loop:
 		move.b	#2,(v_vbla_routine).w
@@ -1872,7 +1872,7 @@ Sega_Loop:
         jsr		(BuildSprites).l
 		bsr.w	Sega_CyclePal
 		
-		cmp.b	#$24, (v_objspace+$1C0+$1A).w		;Is the object on frame $24?
+		cmp.b	#$26, (v_objspace+$1C0+$1A).w		;Is the object on frame $24?
 		bne.s	@SkipScroll							;If not, don't do anything
 		lea		(v_lvllayout).w, a0
 		move.w	(a0), d0					;Get slide amount and check for 0 (below)
