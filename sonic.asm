@@ -1863,7 +1863,7 @@ Sega_Main:
 		move.w	d0,($C00004).l
 		sfx		$90,0,1,1
 		move.b	#$6,(v_objspace+$1C0).w	; load HUD object 2 <----- object
-		move.w	#$8, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
+		move.w	#$10, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
 
 Sega_Loop:
 		move.b	#2,(v_vbla_routine).w
