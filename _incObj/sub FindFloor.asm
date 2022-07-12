@@ -15,6 +15,7 @@
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
+
 ColisionChkLayer:
 		tst.b	(v_collayer).w		; MJ: is collision set to first?
 		beq.s	CCL_NoChange		; MJ: if so, branch
@@ -26,6 +27,7 @@ ColisionChkLayer:
 
 CCL_NoChange:
 		rts						; MJ: return
+
 
 FindFloor:				; XREF: Sonic_AnglePos; et al
 		bsr.w	FindNearestTile
@@ -91,26 +93,30 @@ FindFloor:				; XREF: Sonic_AnglePos; et al
 		rts				; MJ: return
 ; ===========================================================================
 
-FindFloor2:				; XREF: FindFloor
-		bsr.w	FindNearestTile
-		move.w	(a1),d0
-		bsr.w	ColisionChkLayer	; MJ: check solid settings to use
-		move.w	d0,d4
-		andi.w	#$3FF,d0
-		beq.s	@isblank2
-		btst	d5,d4
-		bne.s	@issolid
+@negfloor:
+		move.w	d2,d1
+		andi.w	#$F,d1
+		add.w	d1,d0
+		bpl.w	@isblank
+
+@maxfloor:
+		sub.w	a3,d2
+		bsr.w	FindFloor2	; try tile above the nearest
+		add.w	a3,d2
+		subi.w	#$10,d1		; return distance to floor
+		rts	
 ; End of function FindFloor
 
 
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
 
-FindFloor2:
+FindFloor2:				; XREF: FindFloor
 		bsr.w	FindNearestTile
 		move.w	(a1),d0
+		bsr.w	ColisionChkLayer	; MJ: check solid settings to use
 		move.w	d0,d4
-		andi.w	#$7FF,d0
+		andi.w	#$3FF,d0
 		beq.s	@isblank2
 		btst	d5,d4
 		bne.s	@issolid
@@ -151,7 +157,7 @@ FindFloor2:
 		move.b	(a2,d1.w),d0
 		ext.w	d0
 		eor.w	d6,d4
-		btst #$B,d4 ; MJ: C to B (because S2 format has two solids)
+		btst	#$B,d4		; MJ: C to B (because S2 format has two solids)
 		beq.s	@noflip3
 		neg.w	d0
 

@@ -1863,7 +1863,7 @@ Sega_Main:
 		move.w	d0,($C00004).l
 		sfx		$90,0,1,1
 		move.b	#$6,(v_objspace+$1C0).w	; load HUD object 2 <----- object
-		move.w	#$10, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
+		move.w	#$10, (v_lvllayoutfg).w		;How far to slide (1 subtracted then added each frame ran)
 
 Sega_Loop:
 		move.b	#2,(v_vbla_routine).w
@@ -1874,7 +1874,7 @@ Sega_Loop:
 		
 		cmp.b	#$26, (v_objspace+$1C0+$1A).w		;Is the object on frame $24?
 		bne.s	@SkipScroll							;If not, don't do anything
-		lea		(v_lvllayout).w, a0
+		lea		(v_lvllayoutfg).w, a0
 		move.w	(a0), d0					;Get slide amount and check for 0 (below)
 		beq.s	@SkipScroll					;If so, don't scroll
 		subq.w	#1, (a0)					;If not, subtract 1 from slide amount
@@ -8382,7 +8382,7 @@ Nem_CSZ:	incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
 ; ---------------------------------------------------------------------------
 ; Level Chunks
 ; ---------------------------------------------------------------------------
-Blk128_Lock:incbin	"map128\lockout.bin"
+Blk128_Lock:;incbin	"map128\lockout.bin"
 		even
 Blk128_GHZ:	incbin	"map128\GHZ.bin"
 		even
@@ -8397,7 +8397,7 @@ Blk128_SYZ:
 Blk128_SBZ:	
 Blk128_CSZ:
 	else
-Blk128_IMZ:	incbin	"map128\IMZ.bin"
+Blk128_IMZ:	;incbin	"map128\IMZ.bin"
 		even
 Blk128_SLZ:	incbin	"map128\SLZ.bin"
 		even
@@ -8405,7 +8405,7 @@ Blk128_SYZ:	incbin	"map128\SYZ.bin"
 		even
 Blk128_SBZ:	incbin	"map128\SBZ.bin"
 		even
-Blk128_CSZ:incbin	"map128\CSZ.bin"
+Blk128_CSZ:;incbin	"map128\CSZ.bin"
 	endc
 		even	
 		
@@ -8414,7 +8414,7 @@ Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
 		even
 Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
 		even
-Blk256_LockN:	incbin	"map128\lockoutNORM.bin"
+Blk128_LockN:;	incbin	"map128\lockoutNORM.bin"
 		even
 		
 Null_Level:
@@ -8590,7 +8590,7 @@ Level_LZ2:	incbin	"levels\lz2.bin"
 Level_LZ3:	incbin	"levels\lz3.bin"
 		even
 		
-Level_LZ3_WALL:	incbin	"levels\lz3_wall.bin"
+Level_LZ3_WALL:;	incbin	"levels\lz3_wall.bin"
 		even
 
 Level_SBZ3:	incbin	"levels\sbz3.bin"
