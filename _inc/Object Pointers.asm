@@ -3,9 +3,9 @@
 ; ---------------------------------------------------------------------------
 ptr_SonicPlayer:	dc.l SonicPlayer	; $01
 ptr_Obj02:		dc.l ForceDebug
-ptr_Obj03:		dc.l Hacker
+ptr_Obj03:		dc.l Obj03
 ptr_Obj04:		dc.l Key
-ptr_Obj05:		dc.l NullObject
+ptr_Obj05:		dc.l Hacker
 ptr_Obj06:		dc.l TestDisplay
 ptr_Obj07:		dc.l Imp
 ptr_Splash:		dc.l Splash		; $08

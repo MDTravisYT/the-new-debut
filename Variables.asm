@@ -4,8 +4,9 @@ v_regbuffer:	equ $FFFFFC00	; stores registers d0-a7 during an error event ($40 b
 v_spbuffer:	equ $FFFFFC40	; stores most recent sp address (4 bytes)
 v_errortype:	equ $FFFFFC44	; error type
 
-v_256x256:	equ   $FF0000	; 256x256 tile mappings ($A400 bytes)
-v_lvllayout:	equ $FFFFA400	; level and background layouts ($400 bytes)
+v_128x128:	=   $FF0000	; 128x128 tile mappings ($A400 bytes)
+v_lvllayoutfg:	= $FFFFA400	; level layout ROM address (4 bytes)
+v_lvllayoutbg:	= $FFFFA404	; background layout ROM address (4 bytes)
 v_bgscroll_buffer:	equ	$FFFFA800	; background scroll buffer ($200 bytes)
 v_ngfx_buffer:	equ $FFFFAA00	; Nemesis graphics decompression buffer ($200 bytes)
 v_spritequeue:	equ $FFFFAC00	; sprite display queue, in order of priority ($400 bytes)
@@ -207,10 +208,7 @@ v_bossstatus:	equ $FFFFF7A7	; status of boss and prison capsule (01 = boss defea
 v_trackpos:	equ $FFFFF7A8	; position tracking reference number (2 bytes)
 v_trackbyte:	equ $FFFFF7A9	; low byte for position tracking
 f_lockscreen:	equ $FFFFF7AA	; flag set to lock screen during bosses
-v_256loop1:	equ $FFFFF7AC	; 256x256 level tile which contains a loop (GHZ/SLZ)
-v_256loop2:	equ $FFFFF7AD	; 256x256 level tile which contains a loop (GHZ/SLZ)
-v_256roll1:	equ $FFFFF7AE	; 256x256 level tile which contains a roll tunnel (GHZ)
-v_256roll2:	equ $FFFFF7AF	; 256x256 level tile which contains a roll tunnel (GHZ)
+
 v_lani0_frame:	equ $FFFFF7B0	; level graphics animation 0 - current frame
 v_lani0_time:	equ $FFFFF7B1	; level graphics animation 0 - time until next frame
 v_lani1_frame:	equ $FFFFF7B2	; level graphics animation 1 - current frame
@@ -336,6 +334,9 @@ v_scorecopy:	equ $FFFFFFC0	; score, duplicate (4 bytes)
 v_scorelife:	equ $FFFFFFC0	; points required for an extra life (4 bytes) (JP1 only)
 v_health:	equ $FFFFFFC4 ; health variable ; upon 0, you hit death. Default is 3. Max is 5.
 f_healthcount:	equ $FFFFFFC6 ; health counter flag
+v_coladdr1:	= $FFFFFFD0	; (4 bytes)
+v_coladdr2:	= $FFFFFFD4	; (4 bytes)
+v_collayer:	= $FFFFFFD8	; (1 byte)
 f_levselcheat:	equ $FFFFF608	; level select cheat flag
 f_slomocheat:	equ $FFFFFFE1	; slow motion & frame advance cheat flag
 f_debugcheat:	equ $FFFFFFE2	; debug mode cheat flag
