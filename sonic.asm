@@ -2087,7 +2087,7 @@ GM_Title:
 		lea	(vdp_control_port).l,a5
 		lea	(vdp_data_port).l,a6
 		lea	(v_bgscreenposx).w,a3
-		lea	(v_lvllayout+$40).w,a4
+		lea	(v_lvllayoutbg).w,a4
 		move.w	#$6000,d2
 		bsr.w	DrawChunks
 		
@@ -2141,7 +2141,7 @@ GM_Title:
 		
 	TitFG_Cont:
 		lea	(Kos_TitleText).l,a0 ;	load extra flower patterns
-		lea	(v_256x256).l,a1 ; RAM address to buffer the patterns
+		lea	(v_128x128).l,a1 ; RAM address to buffer the patterns
 		bsr.w	KosDec
 		sfx	bgm_Title,0,1,1	; play title screen music
 		move.b	#0,(f_debugmode).w ; disable debug mode
@@ -3212,11 +3212,13 @@ loc_3BC8:
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
 
-ColIndexLoad:
+ColIndexLoad:				; XREF: GM_Level
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
-		lsl.w	#2,d0
-		move.l	ColPointers(pc,d0.w),(v_collindex).w
+		lsl.w	#3,d0					; MJ: multiply by 8 not 4
+		move.l	ColPointers(pc,d0.w),(v_coladdr1).w	; MJ: get first collision set
+		addq.w	#4,d0					; MJ: increase to next location
+		move.l	ColPointers(pc,d0.w),(v_coladdr2).w	; MJ: get second collision set
 		rts	
 ; End of function ColIndexLoad
 
@@ -3224,18 +3226,20 @@ ColIndexLoad:
 ; ---------------------------------------------------------------------------
 ; Collision index pointers
 ; ---------------------------------------------------------------------------
-ColPointers:	dc.l Col_GHZ
-		dc.l Col_LZ
-		dc.l Col_MZ
-		dc.l Col_SLZ
-		dc.l Col_SYZ
-		dc.l Col_SBZ
-		zonewarning ColPointers,4
-		dc.l Col_FUN ; Pointer for Ending is missing by default.
-		dc.l Col_IMZ
-		dc.l Col_CSZ
-		dc.l Col_GHZ ; Pointer for Ending is missing by default.
-		dc.l Col_GHZ ; Pointer for Ending is missing by default.
+ColPointers:	dc.l Col_GHZ_1
+		dc.l Col_GHZ_2
+		dc.l Col_LZ_1
+		dc.l Col_LZ_2
+		dc.l Col_MZ_1
+		dc.l Col_MZ_2
+		dc.l Col_SLZ_1
+		dc.l Col_SLZ_2
+		dc.l Col_SYZ_1
+		dc.l Col_SYZ_2
+		dc.l Col_SBZ_1
+		dc.l Col_SBZ_2
+;		dc.l Col_GHZ_1 ; Pointer for Ending is missing by default.
+;		dc.l Col_GHZ_2
 
 		include	"_inc\Oscillatory Routines.asm"
 
@@ -3873,7 +3877,7 @@ LoadTilesAsYouMove_BGOnly:
 		lea	(vdp_data_port).l,a6
 		lea	(v_bg1_scroll_flags).w,a2
 		lea	(v_bgscreenposx).w,a3
-		lea	(v_lvllayout+$40).w,a4
+		movea.l (v_lvllayoutbg).w,a4 ; MJ: Load address of layout BG
 		move.w	#$6000,d2
 		bsr.w	DrawBGScrollBlock1
 		lea	(v_bg2_scroll_flags).w,a2
@@ -3894,7 +3898,7 @@ LoadTilesAsYouMove:
 		; First, update the background
 		lea	(v_bg1_scroll_flags_dup).w,a2	; Scroll block 1 scroll flags
 		lea	(v_bgscreenposx_dup).w,a3	; Scroll block 1 X coordinate
-		lea	(v_lvllayout+$40).w,a4
+		lea	(v_lvllayoutbg).w,a4
 		move.w	#$6000,d2			; VRAM thing for selecting Plane B
 		bsr.w	DrawBGScrollBlock1
 		lea	(v_bg2_scroll_flags_dup).w,a2	; Scroll block 2 scroll flags
@@ -3910,7 +3914,7 @@ LoadTilesAsYouMove:
 		; Then, update the foreground
 		lea	(v_fg_scroll_flags_dup).w,a2	; Foreground scroll flags
 		lea	(v_screenposx_dup).w,a3		; Foreground X coordinate
-		lea	(v_lvllayout).w,a4
+		lea	(v_lvllayoutfg).w,a4
 		move.w	#$4000,d2			; VRAM thing for selecting Plane A
 		; The FG's update function is inlined here
 		tst.b	(a2)
@@ -4495,9 +4499,9 @@ DrawBlocks_TB_2:
 DrawBlock:
 		or.w	d2,d0	; OR in that plane A/B specifier to the VRAM command
 		swap	d0
-		btst	#4,(a0)	; Check Y-flip bit
+		btst	#3,(a0)		; MJ: checking bit 3 not 4 (Flip)
 		bne.s	DrawFlipY
-		btst	#3,(a0)	; Check X-flip bit
+		btst	#2,(a0)		; MJ: checking bit 2 not 3 (Flip)
 		bne.s	DrawFlipX
 		move.l	d0,(a5)
 		move.l	(a1)+,(a6)	; Write top two tiles
@@ -4523,7 +4527,7 @@ DrawFlipX:
 ; ===========================================================================
 
 DrawFlipY:
-		btst	#3,(a0)
+		btst #2,(a0) ; MJ: checking bit 2 not 3 (Flip)
 		bne.s	DrawFlipXY
 		move.l	d0,(a5)
 		move.l	(a1)+,d5
@@ -4592,44 +4596,33 @@ DrawFlipXY:
 ; DrawBlocks:
 GetBlockData:
 		if Revision=0
-		lea	(v_16x16).w,a1
-		add.w	4(a3),d4	; Add camera Y coordinate to relative coordinate
-		add.w	(a3),d5		; Add camera X coordinate to relative coordinate
+		lea	(v_16x16).w,a1	; MJ: load Block's location
+		add.w	4(a3),d4	; MJ: load Y position to d4
+		add.w	(a3),d5		; MJ: load X position to d5
 		else
-			add.w	(a3),d5
-	GetBlockData_2:
-			add.w	4(a3),d4
-			lea	(v_16x16).w,a1
+			add.w	(a3),d5		; MJ: load X position to d5
+	DrawBlocks_2:
+			add.w	4(a3),d4	; MJ: load Y position to d4
+			lea	(v_16x16).w,a1	; MJ: load Block's location
 		endc
-		; Turn Y coordinate into index into level layout
-		move.w	d4,d3
-		lsr.w	#1,d3
-		andi.w	#$380,d3
-		; Turn X coordinate into index into level layout
-		lsr.w	#3,d5
-		move.w	d5,d0
-		lsr.w	#5,d0
-		andi.w	#$7F,d0
-		; Get chunk from level layout
-		add.w	d3,d0
-		moveq	#-1,d3
-		move.b	(a4,d0.w),d3
-		beq.s	locret_6C1E	; If chunk 00, just return a pointer to the first block (expected to be empty)
-		; Turn chunk ID into index into chunk table
-		subq.b	#1,d3
-		andi.w	#$7F,d3
-		ror.w	#7,d3
-		; Turn Y coordinate into index into chunk
-		add.w	d4,d4
-		andi.w	#$1E0,d4
-		; Turn X coordinate into index into chunk
-		andi.w	#$1E,d5
-		; Get block metadata from chunk
-		add.w	d4,d3
-		add.w	d5,d3
-		movea.l	d3,a0
+		move.w	d4,d3		; MJ: copy Y position to d3
+		andi.w	#$780,d3	; MJ: get within 780 (Not 380) (E00 pixels (not 700)) in multiples of 80
+		lsr.w	#3,d5		; MJ: divide X position by 8
+		move.w	d5,d0		; MJ: copy to d0
+		lsr.w	#4,d0		; MJ: divide by 10 (Not 20)
+		andi.w	#$7F,d0		; MJ: get within 7F
+		lsl.w	#1,d3		; MJ: multiply by 2 (So it skips the BG)
+		add.w	d3,d0		; MJ: add calc'd Y pos
+		moveq	#-1,d3		; MJ: prepare FFFF in d3
+		move.b	(a4,d0.w),d3	; MJ: collect correct chunk ID from layout
+		andi.w	#$FF,d3		; MJ: keep within FF
+		lsl.w	#7,d3		; MJ: multiply by 80
+		andi.w	#$70,d4		; MJ: keep Y pos within 80 pixels
+		andi.w	#$E,d5		; MJ: keep X pos within 10
+		add.w	d4,d3		; MJ: add calc'd Y pos to ror'd d3
+		add.w	d5,d3		; MJ: add calc'd X pos to ror'd d3
+		movea.l	d3,a0		; MJ: set address (Chunk to read)
 		move.w	(a0),d3
-		; Turn block ID into address
 		andi.w	#$3FF,d3
 		lsl.w	#3,d3
 		adda.w	d3,a1
@@ -4705,11 +4698,11 @@ LoadTilesFromStart:
 		lea	(vdp_control_port).l,a5
 		lea	(vdp_data_port).l,a6
 		lea	(v_screenposx).w,a3
-		lea	(v_lvllayout).w,a4
+		lea	(v_lvllayoutfg).w,a4
 		move.w	#$4000,d2
 		bsr.s	DrawChunks
 		lea	(v_bgscreenposx).w,a3
-		lea	(v_lvllayout+$40).w,a4
+		lea	(v_lvllayoutbg).w,a4
 		move.w	#$6000,d2
 		if Revision=0
 		else
@@ -4840,7 +4833,7 @@ LevelDataLoad:
 		move.w	#0,d0
 		bsr.w	EniDec
 		movea.l	(a2)+,a0
-		lea	(v_256x256).l,a1 ; RAM address for 256x256 mappings
+		lea	(v_128x128).l,a1 ; RAM address for 256x256 mappings
 		bsr.w	KosDec
 		bsr.w	LevelLayoutLoad
 		move.w	(a2)+,d0
@@ -4879,54 +4872,17 @@ LevelDataLoad:
 ; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
 
 
-LevelLayoutLoad:
-		lea	(v_lvllayout).w,a3
-		move.w	#$1FF,d1
-		moveq	#0,d0
-
-LevLoad_ClrRam:
-		move.l	d0,(a3)+
-		dbf	d1,LevLoad_ClrRam ; clear the RAM ($A400-A7FF)
-
-		lea	(v_lvllayout).w,a3 ; RAM address for level layout
-		moveq	#0,d1
-		bsr.w	LevelLayoutLoad2 ; load	level layout into RAM
-		lea	(v_lvllayout+$40).w,a3 ; RAM address for background layout
-		moveq	#2,d1
-; End of function LevelLayoutLoad
-
-; "LevelLayoutLoad2" is	run twice - for	the level and the background
-
-; ||||||||||||||| S U B	R O U T	I N E |||||||||||||||||||||||||||||||||||||||
-
-
-LevelLayoutLoad2:
+LevelLayoutLoad:			; XREF: GM_Title; LevelDataLoad
 		move.w	(v_zone).w,d0
 		lsl.b	#6,d0
-		lsr.w	#5,d0
-		move.w	d0,d2
-		add.w	d0,d0
-		add.w	d2,d0
-		add.w	d1,d0
+		lsr.w	#4,d0
 		lea	(Level_Index).l,a1
-		move.w	(a1,d0.w),d0
-		lea	(a1,d0.w),a1
-		moveq	#0,d1
-		move.w	d1,d2
-		move.b	(a1)+,d1	; load level width (in tiles)
-		move.b	(a1)+,d2	; load level height (in	tiles)
-
-LevLoad_NumRows:
-		move.w	d1,d0
-		movea.l	a3,a0
-
-LevLoad_Row:
-		move.b	(a1)+,(a0)+
-		dbf	d0,LevLoad_Row	; load 1 row
-		lea	$80(a3),a3	; do next row
-		dbf	d2,LevLoad_NumRows ; repeat for	number of rows
-		rts	
-; End of function LevelLayoutLoad2
+		movea.l	(a1,d0.w),a1		; MJ: moving the address strait to a1 rather than adding a word to an address
+		move.l	a1,(v_lvllayoutfg).w	; MJ: save location of layout to $FFFFA400
+		adda.w	#$80,a1			; MJ: add 80 (As the BG line is always after the FG line)
+		move.l	a1,(v_lvllayoutbg).w	; MJ: save location of layout to $FFFFA404
+		rts				; MJ: Return
+; End of function LevelLayoutLoad
 
 		include	"_inc\DynamicLevelEvents.asm"
 
@@ -6292,6 +6248,7 @@ Sonic_Index:	dc.w Sonic_Main-Sonic_Index
 ; ===========================================================================
 
 Sonic_Main:	; Routine 0
+		clr.b (v_collayer).l ; MJ: set collision to 1st
 		addq.b	#2,obRoutine(a0)
 		move.b	#$13,obHeight(a0)
 		move.b	#9,obWidth(a0)
@@ -6539,6 +6496,7 @@ Map_Drown:	include	"_maps\Drowning Countdown.asm"
 
 		include	"_incObj\38 Shield and Invincibility.asm"
 		include	"_incObj\4A Special Stage Entry (Unused).asm"
+		include "_incObj\03 Collision Switcher.asm"
 		include	"_incObj\08 Water Splash.asm"
 		include	"_anim\Shield and Invincibility.asm"
 Map_Shield:	include	"_maps\Shield and Invincibility.asm"
@@ -6743,8 +6701,8 @@ Sonic_HitFloor:
 		lea	(v_anglebuffer).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$D,d5
-		bsr.w	FindFloor
+		moveq	#$C,d5		; MJ: set solid type to check
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -6758,8 +6716,8 @@ Sonic_HitFloor:
 		lea	($FFFFF76A).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$D,d5
-		bsr.w	FindFloor
+		moveq	#$C,d5		; MJ: set solid type to check
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	(sp)+,d0
 		move.b	#0,d2
 
@@ -6789,8 +6747,8 @@ loc_14DF0:
 		lea	(v_anglebuffer).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$E,d5
-		bsr.w	FindFloor
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindFloor	; MJ: check solidity
 		move.b	#0,d2
 
 loc_14E0A:
@@ -6821,8 +6779,8 @@ sub_14E50:
 		lea	(v_anglebuffer).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -6836,8 +6794,8 @@ sub_14E50:
 		lea	($FFFFF76A).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.w	(sp)+,d0
 		move.b	#-$40,d2
 		bra.w	loc_14DD0
@@ -6857,8 +6815,8 @@ loc_14EBC:
 		lea	(v_anglebuffer).w,a4
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.b	#-$40,d2
 		bra.w	loc_14E0A
 
@@ -6878,8 +6836,8 @@ ObjHitWallRight:
 		move.b	#0,(a4)
 		movea.w	#$10,a3
 		move.w	#0,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.b	(v_anglebuffer).w,d3
 		btst	#0,d3
 		beq.s	locret_14F06
@@ -6911,9 +6869,9 @@ Sonic_DontRunOnWalls:
 		add.w	d0,d3
 		lea	(v_anglebuffer).w,a4
 		movea.w	#-$10,a3
-		move.w	#$1000,d6
-		moveq	#$E,d5
-		bsr.w	FindFloor
+		move.w	#$800,d6
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -6927,9 +6885,9 @@ Sonic_DontRunOnWalls:
 		sub.w	d0,d3
 		lea	($FFFFF76A).w,a4
 		movea.w	#-$10,a3
-		move.w	#$1000,d6
-		moveq	#$E,d5
-		bsr.w	FindFloor
+		move.w	#$800,d6
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindFloor	; MJ: check solidity
 		move.w	(sp)+,d0
 		move.b	#-$80,d2
 		bra.w	loc_14DD0
@@ -6944,9 +6902,9 @@ loc_14F7C:
 		eori.w	#$F,d2
 		lea	(v_anglebuffer).w,a4
 		movea.w	#-$10,a3
-		move.w	#$1000,d6
-		moveq	#$E,d5
-		bsr.w	FindFloor
+		move.w	#$800,d6
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindFloor	; MJ: check solidity
 		move.b	#-$80,d2
 		bra.w	loc_14E0A
 
@@ -6990,9 +6948,9 @@ loc_14FD6:
 		eori.w	#$F,d3
 		lea	(v_anglebuffer).w,a4
 		movea.w	#-$10,a3
-		move.w	#$800,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		move.w	#$400,d6
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.w	d1,-(sp)
 		move.w	obY(a0),d2
 		move.w	obX(a0),d3
@@ -7006,9 +6964,9 @@ loc_14FD6:
 		eori.w	#$F,d3
 		lea	($FFFFF76A).w,a4
 		movea.w	#-$10,a3
-		move.w	#$800,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		move.w	#$400,d6
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.w	(sp)+,d0
 		move.b	#$40,d2
 		bra.w	loc_14DD0
@@ -7029,9 +6987,9 @@ loc_1504A:
 		eori.w	#$F,d3
 		lea	(v_anglebuffer).w,a4
 		movea.w	#-$10,a3
-		move.w	#$800,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		move.w	#$400,d6
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.b	#$40,d2
 		bra.w	loc_14E0A
 ; End of function Sonic_HitWall
@@ -7053,9 +7011,9 @@ ObjHitWallLeft:
 		lea	(v_anglebuffer).w,a4
 		move.b	#0,(a4)
 		movea.w	#-$10,a3
-		move.w	#$800,d6
-		moveq	#$E,d5
-		bsr.w	FindWall
+		move.w	#$400,d6
+		moveq	#$D,d5		; MJ: set solid type to check
+		bsr.w	FindWall	; MJ: check solidity
 		move.b	(v_anglebuffer).w,d3
 		btst	#0,d3
 		beq.s	locret_15098
@@ -8424,30 +8382,30 @@ Nem_CSZ:	incbin	"artnem\8x8 - CSZ.bin"	; CSZ primary patterns
 ; ---------------------------------------------------------------------------
 ; Level Chunks
 ; ---------------------------------------------------------------------------
-Blk256_Lock:incbin	"map256\lockout.bin"
+Blk128_Lock:incbin	"map128\lockout.bin"
 		even
-Blk256_GHZ:	incbin	"map256\GHZ.bin"
+Blk128_GHZ:	incbin	"map128\GHZ.bin"
 		even
-Blk256_LZ:	incbin	"map256\LZ.bin"
+Blk128_LZ:	incbin	"map128\LZ.bin"
 		even
-Blk256_MZ:	incbin	"map256\MZ.bin"
+Blk128_MZ:	incbin	"map128\MZ.bin"
 		even
 	if	IsDemo	=	1
-Blk256_IMZ:	
-Blk256_SLZ:	
-Blk256_SYZ:	
-Blk256_SBZ:	
-Blk256_CSZ:
+Blk128_IMZ:	
+Blk128_SLZ:	
+Blk128_SYZ:	
+Blk128_SBZ:	
+Blk128_CSZ:
 	else
-Blk256_IMZ:	incbin	"map256\IMZ.bin"
+Blk128_IMZ:	incbin	"map128\IMZ.bin"
 		even
-Blk256_SLZ:	incbin	"map256\SLZ.bin"
+Blk128_SLZ:	incbin	"map128\SLZ.bin"
 		even
-Blk256_SYZ:	incbin	"map256\SYZ.bin"
+Blk128_SYZ:	incbin	"map128\SYZ.bin"
 		even
-Blk256_SBZ:	incbin	"map256\SBZ.bin"
+Blk128_SBZ:	incbin	"map128\SBZ.bin"
 		even
-Blk256_CSZ:incbin	"map256\CSZ.bin"
+Blk128_CSZ:incbin	"map128\CSZ.bin"
 	endc
 		even	
 		
@@ -8456,7 +8414,7 @@ Blk16_LockN:	incbin	"map16\lockoutNORM.bin"
 		even
 Nem_LockN:	incbin	"artnem\8x8 lockoutNORM.bin"	; GHZ primary patterns
 		even
-Blk256_LockN:	incbin	"map256\lockoutNORM.bin"
+Blk256_LockN:	incbin	"map128\lockoutNORM.bin"
 		even
 		
 Null_Level:
@@ -8513,23 +8471,29 @@ CollArray1:	incbin	"collide\Collision Array (Normal).bin"
 		even
 CollArray2:	incbin	"collide\Collision Array (Rotated).bin"
 		even
-Col_GHZ:	incbin	"collide\GHZ.bin"	; GHZ index
+Col_GHZ_1:	incbin	"collide\GHZ1.bin"	; GHZ index 1
 		even
-Col_LZ:		incbin	"collide\LZ.bin"	; LZ index
+Col_GHZ_2:	incbin	"collide\GHZ2.bin"	; GHZ index 2
 		even
-Col_MZ:		incbin	"collide\MZ.bin"	; MZ index
+Col_LZ_1:	incbin	"collide\LZ1.bin"	; LZ index 1
 		even
-Col_SLZ:	incbin	"collide\SLZ.bin"	; SLZ index
+Col_LZ_2:	incbin	"collide\LZ2.bin"	; LZ index 2
 		even
-Col_SYZ:	incbin	"collide\SYZ.bin"	; SYZ index
+Col_MZ_1:	incbin	"collide\MZ1.bin"	; MZ index 1
 		even
-Col_SBZ:	incbin	"collide\SBZ.bin"	; SBZ index
+Col_MZ_2:	incbin	"collide\MZ2.bin"	; MZ index 2
 		even
-Col_IMZ:	incbin	"collide\IMZ.bin"	; IMZ index
+Col_SLZ_1:	incbin	"collide\SLZ1.bin"	; SLZ index 1
 		even
-Col_CSZ:	incbin	"collide\CSZ.bin"	; CSZ index
+Col_SLZ_2:	incbin	"collide\SLZ2.bin"	; SLZ index 2
 		even
-Col_FUN:	incbin	"collide\FUN.bin"	; FUN index
+Col_SYZ_1:	incbin	"collide\SYZ1.bin"	; SYZ index 1
+		even
+Col_SYZ_2:	incbin	"collide\SYZ2.bin"	; SYZ index 2
+		even
+Col_SBZ_1:	incbin	"collide\SBZ1.bin"	; SBZ index 1
+		even
+Col_SBZ_2:	incbin	"collide\SBZ2.bin"	; SBZ index 2
 		even
 ; ---------------------------------------------------------------------------
 ; Special Stage layouts
@@ -8575,151 +8539,105 @@ Art_SbzSmoke:	incbin	"artunc\SBZ Background Smoke.bin"
 ; ---------------------------------------------------------------------------
 ; Level	layout index
 ; ---------------------------------------------------------------------------
-Level_Index:
-		; GHZ
-		dc.w Level_GHZ1-Level_Index, Level_GHZbg-Level_Index, byte_68D70-Level_Index
-		dc.w Level_GHZ2-Level_Index, Level_GHZbg-Level_Index, byte_68E3C-Level_Index
-		dc.w Level_GHZ3-Level_Index, Level_GHZbg-Level_Index, byte_68F84-Level_Index
-		dc.w byte_68F88-Level_Index, byte_68F88-Level_Index, byte_68F88-Level_Index
-		; LZ
-		dc.w Level_LZ1-Level_Index, Level_LZbg-Level_Index, byte_69190-Level_Index
-		dc.w Level_LZ2-Level_Index, Level_LZbg-Level_Index, byte_6922E-Level_Index
-		dc.w Level_LZ3-Level_Index, Level_LZbg-Level_Index, byte_6934C-Level_Index
-		dc.w Level_SBZ3-Level_Index, Level_LZbg-Level_Index, byte_6940A-Level_Index
-		; MZ
-		dc.w Level_MZ1-Level_Index, Level_MZ1bg-Level_Index, Level_MZ1-Level_Index
-		dc.w Level_MZ2-Level_Index, Level_MZ2bg-Level_Index, byte_6965C-Level_Index
-		dc.w Level_MZ3-Level_Index, Level_MZ3bg-Level_Index, byte_697E6-Level_Index
-		dc.w byte_697EA-Level_Index, byte_697EA-Level_Index, byte_697EA-Level_Index
-		; SLZ
-		dc.w Level_SLZ1-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-		dc.w Level_SLZ2-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-		dc.w Level_SLZ3-Level_Index, Level_SLZbg-Level_Index, byte_69B84-Level_Index
-		dc.w byte_69B84-Level_Index, byte_69B84-Level_Index, byte_69B84-Level_Index
-		; SYZ
-		dc.w Level_SYZ1-Level_Index, Level_SYZbg-Level_Index, byte_69C7E-Level_Index
-		dc.w Level_SYZ2-Level_Index, Level_SYZbg-Level_Index, byte_69D86-Level_Index
-		dc.w Level_SYZ3-Level_Index, Level_SYZbg-Level_Index, byte_69EE4-Level_Index
-		dc.w byte_69EE8-Level_Index, byte_69EE8-Level_Index, byte_69EE8-Level_Index
-		; SBZ
-		dc.w Level_SBZ1-Level_Index, Level_SBZ1bg-Level_Index, Level_SBZ1bg-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-		zonewarning Level_Index,24
-		; Ending
-		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
-		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-		; IMZ
-		dc.w Level_IMZ1-Level_Index, Level_IMZbg-Level_Index, byte_6A2FC-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-		; CSZ
-		dc.w Level_CSZ1-Level_Index, Level_CSZbg-Level_Index, byte_6A2FC-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, Level_SBZ2bg-Level_Index
-		dc.w Level_SBZ2-Level_Index, Level_SBZ2bg-Level_Index, byte_6A2F8-Level_Index
-		dc.w byte_6A2FC-Level_Index, byte_6A2FC-Level_Index, byte_6A2FC-Level_Index
-		
-		dc.w Level_End-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-		dc.w Level_End-Level_Index, Level_GHZbg-Level_Index, byte_6A320-Level_Index
-		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
-		dc.w byte_6A320-Level_Index, byte_6A320-Level_Index, byte_6A320-Level_Index
+Level_Index:	dc.l Level_GHZ1
+		dc.l Level_GHZ2
+		dc.l Level_GHZ3
+		dc.l Level_Null
+		dc.l Level_LZ1
+		dc.l Level_LZ2
+		dc.l Level_LZ3
+		dc.l Level_SBZ3
+		dc.l Level_MZ1
+		dc.l Level_MZ2
+		dc.l Level_MZ3
+		dc.l Level_Null
+		dc.l Level_SLZ1
+		dc.l Level_SLZ2
+		dc.l Level_SLZ3
+		dc.l Level_Null
+		dc.l Level_SYZ1
+		dc.l Level_SYZ2
+		dc.l Level_SYZ3
+		dc.l Level_Null
+		dc.l Level_SBZ1
+		dc.l Level_SBZ2
+		dc.l Level_SBZ2
+		dc.l Level_Null
+		dc.l Level_End
+		dc.l Level_End
+		dc.l Level_Null
+		dc.l Level_Null
+		zonewarning Level_Index,16
+
+Level_Null:
 		
 
 Level_GHZ1:	incbin	"levels\ghz1.bin"
 		even
-byte_68D70:	dc.b 0,	0, 0, 0
+
 Level_GHZ2:	incbin	"levels\ghz2.bin"
 		even
-byte_68E3C:	dc.b 0,	0, 0, 0
+
 Level_GHZ3:	incbin	"levels\ghz3.bin"
 		even
-Level_GHZbg:	incbin	"levels\ghzbg.bin"
-		even
-byte_68F84:	dc.b 0,	0, 0, 0
-byte_68F88:	dc.b 0,	0, 0, 0
 
 Level_LZ1:	incbin	"levels\lz1.bin"
 		even
-Level_LZbg:	incbin	"levels\lzbg.bin"
-		even
-byte_69190:	dc.b 0,	0, 0, 0
+
 Level_LZ2:	incbin	"levels\lz2.bin"
 		even
-byte_6922E:	dc.b 0,	0, 0, 0
+
 Level_LZ3:	incbin	"levels\lz3.bin"
 		even
-byte_6934C:	dc.b 0,	0, 0, 0
+		
+Level_LZ3_WALL:	incbin	"levels\lz3_wall.bin"
+		even
+
 Level_SBZ3:	incbin	"levels\sbz3.bin"
 		even
-byte_6940A:	dc.b 0,	0, 0, 0
 
 Level_MZ1:	incbin	"levels\mz1.bin"
 		even
-Level_MZ1bg:	incbin	"levels\mz1bg.bin"
-		even
+
 Level_MZ2:	incbin	"levels\mz2.bin"
 		even
-Level_MZ2bg:	incbin	"levels\mz2bg.bin"
-		even
-byte_6965C:	dc.b 0,	0, 0, 0
+
 Level_MZ3:	incbin	"levels\mz3.bin"
 		even
 Level_MZ3bg:	incbin	"levels\mz3bg.bin"
 		even
-byte_697E6:	dc.b 0,	0, 0, 0
-byte_697EA:	dc.b 0,	0, 0, 0
 
 Level_IMZ1:	incbin	"levels\imz1.bin"
 		even
-Level_IMZbg:	incbin	"levels\imzbg.bin"
-		even
+
 Level_SLZ1:	incbin	"levels\slz1.bin"
 		even
-Level_SLZbg:	incbin	"levels\slzbg.bin"
-		even
+		
 Level_SLZ2:	incbin	"levels\slz2.bin"
 		even
 Level_SLZ3:	incbin	"levels\slz3.bin"
 		even
-byte_69B84:	dc.b 0,	0, 0, 0
 
 Level_SYZ1:	incbin	"levels\syz1.bin"
 		even
-Level_SYZbg:	if Revision=0
-		incbin	"levels\syzbg.bin"
-		else
-		incbin	"levels\syzbg (JP1).bin"
-		endc
-		even
-byte_69C7E:	dc.b 0,	0, 0, 0
+
 Level_SYZ2:	incbin	"levels\syz2.bin"
 		even
-byte_69D86:	dc.b 0,	0, 0, 0
+
 Level_SYZ3:	incbin	"levels\syz3.bin"
 		even
-byte_69EE4:	dc.b 0,	0, 0, 0
-byte_69EE8:	dc.b 0,	0, 0, 0
 
 Level_SBZ1:	incbin	"levels\sbz1.bin"
 		even
-Level_SBZ1bg:	incbin	"levels\sbz1bg.bin"
-		even
+		
 Level_SBZ2:	incbin	"levels\sbz2.bin"
 		even
-Level_SBZ2bg:	incbin	"levels\sbz2bg.bin"
-		even
-byte_6A2F8:	dc.b 0,	0, 0, 0
-byte_6A2FC:	dc.b 0,	0, 0, 0
+		
 Level_End:	incbin	"levels\ending.bin"
 		even
 byte_6A320:	incbin	"levels\endingbg.bin"
+
 Level_CSZ1:	incbin	"levels\csz1.bin"
-		even
-Level_CSZbg:	incbin	"levels\cszbg.bin"
 		even
 
 Art_BigRing:	incbin	"artunc\Giant Ring.bin"
