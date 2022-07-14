@@ -10379,7 +10379,7 @@
 00008C70 4DF9 00C0 0000             		lea	(vdp_data_port).l,a6
 00008C76 45F8 F756                  		lea	(v_bg1_scroll_flags).w,a2
 00008C7A 47F8 F708                  		lea	(v_bgscreenposx).w,a3
-00008C7E 2878 A404                  		movea.l (v_lvllayoutbg).w,a4 ; MJ: Load address of layout BG
+00008C7E 2878 A404                  		movea.l	(v_lvllayoutbg).w,a4	; MJ: Load address of layout BG
 00008C82 343C 6000                  		move.w	#$6000,d2
 00008C86 6100 0000                  		bsr.w	DrawBGScrollBlock1
 00008C8A 45F8 F758                  		lea	(v_bg2_scroll_flags).w,a2
@@ -10400,7 +10400,7 @@
 00008CA2                            		; First, update the background
 00008CA2 45F8 FF32                  		lea	(v_bg1_scroll_flags_dup).w,a2	; Scroll block 1 scroll flags
 00008CA6 47F8 FF18                  		lea	(v_bgscreenposx_dup).w,a3	; Scroll block 1 X coordinate
-00008CAA 49F8 A404                  		lea	(v_lvllayoutbg).w,a4
+00008CAA 2878 A404                  		movea.l	(v_lvllayoutbg).w,a4		; MJ: Load address of layout BG
 00008CAE 343C 6000                  		move.w	#$6000,d2			; VRAM thing for selecting Plane B
 00008CB2 6100 0000                  		bsr.w	DrawBGScrollBlock1
 00008CB6 45F8 FF34                  		lea	(v_bg2_scroll_flags_dup).w,a2	; Scroll block 2 scroll flags
@@ -10409,7 +10409,7 @@
 00008CC2                            		; Then, update the foreground
 00008CC2 45F8 FF30                  		lea	(v_fg_scroll_flags_dup).w,a2	; Foreground scroll flags
 00008CC6 47F8 FF10                  		lea	(v_screenposx_dup).w,a3		; Foreground X coordinate
-00008CCA 49F8 A400                  		lea	(v_lvllayoutfg).w,a4
+00008CCA 2878 A400                  		movea.l	(v_lvllayoutfg).w,a4		; MJ: Load address of layout
 00008CCE 343C 4000                  		move.w	#$4000,d2			; VRAM thing for selecting Plane A
 00008CD2                            		; The FG's update function is inlined here
 00008CD2 4A12                       		tst.b	(a2)
@@ -10693,7 +10693,7 @@
 00008F08 4CDF 0030                  		movem.l	(sp)+,d4-d5
 00008F0C 0644 0010                  		addi.w	#16,d4		; Move X coordinate one block ahead
 00008F10 51CE FFE0                  		dbf	d6,@loop
-00008F14 4E75                       		rts	
+00008F14 4E75                       		rts
 00008F16                            ; End of function DrawBlocks_TB_2
 00008F16                            
 00008F16                            
@@ -12279,7 +12279,7 @@
 00009E1A 9569 0008                  		sub.w	d2,obX(a1)
 00009E1E                            
 00009E1E                            locret_7B62:
-00009E1E 4E75                       		rts	
+00009E1E 4E75                       		rts
 00009E20                            ; End of function MvSonicOnPtfm2
 00009E20                            TestObj:	include	"_incObj/TestDisplayObj.asm"
 00009E20                            ; ---------------------------------------------------------------------------

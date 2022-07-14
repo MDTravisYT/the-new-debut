@@ -3877,7 +3877,7 @@ LoadTilesAsYouMove_BGOnly:
 		lea	(vdp_data_port).l,a6
 		lea	(v_bg1_scroll_flags).w,a2
 		lea	(v_bgscreenposx).w,a3
-		movea.l (v_lvllayoutbg).w,a4 ; MJ: Load address of layout BG
+		movea.l	(v_lvllayoutbg).w,a4	; MJ: Load address of layout BG
 		move.w	#$6000,d2
 		bsr.w	DrawBGScrollBlock1
 		lea	(v_bg2_scroll_flags).w,a2
@@ -3898,7 +3898,7 @@ LoadTilesAsYouMove:
 		; First, update the background
 		lea	(v_bg1_scroll_flags_dup).w,a2	; Scroll block 1 scroll flags
 		lea	(v_bgscreenposx_dup).w,a3	; Scroll block 1 X coordinate
-		lea	(v_lvllayoutbg).w,a4
+		movea.l	(v_lvllayoutbg).w,a4		; MJ: Load address of layout BG
 		move.w	#$6000,d2			; VRAM thing for selecting Plane B
 		bsr.w	DrawBGScrollBlock1
 		lea	(v_bg2_scroll_flags_dup).w,a2	; Scroll block 2 scroll flags
@@ -3914,7 +3914,7 @@ LoadTilesAsYouMove:
 		; Then, update the foreground
 		lea	(v_fg_scroll_flags_dup).w,a2	; Foreground scroll flags
 		lea	(v_screenposx_dup).w,a3		; Foreground X coordinate
-		lea	(v_lvllayoutfg).w,a4
+		movea.l	(v_lvllayoutfg).w,a4		; MJ: Load address of layout
 		move.w	#$4000,d2			; VRAM thing for selecting Plane A
 		; The FG's update function is inlined here
 		tst.b	(a2)
@@ -4209,7 +4209,7 @@ locret_6AD6:
 			tst.b	(a2)
 			beq.w	locj_6DF2
 			cmpi.b	#id_CWZ,(v_zone).w
-			beq.w	Draw_SBz
+			beq.w	Draw_CWz
 			bclr	#0,(a2)
 			beq.s	locj_6DD2
 			; Draw new tiles on the left
@@ -4239,7 +4239,7 @@ locret_6AD6:
 			dc.b $04,$04,$04,$04,$04,$04,$02,$02,$02,$02,$02,$02,$02,$02,$02,$02
 			dc.b $02,$00						
 ;===============================================================================
-	Draw_SBz:
+	Draw_CWz:
 			moveq	#-16,d4
 			bclr	#0,(a2)
 			bne.s	locj_6E28
@@ -4480,7 +4480,7 @@ DrawBlocks_TB_2:
 		movem.l	(sp)+,d4-d5
 		addi.w	#16,d4		; Move X coordinate one block ahead
 		dbf	d6,@loop
-		rts	
+		rts
 ; End of function DrawBlocks_TB_2
 
 
@@ -4711,7 +4711,7 @@ LoadTilesFromStart:
 			cmpi.b	#id_MZ,(v_zone).w
 			beq.w	Draw_Mz_Bg
 			cmpi.w	#(id_CWZ<<8)+0,(v_zone).w
-			beq.w	Draw_SBz_Bg
+			beq.w	Draw_CWz_Bg
 			cmpi.b	#id_EndZ,(v_zone).w
 			beq.w	Draw_GHz_Bg
 		endc
@@ -4774,7 +4774,7 @@ DrawChunks:
 			dbf	d6,locj_725E
 			rts
 ;-------------------------------------------------------------------------------
-	Draw_SBz_Bg:;locj_7288:
+	Draw_CWz_Bg:;locj_7288:
 			moveq	#-16,d4
 			moveq	#((224+16+16)/16)-1,d6
 	locj_728C:			
@@ -5104,7 +5104,7 @@ MvSonic2:
 		sub.w	d2,obX(a1)
 
 locret_7B62:
-		rts	
+		rts
 ; End of function MvSonicOnPtfm2
 TestObj:	include	"_incObj/TestDisplayObj.asm"
 		include	"_incObj\15 Swinging Platforms (part 2).asm"
