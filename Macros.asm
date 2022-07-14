@@ -316,11 +316,13 @@ gotoROM:	macro
 ; compare the size of an index with ZoneCount constant
 ; (should be used immediately after the index)
 ; input: index address, element size
+;
+; Debut exclusive note: please don't use this ever.  ~~Kat
 ; ---------------------------------------------------------------------------
 
-zonewarning:	macro loc,elementsize
-	@end:
-		if (@end-loc)-(ZoneCount*elementsize)<>0
-		inform 1,"Size of \loc ($%h) does not match ZoneCount ($\#ZoneCount).",(@end-loc)/elementsize
-		endc
-		endm
+;zonewarning:	macro loc,elementsize
+;	@end:
+;		if (@end-loc)-(ZoneCount*elementsize)<>0
+;		inform 1,"Size of \loc ($%h) does not match ZoneCount ($\#ZoneCount).",(@end-loc)/elementsize
+;		endc
+;		endm

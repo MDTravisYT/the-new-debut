@@ -8,7 +8,6 @@ DebugList:
 	dc.w @SLZ-DebugList
 	dc.w @SYZ-DebugList
 	dc.w @SBZ-DebugList
-	zonewarning DebugList,2
 	dc.w @Ending-DebugList
 	dc.w @Ending-DebugList
 	dc.w @Ending-DebugList

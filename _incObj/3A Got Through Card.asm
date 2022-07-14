@@ -207,8 +207,7 @@ LevelOrder:
 		dc.b 8, 0	; Final Zone
 		dc.b 0, 0
 		even
-		zonewarning LevelOrder,8
-		
+
 		; Ending (unused)
 		dc.b 0, 0
 		dc.b 0, 0

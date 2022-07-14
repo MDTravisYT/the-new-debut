@@ -7,7 +7,8 @@ AddressSRAM:	equ 3	; 0 = odd+even; 2 = even only; 3 = odd only
 ; Change to 2 to build the version from Sonic Mega Collection, dubbed REVXB, which fixes the infamous "spike bug"
 Revision:	equ 0
 
-ZoneCount:	equ 6	; discrete zones are: GHZ, MZ, SYZ, LZ, SLZ, and SBZ
+; ZoneCount:	  equ 6	  ; discrete zones are: GHZ, MZ, SYZ, LZ, SLZ, and SBZ
+; Note: this variable is obsolete. used for the now unused zonewarning macro and nothing else.
 
 OptimiseSound:	equ 0	; change to 1 to optimise sound queuing
 

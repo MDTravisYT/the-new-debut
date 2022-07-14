@@ -7,7 +7,7 @@
 
 ; ===========================================================================
 
-    include "_inc/Debugger.asm"
+        include "_inc/Debugger.asm"
 	include	"Constants.asm"
 	include	"Variables.asm"
 	include	"Macros.asm"
@@ -25,7 +25,7 @@ Vectors:	dc.l v_systemstack&$FFFFFF	; Initial stack pointer value
 		dc.l ChkInstr			; CHK exception
 		dc.l TrapvInstr			; TRAPV exception (8)
 		dc.l PrivilegeViol		; Privilege violation
-		dc.l Trace				; TRACE exception
+		dc.l Trace			; TRACE exception
 		dc.l Line1010Emu		; Line-A emulator
 		dc.l Line1111Emu		; Line-F emulator (12)
 		dc.l ErrorExcept		; Unused (reserved)
@@ -44,9 +44,9 @@ Vectors:	dc.l v_systemstack&$FFFFFF	; Initial stack pointer value
 		dc.l ErrorTrap			; IRQ level 1
 		dc.l ErrorTrap			; IRQ level 2
 		dc.l ErrorTrap			; IRQ level 3 (28)
-		dc.l HBlank				; IRQ level 4 (horizontal retrace interrupt)
+		dc.l HBlank			; IRQ level 4 (horizontal retrace interrupt)
 		dc.l ErrorTrap			; IRQ level 5
-		dc.l VBlank				; IRQ level 6 (vertical retrace interrupt)
+		dc.l VBlank			; IRQ level 6 (vertical retrace interrupt)
 		dc.l ErrorTrap			; IRQ level 7 (32)
 		dc.l ErrorTrap			; TRAP #00 exception
 		dc.l ErrorTrap			; TRAP #01 exception
@@ -6322,7 +6322,6 @@ MusicList2:
 		dc.b bgm_SLZ
 		dc.b bgm_SYZ
 		dc.b bgm_SBZ
-		zonewarning MusicList2,1
 		; The ending doesn't get an entry
 		even
 
@@ -8567,7 +8566,6 @@ Level_Index:	dc.l Level_GHZ1
 		dc.l Level_End
 		dc.l Level_Null
 		dc.l Level_Null
-		zonewarning Level_Index,16
 
 Level_Null:
 		
@@ -8680,7 +8678,6 @@ ObjPos_Index:
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		zonewarning ObjPos_Index,$10
 		; Ending
 		dc.w ObjPos_EndN-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
@@ -8727,7 +8724,6 @@ ObjPos_Index:
 		dc.w ObjPos_SBZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_FZ-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		zonewarning ObjPos_Index,$10
 		; Ending
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index

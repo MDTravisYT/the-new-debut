@@ -37,7 +37,6 @@ ptr_PLC_MZAnimals:	dc.w PLC_MZAnimals-ArtLoadCues
 ptr_PLC_SLZAnimals:	dc.w PLC_SLZAnimals-ArtLoadCues
 ptr_PLC_SYZAnimals:	dc.w PLC_SYZAnimals-ArtLoadCues
 ptr_PLC_SBZAnimals:	dc.w PLC_SBZAnimals-ArtLoadCues
-			zonewarning PLC_Animals,2
 ptr_PLC_SSResult:	dc.w PLC_SSResult-ArtLoadCues
 ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues

@@ -23,7 +23,6 @@ AnimateLevelGfx:
 AniArt_Index:	dc.w AniArt_none-AniArt_Index, AniArt_none-AniArt_Index
 		dc.w AniArt_MZ-AniArt_Index, AniArt_none-AniArt_Index
 		dc.w AniArt_none-AniArt_Index, AniArt_SBZ-AniArt_Index
-		zonewarning AniArt_Index,2
 		dc.w AniArt_Ending-AniArt_Index, AniArt_SBZ-AniArt_Index
 		dc.w AniArt_SBZ-AniArt_Index, AniArt_SBZ-AniArt_Index
 		dc.w AniArt_SBZ-AniArt_Index, AniArt_SBZ-AniArt_Index
