@@ -4698,11 +4698,11 @@ LoadTilesFromStart:
 		lea	(vdp_control_port).l,a5
 		lea	(vdp_data_port).l,a6
 		lea	(v_screenposx).w,a3
-		lea	(v_lvllayoutfg).w,a4
+		movea.l	(v_lvllayoutfg).w,a4	; MJ: Load address of layout
 		move.w	#$4000,d2
 		bsr.s	DrawChunks
 		lea	(v_bgscreenposx).w,a3
-		lea	(v_lvllayoutbg).w,a4
+		movea.l	(v_lvllayoutbg).w,a4	; MJ: Load address of layout BG
 		move.w	#$6000,d2
 		if Revision=0
 		else
@@ -4710,7 +4710,7 @@ LoadTilesFromStart:
 			beq.w	Draw_GHz_Bg
 			cmpi.b	#id_MZ,(v_zone).w
 			beq.w	Draw_Mz_Bg
-			cmpi.w	#(id_CWZ<<8)+0,(v_zone).w
+			cmpi.w	#(id_SBZ<<8)+0,(v_zone).w
 			beq.w	Draw_CWz_Bg
 			cmpi.b	#id_EndZ,(v_zone).w
 			beq.w	Draw_GHz_Bg
@@ -4777,7 +4777,7 @@ DrawChunks:
 	Draw_CWz_Bg:;locj_7288:
 			moveq	#-16,d4
 			moveq	#((224+16+16)/16)-1,d6
-	locj_728C:			
+	locj_728C:
 			movem.l	d4-d6,-(sp)
 			lea	(locj_6DF4+1),a0
 			move.w	(v_bgscreenposy).w,d0
