@@ -38,15 +38,15 @@ ptr_PLC_SLZAnimals:	dc.w PLC_SLZAnimals-ArtLoadCues
 ptr_PLC_SYZAnimals:	dc.w PLC_SYZAnimals-ArtLoadCues
 ptr_PLC_SBZAnimals:	dc.w PLC_SBZAnimals-ArtLoadCues
 ptr_PLC_SSResult:	dc.w PLC_SSResult-ArtLoadCues
-ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
-ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
-ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
-ptr_PLC_FZBoss:		dc.w PLC_FZBoss-ArtLoadCues
+ptr_PLC_Blank:		dc.w PLC_Blank-ArtLoadCues
 
 plcm:	macro gfx,vram
 	dc.l gfx
 	dc.w vram
 	endm
+
+PLC_Blank:	dc.w ((PLC_Blankend-PLC_Blank-2)/6)-1
+	PLC_Blankend:
 
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - standard block 1
@@ -483,7 +483,3 @@ plcid_SLZAnimals:	equ (ptr_PLC_SLZAnimals-ArtLoadCues)/2	; $18
 plcid_SZAnimals:	equ (ptr_PLC_SYZAnimals-ArtLoadCues)/2	; $19
 plcid_CWZAnimals:	equ (ptr_PLC_SBZAnimals-ArtLoadCues)/2	; $1A
 plcid_SSResult:		equ (ptr_PLC_SSResult-ArtLoadCues)/2	; $1B
-plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	; $1C
-plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	; $1D
-plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	; $1E
-plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	; $1F

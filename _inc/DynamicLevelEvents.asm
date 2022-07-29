@@ -518,8 +518,8 @@ DLE_SBZ2boss:
 		bne.s	locret_7298
 		move.b	#id_FalseFloor,(a1) ; load collapsing block object
 		addq.b	#2,(v_dle_routine).w
-		moveq	#plcid_EggmanSBZ2,d0
-		bra.w	AddPLC		; load SBZ2 Eggman patterns
+	;	moveq	#plcid_EggmanSBZ2,d0
+	;	bra.w	AddPLC		; load SBZ2 Eggman patterns
 ; ===========================================================================
 
 locret_7298:
@@ -567,8 +567,8 @@ DLE_FZmain:
 		cmpi.w	#$2148,(v_screenposx).w
 		bcs.s	loc_72F4
 		addq.b	#2,(v_dle_routine).w
-		moveq	#plcid_FZBoss,d0
-		bsr.w	AddPLC		; load FZ boss patterns
+	;	moveq	#plcid_FZBoss,d0
+	;	bsr.w	AddPLC		; load FZ boss patterns
 
 loc_72F4:
 		bra.s	loc_72C2
