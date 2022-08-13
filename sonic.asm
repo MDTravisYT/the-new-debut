@@ -3238,8 +3238,12 @@ ColPointers:	dc.l Col_GHZ_1
 		dc.l Col_SYZ_2
 		dc.l Col_SBZ_1
 		dc.l Col_SBZ_2
-;		dc.l Col_GHZ_1 ; Pointer for Ending is missing by default.
-;		dc.l Col_GHZ_2
+		dc.l Col_GHZ_1 ; Pointer for Ending is missing by default.
+		dc.l Col_GHZ_2
+		dc.l Col_IMZ_1
+		dc.l Col_IMZ_2
+		dc.l Col_GHZ_1
+		dc.l Col_GHZ_2
 
 		include	"_inc\Oscillatory Routines.asm"
 
@@ -8396,7 +8400,7 @@ Blk128_SYZ:
 Blk128_SBZ:	
 Blk128_CSZ:
 	else
-Blk128_IMZ:	;incbin	"map128\IMZ.bin"
+Blk128_IMZ:	incbin	"map128\IMZ.bin"
 		even
 Blk128_SLZ:	incbin	"map128\SLZ.bin"
 		even
@@ -8482,6 +8486,10 @@ Col_MZ_1:	incbin	"collide\MZ1.bin"	; MZ index 1
 		even
 Col_MZ_2:	incbin	"collide\MZ2.bin"	; MZ index 2
 		even
+Col_IMZ_1:	incbin	"collide\IMZ1.bin"	; IMZ index 1
+		even
+Col_IMZ_2:	incbin	"collide\IMZ2.bin"	; IMZ index 2
+		even
 Col_SLZ_1:	incbin	"collide\SLZ1.bin"	; SLZ index 1
 		even
 Col_SLZ_2:	incbin	"collide\SLZ2.bin"	; SLZ index 2
@@ -8538,32 +8546,41 @@ Art_SbzSmoke:	incbin	"artunc\SBZ Background Smoke.bin"
 ; ---------------------------------------------------------------------------
 ; Level	layout index
 ; ---------------------------------------------------------------------------
-Level_Index:	dc.l Level_GHZ1
+Level_Index:	
+		dc.l Level_GHZ1	; GHZ
 		dc.l Level_GHZ2
 		dc.l Level_GHZ3
 		dc.l Level_Null
-		dc.l Level_LZ1
+		dc.l Level_LZ1	; LZ
 		dc.l Level_LZ2
 		dc.l Level_LZ3
 		dc.l Level_SBZ3
-		dc.l Level_MZ1
+		dc.l Level_MZ1	; MZ
 		dc.l Level_MZ2
 		dc.l Level_MZ3
 		dc.l Level_Null
-		dc.l Level_SLZ1
+		dc.l Level_SLZ1	; SLZ
 		dc.l Level_SLZ2
 		dc.l Level_SLZ3
 		dc.l Level_Null
-		dc.l Level_SYZ1
+		dc.l Level_SYZ1	; SZ
 		dc.l Level_SYZ2
 		dc.l Level_SYZ3
 		dc.l Level_Null
-		dc.l Level_SBZ1
+		dc.l Level_SBZ1	; CWZ
 		dc.l Level_SBZ2
 		dc.l Level_SBZ2
 		dc.l Level_Null
+		dc.l Level_End	; FUN
 		dc.l Level_End
-		dc.l Level_End
+		dc.l Level_Null
+		dc.l Level_Null
+		dc.l Level_IMZ1	; IMZ
+		dc.l Level_Null
+		dc.l Level_Null
+		dc.l Level_Null
+		dc.l Level_Null	; CSZ
+		dc.l Level_Null
 		dc.l Level_Null
 		dc.l Level_Null
 
