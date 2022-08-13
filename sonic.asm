@@ -1802,6 +1802,7 @@ Hack_GotoTitle:
 ; ---------------------------------------------------------------------------
 
 GM_Sega:
+	;	jsr		SHC2022 
 		sfx	$E0,0,1,1
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
@@ -2016,6 +2017,7 @@ Creds_GotoTitle:
 ; ---------------------------------------------------------------------------
 
 GM_Title:
+		jsr		SHC2022 
 		sfx	bgm_Stop,0,1,1 ; stop music
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
@@ -8866,7 +8868,10 @@ ObjPos_Null:	dc.b $FF, $FF, 0, 0, 0,	0
 TitleLock:
 
 	rts
-	
+
+    SHC2022:    incbin "SHC22_Full_Sonic12.bin"
+                even
+
 SoundDriver:	include "sound/s1.sounddriver.asm"
 
 ; end of 'ROM'
