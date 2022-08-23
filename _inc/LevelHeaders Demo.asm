@@ -24,11 +24,9 @@ lhead:	macro plc1,lvlgfx,plc2,sixteen,twofivesix,music,pal
 	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SYZ,	palid_GHZ	; Spring Yard
 	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Scrap Brain
 ;	zonewarning LevelHeaders,$10
-	lhead	plcid_lock,	Nem_lockN,	plcid_lock,	Blk16_lockN,Blk128_lockN,	bgm_GHZ,	palid_FUN	; Ending
-	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Ice Mountain
 	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Cosmic Space
-	lhead	plcid_lock,	Nem_lock,	plcid_lock,	Blk16_lock,	Blk128_lock,	bgm_GHZ,	palid_GHZ	; LOCK2
-	lhead	plcid_lock,	Nem_lock,	plcid_lock,	Blk16_lock,	Blk128_lock,	bgm_GHZ,	palid_GHZ	; LOCK2
+	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Ice Mountain
+	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Blank
 	even
 
 ;	* music and level gfx are actually set elsewhere, so these values are useless

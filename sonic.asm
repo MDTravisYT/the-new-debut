@@ -2453,7 +2453,7 @@ LevSel_Ptrs:
 		dc.b id_GHZ, 0
 		dc.b id_GHZ, 0
 		dc.b id_GHZ, 0
-		dc.b $06, 0
+		dc.b id_GHZ, 0
 		dc.b $09, 0
 		dc.w $8000
 		even
@@ -5465,11 +5465,9 @@ Map_Push:	include	"_maps\Pushable Blocks.asm"
 ; ---------------------------------------------------------------------------
 ; Sprite mappings - zone title cards
 ; ---------------------------------------------------------------------------
-Map_Card:	if IsDemo=0
+Map_Card:	
 		include	"_maps\Title Cards.asm"
-		else
-		include	"_maps\Title Cards Demo.asm"
-		endif
+
 
 Map_Over:	include	"_maps\Game Over.asm"
 
