@@ -2433,26 +2433,26 @@ LevSel_Ptrs:
 		dc.b id_GHZ, 1
 		dc.b id_GHZ, 2
 		dc.b id_LZ, 0
-		dc.b id_LZ, 1
-		dc.b id_LZ, 2
-		dc.b id_MZ, 0
-		dc.b id_MZ, 1
-		dc.b id_MZ, 2
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
-		dc.b $0A, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
+		dc.b id_GHZ, 0
 		dc.b $06, 0
 		dc.b $09, 0
 		dc.w $8000
@@ -2763,27 +2763,27 @@ LevelMenuText:	if IsDemo=0
 	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_2  
 	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_3  
 	dc.b    _L,_A,_B,_Y,_R,_I,_N,_T,_H,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_1  
-	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_2  
-	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_3 
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
 	dc.b    _M,_A,_R,_B,_L,_E,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_1  
 	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
 	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,_X,__,__,__,__,_Z,_O,_N,_E,__,_X  
-	dc.b    _F,_U,_N,__,_S,_T,_A,_G,_E,__,__,__,__,__,__,__,__,__,_Z,_O,_N,_E,__,_X
+	dc.b    _I,_C,_E,__,_M,_O,_U,_N,_T,_A,_I,_N,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_1 
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
+	dc.b    _S,_T,_A,_R,__,_L,_I,_G,_H,_T,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_1  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
+	dc.b    _S,_P,_A,_R,_K,_L,_I,_N,_G,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_1 
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
+	dc.b    _C,_L,_O,_C,_K,__,_W,_O,_R,_K,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_1  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
+	dc.b    _C,_O,_S,_M,_I,_C,__,_S,_P,_A,_C,_E,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_1  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_2  
+	dc.b    __,__,__,__,__,__,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_3 
+	dc.b    _E,_N,_D,_I,_N,_G,__,__,__,__,__,__,__,__,__,__,_X,__,_Z,_O,_N,_E,__,_X
 	dc.b    _B,_O,_N,_U,_S,__,_S,_T,_A,_G,_E,__,__,__,__,__,__,__,__,__,__,__,__,__
 	dc.b    _S,_O,_U,_N,_D,__,_S,_E,_L,_E,_C,_T,__,__,__,__,__,__,__,__,__,__,__,__
 	dc.b    $00 ; alinhamento
@@ -8674,13 +8674,13 @@ ObjPos_Index:
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		; LZ
 		dc.w ObjPos_LZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_LZ2-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_LZ3-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		; MZ
-		dc.w ObjPos_MZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_Null-ObjPos_Index, ObjPos_Null-ObjPos_Index
-		dc.w ObjPos_Null-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		; SLZ
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
