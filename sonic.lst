@@ -47206,7 +47206,7 @@
 00020B24                            ;	zonewarning LevelHeaders,$10
 00020B24 0000 0000 0000 0000 0000+  	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Cosmic Space
 00020B34 0000 0000 0000 0000 0000+  	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Ice Mountain
-00020B44 0000 0000 0000 0000 0000+  	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Cosmic Space
+00020B44 0000 0000 0000 0000 0000+  	lhead	plcid_GHZ,	Null_Level,	plcid_GHZ2,	Null_Level,	Null_Level,	bgm_SBZ,	palid_GHZ	; Blank
 00020B54                            	even
 00020B54                            
 00020B54                            ;	* music and level gfx are actually set elsewhere, so these values are useless
