@@ -1863,23 +1863,23 @@ Sega_Main:
 		ori.b	#$40,d0
 		move.w	d0,($C00004).l
 		sfx		$90,0,1,1
-		move.b	#$6,(v_objspace+$1C0).w	; load HUD object 2 <----- object
-		move.w	#$10, (v_lvllayoutfg).w		;How far to slide (1 subtracted then added each frame ran)
+	;	move.b	#$6,(v_objspace+$1C0).w	; load HUD object 2 <----- object
+	;	move.w	#$10, (v_lvllayoutfg).w		;How far to slide (1 subtracted then added each frame ran)
 
 Sega_Loop:
 		move.b	#2,(v_vbla_routine).w
 		bsr.w	WaitForVBla
-        jsr		(ExecuteObjects).l
-        jsr		(BuildSprites).l
+   ;     jsr		(ExecuteObjects).l
+    ;    jsr		(BuildSprites).l
 		bsr.w	Sega_CyclePal
 		
-		cmp.b	#$26, (v_objspace+$1C0+$1A).w		;Is the object on frame $24?
-		bne.s	@SkipScroll							;If not, don't do anything
-		lea		(v_lvllayoutfg).w, a0
-		move.w	(a0), d0					;Get slide amount and check for 0 (below)
-		beq.s	@SkipScroll					;If so, don't scroll
-		subq.w	#1, (a0)					;If not, subtract 1 from slide amount
-		sub.w	d0, (v_hscrolltablebuffer+2).w	;Slide!
+;		cmp.b	#$26, (v_objspace+$1C0+$1A).w		;Is the object on frame $24?
+;		bne.s	@SkipScroll							;If not, don't do anything
+;		lea		(v_lvllayoutfg).w, a0
+;		move.w	(a0), d0					;Get slide amount and check for 0 (below)
+;		beq.s	@SkipScroll					;If so, don't scroll
+;		subq.w	#1, (a0)					;If not, subtract 1 from slide amount
+;		sub.w	d0, (v_hscrolltablebuffer+2).w	;Slide!
 	@SkipScroll:
 		
 		tst.w	(v_demolength).w
