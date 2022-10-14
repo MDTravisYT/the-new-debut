@@ -8867,7 +8867,7 @@
 00007E50                            ; ---------------------------------------------------------------------------
 00007E50                            LevelSizeArray:
 00007E50                            		; GHZ
-00007E50 0004 0000 24BF 0000 0300+  		dc.w $0004, $0000, $24BF, $0000, $0300, $0060
+00007E50 0004 0000 21BF 0000 0300+  		dc.w $0004, $0000, $21BF, $0000, $0300, $0060
 00007E5C 0004 0000 2050 0000 0220+  		dc.w $0004, $0000, $2050, $0000, $0220, $0060
 00007E68 0004 0000 295C 0000 0300+  		dc.w $0004, $0000, $295C, $0000, $0300, $0060
 00007E74 0004 0000 2ABF 0000 0300+  		dc.w $0004, $0000, $2ABF, $0000, $0300, $0060
@@ -11121,10 +11121,10 @@
 000091C0                            
 000091C0                            DLE_GHZ1:
 000091C0 31FC 0300 F726             		move.w	#$300,(v_limitbtm1).w ; set lower y-boundary
-000091C6 0C78 0D00 F700             		cmpi.w	#$0D00,(v_screenposx).w ; has the camera reached $1780 on x-axis?
+000091C6 0C78 0C00 F700             		cmpi.w	#$0C00,(v_screenposx).w ; has the camera reached $1780 on x-axis?
 000091CC 6500                       		bcs.s	locret_6E08	; if not, branch
 000091CE 31FC 0200 F726             		move.w	#$200,(v_limitbtm1).w ; set lower y-boundary
-000091D4 0C78 1680 F700             		cmpi.w	#$1680,(v_screenposx).w ; has the camera reached $1780 on x-axis?
+000091D4 0C78 1480 F700             		cmpi.w	#$1480,(v_screenposx).w ; has the camera reached $1780 on x-axis?
 000091DA 6500                       		bcs.s	locret_6E08	; if not, branch
 000091DC 31FC 0400 F726             		move.w	#$400,(v_limitbtm1).w ; set lower y-boundary
 000091E2                            
