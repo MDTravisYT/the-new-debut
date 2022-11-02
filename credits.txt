@@ -1,12 +1,12 @@
 LEAD:
-	MCTravisYT
+	MDTravis
 	
 PROGRAMMERS:
 	Inferno
-	MCTravisYT
+	MDTravis
 	
 ART:
-	MCTravisYT
+	MDTravis
 	BladeOfChaos
 	ManiacShard
 	Gastón A. Guzman
@@ -15,8 +15,8 @@ ART:
 	PepsiJuan666
 	
 MUSIC:
-	MCTravisYT
-	JayKuriN
+	MDTravis
+	KatKuriN
 	THiN CRUST
 	
 BETA TESTING:
@@ -24,16 +24,16 @@ BETA TESTING:
 	Cosmic Eternity
 	KGL
 	ManiacShard
-	Original Chris
-	sonic c32ttb1
-	TwoTailedNeppy
-	JayKuriN
+	SeekFlash16
+	seashore
+      St. Nick 
+	KatKuriN
 	dweeby
 	EmmaNerd
 	MrLordSith
 	dualsh0x
 	Inferno
-	ogm
+	Icytroids / ogm
 	
 SPECIAL THANKS:
 	CaioST
