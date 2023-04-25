@@ -212,7 +212,10 @@ loc_1309A:
 		move.w	d6,d1
 		neg.w	d1
 		cmp.w	d1,d0
-		bgt.s	loc_130A6
+		bgt.s	loc_130A6			; If so, branch
+		add.w	d5,d0				; Apply acceleration
+		cmp.w	d1,d0				; Have we reached top speed?
+		blt.s	loc_130A6
 		move.w	d1,d0
 
 loc_130A6:
@@ -257,7 +260,10 @@ Sonic_MoveRight:
 loc_13104:
 		add.w	d5,d0
 		cmp.w	d6,d0
-		blt.s	loc_1310C
+		blt.s	loc_1310C			; If so, branch
+		sub.w	d5,d0				; Apply acceleration
+		cmp.w	d6,d0				; Have we reached top speed?
+		bge.s	loc_1310C
 		move.w	d6,d0
 
 loc_1310C:

@@ -1,36 +1,26 @@
 Operating system: Microsoft Windows NT 6.2.9200.0
 Opening INI file "D:\Disassembly\BetaSonic in Sonic 1\debut again\the-new-debut\SonPLN.ini"...
 Game type is S1.
-Loading Sega A...
-Loading palette file "palette/Sonic.bin"...
-Source: 0 Destination: 0 Length: 16
-Loading plane mappings from file "tilemaps/Sega Logo.bin", using compression Enigma...
-Loading 8x8 tiles from file "artnem/Sega Logo.bin", using compression Nemesis...
-Load completed.
-Loading Sega B...
-Loading palette file "palette/Sonic.bin"...
-Source: 0 Destination: 0 Length: 16
-Loading 8x8 tiles from file "artnem/Sega Logo.bin", using compression Nemesis...
-Loading plane mappings from file "tilemaps/Sega Logo 2.bin", using compression Enigma...
-Load completed.
-Loading Sega A...
-Loading plane mappings from file "tilemaps/Sega Logo.bin", using compression Enigma...
-Loading 8x8 tiles from file "artnem/Sega Logo.bin", using compression Nemesis...
-Loading palette file "palette/Sonic.bin"...
-Source: 0 Destination: 0 Length: 16
-Load completed.
-System.NullReferenceException: Object reference not set to an instance of an object.
-   at SonicRetro.SonLVL.PatternIndexSearchControl.UpdateStuff() in E:\Programs\SonLVL\SonPLN\PatternIndexSearchControl.cs:line 22
-   at SonicRetro.SonLVL.ReplaceTilesDialog.ReplaceBlockTilesDialog_VisibleChanged(Object sender, EventArgs e) in E:\Programs\SonLVL\SonPLN\ReplaceTilesDialog.cs:line 17
-   at System.Windows.Forms.Control.OnVisibleChanged(EventArgs e)
-   at System.Windows.Forms.ScrollableControl.OnVisibleChanged(EventArgs e)
-   at System.Windows.Forms.Form.OnVisibleChanged(EventArgs e)
-   at System.Windows.Forms.Control.WmShowWindow(Message& m)
+Loading Credits...
+Loading 8x8 tiles from file "artnem/Credits.bin", using compression Nemesis...
+System.FormatException: Level must contain at least one Blocks file!
+   at SonicRetro.SonLVL.API.LevelData.LoadLevelBlocks() in C:\Users\MineC\Downloads\SonLVL-ac6eb1980ea2d03cb924c56de66d112fba479365\SonLVLAPI\LevelData.cs:line 522
+   at SonicRetro.SonLVL.API.LevelData.LoadLevel(String levelname, Boolean loadGraphics) in C:\Users\MineC\Downloads\SonLVL-ac6eb1980ea2d03cb924c56de66d112fba479365\SonLVLAPI\LevelData.cs:line 195
+   at SonicRetro.SonLVL.GUI.MainForm.backgroundLevelLoader_DoWork(Object sender, DoWorkEventArgs e) in C:\Users\MineC\Downloads\SonLVL-ac6eb1980ea2d03cb924c56de66d112fba479365\SonLVL\MainForm.cs:line 575
+   at SonicRetro.SonLVL.GUI.MainForm.LevelToolStripMenuItem_Clicked(Object sender, EventArgs e) in C:\Users\MineC\Downloads\SonLVL-ac6eb1980ea2d03cb924c56de66d112fba479365\SonLVL\MainForm.cs:line 560
+   at System.Windows.Forms.ToolStripItem.RaiseEvent(Object key, EventArgs e)
+   at System.Windows.Forms.ToolStripMenuItem.OnClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleClick(EventArgs e)
+   at System.Windows.Forms.ToolStripItem.HandleMouseUp(MouseEventArgs e)
+   at System.Windows.Forms.ToolStripItem.FireEventInteractive(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStripItem.FireEvent(EventArgs e, ToolStripItemEventType met)
+   at System.Windows.Forms.ToolStrip.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.ToolStripDropDown.OnMouseUp(MouseEventArgs mea)
+   at System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
    at System.Windows.Forms.Control.WndProc(Message& m)
    at System.Windows.Forms.ScrollableControl.WndProc(Message& m)
-   at System.Windows.Forms.ContainerControl.WndProc(Message& m)
-   at System.Windows.Forms.Form.WmShowWindow(Message& m)
-   at System.Windows.Forms.Form.WndProc(Message& m)
+   at System.Windows.Forms.ToolStrip.WndProc(Message& m)
+   at System.Windows.Forms.ToolStripDropDown.WndProc(Message& m)
    at System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
    at System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
    at System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
