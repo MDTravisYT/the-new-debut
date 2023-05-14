@@ -356,7 +356,7 @@ ptr_GM_SimpleCreds:	bra.w	GM_SimpleCreds		; Credits ($18)
 
 ptr_GM_Hack:	bra.w	GM_Hack		; Credits ($1C)
 
-ptr_GM_Radnex-GameModeArray:	bra.w	GM_Radnex ; Radnex Affiliate Splash ($20)
+ptr_GM_Radnex:	bra.w	RadnexAffiliate ; Radnex Affiliate Splash ($20)
 
 		rts	
 ; ===========================================================================
@@ -1721,6 +1721,7 @@ Pal_Ending:	incbin	"palette\Ending.bin"
 Pal_CSZ:	incbin	"palette\Cosmic Space Zone.bin"
 Pal_FUN:	incbin	"palette\Fun Zone.bin"
 Pal_Temp:	incbin	"palette\blank hacky workaround.bin"
+Pal_RadnexAffiliate:	incbin	"palette\Radnex.bin"
 
 ; ---------------------------------------------------------------------------
 ; Subroutine to	wait for VBlank routines to complete
@@ -1963,7 +1964,7 @@ Rad_MainLoop:
     bne.s   Rad_MainLoop          ; if not, branch
  
 Rad_GotoTitle:
-    move.b  #$18,($FFFFF600).w      ; set the screen mode to Credits Screen
+    move.b  #$20,($FFFFF600).w      ; set the screen mode to Radnex Screen
     rts                     ; return
 	
 ; ---------------------------------------------------------------------------
@@ -2012,6 +2013,9 @@ Creds_GotoTitle:
     rts                     ; return
 
 ; ===========================================================================
+
+	include "_inc\In affiliation with RadiantNexus.asm"
+
 
 ; ---------------------------------------------------------------------------
 ; Title	screen
@@ -7952,7 +7956,23 @@ Nem_SegaSonic:	incbin	"artnem\Sega Sonic.bin"
 			even
 	PAL_HACK:	incbin	"palette\Hacker.bin"
 			even
-			
+
+Eni_RadnexAffiliateText:		incbin	"tilemaps\Affiliate Text.bin"
+		even
+Eni_RAffiliate:			incbin	"tilemaps\R.bin"
+		even
+Eni_RAffiliate2:		incbin	"tilemaps\R2.bin"
+		even
+Eni_TAffiliate:			incbin	"tilemaps\T.bin"
+		even
+Eni_TAffiliate2:		incbin	"tilemaps\T2.bin"
+		even
+Eni_RadnexAffiliate:	incbin	"tilemaps\Radnex.bin"
+		even
+Eni_RadnexAffiliate2:	incbin	"tilemaps\Radnex2.bin"
+		even
+Nem_RadnexAffiliate:	incbin	"artnem\Radnex.bin"
+
 Nem_TitleBlank:	incbin	"artnem\Title Screen Blank Top VRAM.bin" ; title screen foreground (mappings)
 		even
 Eni_Title:	incbin	"tilemaps\Title Screen.bin" ; title screen foreground (mappings)

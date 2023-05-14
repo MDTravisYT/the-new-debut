@@ -306,7 +306,7 @@ Sega_MainLoop2:
     bne.s   Sega_MainLoop2          		; if not, branch
  
 Radnex_GotoTitle:
-    move.b  #id_Title,(v_gamemode).w      		; set the screen mode to Title Screen
+    move.b  #$18,($FFFFF600).w      		; set the screen mode to Title Screen
     rts                     				; return
 	
 WaitForNextLogo:
