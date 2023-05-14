@@ -1888,7 +1888,7 @@ Sega_Loop:
 
 Sega_GotoTitle:
 	if IsDemo=0
-		move.b	#id_SplshGM,(v_gamemode).w
+		move.b	#id_Title,(v_gamemode).w
 	else
 		move.b	#id_Title,(v_gamemode).w
 	endif
