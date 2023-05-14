@@ -20734,7 +20734,7 @@
 0000F652 31C0 FE10                  		move.w	d0,(v_zone).w	; set level number
 0000F656 4A40                       		tst.w	d0
 0000F658 6600                       		bne.s	Got_ChkSS
-0000F65A 11FC 0018 F600             		move.b	#$18,(v_gamemode).w
+0000F65A 11FC 0014 F600             		move.b	#$14,(v_gamemode).w
 0000F660 6000                       		bra.s	Got_Display2
 0000F662                            ; ===========================================================================
 0000F662                            

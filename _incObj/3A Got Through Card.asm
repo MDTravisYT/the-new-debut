@@ -149,7 +149,7 @@ Got_NextLevel:	; Routine $A
 		move.w	d0,(v_zone).w	; set level number
 		tst.w	d0
 		bne.s	Got_ChkSS
-		move.b	#$18,(v_gamemode).w
+		move.b	#$14,(v_gamemode).w
 		bra.s	Got_Display2
 ; ===========================================================================
 
