@@ -1027,6 +1027,14 @@
 00000000 =FFFFFEC6                  v_ani3_time:	equ $FFFFFEC6	; synchronised sprite animation 3 - time until next frame
 00000000 =FFFFFEC7                  v_ani3_frame:	equ $FFFFFEC7	; synchronised sprite animation 3 - current frame
 00000000 =FFFFFEC8                  v_ani3_buf:	equ $FFFFFEC8	; synchronised sprite animation 3 - info buffer (2 bytes)
+00000000                            
+00000000 =FFFFFEC9                  v_palflags: equ	$FFFFFEC9			; byte. marks whether or not palettes are in need of change.
+00000000 =FFFFFECA                  v_palcount: equ	$FFFFFECA			; byte. number of colors of the above water palette that are in need of change.
+00000000 =FFFFFECC                  p_paltarget: equ	$FFFFFECC		; longword. points to the target palette in ROM.
+00000000 =FFFFFED0                  p_palreplace: equ	$FFFFFED0		; longword. points to the RAM area where the palette lies and needs replacement.
+00000000                            
+00000000                            
+00000000                            
 00000000 =FFFFFEF0                  v_limittopdb:	equ $FFFFFEF0	; level upper boundary, buffered for debug mode (2 bytes)
 00000000 =FFFFFEF2                  v_limitbtmdb:	equ $FFFFFEF2	; level bottom boundary, buffered for debug mode (2 bytes)
 00000000                            
@@ -5921,16 +5929,16 @@
 00005922 7400                           moveq   #0,d2							; height -1
 00005924 6100 DA74                      bsr.w   TilemapToVRAM			        ; flush mappings to VRAM
 00005928                            
-00005928 11FC 0001 0000             	move.b	#1,(v_palflags).w
-0000592E 11FC 0001 0000             	move.b	#1,(v_palcount).w
-00005934 21FC 0000 0000 0000        	move.l	#The_individual_palette_entry_on_the_table,(p_paltarget).w
-0000593C 21FC FFFF FB06 0000        	move.l	#v_pal_dry+$6,(p_palreplace).w
+00005928 11FC 0001 FEC9             	move.b	#1,(v_palflags).w
+0000592E 11FC 0001 FECA             	move.b	#1,(v_palcount).w
+00005934 21FC 0000 0000 FECC        	move.l	#The_individual_palette_entry_on_the_table,(p_paltarget).w
+0000593C 21FC FFFF FB06 FED0        	move.l	#v_pal_dry+$6,(p_palreplace).w
 00005944                            	
 00005944                            Radnex_WaitForFadeIn:
 00005944 11FC 0006 F62A                 move.b  #6,(v_vbla_routine).w        		; set V-blank routine to run
 0000594A 4EB9 0000 4D14                 jsr 	WaitForVBla          			; wait for V-blank (decreases "Demo_Time_left")
 00005950 6100 0000                  	bsr.w	DynPaletteTransition
-00005954 4A38 0000                  	tst.b	(v_palflags).w
+00005954 4A38 FEC9                  	tst.b	(v_palflags).w
 00005958 66EA                       	bne.s	Radnex_WaitForFadeIn
 0000595A                            	
 0000595A 31FC 00B4 F614             	move.w	#180,(v_demolength).w
@@ -5969,7 +5977,7 @@
 0000599C                            ; ---------------------------------------------------------------------------
 0000599C                            
 0000599C                            DynPaletteTransition:
-0000599C 4A38 0000                  		tst.b	(v_palflags).w			; check	if any of the flags are set
+0000599C 4A38 FEC9                  		tst.b	(v_palflags).w			; check	if any of the flags are set
 000059A0 6700                       		beq.s	DynPalette_Return		; if not, return
 000059A2                            
 000059A2 6100                       		bsr.s	DynPalette_Do
@@ -5982,7 +5990,7 @@
 000059A6                            ; ---------------------------------------------------------------------------
 000059A6                            
 000059A6                            DynPalette_Do:
-000059A6 4A38 0000                  		tst.b	(v_palcount).w			; check that the amount of colors to be changed has actually been set
+000059A6 4A38 FECA                  		tst.b	(v_palcount).w			; check that the amount of colors to be changed has actually been set
 000059AA 6700                       		beq.s	DynPal_Nochange			; if it was not, branch
 000059AC                            
 000059AC 7000                       		moveq	#0,d0					; initialize d0. it will be used for the cycle ignore setup
@@ -5993,9 +6001,9 @@
 000059B6 7A00                       		moveq	#0,d5					; initialize d5. it will be used for comparisons.
 000059B8 7000                       		moveq	#0,d0					; reinitialize d0. it will be used as a flag.
 000059BA 7200                       		moveq	#0,d1					; reinitialize d1. it will be used for a loop.
-000059BC 2078 0000                  		movea.l	(p_palreplace).w,a0		; get the RAM pointer. this is the palette the game is using at the moment.
-000059C0 2278 0000                  		movea.l	(p_paltarget).w,a1		; get the ROM pointer. this will be the palette once the replacements are done.
-000059C4 1238 0000                  		move.b	(v_palcount).w,d1		; get the above water counter. it will be used for loops.
+000059BC 2078 FED0                  		movea.l	(p_palreplace).w,a0		; get the RAM pointer. this is the palette the game is using at the moment.
+000059C0 2278 FECC                  		movea.l	(p_paltarget).w,a1		; get the ROM pointer. this will be the palette once the replacements are done.
+000059C4 1238 FECA                  		move.b	(v_palcount).w,d1		; get the above water counter. it will be used for loops.
 000059C8 5301                       		subq.b	#1,d1					; subtract 1 from the counter.
 000059CA 6100 0000                  		bsr.w	DynPalette_ColorCheck	; run the code that checks through the arrays.
 000059CE                            
@@ -6003,7 +6011,7 @@
 000059D0 6600                       		bne.s	DynPal_Return			; if it is, return
 000059D2                            
 000059D2                            	DynPal_Nochange:
-000059D2 08B8 0000 0000             		bclr	#0,(v_palflags).w		; mark the above water palette as no longer in need of changes
+000059D2 08B8 0000 FEC9             		bclr	#0,(v_palflags).w		; mark the above water palette as no longer in need of changes
 000059D8                            
 000059D8                            	DynPal_Return:
 000059D8 4E75                       		rts

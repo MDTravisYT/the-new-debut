@@ -313,6 +313,14 @@ v_ani2_frame:	equ $FFFFFEC5	; synchronised sprite animation 2 - current frame
 v_ani3_time:	equ $FFFFFEC6	; synchronised sprite animation 3 - time until next frame
 v_ani3_frame:	equ $FFFFFEC7	; synchronised sprite animation 3 - current frame
 v_ani3_buf:	equ $FFFFFEC8	; synchronised sprite animation 3 - info buffer (2 bytes)
+
+v_palflags: equ	$FFFFFEC9			; byte. marks whether or not palettes are in need of change.
+v_palcount: equ	$FFFFFECA			; byte. number of colors of the above water palette that are in need of change.
+p_paltarget: equ	$FFFFFECC		; longword. points to the target palette in ROM.
+p_palreplace: equ	$FFFFFED0		; longword. points to the RAM area where the palette lies and needs replacement.
+
+
+
 v_limittopdb:	equ $FFFFFEF0	; level upper boundary, buffered for debug mode (2 bytes)
 v_limitbtmdb:	equ $FFFFFEF2	; level bottom boundary, buffered for debug mode (2 bytes)
 
