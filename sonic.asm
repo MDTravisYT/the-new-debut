@@ -356,6 +356,8 @@ ptr_GM_SimpleCreds:	bra.w	GM_SimpleCreds		; Credits ($18)
 
 ptr_GM_Hack:	bra.w	GM_Hack		; Credits ($1C)
 
+ptr_GM_Radnex-GameModeArray:	bra.w	GM_Radnex ; Radnex Affiliate Splash ($20)
+
 		rts	
 ; ===========================================================================
 
@@ -1961,7 +1963,7 @@ Rad_MainLoop:
     bne.s   Rad_MainLoop          ; if not, branch
  
 Rad_GotoTitle:
-    move.b  #$04,($FFFFF600).w      ; set the screen mode to Title Screen
+    move.b  #$18,($FFFFF600).w      ; set the screen mode to Credits Screen
     rts                     ; return
 	
 ; ---------------------------------------------------------------------------

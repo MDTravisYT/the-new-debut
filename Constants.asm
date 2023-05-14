@@ -80,6 +80,7 @@ id_Special:	equ ptr_GM_Special-GameModeArray; $10
 id_SplshGM:	equ	ptr_GM_OtherSega-GameModeArray;	$14
 id_Credits:	equ	ptr_GM_SimpleCreds-GameModeArray;	$18
 id_Hacker:	equ	ptr_GM_Hack-GameModeArray	;	$1C
+id_Affiliate: equ							; $20
 
 ; Levels
 id_GHZ:		equ 0
