@@ -1953,7 +1953,7 @@ RadNexAff_PalLoop:
     move.l  (a0)+,(a1)+         ; ''
     dbf d0,RadNexAff_PalLoop      ; repeat until done
     jsr PaletteFadeIn          ; fade palette in
-    move.w  #30,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
+    move.w  #300,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
  
 Rad_MainLoop:
     move.b  #2,($FFFFF62A).w        ; set V-blank routine to run

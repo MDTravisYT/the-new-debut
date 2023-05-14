@@ -5582,7 +5582,7 @@
 00005506 22D8                           move.l  (a0)+,(a1)+         ; ''
 00005508 51C8 FFFA                      dbf d0,RadNexAff_PalLoop      ; repeat until done
 0000550C 4EB9 0000 3FCA                 jsr PaletteFadeIn          ; fade palette in
-00005512 31FC 001E F614                 move.w  #30,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
+00005512 31FC 012C F614                 move.w  #300,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
 00005518                             
 00005518                            Rad_MainLoop:
 00005518 11FC 0002 F62A                 move.b  #2,($FFFFF62A).w        ; set V-blank routine to run
