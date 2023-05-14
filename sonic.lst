@@ -49072,10 +49072,10 @@
 000770AC 0000 0000                  		dc.w ObjPos_SBZ1pf1-ObjPos_Index, ObjPos_SBZ1pf2-ObjPos_Index
 000770B0 FFFF 0000 0000             		dc.b $FF, $FF, 0, 0, 0,	0
 000770B6                            ObjPos_GHZ1:	incbin	"objpos\ghz1.bin"
-00077512                            		even
-00077512                            ObjPos_GHZ2:	incbin	"objpos\ghz2.bin"
-00077974                            		even
-00077974                            		incbin	"objpos\ghz3.bin"
+0007750C                            		even
+0007750C                            ObjPos_GHZ2:	incbin	"objpos\ghz2.bin"
+0007796E                            		even
+0007796E                            		incbin	"objpos\ghz3.bin"
 0007805E                            		even
 0007805E                            ObjPos_LZ1:	
 0007805E                            		incbin	"objpos\lz1 (JP1).bin"
