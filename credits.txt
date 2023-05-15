@@ -4,7 +4,8 @@ LEAD:
 PROGRAMMERS:
 	Inferno
 	MDTravis
-	
+	Giovanni
+
 ART:
 	MDTravis
 	BladeOfChaos

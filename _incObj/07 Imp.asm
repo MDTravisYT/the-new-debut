@@ -10,12 +10,15 @@
 ; -Optimize
 ; ===========================================================================
 Imp:
-                lea	(Ani_Imp).l,a1          ; Animate Bigjaw after every routine.
+        lea	(Ani_Imp).l,a1          ; Animate Bigjaw after every routine.
 		bsr.w	AnimateSprite           ; Simply for convenience. Don't care if it isn't optimal.
 		moveq	#0,d0
 		move.b	obRoutine(a0),d0
 		move.w	Imp_Index(pc,d0.w),d1
-		jmp	Imp_Index(pc,d1.w)
+		jsr	Imp_Index(pc,d1.w)			; GIO: changed to jsr so it runs the following check afterwards.
+		out_of_range	DeleteObject	; GIO: added check for horizontal distance. 
+		; if the object is out of range, it goes to DeleteObject. Otherwise, it just does this:
+		rts
 ; ===========================================================================
 ; Object jump table
 ; ===========================================================================
@@ -121,7 +124,8 @@ Imp_Jump:	; Routine $6 (ID_Imp_Jump)
 ;
 ;		sfx     $BB,0,0,0                                    ; Play the landing sound
 @skip:
-                move.w	(v_limitbtm2).w,d0
+				
+        move.w	(v_limitbtm2).w,d0
 		addi.w	#$E0,d0
 		cmp.w	obY(a0),d0	; has object moved below the level boundary?
 		bcs.s	@delete		; if yes, branch
