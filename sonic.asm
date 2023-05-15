@@ -2260,20 +2260,20 @@ loc_3230:
 		beq.w	Tit_MainLoop	; if not, branch
 
 Tit_ChkLevSel:
-		if IsDemo=1
+;		if IsDemo=1
 		tst.b	(f_levselcheat).w ; check if level select code is on
 		beq.w	DemoStart	; if not, play level
 		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
 		beq.w	DemoStart	; if not, play level
-		else
-		tst.b	(f_levselcheat).w ; check if level select code is on
-		beq.w	PlayLevelC	; if not, play level
-		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
-		beq.w	PlayLevelC	; if not, play level
-		endc
-	if IsDemo=0
+;		else
+;		tst.b	(f_levselcheat).w ; check if level select code is on
+;		beq.w	PlayLevelC	; if not, play level
+;		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
+;		beq.w	PlayLevelC	; if not, play level
+;		endc
+;	if IsDemo=0
 		move.b	#1,(f_debugcheat).w ; enable debug mode
-	endc
+;	endc
 		sfx	$AB,0,1,1	; play ring sound when code is entered
 		moveq	#palid_LevelSel,d0
 		bsr.w	PalLoad2	; load level select palette
@@ -2302,9 +2302,9 @@ Tit_ChkLevSel:
 ; ---------------------------------------------------------------------------
 
 LevelSelect:
-	if	IsDemo = 1
+;	if	IsDemo = 1
 	;	jsr	PlayLevelC
-	endif
+;	endif
 		move.b	#4,(v_vbla_routine).w
 		bsr.w	WaitForVBla
 		bsr.w	LevSelControls
