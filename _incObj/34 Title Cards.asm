@@ -135,9 +135,17 @@ Card_ChangeArt:
 		bne.s	Card_Delete
 		moveq	#plcid_Explode,d0
 		jsr	(AddPLC).l	; load explosion patterns
+		cmpi.b	#7,(v_zone).w	; is this IMZ?
+		beq.s	@alt
 		moveq	#0,d0
 		move.b	(v_zone).w,d0
 		addi.w	#plcid_GHZAnimals,d0
+		bra.s	@common
+	
+	@alt:
+		move.w	#plcid_LZAnimals,d0	; hardcoded hack that forces blackbird and seal for IMZ too
+	
+	@common:
 		jsr	(AddPLC).l	; load animal patterns
 
 Card_Delete:

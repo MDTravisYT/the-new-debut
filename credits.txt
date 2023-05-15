@@ -34,6 +34,7 @@ BETA TESTING:
 	dualsh0x
 	Inferno
 	Icytroids / ogm
+	Giovanni
 	
 SPECIAL THANKS:
 	CaioST
