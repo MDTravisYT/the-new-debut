@@ -2530,11 +2530,11 @@ loc_33E4:
 		move.w	#0,(v_demonum).w ; reset demo number to	0
 
 loc_3422:
-		if IsDemo=1
-		else
-		cmp.b	#0, (f_levselcheat)
-		beq	PlayLevelC
-		endif
+;		if IsDemo=1
+;		else
+;		cmp.b	#0, (f_levselcheat)
+;		beq	PlayLevelC
+;		endif
 
 		move.w	#1,(f_demo).w	; turn demo mode on
 		move.b	#id_Demo,(v_gamemode).w ; set screen mode to 08 (demo)
@@ -6385,10 +6385,10 @@ MusicList2:
 ; ---------------------------------------------------------------------------
 
 Sonic_MdNormal:
-	if IsDemo=0
+;	if IsDemo=0
 		bsr.w	Sonic_Dash
-	else
-	endif
+;	else
+;	endif
 		bsr.w	Sonic_Jump
 		bsr.w	Sonic_SlopeResist
 		bsr.w	Sonic_Move

@@ -1,4 +1,9 @@
 Sonic_Dash:				; CODE XREF: ROM:Obj01_MdNormalp
+		tst.w	(f_debugmode).w	; is debug mode being used?
+		bne.s	debugdashactual
+		rts
+		
+debugdashactual:
 		tst.b	$39(a0)
 		bne.s	loc_10396
 		cmpi.b	#id_LookUp,$1C(a0)
@@ -34,6 +39,7 @@ loc_10396:				; CODE XREF: Sonic_Spindash+4j
 
 loc_103D4:				; CODE XREF: Sonic_Spindash+6Cj
 		bset	#1,$22(a0)
+dashrts:
 		rts
 ; ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
 
