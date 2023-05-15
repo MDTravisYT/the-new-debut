@@ -2273,6 +2273,7 @@ Tit_ChkLevSel:
 ;		endc
 ;	if IsDemo=0
 		move.b	#1,(f_debugcheat).w ; enable debug mode
+		move.b	#1,(f_slomocheat).w ; is slow-motion cheat on?
 ;	endc
 		sfx	$AB,0,1,1	; play ring sound when code is entered
 		moveq	#palid_LevelSel,d0
