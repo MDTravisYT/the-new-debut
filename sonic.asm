@@ -8833,7 +8833,7 @@ ObjPos_Index:
 		dc.w ObjPos_SBZ1-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		zonewarning ObjPos_Index,$10
 		; Ending
-		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
+		dc.w ObjPos_EndN-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
 		dc.w ObjPos_End-ObjPos_Index, ObjPos_Null-ObjPos_Index
