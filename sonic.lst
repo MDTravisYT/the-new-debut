@@ -5975,24 +5975,24 @@
 0000599C                            ; Subroutine that shifts each individual entry of a palette ever so slightly
 0000599C                            ; every time it is ran.
 0000599C                            ; ---------------------------------------------------------------------------
-0000599C                            
+0000599C                            
 0000599C                            DynPaletteTransition:
 0000599C 4A38 FEC9                  		tst.b	(v_palflags).w			; check	if any of the flags are set
 000059A0 6700                       		beq.s	DynPalette_Return		; if not, return
-000059A2                            
+000059A2                            
 000059A2 6100                       		bsr.s	DynPalette_Do
-000059A4                            
+000059A4                            
 000059A4                            	DynPalette_Return:
 000059A4 4E75                       		rts
-000059A6                            
+000059A6                            
 000059A6                            ; ---------------------------------------------------------------------------
 000059A6                            ; Go through the above water palette array
 000059A6                            ; ---------------------------------------------------------------------------
-000059A6                            
+000059A6                            
 000059A6                            DynPalette_Do:
 000059A6 4A38 FECA                  		tst.b	(v_palcount).w			; check that the amount of colors to be changed has actually been set
 000059AA 6700                       		beq.s	DynPal_Nochange			; if it was not, branch
-000059AC                            
+000059AC                            
 000059AC 7000                       		moveq	#0,d0					; initialize d0. it will be used for the cycle ignore setup
 000059AE 7200                       		moveq	#0,d1					; initialize d1. it will be used for the cycle ignore setup
 000059B0 7400                       		moveq	#0,d2					; initialize d2. it will be used for comparisons.
@@ -6006,29 +6006,29 @@
 000059C4 1238 FECA                  		move.b	(v_palcount).w,d1		; get the above water counter. it will be used for loops.
 000059C8 5301                       		subq.b	#1,d1					; subtract 1 from the counter.
 000059CA 6100 0000                  		bsr.w	DynPalette_ColorCheck	; run the code that checks through the arrays.
-000059CE                            
+000059CE                            
 000059CE 4A00                       		tst.b	d0						; check if d0 is set
 000059D0 6600                       		bne.s	DynPal_Return			; if it is, return
-000059D2                            
+000059D2                            
 000059D2                            	DynPal_Nochange:
 000059D2 08B8 0000 FEC9             		bclr	#0,(v_palflags).w		; mark the above water palette as no longer in need of changes
-000059D8                            
+000059D8                            
 000059D8                            	DynPal_Return:
 000059D8 4E75                       		rts
-000059DA                            
-000059DA                            
+000059DA                            
+000059DA                            
 000059DA                            ; ---------------------------------------------------------------------------
 000059DA                            ; Go through the array using instructions given by either of the three leading subroutines
 000059DA                            ; ---------------------------------------------------------------------------
-000059DA                            
+000059DA                            
 000059DA                            DynPalette_ColorCheck:
 000059DA 3410                       		move.w	(a0),d2					; move the palette entry from the current palette in d2
 000059DC 3611                       		move.w	(a1),d3					; move the palette entry from the target palette in d3
 000059DE B642                       		cmp.w	d2,d3					; compare the two values
 000059E0 6700 0000                  		beq.w	@nextpalette			; if they are not equal, branch
-000059E4                            
+000059E4                            
 000059E4 7001                       		moveq	#1,d0					; set the flag that marks that a change has occured.
-000059E6                            
+000059E6                            
 000059E6                            	; check for blue
 000059E6 3802                       		move.w	d2,d4					; move the palette entry from the current palette in d4
 000059E8 3A03                       		move.w  d3,d5					; move the palette entry from the target palette in d5
@@ -6037,15 +6037,15 @@
 000059F2 B845                       		cmp.w	d5,d4					; compare the two colors
 000059F4 6700                       		beq.s	@chkgreen					; if blue is equal, skip
 000059F6 6200                       		bhi.s	@decblue				; if blue is higher, branch
-000059F8                            
+000059F8                            
 000059F8                            	; blue is lower
 000059F8 0650 0200                  		addi.w	#$200,(a0)				; add some blue to the current color entry
 000059FC 6000                       		bra.s   @chkgreen					; go to the next color
-000059FE                            
+000059FE                            
 000059FE                            	; blue is higher
 000059FE                            	@decblue:
 000059FE 0450 0200                  		subi.w	#$200,(a0)				; subtract some blue from the current color entry
-00005A02                            
+00005A02                            
 00005A02                            	@chkgreen:
 00005A02 3802                       		move.w	d2,d4					; move the palette entry from the current palette in d4
 00005A04 3A03                       		move.w  d3,d5					; move the palette entry from the target palette in d5
@@ -6054,14 +6054,14 @@
 00005A0E B845                       		cmp.w	d5,d4					; compare the two colors
 00005A10 6700                       		beq.s	@chkred					; if green is equal, skip
 00005A12 6200                       		bhi.s	@decgreen				; if green is higher, branch
-00005A14                            
+00005A14                            
 00005A14                            	; green is lower
 00005A14 0650 0020                  		addi.w	#$20,(a0)				; add some green to the current color entry
 00005A18 6000                       		bra.s   @chkred					; go to the next color
-00005A1A                            
+00005A1A                            
 00005A1A                            	@decgreen:
 00005A1A 0450 0020                  		subi.w	#$20,(a0)				; subtract some green from the current color entry
-00005A1E                            
+00005A1E                            
 00005A1E                            	@chkred:
 00005A1E 3802                       		move.w	d2,d4					; move the palette entry from the current palette in d4
 00005A20 3A03                       		move.w  d3,d5					; move the palette entry from the target palette in d5
@@ -6070,7 +6070,7 @@
 00005A2A B845                       		cmp.w	d5,d4					; compare the two colors
 00005A2C 6700                       		beq.s	@nextpalette			; if red is equal, skip
 00005A2E 6200                       		bhi.s	@decred					; if red is higher, branch
-00005A30                            
+00005A30                            
 00005A30                            	; red is lower
 00005A30 5450                       		addq.w	#$2,(a0)				; add some red to the current color entry
 00005A32 6000                       		bra.s   @nextpalette			; go to the next color
@@ -18295,13 +18295,13 @@
 0000DC24                            ; -Optimize
 0000DC24                            ; ===========================================================================
 0000DC24                            Imp:
-0000DC24 43F9 0000 0000                             lea	(Ani_Imp).l,a1          ; Animate Bigjaw after every routine.
+0000DC24 43F9 0000 0000                     lea	(Ani_Imp).l,a1          ; Animate Bigjaw after every routine.
 0000DC2A 6100 F814                  		bsr.w	AnimateSprite           ; Simply for convenience. Don't care if it isn't optimal.
 0000DC2E 7000                       		moveq	#0,d0
 0000DC30 1028 0024                  		move.b	obRoutine(a0),d0
 0000DC34 323B 0000                  		move.w	Imp_Index(pc,d0.w),d1
-0000DC38 4EBB 1000                  		jsr	Imp_Index(pc,d1.w)
-0000DC5A                            		; if the object is out of range, it goes to DeleteObject. Otherwise, it does the following check.
+0000DC38 4EBB 1000                  		jsr	Imp_Index(pc,d1.w)			; GIO: changed to jsr so it runs the following check afterwards.
+0000DC5A                            		; if the object is out of range, it goes to DeleteObject. Otherwise, it just does this:
 0000DC5A 4E75                       		rts
 0000DC5C                            ; ===========================================================================
 0000DC5C                            ; Object jump table

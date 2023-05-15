@@ -98,11 +98,11 @@ loc_E0:
 ConsoleName:	dc.b "SEGA MEGA DRIVE " ; Hardware system ID (Console name)
 Date:		dc.b "MCT/SHC22 SEP'22" ; Copyright holder and release date (generally year)
 	if	IsDemo = 0
-Title_Local:	dc.b "SONIC DEBUT BY MDTRAVIS                         " ; Domestic name
-Title_Int:	dc.b "SONIC DEBUT BY MDTRAVIS                         " ; International name
+Title_Local:	dc.b "SONIC DEBUT BY MDTRAVIS                       " ; Domestic name
+Title_Int:		dc.b "SONIC DEBUT BY MDTRAVIS                         " ; International name
 	else
-Title_Local:	dc.b "SONIC DEBUT BY MDTRAVIS - DEV BUILD -           " ; Domestic name
-Title_Int:	dc.b "SONIC DEBUT BY MDTRAVIS - DEV BUILD -           " ; International name
+Title_Local:	dc.b "SONIC DEBUT BY MDTRAVIS                         " ; Domestic name
+Title_Int:		dc.b "SONIC DEBUT BY MDTRAVIS                         " ; International name
 	endif
 Serial:		if Revision=0
 		dc.b "GM XXXXXXXX-XX"   ; Serial/version number (Rev 0)
