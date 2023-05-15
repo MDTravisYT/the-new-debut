@@ -5,3 +5,4 @@ asm68k /k /p /o ae- BuildFull.asm, s1Debuilt.bin >errors.txt, sonic.sym, sonic.l
 
 convsym sonic.sym s1Debuilt.bin -input asm68k_sym -a
 fixheadr.exe s1Debuilt.bin
+pause

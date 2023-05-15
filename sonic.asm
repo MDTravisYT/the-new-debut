@@ -1808,6 +1808,8 @@ GM_Sega:
 		sfx	$E0,0,1,1
 		bsr.w	ClearPLC
 		bsr.w	PaletteFadeOut
+
+		moveq	#0,d0
 		lea	($C00004).l,a6
 		move.w	#$8004,(a6)
 		move.w	#$8230,(a6)
@@ -1818,9 +1820,42 @@ GM_Sega:
 		andi.b	#$BF,d0
 		move.w	d0,($C00004).l
 
-Sega_Main:
+;Sega_Main:
 		bsr.w	ClearScreen
+
+		lea	($FF0000).l,a1
+		moveq	#0,d0	
+		move.l	#$7FF,d1	
 		
+	@clrbufferRAM:
+		move.l	d0,(a1)+
+		dbf	d1,@clrbufferRAM ; clear buffer RAM		
+
+
+		lea	(v_objspace).w,a1
+		moveq	#0,d0
+		move.w	#$7FF,d1
+
+	@clrobjram:
+		move.l	d0,(a1)+
+		dbf	d1,@clrobjram ; clear object RAM
+		
+		lea	(v_lvllayout).w,a1
+		moveq	#0,d0
+		move.w	#$FF,d1
+
+	@clrlayout:
+		move.l	d0,(a1)+
+		dbf	d1,@clrlayout ; clear layout RAM		
+	
+		lea	(v_spritetablebuffer).w,a1
+		moveq	#0,d0
+		move.w	#($280/4)-1,d1	; This should be ($280/4)-1, leading to a slight bug (first bit of v_pal_water is cleared)
+
+	@clearsprites:
+		move.l	d0,(a1)+
+		dbf	d1,@clearsprites ; clear sprite table (in RAM)
+	
 		move.l	#$40000000,($C00004).l		;Beginning of VRAM
 		lea		(Nem_MCTLogo).l,a0
 		bsr.w	NemDec
@@ -1856,6 +1891,8 @@ Sega_Main:
 		moveq	#palid_Temp,d0
 		bsr.w	PalLoad2    ; load Sega logo palette
 		
+		clr.w	(v_screenposx).w
+		clr.w	(v_screenposy).w
 		move.w	#$80,(v_pcyc_num).w
 		move.w	#0,($FFFFF662).w
 		move.w	#0,($FFFFF660).w
@@ -1866,6 +1903,7 @@ Sega_Main:
 		move.w	d0,($C00004).l
 		sfx		$90,0,1,1
 		move.b	#$6,(v_objspace+$1C0).w	; load HUD object 2 <----- object
+		clr.b	(v_objspace+$1C0+obRoutine).w
 		move.w	#$10, (v_lvllayout).w		;How far to slide (1 subtracted then added each frame ran)
 
 Sega_Loop:
@@ -1928,7 +1966,8 @@ word_1A6A:	incbin "palette/Sega.pal"
 GM_RadNexAff:
 	sfx	bgm_Stop,0,1,1 ; stop music
     jsr     PaletteFadeOut          ; fade palettes out
-    jsr     ClearScreen.w           ; clear the plane mappings
+    jsr     ClearScreen             ; clear the plane mappings
+	
     ; load art, mappings and the palette
     lea     ($FF0000).l,a1          ; load dump location
     lea     MAPS_RAD.l,a0          ; load compressed mappings address
@@ -1975,7 +2014,8 @@ GM_SimpleCreds:
     move.b  #$90,d0             ; set music ID 
     jsr     Playsound_Special.w     ; play ID
     jsr     PaletteFadeOut          ; fade palettes out
-    jsr     ClearScreen.w           ; clear the plane mappings
+    jsr     ClearScreen             ; clear the plane mappings	
+	
     ; load art, mappings and the palette
     lea     ($FF0000).l,a1          ; load dump location
     lea     MAPS_CRED.l,a0          ; load compressed mappings address
