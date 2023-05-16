@@ -87,7 +87,7 @@ loc_C61A:
 		cmpi.b	#4,obFrame(a0)
 		bne.s	loc_C5FE
 		addq.b	#2,obRoutine(a0)
-		move.w	#180,obTimeFrame(a0) ; set time delay to 3 seconds
+		move.w	#200,obTimeFrame(a0) ; set time delay to 3 seconds
 
 Got_Wait:	; Routine 4, 8, $C
 		subq.w	#1,obTimeFrame(a0) ; subtract 1 from time delay
@@ -100,18 +100,26 @@ Got_Display:
 
 Got_TimeBonus:	; Routine 6
 		bsr.w	DisplaySprite
-		move.b	#1,(f_endactbonus).w ; set time/ring bonus update flag
+		move.w	#1000,d1	; set score decrement to 1000
+		move.b	#1,(f_endactbonus).w ; set time/coin bonus update flag
 		moveq	#0,d0
 		tst.w	(v_timebonus).w	; is time bonus	= zero?
-		beq.s	Got_RingBonus	; if yes, branch
-		addi.w	#10,d0		; add 10 to score
-		subi.w	#10,(v_timebonus).w ; subtract 10 from time bonus
-
-Got_RingBonus:
-		tst.w	(v_coinbonus).w	; is ring bonus	= zero?
+		beq.s	Got_coinBonus	; if yes, branch
+		cmp.w	(v_timebonus).w,d1	; compare time bonus to score decrement
+		blt.s	@skip	; if it's greater or equal, branch
+		move.w	(v_timebonus).w,d1	; else, set the decrement to the remaining bonus
+		@skip:
+		add.w	d1,d0		; add decrement to score
+		sub.w	d1,(v_timebonus).w ; subtract decrement from time bonus
+Got_coinBonus:
+		tst.w	(v_coinbonus).w	; is coin bonus	= zero?
 		beq.s	Got_ChkBonus	; if yes, branch
-		addi.w	#10,d0		; add 10 to score
-		subi.w	#10,(v_coinbonus).w ; subtract 10 from ring bonus
+		cmp.w	(v_coinbonus).w,d1	; compare coin bonus to score decrement
+		blt.s	@skip	; if it's greater or equal, branch
+		move.w	(v_coinbonus).w,d1	; else, set the decrement to the remaining bonus
+		@skip:
+		add.w	d1,d0		; add decrement to score
+		sub.w	d1,(v_coinbonus).w ; subtract decrement from coin bonus
 
 Got_ChkBonus:
 		tst.w	d0		; is there any bonus?
@@ -155,7 +163,7 @@ Got_NextLevel:	; Routine $A
 
 Got_ChkSS:
 		clr.b	(v_lastlamp).w	; clear	lamppost counter
-		tst.b	(f_bigring).w	; has Sonic jumped into	a giant	ring?
+		tst.b	(f_bigring).w	; has Sonic jumped into	a giant	coin?
 		beq.s	VBla_08A	; if not, branch
 		move.b	#id_Special,(v_gamemode).w ; set game mode to Special Stage (10)
 		bra.s	Got_Display2
@@ -195,7 +203,7 @@ LevelOrder:
 		dc.b id_SZ, 0	; Act 3
 		dc.b 0, 0
 
-		; Spring Yard Zone
+		; Spcoin Yard Zone
 		dc.b id_CWZ, 0	; Act 1
 		dc.b id_SZ, 2	; Act 2
 		dc.b id_CWZ, 0	; Act 3
@@ -281,7 +289,7 @@ Got_Config:	dc.w 4,		$124,	$BC			; "SONIC HAS"
 		dc.w $540,	$120,	$FC			; time bonus
 		dc.b 				2,	3
 
-		dc.w $560,	$120,	$10C			; ring bonus
+		dc.w $560,	$120,	$10C			; coin bonus
 		dc.b 				2,	4
 
 		dc.w $20C,	$14C,	$CC			; oval
