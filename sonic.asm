@@ -6442,6 +6442,7 @@ Sonic_MdNormal:
 ; ===========================================================================
 
 Sonic_MdJump:
+		bsr.w	Sonic_AirRoll
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_JumpDirection
 		bsr.w	Sonic_LevelBound
@@ -6456,23 +6457,6 @@ loc_12E5C:
 		rts	
 ; ===========================================================================
 
-Sonic_AirRoll:
-        cmpi.b  #$1F,$1C(a0)      ; are we already in rolling animation
-        cmpi.b  #$21,$1C(a0)      ; are we already in rolling animation
-        cmpi.b  #$2,$1C(a0)      ; are we already in rolling animation
-        beq.s   AirRoll_Return   ; if yes, branch
-		
-AirRoll_CheckBtn:
-        move.b ($FFFFF603).w,d0 ; Move $FFFFF603 to d0
-        andi.b #$70,d0 ; Has A/B/C been pressed?
-        beq.s  AirRoll_Return
-		
-        move.b #$20,$1C(a0) ; Set Sonic's animation to rolling.
-        move.w    #$A5,d0
-        jsr    (PlaySound_Special).l ;    play Sonic rolling sound
-		
-AirRoll_Return:
-        rts
 
 Sonic_MdRoll:
 		bsr.w	Sonic_Jump
@@ -6486,7 +6470,7 @@ Sonic_MdRoll:
 ; ===========================================================================
 
 Sonic_MdJump2:
-		bsr.w   Sonic_AirRoll
+		bsr.w	Sonic_AirRoll
 		bsr.w	Sonic_JumpHeight
 		bsr.w	Sonic_JumpDirection
 		bsr.w	Sonic_LevelBound
@@ -6504,6 +6488,7 @@ loc_12EA6:
 		include	"_incObj\Sonic Dash.asm"
 		include	"_incObj\Sonic RollSpeed.asm"
 		include	"_incObj\Sonic JumpDirection.asm"
+		include "_incObj\Sonic Air Roll.asm"
 
 ; ===========================================================================
 ; ---------------------------------------------------------------------------
