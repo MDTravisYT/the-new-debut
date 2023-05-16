@@ -262,7 +262,7 @@ DLE_MZx:	dc.w DLE_MZ1-DLE_MZx
 ; ===========================================================================
 
 DLE_MZ1:
-		rts
+		move.w	#$900,(v_limitbtm1).w
 
 DLE_MZ2:
 		move.w	#$520,(v_limitbtm1).w
