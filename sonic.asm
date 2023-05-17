@@ -2012,6 +2012,7 @@ RadNexAff_PalLoop:
     move.l  (a0)+,(a1)+         ; copy colours to buffer
     move.l  (a0)+,(a1)+         ; ''
     dbf d0,RadNexAff_PalLoop      ; repeat until done
+	sfx $AC,0,1,1
     jsr PaletteFadeIn          ; fade palette in
     move.w  #800,($FFFFF614).w     ; set delay time (3 seconds on a 60hz system)
  
