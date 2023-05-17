@@ -2343,8 +2343,8 @@ loc_3230:
 
 Tit_ChkLevSel:
 ;		if IsDemo=1
-		;tst.b	(f_levselcheat).w ; check if level select code is on
-		;beq.w	DemoStart	; if not, play level
+		tst.b	(f_levselcheat).w ; check if level select code is on
+		beq.w	DemoStart	; if not, play level
 		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
 		beq.w	DemoStart	; if not, play level
 ;		else
