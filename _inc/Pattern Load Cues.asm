@@ -43,12 +43,15 @@ ptr_PLC_Ending:		dc.w PLC_Ending-ArtLoadCues
 ptr_PLC_TryAgain:	dc.w PLC_TryAgain-ArtLoadCues
 ptr_PLC_EggmanSBZ2:	dc.w PLC_EggmanSBZ2-ArtLoadCues
 ptr_PLC_FZBoss:		dc.w PLC_FZBoss-ArtLoadCues
+ptr_PLC_WelcomeSign:dc.w PLC_WelcomeSign-ArtLoadCues
+ptr_PLC_Imp:		dc.w PLC_Imp-ArtLoadCues
 
 plcm:	macro gfx,vram
 	dc.l gfx
 	dc.w vram
 	endm
 
+ImpVRAM: equ $9360 ;$94C0
 ; ---------------------------------------------------------------------------
 ; Pattern load cues - standard block 1
 ; ---------------------------------------------------------------------------
@@ -96,7 +99,7 @@ PLC_GHZ:	dc.w ((PLC_GHZ2-PLC_GHZ-2)/6)-1
 		plcm	Nem_UnkExplode, $8380	; cannonball enemy
 		plcm	Nem_Buzz, $8880		; buzz bomber enemy
 		plcm	Nem_Chopper, $8F60	; chopper enemy
-		plcm	Nem_Imp, $94C0	; imp enemy
+		plcm	Nem_Imp, ImpVRAM	; imp enemy
 		plcm	Nem_Spikes, $A360	; spikes
 		plcm	Nem_HSpring, $A460	; horizontal spring
 		plcm	Nem_VSpring, $A660	; vertical spring
@@ -446,8 +449,20 @@ PLC_FZBoss:	dc.w ((PLC_FZBossend-PLC_FZBoss-2)/6)-1
 		plcm	Nem_Sbz2Eggman, $8E00	; Eggman without ship
 		plcm	Nem_Exhaust, $A540	; exhaust flame
 	PLC_FZBossend:
-		even
-
+; ---------------------------------------------------------------------------
+; Pattern load cues - Welcome Signpost
+; ---------------------------------------------------------------------------
+PLC_WelcomeSign:	dc.w ((PLC_WelcomeSignend-PLC_WelcomeSign-2)/6)-1
+		plcm	Nem_Welcome, ImpVRAM	; signpost
+	PLC_WelcomeSignend:
+			even
+; ---------------------------------------------------------------------------
+; Pattern load cues - GHZ Imp (used to reovewrite the PLC above us, the welcome signpost)
+; ---------------------------------------------------------------------------
+PLC_Imp:	dc.w ((PLC_Impend-PLC_Imp-2)/6)-1
+		plcm	Nem_Imp, ImpVRAM	; imp enemy
+	PLC_Impend:
+			even
 ; ---------------------------------------------------------------------------
 ; Pattern load cue IDs
 ; ---------------------------------------------------------------------------
@@ -488,3 +503,6 @@ plcid_Ending:		equ (ptr_PLC_Ending-ArtLoadCues)/2	; $1C
 plcid_TryAgain:		equ (ptr_PLC_TryAgain-ArtLoadCues)/2	; $1D
 plcid_EggmanSBZ2:	equ (ptr_PLC_EggmanSBZ2-ArtLoadCues)/2	; $1E
 plcid_FZBoss:		equ (ptr_PLC_FZBoss-ArtLoadCues)/2	; $1F
+plcid_WelcomeSign:	equ (ptr_PLC_WelcomeSign-ArtLoadCues)/2	; $20
+plcid_Imp:			equ (ptr_PLC_Imp-ArtLoadCues)/2		; 21
+

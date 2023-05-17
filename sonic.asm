@@ -3013,6 +3013,12 @@ Level_TtlCardLoop:
 		tst.l	(v_plc_buffer).w ; are there any items in the pattern load cue?
 		bne.s	Level_TtlCardLoop ; if yes, branch
 		jsr	(Hud_Base).l	; load basic HUD gfx
+		
+		; This code loads the Welcome sign in just Green Hill Zone act 1. - MrLordSith
+		cmpi.w 	#(id_GHZ<<8),(v_zone).w ; Check if this is Green Hill act 1
+		bne.s 	Level_SkipTtlCard ; if not, skip the following code:
+		moveq	#plcid_WelcomeSign,d0 ; Assign Welcome Sign PLC
+		jsr	 	(AddPLC).l ; Slowly load
 
 	Level_SkipTtlCard:
 		moveq	#palid_Sonic,d0
