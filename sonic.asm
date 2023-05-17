@@ -2363,8 +2363,8 @@ LevelSelect:
 	;	beq.s	LevSel_NoCheat	; if not, branch
 		cmpi.w	#$9F,d0		; is sound $9F being played?
 		beq.s	LevSel_Ending	; if yes, branch
-		cmpi.w	#$9E,d0		; is sound $9E being played?
-		beq.s	LevSel_Credits	; if yes, branch
+		;cmpi.w	#$9E,d0		; is sound $9E being played?
+		;beq.s	LevSel_Credits	; if yes, branch
 
 LevSel_NoCheat:
 		; This is a workaround for a bug, see Sound_ChkValue for more.
@@ -2380,16 +2380,16 @@ LevSel_PlaySnd:
 ; ===========================================================================
 
 LevSel_Ending:
-		move.b	#id_Credits,(v_gamemode).w ; set screen mode to $18 (Ending)
+		move.b	#$14,(v_gamemode).w ; set screen mode to $18 (Ending)
 		move.w	#(00<<8),(v_zone).w ; set level to 0600 (Ending)
 		rts	
 ; ===========================================================================
 
-LevSel_Credits:
-		move.b	#id_Credits,(v_gamemode).w ; set screen mode to $1C (Credits)
-		sfx	bgm_Credits,0,1,1 ; play credits music
-		move.w	#0,(v_creditsnum).w
-		rts	
+;LevSel_Credits:
+		;move.b	#id_Credits,(v_gamemode).w ; set screen mode to $1C (Credits)
+		;sfx	bgm_Credits,0,1,1 ; play credits music
+		;move.w	#0,(v_creditsnum).w
+		;rts	
 ; ===========================================================================
 
 LevSel_Level_SS:
