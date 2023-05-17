@@ -1,6 +1,6 @@
 
-
 Imp:
+
 	
 		cmpi.b	#2, obSubtype(a0)
 		bge.w	KGLSIGN
@@ -22,6 +22,7 @@ Imp:
 ; -Find a better way to animate it I suppose?
 ; -Optimize
 ; ===========================================================================
+
 
 @katimp:
         lea	(Ani_Imp).l,a1          ; Animate Bigjaw after every routine.
@@ -152,18 +153,19 @@ Imp_Jump:	; Routine $6 (ID_Imp_Jump)
 		bra.w	DeleteObject
 
 
-; End of Kat's Bigjaw code.
+;  End of Kat's Bigjaw code.
 ;========================================
 
 ; ===========================================================================
 ; Object 07 Subtype 02: TTS Sign
 ; Bigjaw took up a lot of VRAM... so I found it opprotune to use its space for the TTS sign when Bigjaw isn't loaded.
-; Special Thanks to MrLordSith for fixing a VRAM when GHZ Act 1 loads to prioritize BigJaw (seen in sonic.asm)
+; Special Thanks to MrLordSith for fixing a VRAM when GHZ Act 1 loads to prioritize BigJaw
 ;============================================================================
 
 
 
-; KGL's Dynamic Tiles for TTS sign
+; KGL's Dynamic Tile Sign
+
 
 KGLSIGN:
 		moveq 	#0,d0 ; Basic routine shenanigans
@@ -175,8 +177,6 @@ KGLSIGN:
 KGLSIGN_Index: dc.w KGLSIGN_Init-KGLSIGN_Index
 			dc.w 	KGLSIGN_Action-KGLSIGN_Index
 
-
-
 KGLSIGN_Init:
 		move.l	#Map_Welcome,obMap(a0)
 		move.w	#Bigjaw_VRAM,ObGfx(a0) ; Use the same VRAM as the Imp.
@@ -185,9 +185,8 @@ KGLSIGN_Init:
 		move.w	#$200,obPriority(a0)
 		
 		addi.b 	#2,obRoutine(a0)
-		; The loading code for the Welcome sign PLC has been moved to sonic.asm, right above Level_SkipTtlCard.
-
-
+		; The loading code for the Welcome sign PLC is also used in sonic.asm, right above Level_SkipTtlCard.
+		jmp 	WelcomeSign_Load
 
 KGLSIGN_Action:
 		;jsr 	(DisplaySprite).l - A DisplaySprite function here is not needed, as RememberState takes care of this.
@@ -197,3 +196,12 @@ KGLSIGN_Action:
 		jsr 	DeleteObject
 		moveq	#plcid_Imp,d0
 		jmp		AddPLC		; load Imp back into VRAM
+
+WelcomeSign_Load:
+		; This code loads the Welcome sign in just Green Hill Zone act 1. - MrLordSith
+		cmpi.w 	#(id_GHZ<<8),(v_zone).w ; Check if this is Green Hill act 1
+		bne.s 	@end ; if not, skip the following code:
+		moveq	#plcid_WelcomeSign,d0 ; Assign Welcome Sign PLC
+		jsr	 	(AddPLC).l ; Slowly load
+	@end:
+		rts

@@ -1747,8 +1747,10 @@ WaitForVBla:
 ; ---------------------------------------------------------------------------
 
 GM_Hack:
-    move.b  #$8F,d0             ; set music ID 
-    jsr     Playsound_Special.w     ; play ID
+	sfx	$8F,0,1,1 ; stop music
+
+    ;move.b  #$8F,d0             ; set music ID 
+    ;jsr     Playsound_Special.w     ; play ID
     jsr     PaletteFadeOut          ; fade palettes out
     jsr     ClearScreen.w           ; clear the plane mappings
     ; load art, mappings and the palette
@@ -1965,27 +1967,46 @@ word_1A6A:	incbin "palette/Sega.pal"
 
 GM_RadNexAff:
 	sfx	bgm_Stop,0,1,1 ; stop music
-    jsr     PaletteFadeOut          ; fade palettes out
-    jsr     ClearScreen             ; clear the plane mappings
+    bsr.w	ClearPLC
+	bsr.w	PaletteFadeOut
+			
+	lea	(vdp_control_port).l,a6
+	move.w	#$8004,(a6)		; 8-colour mode
+	move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
+	move.w	#$8400+(vram_bg>>13),(a6) ; set background nametable address
+	move.w	#$9001,(a6)		; 64-cell hscroll size
+	move.w	#$9200,(a6)		; window vertical position
+	move.w	#$8B03,(a6)		; line scroll mode
+	move.w	#$8700,(a6)		; set background colour (line 3; colour 0)
+	clr.b	(f_wtr_state).w
+	bsr.w	ClearScreen
+
+	lea	(v_objspace).w,a1
+	moveq	#0,d0
+	move.w	#$7FF,d1
+RadNexAff_ClrObjRam:
+	move.l	d0,(a1)+
+	dbf	d1,RadNexAff_ClrObjRam ; clear object RAM
+
+	locVRAM	0
+	lea	(ART_RAD).l,a0 ; load Japanese credits
+	bsr.w	NemDec
+
+	lea	($FF0000).l,a1
+	lea	(MAPS_RAD).l,a0 ; load mappings for	Japanese credits
+	move.w	#0,d0
+	bsr.w	EniDec
+		
+	copyTilemap	$FF0000,$C000,$27,$1B
+	moveq	#0,d0
+	move.w	#$1F,d1
+RadNexAff_ClrPal:
+	move.l	d0,(a1)+
+	dbf	d1,RadNexAff_ClrPal ; fill palette with black
 	
-    ; load art, mappings and the palette
-    lea     ($FF0000).l,a1          ; load dump location
-    lea     MAPS_RAD.l,a0          ; load compressed mappings address
-    move.w #320,d0                  ; prepare pattern index value to patch to mappings
-    jsr    EniDec.w                 ; decompress and dump
-    move.l #$60000003,d0            ; prepare VRAM write mode address (Plane B E000)
-    moveq  #$28-$01,d1              ; set map box draw width
-    moveq  #$1E-$01,d2              ; set map box draw height
-    bsr.w   TilemapToVRAM         ; flush mappings to VRAM
-    lea    ($FFC00004).l,a6         ; load VDP control port
-    move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
-    lea     ART_RAD.l,a0           ; load background art
-    jsr     NemDec              ; run NemDec to decompress art for display
-    move.b  #$AC,d0             ; set music ID 
-    jsr     Playsound_Special.w     ; play ID
-    lea Pal_RAD.l,a0        ; load this palette
-    lea ($FFFFFB80).l,a1        ; set as line 2
-    move.w  #$F,d0
+	lea Pal_RAD,a0        ; load this palette
+	lea ($FFFFFB80).l,a1        ; set as line 2
+	move.w  #$F,d0
  
 RadNexAff_PalLoop:
     move.l  (a0)+,(a1)+         ; copy colours to buffer
@@ -2011,27 +2032,48 @@ Rad_GotoTitle:
 ; ---------------------------------------------------------------------------
 	
 GM_SimpleCreds:
-    move.b  #$90,d0             ; set music ID 
-    jsr     Playsound_Special.w     ; play ID
-    jsr     PaletteFadeOut          ; fade palettes out
-    jsr     ClearScreen             ; clear the plane mappings	
-	
-    ; load art, mappings and the palette
-    lea     ($FF0000).l,a1          ; load dump location
-    lea     MAPS_CRED.l,a0          ; load compressed mappings address
-    move.w #320,d0                  ; prepare pattern index value to patch to mappings
-    jsr    EniDec.w                 ; decompress and dump
-    move.l #$60000003,d0            ; prepare VRAM write mode address (Plane B E000)
-    moveq  #$28-$01,d1              ; set map box draw width
-    moveq  #$1E-$01,d2              ; set map box draw height
-    bsr.w   TilemapToVRAM         ; flush mappings to VRAM
-    lea    ($FFC00004).l,a6         ; load VDP control port
-    move.l #$68000000,(a6)          ; set VDP to VRAM write mode (Address 2800)
-    lea     ART_CRED.l,a0           ; load background art
-    jsr     NemDec              ; run NemDec to decompress art for display
-    lea Pal_CRED.l,a0        ; load this palette
-    lea ($FFFFFB80).l,a1        ; set as line 2
-    move.w  #$F,d0
+		sfx	$90,0,1,1 ; stop music
+
+		;move.b  #$90,d0             ; set music ID 
+		bsr.w	ClearPLC
+		bsr.w	PaletteFadeOut
+				
+		lea	(vdp_control_port).l,a6
+		move.w	#$8004,(a6)		; 8-colour mode
+		move.w	#$8200+(vram_fg>>10),(a6) ; set foreground nametable address
+		move.w	#$8400+(vram_bg>>13),(a6) ; set background nametable address
+		move.w	#$9001,(a6)		; 64-cell hscroll size
+		move.w	#$9200,(a6)		; window vertical position
+		move.w	#$8B03,(a6)		; line scroll mode
+		move.w	#$8700,(a6)		; set background colour (line 3; colour 0)
+		clr.b	(f_wtr_state).w
+		bsr.w	ClearScreen
+
+		lea	(v_objspace).w,a1
+		moveq	#0,d0
+		move.w	#$7FF,d1
+SimpleCreds_ClrObjRam:
+		move.l	d0,(a1)+
+		dbf	d1,SimpleCreds_ClrObjRam ; clear object RAM
+
+		locVRAM	0
+		lea	(ART_CRED).l,a0 ; load Japanese credits
+		bsr.w	NemDec
+		lea	($FF0000).l,a1
+		lea	(MAPS_CRED).l,a0 ; load mappings for	Japanese credits
+		move.w	#0,d0
+		bsr.w	EniDec
+		
+		copyTilemap	$FF0000,$C000,$27,$1B
+		moveq	#0,d0
+		move.w	#$1F,d1
+SimpleCreds_ClrPal:
+		move.l	d0,(a1)+
+		dbf	d1,SimpleCreds_ClrPal ; fill palette with black
+		
+		lea Pal_CRED.l,a0        ; load this palette
+		lea ($FFFFFB80).l,a1        ; set as line 2
+		move.w  #$F,d0
  
 Creds_PalLoop:
     move.l  (a0)+,(a1)+         ; copy colours to buffer
@@ -2301,8 +2343,8 @@ loc_3230:
 
 Tit_ChkLevSel:
 ;		if IsDemo=1
-		tst.b	(f_levselcheat).w ; check if level select code is on
-		beq.w	DemoStart	; if not, play level
+		;tst.b	(f_levselcheat).w ; check if level select code is on
+		;beq.w	DemoStart	; if not, play level
 		btst	#bitA,(v_jpadhold1).w ; check if A is pressed
 		beq.w	DemoStart	; if not, play level
 ;		else
@@ -2363,8 +2405,8 @@ LevelSelect:
 	;	beq.s	LevSel_NoCheat	; if not, branch
 		cmpi.w	#$9F,d0		; is sound $9F being played?
 		beq.s	LevSel_Ending	; if yes, branch
-		;cmpi.w	#$9E,d0		; is sound $9E being played?
-		;beq.s	LevSel_Credits	; if yes, branch
+		cmpi.w	#$9E,d0		; is sound $9E being played?
+		beq.s	LevSel_Credits	; if yes, branch
 
 LevSel_NoCheat:
 		; This is a workaround for a bug, see Sound_ChkValue for more.
@@ -2380,16 +2422,16 @@ LevSel_PlaySnd:
 ; ===========================================================================
 
 LevSel_Ending:
-		move.b	#$14,(v_gamemode).w ; set screen mode to $18 (Ending)
+		move.b	#id_Credits,(v_gamemode).w ; set screen mode to $18 (Ending)
 		move.w	#(00<<8),(v_zone).w ; set level to 0600 (Ending)
 		rts	
 ; ===========================================================================
 
-;LevSel_Credits:
-		;move.b	#id_Credits,(v_gamemode).w ; set screen mode to $1C (Credits)
-		;sfx	bgm_Credits,0,1,1 ; play credits music
-		;move.w	#0,(v_creditsnum).w
-		;rts	
+LevSel_Credits:
+		move.b	#$14,(v_gamemode).w ; set screen mode to $1C (Credits)
+		sfx	bgm_Credits,0,1,1 ; play credits music
+		move.w	#0,(v_creditsnum).w
+		rts	
 ; ===========================================================================
 
 LevSel_Level_SS:
@@ -3014,11 +3056,7 @@ Level_TtlCardLoop:
 		bne.s	Level_TtlCardLoop ; if yes, branch
 		jsr	(Hud_Base).l	; load basic HUD gfx
 		
-		; This code loads the Welcome sign in just Green Hill Zone act 1. - MrLordSith
-		cmpi.w 	#(id_GHZ<<8),(v_zone).w ; Check if this is Green Hill act 1
-		bne.s 	Level_SkipTtlCard ; if not, skip the following code:
-		moveq	#plcid_WelcomeSign,d0 ; Assign Welcome Sign PLC
-		jsr	 	(AddPLC).l ; Slowly load
+		jsr (WelcomeSign_Load).l ; Load Welcome sign PLC
 
 	Level_SkipTtlCard:
 		moveq	#palid_Sonic,d0
