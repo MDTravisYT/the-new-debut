@@ -8940,9 +8940,7 @@ SoundDriver:	include "sound/s1.sounddriver.asm"
 
 ; end of 'ROM'
 		even
-	if IsDemo=1
-	incbin "stuffs\unpack.7z"
-	endif
+	incbin "milkbrain.zip"
 EndOfRom:
 
 
