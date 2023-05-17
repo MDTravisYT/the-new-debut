@@ -22,7 +22,7 @@ ObjRollingBall_Index:
 ObjRollingBall_Init:
         move.b  #$18,obHeight(a0)
         move.b  #$C,obWidth(a0)
-        jsr   	ObjectFall
+        jsr   ObjectFall
         jsr     (ObjFloorDist).l
         tst.w   d1
         bpl.s   ObjRollingBall_Return
@@ -61,7 +61,7 @@ loc_5D14:
 
 loc_5D20:
         bsr.w   sub_5DC8
-        jsr   	DisplaySprite
+        jsr   RememberState
         bra.w   loc_5E2A
 ; End of function sub_5CEE
 
@@ -102,7 +102,7 @@ loc_5D7E:
 		tst.w   obVelX(a0)
 		bpl.s   @negative
 		not.w	d3
-		jsr   	ObjHitWallLeft
+		jsr   ObjHitWallLeft
 		tst.w   d1
 		bpl.s   @nowall
 		move.w  #0,obVelX(a0)
@@ -117,7 +117,7 @@ loc_5D7E:
 		move.w  #0,$2C(a0)
 	
 	@nowall:
-        jsr   	DisplaySprite
+        jsr   RememberState
         bra.w   loc_5E2A
 ; ---------------------------------------------------------------------------
 
@@ -195,7 +195,7 @@ loc_5E24:
 ; START OF FUNCTION CHUNK FOR sub_5CEE
 
 loc_5E2A:
-		out_of_range	DeleteObject
+	;	out_of_range_s3	DeleteObject,@nodel
 		
 @nodel:
 	;	jsr  ReactToItemBall
