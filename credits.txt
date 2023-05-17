@@ -4,7 +4,11 @@ LEAD:
 PROGRAMMERS:
 	Inferno
 	MDTravis
+	Rivet
+	KatKuriN
 	Giovanni
+	KGL
+	MrLordSith
 
 ART:
 	MDTravis
@@ -19,6 +23,7 @@ MUSIC:
 	MDTravis
 	KatKuriN
 	THiN CRUST
+	seafour
 	
 BETA TESTING:
 	BladeOfChaos
