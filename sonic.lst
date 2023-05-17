@@ -20850,7 +20850,7 @@
 0000F750 0C28 0004 001A             		cmpi.b	#4,obFrame(a0)
 0000F756 66D4                       		bne.s	loc_C5FE
 0000F758 5428 0024                  		addq.b	#2,obRoutine(a0)
-0000F75C 317C 00DC 001E             		move.w	#220,obTimeFrame(a0) ; set time delay to 3 seconds
+0000F75C 317C 00D2 001E             		move.w	#210,obTimeFrame(a0) ; set time delay to 3 seconds
 0000F762                            
 0000F762                            Got_Wait:	; Routine 4, 8, $C
 0000F762 5368 001E                  		subq.w	#1,obTimeFrame(a0) ; subtract 1 from time delay
