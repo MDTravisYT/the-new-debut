@@ -20972,7 +20972,7 @@
 0000F858 0000                       		dc.b 0, 0
 0000F85A                            
 0000F85A                            		; Scrap Brain Zone
-0000F85A 0501                       		dc.b id_CWZ, 1	; Act 1
+0000F85A 0103                       		dc.b id_LZ, 3	; Act 1
 0000F85C 0502                       		dc.b id_CWZ, 2	; Act 2
 0000F85E 0800                       		dc.b 8, 0	; Final Zone
 0000F860 0000                       		dc.b 0, 0
@@ -20991,7 +20991,7 @@
 0000F870 0000                       		dc.b 0, 0
 0000F872                            		
 0000F872                            		; Cosmic Space Zone Zone
-0000F872 0801                       		dc.b 8, 1	; Act 1
+0000F872 0000                       		dc.b 0, 0	; Act 1
 0000F874 0802                       		dc.b 8, 2	; Act 2
 0000F876 0000                       		dc.b 0, 0	; Final Zone
 0000F878 0000                       		dc.b 0, 0

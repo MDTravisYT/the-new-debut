@@ -210,7 +210,7 @@ LevelOrder:
 		dc.b 0, 0
 
 		; Scrap Brain Zone
-		dc.b id_CWZ, 1	; Act 1
+		dc.b id_LZ, 3	; Act 1
 		dc.b id_CWZ, 2	; Act 2
 		dc.b 8, 0	; Final Zone
 		dc.b 0, 0
@@ -230,7 +230,7 @@ LevelOrder:
 		dc.b 0, 0
 		
 		; Cosmic Space Zone Zone
-		dc.b 8, 1	; Act 1
+		dc.b 0, 0	; Act 1
 		dc.b 8, 2	; Act 2
 		dc.b 0, 0	; Final Zone
 		dc.b 0, 0
