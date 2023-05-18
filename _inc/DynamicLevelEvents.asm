@@ -268,7 +268,7 @@ DLE_MZ2:
 		move.w	#$520,(v_limitbtm1).w
 		cmpi.w	#$1700,(v_screenposx).w
 		bcs.s	locret_7088
-		move.w	#$200,(v_limitbtm1).w
+		move.w	#$520,(v_limitbtm1).w
 
 locret_7088:
 		rts	
